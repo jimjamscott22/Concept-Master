@@ -140,3 +140,28 @@ vite.config.ts.timestamp-*
 
 # Git worktrees
 .worktrees/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Env files — NEVER commit credentials
+backend/.env
+*.env
+
+# DB files
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

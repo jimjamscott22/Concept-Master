@@ -21,14 +21,15 @@ GRANT ALL PRIVILEGES ON concept_master.* TO 'concept_user'@'%';
 FLUSH PRIVILEGES;
 ```
 
-**Connection config** (constants in `backend/database.py`, no `.env` file):
+**Connection config** (loaded from `backend/.env` via `python-dotenv`):
 ```
-DB_HOST = "192.168.1.25"
-DB_PORT = 3306
-DB_USER = "concept_user"
-DB_PASS = "Yar22"
-DB_NAME = "concept_master"
+DB_HOST=192.168.1.25
+DB_PORT=3306
+DB_USER=concept_user
+DB_PASS=Yar22
+DB_NAME=concept_master
 ```
+`backend/.env` is listed in `.gitignore`. `backend/database.py` reads these via `os.getenv()` with `load_dotenv()` called at import time.
 
 ---
 
@@ -53,7 +54,7 @@ All tables use `ENGINE=InnoDB` for foreign key support.
 ## Backend Architecture
 
 ### `backend/database.py`
-- Connection constants at top of file
+- Reads connection config from `backend/.env` via `python-dotenv`
 - `create_pool()` — creates `aiomysql` connection pool (min=2, max=10)
 - `init_db()` — provisions DB/user, creates schema, seeds data
 - `get_db()` — FastAPI dependency yielding a pool connection
@@ -120,7 +121,7 @@ Vite proxy: `/api` → `http://localhost:8000`
 - Tech stack table: change `SQLite` → `MariaDB 192.168.1.25` and `aiosqlite` → `aiomysql`
 - DB schema section: note `TINYINT(1)` for `is_favorite`, `InnoDB` engine
 - Dev commands: replace DB init command with the `CREATE DATABASE` / `CREATE USER` provisioning step
-- Requirements: `aiomysql>=0.2.0` replaces `aiosqlite`
+- Requirements: `aiomysql>=0.2.0` replaces `aiosqlite`, add `python-dotenv>=1.0.0`
 
 ---
 
@@ -138,6 +139,6 @@ Unchanged from CLAUDE.md:
 ## Out of Scope
 
 - Authentication / access control (single-user app, explicitly excluded in CLAUDE.md)
-- Environment variable / `.env` file management (connection constants live in `database.py`)
+- ORM or migration tooling beyond raw SQL (raw SQL only, as per CLAUDE.md)
 - ORM or migration tooling (raw SQL only, as per CLAUDE.md)
 - Any charting library (Tailwind-styled bars for stats, as per CLAUDE.md)

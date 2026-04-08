@@ -1,10 +1,11 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { Layout }    from "./components/Layout"
 import { SearchBar } from "./components/SearchBar"
 import { Sidebar }   from "./components/Sidebar"
 import { TermCard }  from "./components/TermCard"
 import { TermDetail } from "./components/TermDetail"
 import { TermForm }   from "./components/TermForm"
+import { StatsPanel } from "./components/StatsPanel"
 import { EmptyState } from "./components/EmptyState"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
@@ -23,6 +24,8 @@ export default function App() {
   const [expandedTerm,     setExpandedTerm]     = useState<TermDetailType | null>(null)
   const [view,             setView]             = useState<View>("terms")
   const [editingSlug,      setEditingSlug]      = useState<string | null | "new">(null)
+  const [showDetail,       setShowDetail]       = useState(false)
+  const listRef = useRef<HTMLDivElement>(null)
 
   const { categories } = useCategories()
   const { tags }       = useTags()
@@ -35,6 +38,7 @@ export default function App() {
     const detail = await api.terms.get(slug)
     setExpandedTerm(detail)
     setView("terms")
+    setShowDetail(true)
   }, [])
 
   const handleToggleFavorite = useCallback(async (slug: string) => {
@@ -67,8 +71,63 @@ export default function App() {
     await api.terms.delete(slug)
     setSelectedSlug(null)
     setExpandedTerm(null)
+    setShowDetail(false)
     refetch()
   }, [refetch])
+
+  const handleExport = useCallback(async () => {
+    const data = await api.terms.export()
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `concept-master-export-${new Date().toISOString().slice(0, 10)}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }, [])
+
+  const handleImport = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const text = await file.text()
+    const items = JSON.parse(text)
+    const result = await api.terms.import(items)
+    alert(`Imported ${result.imported} terms, skipped ${result.skipped} duplicates.`)
+    refetch()
+    e.target.value = ""
+  }, [refetch])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (view !== "terms") return
+      if (document.activeElement?.tagName === "INPUT" ||
+          document.activeElement?.tagName === "TEXTAREA") return
+
+      const currentIndex = terms.findIndex(t => t.slug === selectedSlug)
+
+      if (e.key === "ArrowDown") {
+        e.preventDefault()
+        const next = terms[currentIndex + 1]
+        if (next) handleSelectTerm(next.slug)
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault()
+        const prev = terms[currentIndex - 1]
+        if (prev) handleSelectTerm(prev.slug)
+      } else if (e.key === "Escape") {
+        setSelectedSlug(null)
+        setExpandedTerm(null)
+        setShowDetail(false)
+      }
+    }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [view, terms, selectedSlug, handleSelectTerm])
+
+  useEffect(() => {
+    if (!selectedSlug || !listRef.current) return
+    const el = listRef.current.querySelector(`[data-slug="${selectedSlug}"]`)
+    el?.scrollIntoView({ block: "nearest", behavior: "smooth" })
+  }, [selectedSlug])
 
   const sidebar = (
     <div>
@@ -84,6 +143,8 @@ export default function App() {
         onToggleFavorites={() => setFavoritesOnly(v => !v)}
         onShowStats={() => setView("stats")}
         onNewTerm={() => { setEditingSlug("new"); setView("form") }}
+        onExport={handleExport}
+        onImport={handleImport}
       />
     </div>
   )
@@ -93,7 +154,10 @@ export default function App() {
       {view === "terms" && (
         <div className="flex h-full">
           {/* Term list */}
-          <div className="w-80 flex-shrink-0 border-r border-border overflow-y-auto">
+          <div
+            ref={listRef}
+            className={`w-80 flex-shrink-0 border-r border-border overflow-y-auto ${showDetail ? "hidden md:block" : "block"}`}
+          >
             {loading && <p className="p-4 text-muted text-sm">Loading…</p>}
             {error   && <p className="p-4 text-red-400 text-sm">{error}</p>}
             {!loading && terms.length === 0 && <EmptyState query={search} />}
@@ -109,7 +173,7 @@ export default function App() {
           </div>
 
           {/* Term detail */}
-          <div className="flex-1 overflow-y-auto">
+          <div className={`flex-1 overflow-y-auto ${showDetail ? "block" : "hidden md:block"}`}>
             {expandedTerm ? (
               <TermDetail
                 term={expandedTerm}
@@ -117,6 +181,7 @@ export default function App() {
                 onDelete={() => handleDelete(expandedTerm.slug)}
                 onToggleFavorite={() => handleToggleFavorite(expandedTerm.slug)}
                 onSelectRelated={handleSelectTerm}
+                onBack={() => setShowDetail(false)}
               />
             ) : (
               <div className="flex items-center justify-center h-full text-muted text-sm">
@@ -125,6 +190,15 @@ export default function App() {
             )}
           </div>
         </div>
+      )}
+
+      {view === "stats" && (
+        <StatsPanel
+          onSelectTerm={(slug) => {
+            setView("terms")
+            handleSelectTerm(slug)
+          }}
+        />
       )}
 
       {view === "form" && (

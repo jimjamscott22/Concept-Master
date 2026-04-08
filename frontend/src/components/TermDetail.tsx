@@ -9,11 +9,13 @@ interface TermDetailProps {
   onDelete: () => void
   onToggleFavorite: () => void
   onSelectRelated: (slug: string) => void
+  onBack: () => void
 }
 
-export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectRelated }: TermDetailProps) {
+export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectRelated, onBack }: TermDetailProps) {
   return (
-    <article className="max-w-3xl mx-auto px-6 py-6">
+    <article className="fade-in max-w-3xl mx-auto px-6 py-6">
+      <button onClick={onBack} className="md:hidden mb-4 text-muted text-sm hover:text-text transition-colors">← Back</button>
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <h2 className="font-mono font-bold text-xl text-text">{term.name}</h2>

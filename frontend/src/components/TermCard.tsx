@@ -14,7 +14,7 @@ export function TermCard({ term, isSelected, onClick, onToggleFavorite }: TermCa
     <div
       data-slug={term.slug}
       onClick={onClick}
-      className={`group px-4 py-3 border-b border-border cursor-pointer transition-all
+      className={`group card-hover px-4 py-3 border-b border-border cursor-pointer
         hover:bg-surface
         ${isSelected ? "bg-surface border-l-2 border-l-accent" : "border-l-2 border-l-transparent"}`}
     >

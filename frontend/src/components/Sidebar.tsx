@@ -11,12 +11,14 @@ interface SidebarProps {
   onToggleFavorites: () => void
   onShowStats: () => void
   onNewTerm: () => void
+  onExport: () => void
+  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export function Sidebar({
   categories, tags, selectedCategory, selectedTag,
   favoritesOnly, onSelectCategory, onSelectTag,
-  onToggleFavorites, onShowStats, onNewTerm,
+  onToggleFavorites, onShowStats, onNewTerm, onExport, onImport,
 }: SidebarProps) {
   return (
     <nav className="flex flex-col h-full text-sm">
@@ -43,6 +45,16 @@ export function Sidebar({
         >
           Stats
         </button>
+        <button
+          onClick={onExport}
+          className="w-full text-left px-3 py-2 rounded-md text-muted hover:bg-surface hover:text-text transition-colors"
+        >
+          ↓ Export JSON
+        </button>
+        <label className="w-full text-left px-3 py-2 rounded-md text-muted hover:bg-surface hover:text-text transition-colors cursor-pointer block">
+          ↑ Import JSON
+          <input type="file" accept=".json" className="hidden" onChange={onImport} />
+        </label>
       </div>
 
       {/* Favorites */}

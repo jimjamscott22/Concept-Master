@@ -4,12 +4,13 @@ import { SearchBar } from "./components/SearchBar"
 import { Sidebar }   from "./components/Sidebar"
 import { TermCard }  from "./components/TermCard"
 import { TermDetail } from "./components/TermDetail"
+import { TermForm }   from "./components/TermForm"
 import { EmptyState } from "./components/EmptyState"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
 import { useTerms }      from "./hooks/useTerms"
 import { api }           from "./api/client"
-import type { TermDetail as TermDetailType } from "./types"
+import type { TermDetail as TermDetailType, TermCreatePayload } from "./types"
 
 type View = "terms" | "stats" | "form"
 
@@ -21,7 +22,7 @@ export default function App() {
   const [selectedSlug,     setSelectedSlug]     = useState<string | null>(null)
   const [expandedTerm,     setExpandedTerm]     = useState<TermDetailType | null>(null)
   const [view,             setView]             = useState<View>("terms")
-  const [_editingSlug,     setEditingSlug]      = useState<string | null | "new">(null)
+  const [editingSlug,      setEditingSlug]      = useState<string | null | "new">(null)
 
   const { categories } = useCategories()
   const { tags }       = useTags()
@@ -44,6 +45,22 @@ export default function App() {
       setExpandedTerm(updated)
     }
   }, [expandedTerm, refetch])
+
+  const handleSaveTerm = useCallback(async (payload: TermCreatePayload) => {
+    if (editingSlug === "new") {
+      const created = await api.terms.create(payload)
+      setEditingSlug(null)
+      setView("terms")
+      refetch()
+      await handleSelectTerm(created.slug)
+    } else if (editingSlug) {
+      const updated = await api.terms.update(editingSlug, payload)
+      setEditingSlug(null)
+      setView("terms")
+      refetch()
+      setExpandedTerm(updated)
+    }
+  }, [editingSlug, refetch, handleSelectTerm])
 
   const handleDelete = useCallback(async (slug: string) => {
     if (!confirm(`Delete "${slug}"?`)) return
@@ -108,6 +125,16 @@ export default function App() {
             )}
           </div>
         </div>
+      )}
+
+      {view === "form" && (
+        <TermForm
+          initial={editingSlug !== "new" ? expandedTerm : null}
+          categories={categories}
+          allTags={tags}
+          onSave={handleSaveTerm}
+          onCancel={() => setView("terms")}
+        />
       )}
     </Layout>
   )

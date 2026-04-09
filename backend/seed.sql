@@ -1,5 +1,5 @@
 -- Concept Master — Seed Data
--- 10 categories, 8 tags, 30 terms
+-- 11 categories, 8 tags, 43 terms
 
 INSERT IGNORE INTO categories (name, slug) VALUES
   ('Data Structures',        'data-structures'),
@@ -8,6 +8,7 @@ INSERT IGNORE INTO categories (name, slug) VALUES
   ('Functional Programming', 'functional-programming'),
   ('Concurrency',            'concurrency'),
   ('Networking',             'networking'),
+  ('Cybersecurity',          'cybersecurity'),
   ('Databases',              'databases'),
   ('Design Patterns',        'design-patterns'),
   ('Memory Management',      'memory-management'),
@@ -204,6 +205,85 @@ INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUE
  'import gc\n\nclass Node:\n    def __init__(self): self.ref = None\n\na = Node()\nb = Node()\na.ref = b  # circular reference\nb.ref = a\ndel a, b\ngc.collect()  # reclaim the cycle',
  'python');
 
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('HTTP',
+ 'http',
+ 'Hypertext Transfer Protocol, the request-response protocol that powers most web communication. Clients send requests to servers using methods like `GET` and `POST`, and servers return status codes, headers, and a response body.\n\n**Common building blocks:**\n- Methods: `GET`, `POST`, `PUT`, `PATCH`, `DELETE`\n- Status codes: `2xx`, `3xx`, `4xx`, `5xx`\n- Headers: `Content-Type`, `Authorization`, `Cache-Control`',
+ 'curl -i https://example.com/api/terms \\\n  -H "Accept: application/json"',
+ 'bash'),
+
+('TCP',
+ 'tcp',
+ 'Transmission Control Protocol is a connection-oriented transport protocol that prioritizes reliable, ordered delivery of bytes between hosts.\n\n**TCP features:**\n- Three-way handshake before data transfer\n- Retransmission of lost packets\n- Flow control and congestion control\n- Commonly used by HTTP, HTTPS, SSH, and databases',
+ 'import socket\n\nwith socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:\n    sock.connect(("example.com", 80))\n    sock.sendall(b"GET / HTTP/1.1\\r\\nHost: example.com\\r\\n\\r\\n")\n    print(sock.recv(1024).decode())',
+ 'python'),
+
+('UDP',
+ 'udp',
+ 'User Datagram Protocol is a connectionless transport protocol that sends independent datagrams without guaranteeing delivery, ordering, or duplicate protection.\n\n**Why use UDP?**\n- Lower latency than TCP\n- Minimal protocol overhead\n- Useful for DNS, VoIP, live video, and online games where speed matters more than perfect delivery',
+ 'import socket\n\nwith socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:\n    sock.sendto(b"ping", ("127.0.0.1", 9999))',
+ 'python'),
+
+('DNS',
+ 'dns',
+ 'Domain Name System translates human-readable domain names into IP addresses so clients can locate servers on a network.\n\n**DNS records include:**\n- `A` / `AAAA` for IP addresses\n- `CNAME` for aliases\n- `MX` for mail routing\n- `TXT` for verification and policy metadata',
+ 'nslookup example.com',
+ 'bash'),
+
+('TLS',
+ 'tls',
+ 'Transport Layer Security encrypts data in transit so clients and servers can communicate privately and verify each other''s identity.\n\n**TLS provides:**\n- Confidentiality through encryption\n- Integrity checks to detect tampering\n- Certificate-based authentication\n\nHTTPS is simply HTTP running over TLS.',
+ 'openssl s_client -connect example.com:443 -servername example.com',
+ 'bash'),
+
+('WebSocket',
+ 'websocket',
+ 'WebSocket is a protocol for long-lived, bidirectional communication between a client and server over a single TCP connection.\n\nUnlike standard HTTP request-response traffic, either side can push messages at any time after the connection is established.',
+ 'const socket = new WebSocket("wss://example.com/ws");\nsocket.addEventListener("open", () => {\n  socket.send(JSON.stringify({ type: "ping" }));\n});\nsocket.addEventListener("message", (event) => {\n  console.log("received:", event.data);\n});',
+ 'javascript'),
+
+('Authentication',
+ 'authentication',
+ 'Authentication is the process of verifying who a user or system is. It answers the question, "Are you really who you claim to be?"\n\n**Common authentication factors:**\n- Something you know: password or PIN\n- Something you have: token or phone\n- Something you are: fingerprint or face scan',
+ 'headers = {"Authorization": f"Bearer {token}"}\nresponse = requests.get("https://api.example.com/me", headers=headers)',
+ 'python'),
+
+('Authorization',
+ 'authorization',
+ 'Authorization determines what an authenticated user is allowed to do. It answers the question, "Now that we know who you are, what can you access?"\n\nExamples include role-based access control, ownership checks, and permission scopes.',
+ 'def can_edit_term(user, term):\n    return user.is_admin or term.owner_id == user.id',
+ 'python'),
+
+('Encryption',
+ 'encryption',
+ 'Encryption transforms readable plaintext into unreadable ciphertext using an algorithm and a key so only authorized parties can recover the original data.\n\n**At-rest vs. in-transit:**\n- Disk/database encryption protects stored data\n- TLS protects data moving across the network',
+ 'echo "top-secret" | openssl enc -aes-256-cbc -pbkdf2 -salt -out secret.enc',
+ 'bash'),
+
+('SQL Injection',
+ 'sql-injection',
+ 'SQL injection is a vulnerability where untrusted input is interpreted as part of a SQL query, allowing attackers to bypass checks or read and modify data.\n\n**Primary defense:** always use parameterized queries instead of building SQL with string concatenation.',
+ 'cursor.execute(\n    "SELECT * FROM users WHERE email = %s AND password_hash = %s",\n    (email, password_hash),\n)',
+ 'python'),
+
+('Cross-Site Scripting (XSS)',
+ 'cross-site-scripting-xss',
+ 'Cross-site scripting is a vulnerability where attacker-controlled content is rendered as executable script in another user''s browser.\n\n**Common types:**\n- Stored XSS\n- Reflected XSS\n- DOM-based XSS\n\nMitigations include output escaping, content security policy, and avoiding unsafe HTML injection.',
+ 'const message = userSuppliedText;\nelement.textContent = message; // safe: treats input as text, not HTML',
+ 'javascript'),
+
+('Memory Leak',
+ 'memory-leak',
+ 'A memory leak happens when a program keeps references to memory it no longer needs, preventing that memory from being reclaimed.\n\nLeaks often come from long-lived caches, event listeners that are never removed, or accidental retention of large objects.',
+ 'cache = []\n\ndef handle_request(payload):\n    cache.append(payload)  # grows forever if never cleared',
+ 'python'),
+
+('Race Condition',
+ 'race-condition',
+ 'A race condition occurs when the result of a program depends on the timing or ordering of concurrent operations accessing shared state.\n\nThese bugs can be intermittent and hard to reproduce because small scheduling changes can alter the outcome.',
+ 'import threading\n\ncounter = 0\nlock = threading.Lock()\n\ndef increment():\n    global counter\n    with lock:\n        counter += 1',
+ 'python');
+
 -- Term-category associations
 INSERT IGNORE INTO term_categories (term_id, category_id)
 SELECT t.id, c.id FROM terms t, categories c WHERE
@@ -231,12 +311,33 @@ SELECT t.id, c.id FROM terms t, categories c WHERE
   (t.slug = 'higher-order-function' AND c.slug = 'functional-programming') OR
   (t.slug = 'thread'              AND c.slug = 'concurrency') OR
   (t.slug = 'deadlock'            AND c.slug = 'concurrency') OR
+  (t.slug = 'race-condition'      AND c.slug = 'concurrency') OR
   (t.slug = 'rest'                AND c.slug = 'networking') OR
+  (t.slug = 'http'                AND c.slug = 'networking') OR
+  (t.slug = 'tcp'                 AND c.slug = 'networking') OR
+  (t.slug = 'udp'                 AND c.slug = 'networking') OR
+  (t.slug = 'dns'                 AND c.slug = 'networking') OR
+  (t.slug = 'tls'                 AND c.slug = 'networking') OR
+  (t.slug = 'websocket'           AND c.slug = 'networking') OR
+  (t.slug = 'authentication'      AND c.slug = 'cybersecurity') OR
+  (t.slug = 'authorization'       AND c.slug = 'cybersecurity') OR
+  (t.slug = 'encryption'          AND c.slug = 'cybersecurity') OR
+  (t.slug = 'tls'                 AND c.slug = 'cybersecurity') OR
+  (t.slug = 'sql-injection'       AND c.slug = 'cybersecurity') OR
+  (t.slug = 'cross-site-scripting-xss' AND c.slug = 'cybersecurity') OR
   (t.slug = 'sql-join'            AND c.slug = 'databases') OR
   (t.slug = 'index-database'      AND c.slug = 'databases') OR
+  (t.slug = 'sql-injection'       AND c.slug = 'databases') OR
   (t.slug = 'singleton'           AND c.slug = 'design-patterns') OR
   (t.slug = 'observer-pattern'    AND c.slug = 'design-patterns') OR
-  (t.slug = 'garbage-collection'  AND c.slug = 'memory-management');
+  (t.slug = 'garbage-collection'  AND c.slug = 'memory-management') OR
+  (t.slug = 'memory-leak'         AND c.slug = 'memory-management') OR
+  (t.slug = 'http'                AND c.slug = 'web') OR
+  (t.slug = 'websocket'           AND c.slug = 'web') OR
+  (t.slug = 'authentication'      AND c.slug = 'web') OR
+  (t.slug = 'authorization'       AND c.slug = 'web') OR
+  (t.slug = 'sql-injection'       AND c.slug = 'web') OR
+  (t.slug = 'cross-site-scripting-xss' AND c.slug = 'web');
 
 -- Tag associations
 INSERT IGNORE INTO term_tags (term_id, tag_id)
@@ -245,6 +346,10 @@ SELECT t.id, tg.id FROM terms t, tags tg WHERE
   (t.slug IN ('big-o-notation','binary-search','merge-sort','quick-sort','depth-first-search','breadth-first-search','dynamic-programming') AND tg.name = 'interview-prep') OR
   (t.slug IN ('binary-search','merge-sort','quick-sort','depth-first-search','breadth-first-search') AND tg.name = 'exam-review') OR
   (t.slug IN ('dynamic-programming','recursion','closure','higher-order-function') AND tg.name = 'advanced') OR
-  (t.slug IN ('object','inheritance','polymorphism','encapsulation','closure','higher-order-function','garbage-collection') AND tg.name = 'python') OR
-  (t.slug IN ('thread','deadlock') AND tg.name = 'systems') OR
-  (t.slug IN ('rest','sql-join','index-database') AND tg.name = 'fundamentals');
+  (t.slug IN ('object','inheritance','polymorphism','encapsulation','closure','higher-order-function','garbage-collection','tcp','udp','authentication','authorization','sql-injection','memory-leak','race-condition') AND tg.name = 'python') OR
+  (t.slug IN ('thread','deadlock','tcp','udp','dns','tls','encryption','memory-leak','race-condition') AND tg.name = 'systems') OR
+  (t.slug IN ('rest','http','websocket','authentication','authorization','sql-join','index-database','encryption') AND tg.name = 'fundamentals') OR
+  (t.slug IN ('tcp','udp','dns','tls','sql-injection','cross-site-scripting-xss','race-condition') AND tg.name = 'interview-prep') OR
+  (t.slug IN ('http','tcp','udp','dns','sql-injection','cross-site-scripting-xss') AND tg.name = 'exam-review') OR
+  (t.slug IN ('tls','websocket','encryption','sql-injection','cross-site-scripting-xss','memory-leak','race-condition') AND tg.name = 'advanced') OR
+  (t.slug IN ('websocket','cross-site-scripting-xss') AND tg.name = 'javascript');

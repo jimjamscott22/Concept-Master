@@ -263,13 +263,17 @@ All responses return JSON. All request bodies are JSON.
 ## Development Commands
 
 ```bash
-# Backend
-cd backend
-pip install -r requirements.txt
+# Backend — install / sync all dependencies (run from repo root)
+uv sync --group dev
+
 # Initialize DB (creates glossary.db, runs schema.sql and seed.sql)
-python -c "import asyncio; from database import init_db; asyncio.run(init_db())"
-# Start dev server
-uvicorn main:app --reload --port 8000
+uv run python -c "import asyncio; from backend.database import init_db; asyncio.run(init_db())"
+
+# Start backend dev server (from repo root)
+uv run uvicorn backend.main:app --reload --port 8000
+
+# Run tests
+uv run pytest
 
 # Frontend
 cd frontend

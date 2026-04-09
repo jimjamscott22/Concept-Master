@@ -33,7 +33,7 @@ A local-first desktop web application for building and browsing a personal gloss
 
 ## Prerequisites
 
-- **Python 3.12+** — [python.org](https://www.python.org/downloads/)
+- **uv** — [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) (manages Python and all backend dependencies)
 - **Node.js 18+** and **npm** — [nodejs.org](https://nodejs.org/)
 - **MySQL 8+** — a running MySQL server accessible from your machine
 
@@ -48,12 +48,13 @@ git clone https://github.com/jimjamscott22/Concept-Master.git
 cd Concept-Master
 ```
 
-### 2. Backend — Python environment
+### 2. Backend — install dependencies
 
 ```bash
-cd backend
-pip install -r requirements.txt
+uv sync --group dev
 ```
+
+This resolves all backend dependencies (including dev tools like pytest) into a local `.venv` using the locked versions in `uv.lock`. No manual `pip install` or virtual environment creation needed.
 
 ### 3. Database — provision MySQL
 
@@ -100,8 +101,7 @@ Open **two terminals** — one for the backend and one for the frontend.
 **Terminal 1 — backend API (port 8000):**
 
 ```bash
-cd backend
-uvicorn main:app --reload --port 8000
+uv run uvicorn backend.main:app --reload --port 8000
 ```
 
 **Terminal 2 — frontend dev server (port 5173):**

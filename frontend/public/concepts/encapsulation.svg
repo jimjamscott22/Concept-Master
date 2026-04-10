@@ -1,0 +1,27 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Encapsulation</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Bundle data and behavior together, and control how state is accessed</text>
+
+  <rect x="174" y="182" width="300" height="218" rx="20" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="206" y="224" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">BankAccount</text>
+  <rect x="210" y="252" width="228" height="54" rx="12" fill="#161B22" stroke="#F85149" stroke-width="2"/>
+  <text x="324" y="286" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">__balance</text>
+  <rect x="210" y="324" width="102" height="46" rx="10" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <rect x="336" y="324" width="102" height="46" rx="10" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="261" y="353" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">deposit()</text>
+  <text x="387" y="353" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">getBalance()</text>
+
+  <text x="540" y="246" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">outside code</text>
+  <rect x="540" y="266" width="218" height="62" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="650" y="304" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">account.deposit(50)</text>
+  <rect x="540" y="346" width="218" height="62" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="650" y="384" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="19">account.__balance</text>
+
+  <path d="M474 347C506 347 524 340 540 321" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M474 280C510 280 526 302 540 374" stroke="#F85149" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 10"/>
+  <text x="776" y="304" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="18">approved interface</text>
+  <text x="776" y="384" fill="#F85149" font-family="IBM Plex Sans, sans-serif" font-size="18">restricted internals</text>
+  <text x="480" y="448" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Encapsulation protects internal state behind a controlled public API</text>
+</svg>

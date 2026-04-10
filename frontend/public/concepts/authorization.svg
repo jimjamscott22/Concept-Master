@@ -1,0 +1,26 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Authorization</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Once identity is known, decide which actions or resources that identity may access</text>
+
+  <rect x="104" y="196" width="218" height="152" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="132" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">authenticated user</text>
+  <text x="132" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">role = editor</text>
+  <text x="132" y="314" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">known identity</text>
+
+  <rect x="378" y="168" width="204" height="208" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="406" y="204" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">policy check</text>
+  <text x="406" y="258" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">Can edit term?</text>
+  <text x="406" y="296" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">owner or admin?</text>
+  <text x="406" y="336" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">allow / deny</text>
+
+  <rect x="638" y="196" width="218" height="152" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="666" y="232" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">protected action</text>
+  <text x="666" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">edit, delete, view</text>
+  <text x="666" y="314" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">depends on permissions</text>
+
+  <path d="M322 272H378" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M582 272H638" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Authorization answers: "Now that we know who you are, what can you do?"</text>
+</svg>

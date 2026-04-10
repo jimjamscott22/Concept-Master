@@ -1,0 +1,30 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Deadlock</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Two threads wait forever because each needs a lock held by the other</text>
+
+  <rect x="130" y="196" width="240" height="146" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="158" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Thread A</text>
+  <text x="158" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">holds Lock 1</text>
+  <text x="158" y="312" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">waiting for Lock 2</text>
+
+  <rect x="590" y="196" width="240" height="146" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="618" y="232" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Thread B</text>
+  <text x="618" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">holds Lock 2</text>
+  <text x="618" y="312" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">waiting for Lock 1</text>
+
+  <rect x="352" y="176" width="112" height="72" rx="14" fill="#161B22" stroke="#D29922" stroke-width="3"/>
+  <text x="408" y="220" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20">Lock 1</text>
+  <rect x="496" y="296" width="112" height="72" rx="14" fill="#161B22" stroke="#D29922" stroke-width="3"/>
+  <text x="552" y="340" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20">Lock 2</text>
+
+  <path d="M370 248C364 276 360 302 376 324C394 348 430 356 496 338" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M590 264C540 246 500 236 464 232" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M608 332C650 352 688 358 728 348C770 338 794 304 798 248" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M592 338C558 352 526 362 464 214" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+
+  <circle cx="480" cy="270" r="88" stroke="#F85149" stroke-width="4" stroke-dasharray="10 12"/>
+  <text x="480" y="274" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">circular wait</text>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Neither thread can proceed until the other releases its lock</text>
+</svg>

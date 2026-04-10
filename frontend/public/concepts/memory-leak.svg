@@ -1,0 +1,37 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Memory Leak</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Memory usage keeps growing because references to unneeded data are never released</text>
+
+  <rect x="112" y="198" width="268" height="184" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="140" y="236" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">requests</text>
+  <rect x="146" y="260" width="200" height="30" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <rect x="146" y="302" width="200" height="30" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <rect x="146" y="344" width="200" height="30" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="246" y="280" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">payload 1</text>
+  <text x="246" y="322" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">payload 2</text>
+  <text x="246" y="364" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">payload 3</text>
+
+  <rect x="454" y="174" width="162" height="232" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="482" y="212" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">cache[]</text>
+  <rect x="488" y="238" width="94" height="28" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <rect x="488" y="276" width="94" height="28" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <rect x="488" y="314" width="94" height="28" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <rect x="488" y="352" width="94" height="28" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="535" y="257" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">keep</text>
+  <text x="535" y="295" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">keep</text>
+  <text x="535" y="333" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">keep</text>
+  <text x="535" y="371" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">keep</text>
+
+  <rect x="690" y="198" width="156" height="184" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="718" y="236" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">memory</text>
+  <rect x="722" y="262" width="92" height="98" rx="12" fill="#161B22" stroke="#D29922" stroke-width="2"/>
+  <rect x="722" y="208" width="92" height="46" rx="12" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="768" y="236" text-anchor="middle" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="16">used</text>
+  <text x="768" y="316" text-anchor="middle" fill="#F85149" font-family="IBM Plex Sans, sans-serif" font-size="18">grows</text>
+
+  <path d="M380 290H454" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M616 290H690" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="452" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Leaks often come from caches, listeners, or long-lived references that never get cleaned up</text>
+</svg>

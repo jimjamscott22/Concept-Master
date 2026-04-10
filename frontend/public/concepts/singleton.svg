@@ -1,0 +1,23 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Singleton</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A pattern that ensures only one shared instance of a class exists</text>
+
+  <rect x="120" y="204" width="228" height="140" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="148" y="242" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">caller A</text>
+  <text x="148" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">getInstance()</text>
+
+  <rect x="366" y="164" width="228" height="220" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="394" y="202" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Singleton</text>
+  <circle cx="480" cy="286" r="46" fill="#161B22" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">one instance</text>
+
+  <rect x="612" y="204" width="228" height="140" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="640" y="242" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">caller B</text>
+  <text x="640" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">getInstance()</text>
+
+  <path d="M348 274H366" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M612 274H594" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">All callers receive the same shared object, which is useful but should be used sparingly</text>
+</svg>

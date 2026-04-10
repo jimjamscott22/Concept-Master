@@ -1,0 +1,30 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Linked List</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Each node stores a value and a pointer to the next node in the chain</text>
+
+  <g transform="translate(118 230)">
+    <rect x="0" y="0" width="168" height="88" rx="14" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <rect x="236" y="0" width="168" height="88" rx="14" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <rect x="472" y="0" width="168" height="88" rx="14" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+
+    <line x1="108" y1="0" x2="108" y2="88" stroke="#30363D" stroke-width="2"/>
+    <line x1="344" y1="0" x2="344" y2="88" stroke="#30363D" stroke-width="2"/>
+    <line x1="580" y1="0" x2="580" y2="88" stroke="#30363D" stroke-width="2"/>
+
+    <text x="54" y="52" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="26">1</text>
+    <text x="290" y="52" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="26">2</text>
+    <text x="526" y="52" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="26">3</text>
+    <text x="138" y="52" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="18">next</text>
+    <text x="374" y="52" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="18">next</text>
+    <text x="610" y="52" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="18">null</text>
+
+    <path d="M168 44H236" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M404 44H472" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <text x="120" y="200" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20">head</text>
+  <path d="M152 206L170 226" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Linked lists are flexible for insertion and removal, but you must follow pointers to traverse them</text>
+</svg>

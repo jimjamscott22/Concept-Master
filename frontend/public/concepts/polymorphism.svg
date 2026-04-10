@@ -1,0 +1,25 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Polymorphism</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Different objects can respond to the same interface in their own way</text>
+
+  <rect x="376" y="156" width="208" height="110" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="404" y="194" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">makeItSpeak()</text>
+  <text x="404" y="230" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">animal.speak()</text>
+
+  <rect x="108" y="320" width="196" height="106" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <rect x="382" y="320" width="196" height="106" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <rect x="656" y="320" width="196" height="106" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="206" y="360" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Cat</text>
+  <text x="206" y="396" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">"Meow"</text>
+  <text x="480" y="360" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Dog</text>
+  <text x="480" y="396" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">"Woof"</text>
+  <text x="754" y="360" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Duck</text>
+  <text x="754" y="396" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">"Quack"</text>
+
+  <path d="M434 266L252 320" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M480 266V320" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M526 266L708 320" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="468" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">One call site can work with many object types as long as they honor the expected interface</text>
+</svg>

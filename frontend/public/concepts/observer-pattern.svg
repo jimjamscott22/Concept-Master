@@ -1,0 +1,23 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Observer Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A subject keeps a list of observers and notifies them when its state changes</text>
+
+  <rect x="376" y="180" width="208" height="132" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="404" y="218" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Subject</text>
+  <text x="404" y="258" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">state changes</text>
+  <text x="404" y="290" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">notifyAll()</text>
+
+  <rect x="108" y="344" width="196" height="94" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <rect x="382" y="344" width="196" height="94" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <rect x="656" y="344" width="196" height="94" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="206" y="398" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Observer A</text>
+  <text x="480" y="398" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Observer B</text>
+  <text x="754" y="398" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">Observer C</text>
+
+  <path d="M434 312L252 344" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M480 312V344" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M526 312L708 344" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="468" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">This pattern is useful for event systems, UI updates, and publish-subscribe style communication</text>
+</svg>

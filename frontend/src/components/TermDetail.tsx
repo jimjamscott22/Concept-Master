@@ -2,6 +2,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Highlight, themes } from "prism-react-renderer"
 import type { TermDetail } from "../types"
+import { ConceptVisual } from "./ConceptVisual"
 
 interface TermDetailProps {
   term: TermDetail
@@ -90,6 +91,8 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
           </Highlight>
         </div>
       )}
+
+      <ConceptVisual slug={term.slug} name={term.name} />
 
       {/* Tags */}
       {term.tags.length > 0 && (

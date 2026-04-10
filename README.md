@@ -16,6 +16,7 @@ A local-first desktop web application for building and browsing a personal gloss
 - **Bulk import & export** — export your entire glossary as JSON or import a JSON array of terms
 - **Stats panel** — total term count, per-category breakdown, recently added, and most-favourited terms
 - **Keyboard navigation** — arrow keys to move through the list, `Enter` to expand, `Escape` to collapse
+- **Concept visuals** — inline SVG diagrams in the term detail view for seeded glossary concepts
 
 ---
 
@@ -164,6 +165,29 @@ Base URL: `http://localhost:8000/api`
 | `GET` | `/stats` | Glossary statistics |
 
 Interactive API docs are available at `http://localhost:8000/docs` (Swagger UI) when the backend is running.
+
+---
+
+## Visuals
+
+The glossary now includes a diagram system for concept entries in the detail view.
+
+- Visuals are stored as lightweight SVG assets in `frontend/public/concepts`
+- The frontend maps term slugs to diagrams in `frontend/src/components/ConceptVisual.tsx`
+- Matching terms automatically render a `Visual Representation` panel below the main content in the detail view
+- SVG was chosen so diagrams stay sharp, load quickly, and remain easy to maintain in-repo
+
+---
+
+## Next Steps
+
+Suggested polish tasks for the new concept-visual system:
+
+- Add click-to-expand or modal zoom for larger diagram viewing
+- Show a small visual badge on term cards when a term has an attached diagram
+- Add keyboard navigation support for jumping between definition, code example, and visual sections
+- Add a reusable template or generator workflow for creating future SVG concept diagrams consistently
+- Consider optional per-term captions or learning notes below each diagram
 
 ---
 

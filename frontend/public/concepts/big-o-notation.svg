@@ -1,0 +1,28 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Big O Notation</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">How algorithm growth changes as input size increases</text>
+
+  <line x1="120" y1="430" x2="120" y2="170" stroke="#8B949E" stroke-width="3"/>
+  <line x1="120" y1="430" x2="760" y2="430" stroke="#8B949E" stroke-width="3"/>
+  <text x="84" y="180" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18" transform="rotate(-90 84 180)">growth</text>
+  <text x="704" y="468" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">input size n</text>
+
+  <path d="M140 386C230 386 320 386 410 386C500 386 590 386 680 386" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 392C210 378 270 358 325 330C390 296 460 250 540 190C580 160 625 132 680 108" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 376C250 354 360 326 470 286C555 254 620 220 680 180" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 398C215 396 290 390 365 372C445 350 520 314 590 258C628 228 658 196 680 160" stroke="#A371F7" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 402C200 398 250 390 300 376C360 360 410 336 460 298C520 252 575 194 625 124C640 102 658 76 680 54" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+
+  <g font-family="JetBrains Mono, monospace" font-size="20" font-weight="600">
+    <text x="706" y="390" fill="#39D353">O(1)</text>
+    <text x="706" y="112" fill="#58A6FF">O(log n)</text>
+    <text x="706" y="184" fill="#D29922">O(n)</text>
+    <text x="706" y="160" fill="#A371F7">O(n log n)</text>
+    <text x="706" y="56" fill="#F85149">O(n^2)</text>
+  </g>
+
+  <text x="120" y="478" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">better</text>
+  <text x="720" y="478" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">worse</text>
+</svg>

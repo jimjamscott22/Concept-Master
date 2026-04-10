@@ -1,0 +1,29 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">DNS</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Domain Name System maps human-readable names to IP addresses</text>
+
+  <rect x="90" y="214" width="214" height="124" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="120" y="252" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">client</text>
+  <text x="120" y="292" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">example.com ?</text>
+
+  <rect x="372" y="182" width="214" height="188" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="402" y="220" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">DNS resolver</text>
+  <rect x="402" y="248" width="154" height="40" rx="10" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="479" y="274" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">cache lookup</text>
+  <rect x="402" y="302" width="154" height="40" rx="10" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="479" y="328" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">query upstream</text>
+
+  <rect x="654" y="214" width="214" height="124" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="684" y="252" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">authoritative DNS</text>
+  <text x="684" y="292" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">example.com -&gt;</text>
+  <text x="684" y="320" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">93.184.216.34</text>
+
+  <path d="M304 276H372" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M586 276H654" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M654 330H586" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+  <path d="M372 330H304" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="490" y="428" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Ask for a domain name, receive the IP address needed to reach the server</text>
+</svg>

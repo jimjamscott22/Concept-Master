@@ -1,0 +1,28 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700">Cross-Site Scripting (XSS)</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Untrusted input becomes executable script in another user's browser</text>
+
+  <rect x="90" y="186" width="240" height="190" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="118" y="222" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">unsafe input</text>
+  <rect x="118" y="248" width="184" height="94" rx="12" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="136" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">&lt;script&gt;</text>
+  <text x="136" y="314" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">stealCookies()</text>
+  <text x="136" y="342" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">&lt;/script&gt;</text>
+
+  <rect x="390" y="186" width="180" height="190" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="420" y="222" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">rendered as HTML</text>
+  <rect x="420" y="248" width="120" height="94" rx="12" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="480" y="304" text-anchor="middle" fill="#D29922" font-family="IBM Plex Sans, sans-serif" font-size="20">browser executes it</text>
+
+  <rect x="628" y="186" width="242" height="190" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="656" y="222" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">safe rendering</text>
+  <rect x="656" y="248" width="186" height="94" rx="12" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="676" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">element.textContent</text>
+  <text x="676" y="314" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">shows text only</text>
+
+  <path d="M330 282H390" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+  <path d="M570 282H628" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="484" y="428" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Prevent XSS by escaping output and avoiding unsafe HTML injection</text>
+</svg>

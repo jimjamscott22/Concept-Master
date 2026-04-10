@@ -1,0 +1,39 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Graph</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A graph stores vertices connected by edges, useful for relationships and paths</text>
+
+  <g stroke="#30363D" stroke-width="4" stroke-linecap="round">
+    <path d="M228 218L356 164"/>
+    <path d="M228 218L340 314"/>
+    <path d="M356 164L486 236"/>
+    <path d="M340 314L486 236"/>
+    <path d="M486 236L624 162"/>
+    <path d="M486 236L652 320"/>
+    <path d="M340 314L652 320"/>
+  </g>
+
+  <g font-family="JetBrains Mono, monospace" font-size="24" font-weight="700" text-anchor="middle">
+    <circle cx="228" cy="218" r="34" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <circle cx="356" cy="164" r="34" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <circle cx="340" cy="314" r="34" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <circle cx="486" cy="236" r="34" fill="#0D1117" stroke="#39D353" stroke-width="4"/>
+    <circle cx="624" cy="162" r="34" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <circle cx="652" cy="320" r="34" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <text x="228" y="226" fill="#E6EDF3">A</text>
+    <text x="356" y="172" fill="#E6EDF3">B</text>
+    <text x="340" y="322" fill="#E6EDF3">C</text>
+    <text x="486" y="244" fill="#E6EDF3">D</text>
+    <text x="624" y="170" fill="#E6EDF3">E</text>
+    <text x="652" y="328" fill="#E6EDF3">F</text>
+  </g>
+
+  <rect x="126" y="404" width="280" height="70" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="146" y="432" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="18">vertices = nodes</text>
+  <text x="146" y="460" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="18">edges = connections</text>
+
+  <rect x="494" y="404" width="290" height="70" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="514" y="432" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="18">Can represent roads, friends, links, networks</text>
+  <text x="514" y="460" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">directed or undirected, weighted or unweighted</text>
+</svg>

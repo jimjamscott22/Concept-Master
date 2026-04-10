@@ -1,0 +1,22 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Inheritance</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A subclass reuses shared behavior from a superclass and can add or override features</text>
+
+  <rect x="374" y="146" width="212" height="110" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="402" y="184" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Animal</text>
+  <text x="402" y="222" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">speak()</text>
+
+  <rect x="176" y="316" width="212" height="118" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="204" y="354" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Cat</text>
+  <text x="204" y="392" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">override: "Meow"</text>
+
+  <rect x="572" y="316" width="212" height="118" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="600" y="354" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Dog</text>
+  <text x="600" y="392" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">override: "Woof"</text>
+
+  <path d="M458 256L304 316" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M502 256L656 316" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="470" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Shared behavior lives in the parent class, while child classes specialize it</text>
+</svg>

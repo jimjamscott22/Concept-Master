@@ -1,0 +1,25 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Encryption</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Transform readable plaintext into ciphertext so only authorized parties can recover it</text>
+
+  <rect x="94" y="212" width="208" height="118" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="122" y="248" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">plaintext</text>
+  <text x="122" y="294" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">top-secret</text>
+
+  <rect x="378" y="182" width="208" height="178" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="406" y="218" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">encrypt(key)</text>
+  <circle cx="482" cy="282" r="42" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <path d="M482 258C474 258 468 264 468 272V278H496V272C496 264 490 258 482 258Z" stroke="#D29922" stroke-width="3" fill="none"/>
+  <rect x="466" y="278" width="32" height="32" rx="8" fill="#161B22" stroke="#D29922" stroke-width="3"/>
+
+  <rect x="662" y="212" width="208" height="118" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="690" y="248" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">ciphertext</text>
+  <text x="690" y="288" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">8F A1 2C 9D ...</text>
+  <text x="690" y="316" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">unreadable without key</text>
+
+  <path d="M302 271H378" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M586 271H662" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="430" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Encryption protects data by making it unintelligible until it is decrypted with the right key</text>
+</svg>

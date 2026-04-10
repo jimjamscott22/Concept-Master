@@ -1,0 +1,27 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">REST</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">An API style built around resources, standard HTTP methods, and stateless requests</text>
+
+  <rect x="96" y="188" width="232" height="170" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="124" y="224" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">resource</text>
+  <text x="124" y="272" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">/api/terms</text>
+  <text x="124" y="308" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">nouns, not actions</text>
+
+  <rect x="364" y="168" width="232" height="210" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="392" y="204" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">HTTP verbs</text>
+  <text x="392" y="252" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">GET - read</text>
+  <text x="392" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">POST - create</text>
+  <text x="392" y="320" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">PUT/PATCH - update</text>
+  <text x="392" y="354" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">DELETE - remove</text>
+
+  <rect x="632" y="188" width="232" height="170" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="660" y="224" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">stateless</text>
+  <text x="660" y="272" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">each request</text>
+  <text x="660" y="308" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">carries what it needs</text>
+
+  <path d="M328 274H364" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M596 274H632" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">REST keeps APIs predictable by combining clear resource URLs with standard web semantics</text>
+</svg>

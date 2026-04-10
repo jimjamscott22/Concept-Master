@@ -1,0 +1,20 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Recursion</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A function solves a problem by calling itself on a smaller version until a base case stops it</text>
+
+  <g font-family="JetBrains Mono, monospace" font-size="22" text-anchor="middle">
+    <rect x="360" y="156" width="240" height="54" rx="12" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <rect x="332" y="238" width="296" height="54" rx="12" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <rect x="304" y="320" width="352" height="54" rx="12" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+    <text x="480" y="190" fill="#E6EDF3">factorial(3)</text>
+    <text x="480" y="272" fill="#E6EDF3">3 * factorial(2)</text>
+    <text x="480" y="354" fill="#E6EDF3">2 * factorial(1)</text>
+  </g>
+
+  <path d="M480 210V238" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M480 292V320" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <rect x="368" y="416" width="224" height="54" rx="12" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="450" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">base case: factorial(0)=1</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Depth-First Search</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Go as deep as possible along one branch before backtracking</text>
+
+  <g stroke="#30363D" stroke-width="4" stroke-linecap="round">
+    <path d="M300 160L220 248"/>
+    <path d="M300 160L380 248"/>
+    <path d="M220 248L160 340"/>
+    <path d="M220 248L260 340"/>
+    <path d="M380 248L340 340"/>
+    <path d="M380 248L440 340"/>
+  </g>
+
+  <g font-family="JetBrains Mono, monospace" font-size="22" font-weight="700" text-anchor="middle">
+    <circle cx="300" cy="160" r="34" fill="#0D1117" stroke="#39D353" stroke-width="4"/>
+    <text x="300" y="168" fill="#39D353">1</text>
+
+    <circle cx="220" cy="248" r="32" fill="#0D1117" stroke="#39D353" stroke-width="4"/>
+    <text x="220" y="256" fill="#39D353">2</text>
+
+    <circle cx="160" cy="340" r="30" fill="#0D1117" stroke="#39D353" stroke-width="4"/>
+    <text x="160" y="348" fill="#39D353">3</text>
+
+    <circle cx="260" cy="340" r="30" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <text x="260" y="348" fill="#58A6FF">4</text>
+
+    <circle cx="380" cy="248" r="32" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <text x="380" y="256" fill="#58A6FF">5</text>
+
+    <circle cx="340" cy="340" r="30" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <text x="340" y="348" fill="#58A6FF">6</text>
+
+    <circle cx="440" cy="340" r="30" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+    <text x="440" y="348" fill="#58A6FF">7</text>
+  </g>
+
+  <path d="M300 160L220 248L160 340" stroke="#39D353" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M160 340C182 380 214 390 248 350" stroke="#58A6FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 10"/>
+  <path d="M260 340C284 382 318 392 360 346" stroke="#58A6FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 10"/>
+  <text x="540" y="214" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">stack / recursion</text>
+  <rect x="540" y="236" width="178" height="160" rx="16" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <rect x="570" y="342" width="118" height="34" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <rect x="570" y="302" width="118" height="34" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <rect x="570" y="262" width="118" height="34" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="629" y="366" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">root</text>
+  <text x="629" y="326" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">left</text>
+  <text x="629" y="286" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">deeper</text>
+  <text x="480" y="448" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">DFS follows one path downward first, then backtracks to unexplored branches</text>
+</svg>

@@ -11,7 +11,8 @@
   <rect x="366" y="164" width="228" height="220" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="394" y="202" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Singleton</text>
   <circle cx="480" cy="286" r="46" fill="#161B22" stroke="#39D353" stroke-width="3"/>
-  <text x="480" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">one instance</text>
+  <text x="480" y="283" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">one</text>
+  <text x="480" y="303" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">instance</text>
 
   <rect x="612" y="204" width="228" height="140" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
   <text x="640" y="242" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">caller B</text>

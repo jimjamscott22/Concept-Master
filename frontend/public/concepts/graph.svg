@@ -34,6 +34,6 @@
   <text x="146" y="460" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="18">edges = connections</text>
 
   <rect x="494" y="404" width="290" height="70" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
-  <text x="514" y="432" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="18">Can represent roads, friends, links, networks</text>
-  <text x="514" y="460" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">directed or undirected, weighted or unweighted</text>
+  <text x="514" y="432" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="18">roads, links, social graphs</text>
+  <text x="514" y="460" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">directed/undirected, weighted</text>
 </svg>

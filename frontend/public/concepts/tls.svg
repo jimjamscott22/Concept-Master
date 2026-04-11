@@ -7,7 +7,8 @@
   <rect x="116" y="196" width="210" height="156" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
   <text x="144" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">browser</text>
   <text x="144" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">ClientHello</text>
-  <text x="144" y="312" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">wants secure connection</text>
+  <text x="144" y="306" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">wants secure</text>
+  <text x="144" y="326" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">connection</text>
 
   <rect x="374" y="168" width="212" height="212" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="402" y="204" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">TLS handshake</text>

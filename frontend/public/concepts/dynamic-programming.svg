@@ -27,8 +27,9 @@
 
   <rect x="634" y="188" width="236" height="166" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
   <text x="662" y="224" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">reuse result</text>
-  <text x="662" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">need F(3) again?</text>
-  <text x="662" y="316" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">look it up, don't recompute</text>
+  <text x="662" y="270" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">need F(3) again?</text>
+  <text x="662" y="304" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">look it up —</text>
+  <text x="662" y="330" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20">don't recompute</text>
 
   <path d="M338 270H390" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M582 270H634" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>

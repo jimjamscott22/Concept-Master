@@ -9,18 +9,18 @@
   <text x="84" y="180" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18" transform="rotate(-90 84 180)">growth</text>
   <text x="704" y="468" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">input size n</text>
 
-  <path d="M140 386C230 386 320 386 410 386C500 386 590 386 680 386" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
-  <path d="M140 392C210 378 270 358 325 330C390 296 460 250 540 190C580 160 625 132 680 108" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
-  <path d="M140 376C250 354 360 326 470 286C555 254 620 220 680 180" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
-  <path d="M140 398C215 396 290 390 365 372C445 350 520 314 590 258C628 228 658 196 680 160" stroke="#A371F7" stroke-width="4" stroke-linecap="round"/>
-  <path d="M140 402C200 398 250 390 300 376C360 360 410 336 460 298C520 252 575 194 625 124C640 102 658 76 680 54" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 416C300 416 500 416 680 416" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 416C280 413 440 407 560 398C620 393 655 388 680 384" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 416C260 400 380 372 480 335C560 306 630 275 680 252" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 416C240 394 350 354 450 306C540 262 625 210 680 178" stroke="#A371F7" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 416C190 384 240 330 300 260C368 176 450 114 530 74C590 46 645 32 680 26" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
 
   <g font-family="JetBrains Mono, monospace" font-size="20" font-weight="600">
-    <text x="706" y="390" fill="#39D353">O(1)</text>
-    <text x="706" y="112" fill="#58A6FF">O(log n)</text>
-    <text x="706" y="184" fill="#D29922">O(n)</text>
-    <text x="706" y="160" fill="#A371F7">O(n log n)</text>
-    <text x="706" y="56" fill="#F85149">O(n^2)</text>
+    <text x="706" y="420" fill="#39D353">O(1)</text>
+    <text x="706" y="388" fill="#58A6FF">O(log n)</text>
+    <text x="706" y="256" fill="#D29922">O(n)</text>
+    <text x="706" y="182" fill="#A371F7">O(n log n)</text>
+    <text x="706" y="30" fill="#F85149">O(n²)</text>
   </g>
 
   <text x="120" y="478" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">better</text>

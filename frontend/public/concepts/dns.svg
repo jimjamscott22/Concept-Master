@@ -16,7 +16,7 @@
   <text x="479" y="328" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">query upstream</text>
 
   <rect x="654" y="214" width="214" height="124" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
-  <text x="684" y="252" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">authoritative DNS</text>
+  <text x="684" y="252" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="17" font-weight="700">authoritative DNS</text>
   <text x="684" y="292" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">example.com -&gt;</text>
   <text x="684" y="320" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">93.184.216.34</text>
 

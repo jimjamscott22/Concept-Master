@@ -7,7 +7,8 @@
   <rect x="92" y="196" width="214" height="152" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
   <text x="120" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">client</text>
   <text x="120" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="20">GET /api/terms</text>
-  <text x="120" y="314" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">method + path + headers</text>
+  <text x="120" y="308" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="17">method + path</text>
+  <text x="120" y="330" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="17">+ headers</text>
 
   <rect x="376" y="166" width="208" height="212" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="404" y="202" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">HTTP exchange</text>

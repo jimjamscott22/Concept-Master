@@ -20,7 +20,8 @@
 
   <rect x="392" y="236" width="176" height="98" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="480" y="272" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22">ON</text>
-  <text x="480" y="308" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">users.id = orders.user_id</text>
+  <text x="480" y="301" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">users.id =</text>
+  <text x="480" y="319" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">orders.user_id</text>
 
   <path d="M358 286H392" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M568 286H602" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>

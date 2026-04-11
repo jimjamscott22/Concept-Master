@@ -16,8 +16,9 @@
 
   <rect x="662" y="212" width="208" height="118" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="690" y="248" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">ciphertext</text>
-  <text x="690" y="288" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">8F A1 2C 9D ...</text>
-  <text x="690" y="316" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">unreadable without key</text>
+  <text x="666" y="284" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">8F A1 2C 9D ...</text>
+  <text x="666" y="308" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">unreadable without</text>
+  <text x="666" y="328" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">the decryption key</text>
 
   <path d="M302 271H378" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M586 271H662" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>

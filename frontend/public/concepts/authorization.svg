@@ -5,7 +5,7 @@
   <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Once identity is known, decide which actions or resources that identity may access</text>
 
   <rect x="104" y="196" width="218" height="152" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
-  <text x="132" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">authenticated user</text>
+  <text x="132" y="232" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">authenticated user</text>
   <text x="132" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">role = editor</text>
   <text x="132" y="314" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">known identity</text>
 

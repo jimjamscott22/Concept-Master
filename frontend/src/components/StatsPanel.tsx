@@ -8,11 +8,13 @@ interface StatsPanelProps {
 
 export function StatsPanel({ onSelectTerm }: StatsPanelProps) {
   const [stats, setStats] = useState<Stats | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    api.stats.get().then(setStats)
+    api.stats.get().then(setStats).catch((e: Error) => setError(e.message))
   }, [])
 
+  if (error)  return <p className="p-6 text-red-400 text-sm">Failed to load stats: {error}</p>
   if (!stats) return <p className="p-6 text-muted text-sm">Loading stats…</p>
 
   const maxCount = Math.max(...stats.per_category.map(c => c.term_count), 1)

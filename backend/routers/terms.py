@@ -226,7 +226,8 @@ async def update_term(
         try:
             await cur.execute(
                 """UPDATE terms
-                   SET name=%s, slug=%s, definition=%s, example_code=%s, code_lang=%s
+                   SET name=%s, slug=%s, definition=%s, example_code=%s, code_lang=%s,
+                       updated_at=NOW()
                    WHERE id=%s""",
                 (body.name, new_slug, body.definition, body.example_code, body.code_lang, row["id"]),
             )

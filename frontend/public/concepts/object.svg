@@ -14,7 +14,7 @@
   <text x="586" y="210" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">fido: Dog</text>
   <text x="586" y="258" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">name = "Fido"</text>
   <text x="586" y="294" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">bark() -&gt; "woof"</text>
-  <text x="586" y="342" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">actual instance in memory</text>
+  <text x="586" y="342" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="15">actual instance in memory</text>
 
   <path d="M402 280H558" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <text x="480" y="264" text-anchor="middle" fill="#58A6FF" font-family="IBM Plex Sans, sans-serif" font-size="18">instantiate</text>

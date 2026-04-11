@@ -15,6 +15,6 @@
 
   <path d="M480 210V238" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M480 292V320" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
-  <rect x="368" y="416" width="224" height="54" rx="12" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
-  <text x="480" y="450" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="22">base case: factorial(0)=1</text>
+  <rect x="340" y="416" width="280" height="54" rx="12" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="450" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">base case: factorial(0) = 1</text>
 </svg>

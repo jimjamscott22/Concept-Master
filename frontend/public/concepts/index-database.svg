@@ -8,7 +8,8 @@
   <text x="120" y="226" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">query</text>
   <text x="120" y="276" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">WHERE email =</text>
   <text x="120" y="308" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">'alice@example.com'</text>
-  <text x="120" y="344" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">look up matching rows fast</text>
+  <text x="120" y="338" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">look up matching</text>
+  <text x="120" y="358" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">rows fast</text>
 
   <rect x="376" y="162" width="216" height="236" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="404" y="198" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">index</text>
@@ -16,7 +17,7 @@
   <rect x="410" y="270" width="148" height="34" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2"/>
   <rect x="410" y="314" width="148" height="34" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
   <text x="484" y="248" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="16">anna@...</text>
-  <text x="484" y="292" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">alice@... -&gt; row 42</text>
+  <text x="484" y="292" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">alice@... → row 42</text>
   <text x="484" y="336" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="16">bob@...</text>
 
   <rect x="626" y="190" width="250" height="180" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>

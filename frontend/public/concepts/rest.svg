@@ -19,7 +19,7 @@
   <rect x="632" y="188" width="232" height="170" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
   <text x="660" y="224" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">stateless</text>
   <text x="660" y="272" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">each request</text>
-  <text x="660" y="308" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">carries what it needs</text>
+  <text x="660" y="308" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">carries what it needs</text>
 
   <path d="M328 274H364" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M596 274H632" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>

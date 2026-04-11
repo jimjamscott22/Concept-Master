@@ -12,8 +12,8 @@
   <rect x="384" y="164" width="206" height="220" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
   <text x="412" y="200" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">map(...)</text>
   <text x="412" y="248" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">takes function</text>
-  <text x="412" y="284" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">applies it to items</text>
-  <text x="412" y="320" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">returns new result</text>
+  <text x="412" y="284" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">applies to each item</text>
+  <text x="412" y="318" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="15">returns new result</text>
 
   <rect x="634" y="194" width="232" height="160" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
   <text x="662" y="230" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">result</text>

@@ -18,7 +18,8 @@
   <rect x="638" y="196" width="218" height="152" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
   <text x="666" y="232" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">result</text>
   <text x="666" y="278" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">session / user id</text>
-  <text x="666" y="314" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">now the app knows who you are</text>
+  <text x="666" y="306" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">now the app knows</text>
+  <text x="666" y="328" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">who you are</text>
 
   <path d="M322 272H378" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
   <path d="M582 272H638" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>

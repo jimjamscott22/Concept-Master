@@ -89,12 +89,17 @@ export default function App() {
   const handleImport = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const text = await file.text()
-    const items = JSON.parse(text)
-    const result = await api.terms.import(items)
-    alert(`Imported ${result.imported} terms, skipped ${result.skipped} duplicates.`)
-    refetch()
-    e.target.value = ""
+    try {
+      const text = await file.text()
+      const items = JSON.parse(text)
+      const result = await api.terms.import(items)
+      alert(`Imported ${result.imported} terms, skipped ${result.skipped} duplicates.`)
+      refetch()
+    } catch (err) {
+      alert(`Import failed: ${err instanceof Error ? err.message : "Invalid file"}`)
+    } finally {
+      e.target.value = ""
+    }
   }, [refetch])
 
   useEffect(() => {
@@ -203,6 +208,7 @@ export default function App() {
 
       {view === "form" && (
         <TermForm
+          key={editingSlug ?? "new"}
           initial={editingSlug !== "new" ? expandedTerm : null}
           categories={categories}
           allTags={tags}

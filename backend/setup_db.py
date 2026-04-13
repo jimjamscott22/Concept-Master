@@ -8,6 +8,7 @@ then initializes schema and seeds data.
 import asyncio
 import argparse
 import os
+import re
 import aiomysql
 from pathlib import Path
 from dotenv import load_dotenv
@@ -17,13 +18,27 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
 
+def _validate_mysql_username(username: str) -> str:
+    if not re.fullmatch(r"[A-Za-z0-9_]+", username):
+        raise ValueError(
+            "DB_USER may only contain letters, numbers, and underscores."
+        )
+    return username
+
+
+def _escape_mysql_string(value: str) -> str:
+    return value.replace("\\", "\\\\").replace("'", "\\'")
+
+
 async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
-    app_user = os.getenv("DB_USER", "concept_user")
+    app_user = _validate_mysql_username(os.getenv("DB_USER", "concept_user"))
     app_password = os.getenv("DB_PASS")
     if not app_password:
         raise RuntimeError(
             "Missing DB_PASS. Set DB_PASS in the repository root .env before running setup_db.py."
         )
+    escaped_user = _escape_mysql_string(app_user)
+    escaped_password = _escape_mysql_string(app_password)
 
     conn = await aiomysql.connect(
         host=host, port=port, user="root", password=root_password
@@ -34,12 +49,10 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         )
         await cur.execute(
-            "CREATE USER IF NOT EXISTS %s@'%%' IDENTIFIED BY %s",
-            (app_user, app_password),
+            f"CREATE USER IF NOT EXISTS '{escaped_user}'@'%' IDENTIFIED BY '{escaped_password}'"
         )
         await cur.execute(
-            "GRANT ALL PRIVILEGES ON concept_master.* TO %s@'%%'",
-            (app_user,),
+            f"GRANT ALL PRIVILEGES ON concept_master.* TO '{escaped_user}'@'%'"
         )
         await cur.execute("FLUSH PRIVILEGES")
     conn.close()
@@ -48,10 +61,10 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
     # Now init schema + seed via database.py
     import sys
 
-    os.environ.setdefault("DB_HOST", host)
-    os.environ.setdefault("DB_PORT", str(port))
-    os.environ.setdefault("DB_USER", app_user)
-    os.environ.setdefault("DB_PASS", app_password)
+    os.environ["DB_HOST"] = host
+    os.environ["DB_PORT"] = str(port)
+    os.environ["DB_USER"] = app_user
+    os.environ["DB_PASS"] = app_password
     os.environ.setdefault("DB_NAME", "concept_master")
 
     sys.path.insert(0, str(Path(__file__).parent.parent))

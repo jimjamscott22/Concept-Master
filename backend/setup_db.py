@@ -18,16 +18,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
 
-def _validate_mysql_username(username: str) -> str:
-    if not re.fullmatch(r"[A-Za-z0-9_]+", username):
-        raise ValueError(
-            "DB_USER may only contain letters, numbers, and underscores "
-            "(for safe setup script provisioning)."
-        )
-    return username
-
-
-def _validate_mysql_identifier(value: str, env_name: str) -> str:
+def _validate_mysql_safe_token(value: str, env_name: str) -> str:
     if not re.fullmatch(r"[A-Za-z0-9_]+", value):
         raise ValueError(
             f"{env_name} may only contain letters, numbers, and underscores."
@@ -36,9 +27,9 @@ def _validate_mysql_identifier(value: str, env_name: str) -> str:
 
 
 async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
-    app_user = _validate_mysql_username(os.getenv("DB_USER", "concept_user"))
+    app_user = _validate_mysql_safe_token(os.getenv("DB_USER", "concept_user"), "DB_USER")
     app_password = os.getenv("DB_PASS")
-    db_name = _validate_mysql_identifier(
+    db_name = _validate_mysql_safe_token(
         os.getenv("DB_NAME", "concept_master"), "DB_NAME"
     )
     if not app_password:
@@ -50,6 +41,8 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
         host=host, port=port, user="root", password=root_password
     )
     async with conn.cursor() as cur:
+        # MySQL identifiers cannot be parameterized with placeholders, so we
+        # restrict db_name to [A-Za-z0-9_] before interpolating it below.
         await cur.execute(
             f"CREATE DATABASE IF NOT EXISTS `{db_name}` "
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"

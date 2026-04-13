@@ -52,6 +52,7 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
             f"CREATE DATABASE IF NOT EXISTS `{db_name}` "
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         )
+        # app_user is parameterized and pre-validated to a safe token format.
         await cur.execute(
             "CREATE USER IF NOT EXISTS %s@'%%' IDENTIFIED BY %s",
             (app_user, app_password),

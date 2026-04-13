@@ -87,6 +87,7 @@ DB_NAME=concept_master
 ```
 
 You can copy `.env.example` and then fill in your values.
+(`setup_db.py` expects `DB_USER` to use letters/numbers/underscores.)
 
 ### 5. Frontend — install dependencies
 

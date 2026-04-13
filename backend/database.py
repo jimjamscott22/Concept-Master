@@ -28,13 +28,19 @@ DB_PASS = _require_env("DB_PASS")
 DB_NAME = os.getenv("DB_NAME", "concept_master")
 
 
-async def create_pool() -> aiomysql.Pool:
+async def create_pool(
+    host: str = DB_HOST,
+    port: int = DB_PORT,
+    user: str = DB_USER,
+    password: str = DB_PASS,
+    db_name: str = DB_NAME,
+) -> aiomysql.Pool:
     return await aiomysql.create_pool(
-        host=DB_HOST,
-        port=DB_PORT,
-        user=DB_USER,
-        password=DB_PASS,
-        db=DB_NAME,
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        db=db_name,
         charset="utf8mb4",
         autocommit=True,
         minsize=2,
@@ -58,9 +64,15 @@ async def _exec_sql_file(conn: aiomysql.Connection, filepath: Path) -> None:
                 await cur.execute(clean)
 
 
-async def init_db() -> None:
+async def init_db(
+    host: str = DB_HOST,
+    port: int = DB_PORT,
+    user: str = DB_USER,
+    password: str = DB_PASS,
+    db_name: str = DB_NAME,
+) -> None:
     """Create schema and seed data. Safe to re-run (IF NOT EXISTS guards)."""
-    pool = await create_pool()
+    pool = await create_pool(host=host, port=port, user=user, password=password, db_name=db_name)
     async with pool.acquire() as conn:
         schema = Path(__file__).parent / "schema.sql"
         seed = Path(__file__).parent / "seed.sql"

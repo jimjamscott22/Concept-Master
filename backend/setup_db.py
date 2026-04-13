@@ -21,13 +21,10 @@ load_dotenv(PROJECT_ROOT / ".env")
 def _validate_mysql_username(username: str) -> str:
     if not re.fullmatch(r"[A-Za-z0-9_]+", username):
         raise ValueError(
-            "DB_USER may only contain letters, numbers, and underscores."
+            "DB_USER may only contain letters, numbers, and underscores "
+            "(for safe setup script provisioning)."
         )
     return username
-
-
-def _escape_mysql_string(value: str) -> str:
-    return value.replace("\\", "\\\\").replace("'", "\\'")
 
 
 async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
@@ -37,8 +34,6 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
         raise RuntimeError(
             "Missing DB_PASS. Set DB_PASS in the repository root .env before running setup_db.py."
         )
-    escaped_user = _escape_mysql_string(app_user)
-    escaped_password = _escape_mysql_string(app_password)
 
     conn = await aiomysql.connect(
         host=host, port=port, user="root", password=root_password
@@ -49,10 +44,11 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         )
         await cur.execute(
-            f"CREATE USER IF NOT EXISTS '{escaped_user}'@'%' IDENTIFIED BY '{escaped_password}'"
+            f"CREATE USER IF NOT EXISTS '{app_user}'@'%' IDENTIFIED BY %s",
+            (app_password,),
         )
         await cur.execute(
-            f"GRANT ALL PRIVILEGES ON concept_master.* TO '{escaped_user}'@'%'"
+            f"GRANT ALL PRIVILEGES ON concept_master.* TO '{app_user}'@'%'"
         )
         await cur.execute("FLUSH PRIVILEGES")
     conn.close()
@@ -61,15 +57,15 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
     # Now init schema + seed via database.py
     import sys
 
-    os.environ["DB_HOST"] = host
-    os.environ["DB_PORT"] = str(port)
-    os.environ["DB_USER"] = app_user
-    os.environ["DB_PASS"] = app_password
-    os.environ.setdefault("DB_NAME", "concept_master")
-
     sys.path.insert(0, str(Path(__file__).parent.parent))
     from backend.database import init_db
-    await init_db()
+    await init_db(
+        host=host,
+        port=port,
+        user=app_user,
+        password=app_password,
+        db_name=os.getenv("DB_NAME", "concept_master"),
+    )
     print("✓ Schema created and data seeded")
 
 

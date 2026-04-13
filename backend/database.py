@@ -1,6 +1,7 @@
 import os
 import asyncio
 from pathlib import Path
+from typing import Optional
 
 import aiomysql
 import sqlparse
@@ -11,8 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 load_dotenv(PROJECT_ROOT / ".env")
 
 
-def _require_env(name: str) -> str:
-    value = os.getenv(name)
+def _require_value(name: str, value: Optional[str]) -> str:
     if not value:
         raise RuntimeError(
             f"Missing required environment variable: {name}. "
@@ -23,23 +23,25 @@ def _require_env(name: str) -> str:
 
 DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
 DB_PORT = int(os.getenv("DB_PORT", "3306"))
-DB_USER = _require_env("DB_USER")
-DB_PASS = _require_env("DB_PASS")
+DB_USER = os.getenv("DB_USER")
+DB_PASS = os.getenv("DB_PASS")
 DB_NAME = os.getenv("DB_NAME", "concept_master")
 
 
 async def create_pool(
     host: str = DB_HOST,
     port: int = DB_PORT,
-    user: str = DB_USER,
-    password: str = DB_PASS,
+    user: Optional[str] = DB_USER,
+    password: Optional[str] = DB_PASS,
     db_name: str = DB_NAME,
 ) -> aiomysql.Pool:
+    resolved_user = _require_value("DB_USER", user)
+    resolved_password = _require_value("DB_PASS", password)
     return await aiomysql.create_pool(
         host=host,
         port=port,
-        user=user,
-        password=password,
+        user=resolved_user,
+        password=resolved_password,
         db=db_name,
         charset="utf8mb4",
         autocommit=True,
@@ -67,8 +69,8 @@ async def _exec_sql_file(conn: aiomysql.Connection, filepath: Path) -> None:
 async def init_db(
     host: str = DB_HOST,
     port: int = DB_PORT,
-    user: str = DB_USER,
-    password: str = DB_PASS,
+    user: Optional[str] = DB_USER,
+    password: Optional[str] = DB_PASS,
     db_name: str = DB_NAME,
 ) -> None:
     """Create schema and seed data. Safe to re-run (IF NOT EXISTS guards)."""

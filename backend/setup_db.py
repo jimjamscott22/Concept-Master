@@ -27,7 +27,12 @@ def _validate_mysql_safe_token(value: str, env_name: str) -> str:
 
 
 async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
-    app_user = _validate_mysql_safe_token(os.getenv("DB_USER", "concept_user"), "DB_USER")
+    app_user = os.getenv("DB_USER")
+    if not app_user:
+        raise RuntimeError(
+            "Missing DB_USER. Set DB_USER in the repository root .env before running setup_db.py."
+        )
+    app_user = _validate_mysql_safe_token(app_user, "DB_USER")
     app_password = os.getenv("DB_PASS")
     db_name = _validate_mysql_safe_token(
         os.getenv("DB_NAME", "concept_master"), "DB_NAME"

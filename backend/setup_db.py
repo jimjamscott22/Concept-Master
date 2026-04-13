@@ -7,11 +7,24 @@ then initializes schema and seeds data.
 """
 import asyncio
 import argparse
+import os
 import aiomysql
 from pathlib import Path
+from dotenv import load_dotenv
 
 
-async def provision(root_password: str, host: str = "192.168.1.25", port: int = 3306) -> None:
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(PROJECT_ROOT / ".env")
+
+
+async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
+    app_user = os.getenv("DB_USER", "concept_user")
+    app_password = os.getenv("DB_PASS")
+    if not app_password:
+        raise RuntimeError(
+            "Missing DB_PASS. Set DB_PASS in the repository root .env before running setup_db.py."
+        )
+
     conn = await aiomysql.connect(
         host=host, port=port, user="root", password=root_password
     )
@@ -21,10 +34,12 @@ async def provision(root_password: str, host: str = "192.168.1.25", port: int = 
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         )
         await cur.execute(
-            "CREATE USER IF NOT EXISTS 'concept_user'@'%' IDENTIFIED BY 'Yar22'"
+            "CREATE USER IF NOT EXISTS %s@'%%' IDENTIFIED BY %s",
+            (app_user, app_password),
         )
         await cur.execute(
-            "GRANT ALL PRIVILEGES ON concept_master.* TO 'concept_user'@'%'"
+            "GRANT ALL PRIVILEGES ON concept_master.* TO %s@'%%'",
+            (app_user,),
         )
         await cur.execute("FLUSH PRIVILEGES")
     conn.close()
@@ -32,6 +47,13 @@ async def provision(root_password: str, host: str = "192.168.1.25", port: int = 
 
     # Now init schema + seed via database.py
     import sys
+
+    os.environ.setdefault("DB_HOST", host)
+    os.environ.setdefault("DB_PORT", str(port))
+    os.environ.setdefault("DB_USER", app_user)
+    os.environ.setdefault("DB_PASS", app_password)
+    os.environ.setdefault("DB_NAME", "concept_master")
+
     sys.path.insert(0, str(Path(__file__).parent.parent))
     from backend.database import init_db
     await init_db()
@@ -41,7 +63,7 @@ async def provision(root_password: str, host: str = "192.168.1.25", port: int = 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--root-password", required=True)
-    parser.add_argument("--host", default="192.168.1.25")
+    parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=3306)
     args = parser.parse_args()
     asyncio.run(provision(args.root_password, args.host, args.port))

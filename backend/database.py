@@ -7,12 +7,24 @@ import sqlparse
 from dotenv import load_dotenv
 from fastapi import Request
 
-load_dotenv(Path(__file__).parent / ".env")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(PROJECT_ROOT / ".env")
 
-DB_HOST = os.getenv("DB_HOST", "192.168.1.25")
+
+def _require_env(name: str) -> str:
+    value = os.getenv(name)
+    if not value:
+        raise RuntimeError(
+            f"Missing required environment variable: {name}. "
+            "Set it in the repository root .env file."
+        )
+    return value
+
+
+DB_HOST = os.getenv("DB_HOST", "127.0.0.1")
 DB_PORT = int(os.getenv("DB_PORT", "3306"))
-DB_USER = os.getenv("DB_USER", "concept_user")
-DB_PASS = os.getenv("DB_PASS", "Yar22")
+DB_USER = _require_env("DB_USER")
+DB_PASS = _require_env("DB_PASS")
 DB_NAME = os.getenv("DB_NAME", "concept_master")
 
 

@@ -72,7 +72,13 @@ async def init_db(
     db_name: str = DB_NAME,
 ) -> None:
     """Create schema and seed data. Safe to re-run (IF NOT EXISTS guards)."""
-    pool = await create_pool(host=host, port=port, user=user, password=password, db_name=db_name)
+    pool = await create_pool(
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        db_name=db_name,
+    )
     async with pool.acquire() as conn:
         schema = Path(__file__).parent / "schema.sql"
         seed = Path(__file__).parent / "seed.sql"

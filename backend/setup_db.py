@@ -27,9 +27,20 @@ def _validate_mysql_username(username: str) -> str:
     return username
 
 
+def _validate_mysql_identifier(value: str, env_name: str) -> str:
+    if not re.fullmatch(r"[A-Za-z0-9_]+", value):
+        raise ValueError(
+            f"{env_name} may only contain letters, numbers, and underscores."
+        )
+    return value
+
+
 async def provision(root_password: str, host: str = "127.0.0.1", port: int = 3306) -> None:
     app_user = _validate_mysql_username(os.getenv("DB_USER", "concept_user"))
     app_password = os.getenv("DB_PASS")
+    db_name = _validate_mysql_identifier(
+        os.getenv("DB_NAME", "concept_master"), "DB_NAME"
+    )
     if not app_password:
         raise RuntimeError(
             "Missing DB_PASS. Set DB_PASS in the repository root .env before running setup_db.py."
@@ -40,15 +51,16 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
     )
     async with conn.cursor() as cur:
         await cur.execute(
-            "CREATE DATABASE IF NOT EXISTS concept_master "
+            f"CREATE DATABASE IF NOT EXISTS `{db_name}` "
             "CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci"
         )
         await cur.execute(
-            f"CREATE USER IF NOT EXISTS '{app_user}'@'%' IDENTIFIED BY %s",
-            (app_password,),
+            "CREATE USER IF NOT EXISTS %s@'%%' IDENTIFIED BY %s",
+            (app_user, app_password),
         )
         await cur.execute(
-            f"GRANT ALL PRIVILEGES ON concept_master.* TO '{app_user}'@'%'"
+            f"GRANT ALL PRIVILEGES ON `{db_name}`.* TO %s@'%%'",
+            (app_user,),
         )
         await cur.execute("FLUSH PRIVILEGES")
     conn.close()
@@ -64,7 +76,7 @@ async def provision(root_password: str, host: str = "127.0.0.1", port: int = 330
         port=port,
         user=app_user,
         password=app_password,
-        db_name=os.getenv("DB_NAME", "concept_master"),
+        db_name=db_name,
     )
     print("✓ Schema created and data seeded")
 

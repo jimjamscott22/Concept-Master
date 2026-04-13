@@ -59,14 +59,14 @@ This resolves all backend dependencies (including dev tools like pytest) into a 
 
 ### 3. Database — provision MySQL
 
-The `setup_db.py` script creates the `concept_master` database, the `concept_user` account, applies the schema, and seeds initial data — all in one step.
+The `setup_db.py` script creates the `concept_master` database, creates the app user from your `.env` (`DB_USER` / `DB_PASS`), applies the schema, and seeds initial data — all in one step.
 
 ```bash
 # Run from the repo root
 python backend/setup_db.py --root-password <your-mysql-root-password>
 ```
 
-By default the script connects to `192.168.1.25:3306`. Override with `--host` and `--port` if your MySQL server is elsewhere:
+By default the script connects to `127.0.0.1:3306`. Override with `--host` and `--port` if your MySQL server is elsewhere:
 
 ```bash
 python backend/setup_db.py --root-password <password> --host 127.0.0.1 --port 3306
@@ -74,9 +74,9 @@ python backend/setup_db.py --root-password <password> --host 127.0.0.1 --port 33
 
 > **Tip — skip the script and use an existing user:** If you already have a database user with the necessary privileges, you can skip `setup_db.py` and configure the connection via environment variables (see step 4) instead.
 
-### 4. Backend — environment variables (optional)
+### 4. Backend — environment variables
 
-If your MySQL credentials differ from the defaults, create `backend/.env`:
+Create a `.env` file in the repository root (same folder as `README.md`):
 
 ```ini
 DB_HOST=127.0.0.1
@@ -85,6 +85,9 @@ DB_USER=concept_user
 DB_PASS=your_password
 DB_NAME=concept_master
 ```
+
+You can copy `.env.example` and then fill in your values.
+(`setup_db.py` expects `DB_USER` to use letters/numbers/underscores.)
 
 ### 5. Frontend — install dependencies
 

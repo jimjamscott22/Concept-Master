@@ -111,7 +111,7 @@ System.out.println(pq.poll()); // => 1\n```',
 
 ('Big O Notation',
   'big-o-notation',
-  'A mathematical notation describing the upper bound of an algorithm''''s time or space complexity as input size n grows.\n\n**Common complexities:**\n- O(1) constant\n- O(log n) logarithmic\n- O(n) linear\n- O(n log n) linearithmic\n- O(n²) quadratic\n- O(2ⁿ) exponential\n\n**Java example:**\n```java\nfor (int i = 0; i < n; i++) {
+  'A mathematical notation describing the upper bound of an algorithm''s time or space complexity as input size n grows.\n\n**Common complexities:**\n- O(1) constant\n- O(log n) logarithmic\n- O(n) linear\n- O(n log n) linearithmic\n- O(n²) quadratic\n- O(2ⁿ) exponential\n\n**Java example:**\n```java\nfor (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
         System.out.println(i + "," + j);
     }

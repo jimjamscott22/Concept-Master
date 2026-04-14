@@ -1,0 +1,38 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Factory Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A method or class creates objects without exposing instantiation logic</text>
+
+  <rect x="108" y="210" width="220" height="130" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="148" y="252" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Client</text>
+  <text x="148" y="286" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">create("dog")</text>
+  <text x="148" y="314" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">passes a type</text>
+
+  <path d="M328 275H400" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+  <path d="M392 267L404 275L392 283" stroke="#D29922" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <rect x="400" y="180" width="220" height="190" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="432" y="218" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Factory</text>
+  <text x="432" y="252" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">create(type)</text>
+  <line x1="424" y1="270" x2="600" y2="270" stroke="#30363D" stroke-width="1"/>
+  <text x="432" y="298" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">decides which</text>
+  <text x="432" y="318" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">class to build</text>
+  <text x="432" y="350" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">return new X()</text>
+
+  <path d="M620 240H692" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M684 232L696 240L684 248" stroke="#58A6FF" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M620 310H692" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M684 302L696 310L684 318" stroke="#58A6FF" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <rect x="692" y="200" width="196" height="80" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="790" y="246" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Dog</text>
+
+  <rect x="692" y="296" width="196" height="80" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="790" y="342" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Cat</text>
+
+  <text x="790" y="268" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">speak() &#x2192; Woof</text>
+  <text x="790" y="364" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">speak() &#x2192; Meow</text>
+
+  <text x="480" y="448" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">The client never calls constructors directly &#x2014; the factory decides which class to instantiate</text>
+</svg>

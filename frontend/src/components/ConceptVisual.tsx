@@ -1,4 +1,9 @@
 const conceptVisuals: Record<string, { src: string; alt: string; caption: string }> = {
+  acid: {
+    src: "/concepts/acid.svg",
+    alt: "Diagram showing the four ACID properties — Atomicity, Consistency, Isolation, Durability — around a central transaction.",
+    caption: "Visual: ACID guarantees make database transactions safe and predictable.",
+  },
   array: {
     src: "/concepts/array.svg",
     alt: "Diagram showing indexed array slots and constant-time access by index.",
@@ -74,6 +79,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing plaintext transformed into ciphertext using a key.",
     caption: "Visual: readable data becomes protected ciphertext through encryption.",
   },
+  "factory-pattern": {
+    src: "/concepts/factory-pattern.svg",
+    alt: "Diagram showing a factory receiving a type parameter and producing different concrete objects.",
+    caption: "Visual: the client asks a factory to create objects without knowing the concrete class.",
+  },
   "garbage-collection": {
     src: "/concepts/garbage-collection.svg",
     alt: "Diagram contrasting reachable objects with unreachable objects eligible for cleanup.",
@@ -119,6 +129,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Linked list diagram showing nodes connected by next pointers.",
     caption: "Visual: each node stores data plus a pointer to the next node.",
   },
+  "map-filter-reduce": {
+    src: "/concepts/map-filter-reduce.svg",
+    alt: "Diagram showing a pipeline: input list through map, filter, and reduce to a single result.",
+    caption: "Visual: map transforms, filter selects, reduce combines — no explicit loops needed.",
+  },
   "memory-leak": {
     src: "/concepts/memory-leak.svg",
     alt: "Diagram showing retained references causing memory usage to grow over time.",
@@ -128,6 +143,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/merge-sort.svg",
     alt: "Diagram showing merge sort splitting an array and merging it back sorted.",
     caption: "Visual: divide into halves, sort recursively, then merge.",
+  },
+  normalization: {
+    src: "/concepts/normalization.svg",
+    alt: "Diagram showing an unnormalized table splitting into normalized related tables to eliminate redundancy.",
+    caption: "Visual: normalization splits repeated data into related tables linked by foreign keys.",
   },
   object: {
     src: "/concepts/object.svg",
@@ -139,25 +159,25 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a subject notifying multiple observers after a state change.",
     caption: "Visual: one subject can broadcast updates to many subscribed observers.",
   },
+  pointer: {
+    src: "/concepts/pointer.svg",
+    alt: "Diagram showing a pointer variable storing a memory address that points to another variable's location.",
+    caption: "Visual: pointers store addresses, enabling indirection and dynamic memory access.",
+  },
   polymorphism: {
     src: "/concepts/polymorphism.svg",
     alt: "Diagram showing one interface producing different behavior across object types.",
     caption: "Visual: the same method call can behave differently depending on the object.",
   },
+  "pure-function": {
+    src: "/concepts/pure-function.svg",
+    alt: "Diagram contrasting a pure function with deterministic output and no side effects versus an impure function that mutates external state.",
+    caption: "Visual: pure functions always return the same result and never touch external state.",
+  },
   queue: {
     src: "/concepts/queue.svg",
     alt: "Diagram showing a queue with front dequeue and back enqueue operations.",
     caption: "Visual: queues process items in first-in, first-out order.",
-  },
-  recursion: {
-    src: "/concepts/recursion.svg",
-    alt: "Diagram showing a function calling itself on smaller inputs until a base case is reached.",
-    caption: "Visual: recursion solves a problem by reducing it until a base case stops the calls.",
-  },
-  rest: {
-    src: "/concepts/rest.svg",
-    alt: "Diagram showing REST resources, HTTP verbs, and stateless API requests.",
-    caption: "Visual: REST combines resource URLs, HTTP verbs, and stateless requests.",
   },
   "quick-sort": {
     src: "/concepts/quick-sort.svg",
@@ -169,20 +189,40 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing two threads interfering while updating shared state.",
     caption: "Visual: concurrent timing issues can corrupt shared state without coordination.",
   },
+  recursion: {
+    src: "/concepts/recursion.svg",
+    alt: "Diagram showing a function calling itself on smaller inputs until a base case is reached.",
+    caption: "Visual: recursion solves a problem by reducing it until a base case stops the calls.",
+  },
+  rest: {
+    src: "/concepts/rest.svg",
+    alt: "Diagram showing REST resources, HTTP verbs, and stateless API requests.",
+    caption: "Visual: REST combines resource URLs, HTTP verbs, and stateless requests.",
+  },
   singleton: {
     src: "/concepts/singleton.svg",
     alt: "Diagram showing multiple callers receiving the same shared singleton instance.",
     caption: "Visual: a singleton pattern ensures one shared instance is reused.",
+  },
+  "sql-join": {
+    src: "/concepts/sql-join.svg",
+    alt: "Diagram showing two related tables combined through a join condition.",
+    caption: "Visual: SQL joins connect related rows across multiple tables.",
   },
   stack: {
     src: "/concepts/stack.svg",
     alt: "Diagram showing a stack with push and pop operations at the top.",
     caption: "Visual: stacks process items in last-in, first-out order.",
   },
-  "sql-join": {
-    src: "/concepts/sql-join.svg",
-    alt: "Diagram showing two related tables combined through a join condition.",
-    caption: "Visual: SQL joins connect related rows across multiple tables.",
+  "stack-vs-heap-memory": {
+    src: "/concepts/stack-vs-heap-memory.svg",
+    alt: "Diagram comparing stack memory with LIFO function frames and heap memory with scattered dynamic allocations.",
+    caption: "Visual: stack is fast and automatic; heap is flexible but needs management.",
+  },
+  "strategy-pattern": {
+    src: "/concepts/strategy-pattern.svg",
+    alt: "Diagram showing a context object delegating to interchangeable strategy implementations.",
+    caption: "Visual: the strategy pattern lets you swap algorithms at runtime without changing the context.",
   },
   tcp: {
     src: "/concepts/tcp.svg",
@@ -198,6 +238,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/tls.svg",
     alt: "Diagram showing a TLS handshake, certificate verification, and encrypted session.",
     caption: "Visual: TLS secures traffic through identity checks and encryption.",
+  },
+  transaction: {
+    src: "/concepts/transaction.svg",
+    alt: "Diagram showing the transaction flow from BEGIN through operations to COMMIT or ROLLBACK.",
+    caption: "Visual: a transaction groups operations into an all-or-nothing unit of work.",
   },
   udp: {
     src: "/concepts/udp.svg",

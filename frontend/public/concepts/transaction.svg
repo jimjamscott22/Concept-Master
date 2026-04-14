@@ -1,0 +1,52 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Transaction</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A unit of work that fully completes or fully rolls back</text>
+
+  <!-- BEGIN box -->
+  <rect x="72" y="200" width="160" height="80" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="152" y="248" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">BEGIN</text>
+
+  <!-- Operations box -->
+  <rect x="300" y="180" width="220" height="120" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="410" y="218" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Operations</text>
+  <text x="410" y="248" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">INSERT ...</text>
+  <text x="410" y="274" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">UPDATE ...</text>
+
+  <!-- Decision diamond (simulated with rotated rect) -->
+  <rect x="580" y="200" width="80" height="80" rx="8" fill="#0D1117" stroke="#D29922" stroke-width="3" transform="rotate(45 620 240)"/>
+  <text x="620" y="236" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">OK?</text>
+
+  <!-- COMMIT box -->
+  <rect x="730" y="168" width="170" height="70" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="815" y="210" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">COMMIT</text>
+
+  <!-- ROLLBACK box -->
+  <rect x="730" y="286" width="170" height="70" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="815" y="328" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">ROLLBACK</text>
+
+  <!-- Flow arrows -->
+  <path d="M232 240H300" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M520 240H563" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M677 210H730" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M660 268L700 310" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+  <path d="M700 310H730" stroke="#F85149" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Labels on branches -->
+  <text x="690" y="196" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14">yes</text>
+  <text x="690" y="290" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14">no</text>
+
+  <!-- State indicators -->
+  <rect x="72" y="360" width="380" height="70" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="2"/>
+  <rect x="82" y="370" width="360" height="50" rx="8" fill="#161B22"/>
+  <text x="100" y="400" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">COMMIT</text>
+  <text x="210" y="400" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">→ changes are permanent</text>
+
+  <rect x="490" y="360" width="398" height="70" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="2"/>
+  <rect x="500" y="370" width="378" height="50" rx="8" fill="#161B22"/>
+  <text x="518" y="400" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">ROLLBACK</text>
+  <text x="648" y="400" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">→ all changes undone</text>
+
+  <text x="480" y="472" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Transactions guarantee the database is never left in a half-finished state</text>
+</svg>

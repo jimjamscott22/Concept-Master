@@ -1,0 +1,67 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Pointer</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A variable that stores the memory address of another variable</text>
+
+  <!-- Variable x box -->
+  <rect x="72" y="170" width="260" height="120" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="100" y="206" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">int x = 42</text>
+  <text x="100" y="236" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">addr: 0x1A2B</text>
+  <text x="100" y="270" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">42</text>
+
+  <!-- Pointer p box -->
+  <rect x="420" y="170" width="280" height="120" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="448" y="206" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">int *p = &amp;x</text>
+  <text x="448" y="236" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">addr: 0x3C4D</text>
+  <text x="448" y="270" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">0x1A2B</text>
+
+  <!-- Arrow from p to x -->
+  <defs>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/>
+    </marker>
+    <marker id="arrowAmber2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D29922"/>
+    </marker>
+  </defs>
+  <path d="M420 230L332 230" stroke="#39D353" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+  <text x="358" y="220" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14">points to</text>
+
+  <!-- Dereference section -->
+  <rect x="72" y="320" width="360" height="140" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="100" y="356" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Dereference (*p)</text>
+  <text x="100" y="390" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">*p = 99;</text>
+  <text x="100" y="420" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">Changes x through p</text>
+  <text x="100" y="444" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">x is now 99</text>
+
+  <!-- Pointer arithmetic section -->
+  <rect x="480" y="320" width="400" height="140" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="508" y="356" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Pointer Arithmetic</text>
+
+  <!-- Array cells -->
+  <rect x="508" y="374" width="60" height="40" rx="6" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="538" y="400" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">1</text>
+
+  <rect x="578" y="374" width="60" height="40" rx="6" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="608" y="400" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">2</text>
+
+  <rect x="648" y="374" width="60" height="40" rx="6" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="678" y="400" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">3</text>
+
+  <!-- q pointer label -->
+  <text x="538" y="440" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14">q</text>
+  <text x="608" y="440" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14">q+1</text>
+  <text x="678" y="440" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14">q+2</text>
+
+  <!-- Dereference arrow -->
+  <path d="M252 340L252 290" stroke="#D29922" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowAmber2)"/>
+
+  <!-- Memory representation label on top right -->
+  <rect x="750" y="180" width="160" height="90" rx="12" fill="#0D1117" stroke="#8B949E" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="770" y="210" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="14">Memory</text>
+  <text x="770" y="236" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">0x1A2B: 42</text>
+  <text x="770" y="258" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">0x3C4D: 0x1A2B</text>
+
+  <text x="480" y="488" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Pointers store addresses, enabling indirection and dynamic memory access</text>
+</svg>

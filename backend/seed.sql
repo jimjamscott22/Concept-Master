@@ -1,5 +1,5 @@
 -- Concept Master — Seed Data
--- 11 categories, 8 tags, 43 terms
+-- 11 categories, 8 tags, 52 terms
 
 INSERT IGNORE INTO categories (name, slug) VALUES
   ('Data Structures',        'data-structures'),
@@ -491,6 +491,45 @@ void increment() {
   'import threading\n\ncounter = 0\nlock = threading.Lock()\n\ndef increment():\n    global counter\n    with lock:\n        counter += 1',
   'python');
 
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('ACID',
+  'acid',
+  'ACID describes the four guarantees every reliable database transaction must provide.\n\n**Atomicity** — a transaction is all-or-nothing; if any step fails the entire transaction rolls back.\n**Consistency** — a transaction moves the database from one valid state to another, respecting all constraints.\n**Isolation** — concurrent transactions execute as if they were sequential; intermediate states are invisible to others.\n**Durability** — once committed, changes survive crashes and power failures.\n\n**Java example:**\n```java\nConnection conn = DriverManager.getConnection(url);
+conn.setAutoCommit(false);
+Statement stmt = conn.createStatement();
+try {
+    stmt.executeUpdate("UPDATE accounts SET balance = balance - 100 WHERE id = 1");
+    stmt.executeUpdate("UPDATE accounts SET balance = balance + 100 WHERE id = 2");
+    conn.commit();
+} catch (SQLException e) {
+    conn.rollback();
+}\n```',
+  'import sqlite3\n\nconn = sqlite3.connect("bank.db")\ntry:\n    conn.execute("UPDATE accounts SET balance = balance - 100 WHERE id = 1")\n    conn.execute("UPDATE accounts SET balance = balance + 100 WHERE id = 2")\n    conn.commit()\nexcept Exception:\n    conn.rollback()',
+  'python'),
+
+('Transaction',
+  'transaction',
+  'A database transaction is a unit of work that groups one or more operations into a single logical action. The transaction either **fully completes** (commit) or **fully rolls back** (abort), ensuring the database never ends up in a half-finished state.\n\nTransactions are the mechanism through which ACID guarantees are enforced.\n\n**Java example:**\n```java\nConnection conn = DriverManager.getConnection(url);
+conn.setAutoCommit(false);
+try {
+    PreparedStatement ps = conn.prepareStatement("INSERT INTO orders (user_id, total) VALUES (?, ?)");
+    ps.setInt(1, userId);
+    ps.setBigDecimal(2, total);
+    ps.executeUpdate();
+    conn.commit();
+} catch (SQLException e) {
+    conn.rollback();
+    throw e;
+}\n```',
+  'BEGIN TRANSACTION;\n\nINSERT INTO orders (user_id, total) VALUES (1, 59.99);\nUPDATE inventory SET qty = qty - 1 WHERE product_id = 42;\n\n-- If everything succeeds:\nCOMMIT;\n\n-- If something fails:\n-- ROLLBACK;',
+  'sql'),
+
+('Normalization',
+  'normalization',
+  'Database normalization is the process of organizing tables to **reduce redundancy** and **prevent update anomalies**.\n\n**1NF (First Normal Form):** every column holds atomic (indivisible) values; no repeating groups.\n**2NF (Second Normal Form):** meets 1NF and every non-key column depends on the entire primary key.\n**3NF (Third Normal Form):** meets 2NF and no non-key column depends on another non-key column (no transitive dependencies).\n\nHigher normal forms exist (BCNF, 4NF, 5NF) but 3NF is the practical target for most applications.',
+  '-- Unnormalized: repeating data\n-- | order_id | customer | item   | item_price |\n-- | 1        | Alice    | Widget | 9.99       |\n-- | 2        | Alice    | Gadget | 14.99      |\n\n-- Normalized into two tables:\nCREATE TABLE customers (\n    id   INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    id          INTEGER PRIMARY KEY,\n    customer_id INTEGER REFERENCES customers(id),\n    item        TEXT NOT NULL,\n    item_price  REAL NOT NULL\n);',
+  'sql');
+
 -- Term-category associations
 INSERT IGNORE INTO term_categories (term_id, category_id)
 SELECT t.id, c.id FROM terms t, categories c WHERE
@@ -561,3 +600,102 @@ SELECT t.id, tg.id FROM terms t, tags tg WHERE
   (t.slug IN ('http','tcp','udp','dns','sql-injection','cross-site-scripting-xss') AND tg.name = 'exam-review') OR
   (t.slug IN ('tls','websocket','encryption','sql-injection','cross-site-scripting-xss','memory-leak','race-condition') AND tg.name = 'advanced') OR
   (t.slug IN ('websocket','cross-site-scripting-xss') AND tg.name = 'javascript');
+
+-- Databases batch: category associations
+INSERT IGNORE INTO term_categories (term_id, category_id)
+SELECT t.id, c.id FROM terms t, categories c WHERE
+  (t.slug = 'acid'          AND c.slug = 'databases') OR
+  (t.slug = 'transaction'   AND c.slug = 'databases') OR
+  (t.slug = 'normalization' AND c.slug = 'databases');
+
+-- Databases batch: tag associations
+INSERT IGNORE INTO term_tags (term_id, tag_id)
+SELECT t.id, tg.id FROM terms t, tags tg WHERE
+  (t.slug IN ('acid','transaction','normalization') AND tg.name = 'fundamentals') OR
+  (t.slug IN ('acid','transaction','normalization') AND tg.name = 'interview-prep') OR
+  (t.slug IN ('acid','normalization') AND tg.name = 'exam-review') OR
+  (t.slug = 'acid' AND tg.name = 'java') OR
+  (t.slug = 'acid' AND tg.name = 'python') OR
+  (t.slug = 'transaction' AND tg.name = 'java');
+
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('Factory Pattern',
+  'factory-pattern',
+  'A creational design pattern that provides an interface for creating objects without specifying their exact class. A factory method or class encapsulates the instantiation logic, letting subclasses or configuration determine which concrete type to create.\n\n**Use cases:** creating objects from a shared interface, plugin systems, decoupling client code from concrete classes.\n\n**Java example:**\n```java\ninterface Shape {\n    void draw();\n}\n\nclass Circle implements Shape {\n    public void draw() { System.out.println("Circle"); }\n}\n\nclass Square implements Shape {\n    public void draw() { System.out.println("Square"); }\n}\n\nclass ShapeFactory {\n    static Shape create(String type) {\n        return switch (type) {\n            case "circle" -> new Circle();\n            case "square" -> new Square();\n            default -> throw new IllegalArgumentException(type);\n        };\n    }\n}\n```',
+  'class Dog:\n    def speak(self): return "Woof"\n\nclass Cat:\n    def speak(self): return "Meow"\n\ndef animal_factory(kind):\n    animals = {"dog": Dog, "cat": Cat}\n    cls = animals.get(kind)\n    if cls is None:\n        raise ValueError(f"Unknown animal: {kind}")\n    return cls()\n\npet = animal_factory("dog")\nprint(pet.speak())  # Woof',
+  'python'),
+
+('Strategy Pattern',
+  'strategy-pattern',
+  'A behavioral design pattern that defines a family of interchangeable algorithms, encapsulates each one, and makes them swappable at runtime. The client delegates work to a strategy object rather than implementing the logic itself.\n\n**Use cases:** sorting algorithms, payment methods, compression formats, validation rules.\n\n**Java example:**\n```java\ninterface SortStrategy {\n    void sort(int[] data);\n}\n\nclass BubbleSort implements SortStrategy {\n    public void sort(int[] data) { /* bubble sort */ }\n}\n\nclass QuickSort implements SortStrategy {\n    public void sort(int[] data) { /* quick sort */ }\n}\n\nclass Sorter {\n    private SortStrategy strategy;\n    Sorter(SortStrategy strategy) { this.strategy = strategy; }\n    void execute(int[] data) { strategy.sort(data); }\n}\n```',
+  'from typing import Callable\n\ndef bubble_sort(data: list[int]) -> list[int]:\n    items = data[:]\n    for i in range(len(items)):\n        for j in range(len(items) - 1 - i):\n            if items[j] > items[j + 1]:\n                items[j], items[j + 1] = items[j + 1], items[j]\n    return items\n\ndef quick_sort(data: list[int]) -> list[int]:\n    if len(data) <= 1:\n        return data\n    pivot = data[len(data) // 2]\n    left  = [x for x in data if x < pivot]\n    mid   = [x for x in data if x == pivot]\n    right = [x for x in data if x > pivot]\n    return quick_sort(left) + mid + quick_sort(right)\n\nclass Sorter:\n    def __init__(self, strategy: Callable):\n        self.strategy = strategy\n\n    def execute(self, data: list[int]) -> list[int]:\n        return self.strategy(data)\n\nsorter = Sorter(quick_sort)\nprint(sorter.execute([5, 3, 8, 1]))  # [1, 3, 5, 8]',
+  'python');
+
+-- Design patterns batch: category associations
+INSERT IGNORE INTO term_categories (term_id, category_id)
+SELECT t.id, c.id FROM terms t, categories c WHERE
+  (t.slug = 'factory-pattern'  AND c.slug = 'design-patterns') OR
+  (t.slug = 'strategy-pattern' AND c.slug = 'design-patterns');
+
+-- Design patterns batch: tag associations
+INSERT IGNORE INTO term_tags (term_id, tag_id)
+SELECT t.id, tg.id FROM terms t, tags tg WHERE
+  (t.slug IN ('factory-pattern','strategy-pattern') AND tg.name = 'interview-prep') OR
+  (t.slug IN ('factory-pattern','strategy-pattern') AND tg.name = 'java') OR
+  (t.slug IN ('factory-pattern','strategy-pattern') AND tg.name = 'python') OR
+  (t.slug = 'strategy-pattern' AND tg.name = 'advanced');
+
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('Pure Function',
+  'pure-function',
+  'A function that always returns the same output for the same inputs and produces no side effects — no mutation, no I/O, no global state changes. Pure functions are easier to reason about, test, and parallelize because they depend only on their arguments and guarantee no hidden interactions.\n\n**Key properties:** deterministic output, no side effects, referential transparency.\n\n**Java example:**\n```java\n// Pure — depends only on input, no side effects\nstatic int add(int a, int b) {\n    return a + b;\n}\n\n// Impure — mutates external state\nstatic int counter = 0;\nstatic int addAndCount(int a, int b) {\n    counter++;          // side effect\n    return a + b;\n}\n```',
+  '# Pure function — same input always gives same output\ndef add(a, b):\n    return a + b\n\n# Impure — relies on and mutates external state\ntotal = 0\n\ndef add_to_total(x):\n    global total\n    total += x      # side effect: mutates global\n    return total\n\nprint(add(2, 3))        # always 5\nprint(add_to_total(5))  # 5  (depends on previous calls)\nprint(add_to_total(5))  # 10 (different result, same input)',
+  'python'),
+
+('Map, Filter, and Reduce',
+  'map-filter-reduce',
+  'Three higher-order functions that transform collections without explicit loops. **map** applies a function to each element, **filter** selects elements matching a predicate, and **reduce** combines all elements into a single accumulated value.\n\nTogether they form a declarative pipeline: transform → select → aggregate.\n\n**Java example:**\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n\nint result = nums.stream()\n    .map(n -> n * n)            // [1,4,9,16,25,36]\n    .filter(n -> n % 2 == 0)    // [4,16,36]\n    .reduce(0, Integer::sum);   // 56\n```',
+  'from functools import reduce\n\nnums = [1, 2, 3, 4, 5, 6]\n\nsquared  = list(map(lambda n: n ** 2, nums))       # [1,4,9,16,25,36]\nevens    = list(filter(lambda n: n % 2 == 0, squared))  # [4,16,36]\ntotal    = reduce(lambda acc, n: acc + n, evens)   # 56\n\nprint(squared)  # [1, 4, 9, 16, 25, 36]\nprint(evens)    # [4, 16, 36]\nprint(total)    # 56',
+  'python');
+
+-- FP batch: category associations
+INSERT IGNORE INTO term_categories (term_id, category_id)
+SELECT t.id, c.id FROM terms t, categories c WHERE
+  (t.slug = 'pure-function'     AND c.slug = 'functional-programming') OR
+  (t.slug = 'map-filter-reduce' AND c.slug = 'functional-programming');
+
+-- FP batch: tag associations
+INSERT IGNORE INTO term_tags (term_id, tag_id)
+SELECT t.id, tg.id FROM terms t, tags tg WHERE
+  (t.slug IN ('pure-function','map-filter-reduce') AND tg.name = 'fundamentals') OR
+  (t.slug IN ('pure-function','map-filter-reduce') AND tg.name = 'interview-prep') OR
+  (t.slug IN ('pure-function','map-filter-reduce') AND tg.name = 'java') OR
+  (t.slug IN ('pure-function','map-filter-reduce') AND tg.name = 'python') OR
+  (t.slug = 'map-filter-reduce' AND tg.name = 'javascript');
+
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('Stack vs Heap Memory',
+  'stack-vs-heap-memory',
+  'Programs use two main memory regions for allocation.\n\n**Stack:** a fast, LIFO region that stores local variables, function parameters, and return addresses. Each function call creates a stack frame that is automatically freed when the function returns. Stack memory is limited in size, thread-local, and very fast because allocation is just a pointer bump.\n\n**Heap:** a larger, dynamically allocated region for objects whose size or lifetime isn''t known at compile time. Heap allocation is slower (requires bookkeeping) and memory must be freed explicitly (C/C++) or by a garbage collector (Java, Python).\n\n**Key differences:**\n- **Speed:** stack is faster (pointer bump vs. allocator search)\n- **Size:** stack is small (typically 1-8 MB); heap can grow to available RAM\n- **Lifetime:** stack data dies with the function; heap data lives until freed\n- **Thread safety:** each thread has its own stack; the heap is shared\n\n**Java example:**\n```java\nvoid demo() {\n    int x = 42;              // x lives on the stack\n    int[] arr = new int[10]; // arr reference on stack,\n                             // array object on heap\n}\n```',
+  '#include <stdio.h>\n#include <stdlib.h>\n\nvoid demo(void) {\n    int x = 42;                     /* stack allocation */\n    int *p = malloc(sizeof(int));   /* heap allocation  */\n    *p = 99;\n    printf("stack: %d, heap: %d\\n", x, *p);\n    free(p);                        /* must free heap memory */\n}\n\nint main(void) {\n    demo();\n    return 0;\n}',
+  'c'),
+
+('Pointer',
+  'pointer',
+  'A variable that stores the memory address of another variable rather than a data value itself. Pointers enable direct memory access, dynamic memory allocation, efficient pass-by-reference, and building data structures like linked lists and trees.\n\n**Core operations:**\n- **Declaration:** `int *p;` declares a pointer to an int\n- **Address-of:** `p = &x;` stores the address of x\n- **Dereference:** `*p` accesses the value at the stored address\n- **Arithmetic:** `p + 1` moves to the next element of the pointed-to type\n\n**Java note:**\n```java\n// Java has no explicit pointers, but object variables\n// are references (managed pointers) under the hood:\nString s = new String("hello"); // s holds a reference\nString t = s;                   // t points to same object\n```',
+  '#include <stdio.h>\n\nint main(void) {\n    int x = 10;\n    int *p = &x;          /* p holds the address of x */\n\n    printf("x  = %d\\n", x);    /* 10 */\n    printf("*p = %d\\n", *p);   /* 10  (dereference) */\n    printf("p  = %p\\n", (void *)p);  /* address */\n\n    *p = 20;                   /* modify x through p */\n    printf("x  = %d\\n", x);    /* 20 */\n\n    /* pointer arithmetic */\n    int arr[] = {1, 2, 3};\n    int *q = arr;\n    printf("first: %d, second: %d\\n", *q, *(q + 1));\n    return 0;\n}',
+  'c');
+
+-- Memory management batch: category associations
+INSERT IGNORE INTO term_categories (term_id, category_id)
+SELECT t.id, c.id FROM terms t, categories c WHERE
+  (t.slug = 'stack-vs-heap-memory' AND c.slug = 'memory-management') OR
+  (t.slug = 'pointer'             AND c.slug = 'memory-management');
+
+-- Memory management batch: tag associations
+INSERT IGNORE INTO term_tags (term_id, tag_id)
+SELECT t.id, tg.id FROM terms t, tags tg WHERE
+  (t.slug IN ('stack-vs-heap-memory','pointer') AND tg.name = 'fundamentals') OR
+  (t.slug IN ('stack-vs-heap-memory','pointer') AND tg.name = 'interview-prep') OR
+  (t.slug IN ('stack-vs-heap-memory','pointer') AND tg.name = 'systems') OR
+  (t.slug = 'stack-vs-heap-memory' AND tg.name = 'java');

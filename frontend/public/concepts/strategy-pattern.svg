@@ -1,0 +1,41 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Strategy Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Define interchangeable algorithms and swap them at runtime</text>
+
+  <rect x="108" y="190" width="240" height="180" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="148" y="230" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">Context</text>
+  <text x="148" y="260" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">Sorter</text>
+  <line x1="128" y1="276" x2="328" y2="276" stroke="#30363D" stroke-width="1"/>
+  <text x="148" y="304" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">strategy</text>
+  <text x="148" y="332" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">execute(data)</text>
+  <text x="148" y="358" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">delegates work</text>
+
+  <rect x="430" y="174" width="200" height="72" rx="16" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="530" y="216" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">&#xAB;interface&#xBB;</text>
+  <text x="530" y="238" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">SortStrategy</text>
+
+  <path d="M348 250H430" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+  <path d="M422 242L434 250L422 258" stroke="#D29922" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <path d="M530 246V290" stroke="#D29922" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 6"/>
+
+  <rect x="430" y="290" width="200" height="72" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="530" y="332" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">BubbleSort</text>
+
+  <rect x="700" y="190" width="200" height="72" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="800" y="232" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">QuickSort</text>
+
+  <rect x="700" y="290" width="200" height="72" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="800" y="332" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">MergeSort</text>
+
+  <path d="M630 226H700" stroke="#D29922" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 6"/>
+  <path d="M630 246L700 326" stroke="#D29922" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 6"/>
+
+  <text x="470" y="354" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">sort(data)</text>
+  <text x="740" y="254" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">sort(data)</text>
+  <text x="740" y="354" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">sort(data)</text>
+
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Swap sorting algorithms at runtime without changing the context class</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Normalization</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Organizing tables to reduce redundancy and prevent update anomalies</text>
+
+  <!-- Unnormalized table (left) -->
+  <rect x="60" y="168" width="340" height="220" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="230" y="206" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Unnormalized</text>
+
+  <!-- Table header -->
+  <rect x="78" y="220" width="304" height="30" rx="8" fill="#161B22"/>
+  <text x="96" y="241" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">order</text>
+  <text x="168" y="241" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">customer</text>
+  <text x="278" y="241" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">item</text>
+
+  <!-- Row 1 -->
+  <text x="96" y="271" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">1</text>
+  <text x="168" y="271" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">Alice</text>
+  <text x="278" y="271" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Widget</text>
+
+  <!-- Row 2 -->
+  <text x="96" y="299" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">2</text>
+  <text x="168" y="299" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">Alice</text>
+  <text x="278" y="299" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Gadget</text>
+
+  <!-- Row 3 -->
+  <text x="96" y="327" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">3</text>
+  <text x="168" y="327" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">Bob</text>
+  <text x="278" y="327" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Widget</text>
+
+  <!-- Redundancy marker -->
+  <text x="230" y="370" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="13">⚠ "Alice" repeated</text>
+
+  <!-- Arrow from left to right -->
+  <path d="M400 278H440" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M440 278L432 270" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <path d="M440 278L432 286" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="420" y="260" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">split</text>
+
+  <!-- Normalized customers table (top-right) -->
+  <rect x="470" y="168" width="230" height="150" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="585" y="206" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">customers</text>
+
+  <rect x="488" y="220" width="194" height="28" rx="8" fill="#161B22"/>
+  <text x="506" y="239" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">id</text>
+  <text x="568" y="239" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">name</text>
+
+  <text x="506" y="269" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">1</text>
+  <text x="568" y="269" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Alice</text>
+  <text x="506" y="297" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">2</text>
+  <text x="568" y="297" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Bob</text>
+
+  <!-- Normalized orders table (bottom-right) -->
+  <rect x="470" y="336" width="420" height="140" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="680" y="370" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="18" font-weight="700">orders</text>
+
+  <rect x="488" y="384" width="384" height="28" rx="8" fill="#161B22"/>
+  <text x="506" y="403" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">id</text>
+  <text x="560" y="403" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">customer_id</text>
+  <text x="720" y="403" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700">item</text>
+
+  <text x="506" y="433" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">1</text>
+  <text x="560" y="433" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">1 → Alice</text>
+  <text x="720" y="433" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Widget</text>
+
+  <text x="506" y="457" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">2</text>
+  <text x="560" y="457" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">1 → Alice</text>
+  <text x="720" y="457" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="13">Gadget</text>
+
+  <!-- FK arrow between tables -->
+  <path d="M585 318L585 336" stroke="#D29922" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="480" y="500" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Splitting repeated data into related tables eliminates redundancy</text>
+</svg>

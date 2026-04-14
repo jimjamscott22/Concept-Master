@@ -1,0 +1,60 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Map, Filter, and Reduce</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Transform collections declaratively: transform &#x2192; select &#x2192; aggregate</text>
+
+  <!-- Input list -->
+  <rect x="60" y="176" width="150" height="180" rx="18" fill="#0D1117" stroke="#8B949E" stroke-width="2"/>
+  <text x="135" y="210" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">input</text>
+  <text x="135" y="244" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">[1,2,3,</text>
+  <text x="135" y="272" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18"> 4,5,6]</text>
+
+  <!-- Arrow 1 -->
+  <path d="M210 266 L254 266" stroke="#58A6FF" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowCyan)"/>
+
+  <!-- Map box -->
+  <rect x="254" y="176" width="166" height="180" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="337" y="210" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">map</text>
+  <text x="337" y="244" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">n &#x2192; n * n</text>
+  <text x="337" y="280" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13">[1,4,9,</text>
+  <text x="337" y="302" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13"> 16,25,36]</text>
+
+  <!-- Arrow 2 -->
+  <path d="M420 266 L464 266" stroke="#39D353" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+
+  <!-- Filter box -->
+  <rect x="464" y="176" width="166" height="180" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="547" y="210" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">filter</text>
+  <text x="547" y="244" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">n % 2 == 0</text>
+  <text x="547" y="280" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13">[4, 16, 36]</text>
+
+  <!-- Arrow 3 -->
+  <path d="M630 266 L674 266" stroke="#D29922" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowAmber)"/>
+
+  <!-- Reduce box -->
+  <rect x="674" y="176" width="166" height="180" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="757" y="210" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">reduce</text>
+  <text x="757" y="244" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">acc + n</text>
+  <text x="757" y="290" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">56</text>
+
+  <!-- Pipeline labels row -->
+  <text x="337" y="400" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="14">transform each</text>
+  <text x="547" y="400" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14">keep matching</text>
+  <text x="757" y="400" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14">combine into one</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowCyan" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8" fill="none" stroke="#58A6FF" stroke-width="2"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8" fill="none" stroke="#39D353" stroke-width="2"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8" fill="none" stroke="#D29922" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="468" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Declarative pipelines replace explicit loops with composable transformations</text>
+</svg>

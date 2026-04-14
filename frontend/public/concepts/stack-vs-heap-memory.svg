@@ -1,0 +1,61 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Stack vs Heap Memory</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Two memory regions with different allocation strategies and trade-offs</text>
+
+  <!-- Stack box -->
+  <rect x="72" y="160" width="380" height="280" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="100" y="196" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">STACK (LIFO)</text>
+  <text x="100" y="224" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="14">grows &#x2193;</text>
+
+  <!-- Stack frames -->
+  <rect x="110" y="240" width="324" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="130" y="266" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">main()  x = 42</text>
+
+  <rect x="110" y="290" width="324" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="130" y="316" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">foo()   y = 10</text>
+
+  <rect x="110" y="340" width="324" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="130" y="366" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">bar()   z = 7</text>
+  <text x="380" y="366" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14">&#x2190; top</text>
+
+  <!-- Stack properties -->
+  <text x="100" y="408" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">&#x2022; Fast (pointer bump)</text>
+  <text x="100" y="428" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">&#x2022; Auto-freed on return</text>
+
+  <!-- Heap box -->
+  <rect x="508" y="160" width="380" height="280" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="536" y="196" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="22" font-weight="700">HEAP (dynamic)</text>
+  <text x="536" y="224" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="14">scattered allocations</text>
+
+  <!-- Heap blocks -->
+  <rect x="536" y="244" width="150" height="50" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="554" y="276" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">Object A</text>
+
+  <rect x="716" y="248" width="140" height="42" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="734" y="276" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">int[10]</text>
+
+  <rect x="556" y="312" width="120" height="42" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2" stroke-dasharray="8 8"/>
+  <text x="574" y="340" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="16">freed</text>
+
+  <rect x="706" y="318" width="150" height="50" rx="8" fill="#161B22" stroke="#39D353" stroke-width="2"/>
+  <text x="724" y="350" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">String</text>
+
+  <!-- Pointer arrow from stack to heap -->
+  <path d="M434 310L508 274" stroke="#D29922" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowAmber)"/>
+  <text x="444" y="280" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">ref</text>
+
+  <!-- Heap properties -->
+  <text x="536" y="408" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">&#x2022; Slower (bookkeeping)</text>
+  <text x="536" y="428" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">&#x2022; Manual free or GC</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrowAmber" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D29922"/>
+    </marker>
+  </defs>
+
+  <text x="480" y="476" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Stack is fast and automatic; heap is flexible but needs management</text>
+</svg>

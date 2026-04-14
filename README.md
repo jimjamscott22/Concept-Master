@@ -96,6 +96,39 @@ cd frontend
 npm install
 ```
 
+### Re-seeding the database
+
+If the seed data has been updated (e.g. new code examples added to existing terms), you need to clear the existing data and re-run the seed, since `seed.sql` uses `INSERT IGNORE` and won't overwrite existing rows.
+
+```bash
+# Clear all seed data
+uv run python -c "
+import asyncio, aiomysql
+from backend.database import create_pool
+
+async def reset():
+    pool = await create_pool()
+    async with pool.acquire() as conn:
+        async with conn.cursor() as cur:
+            await cur.execute('DELETE FROM related_terms')
+            await cur.execute('DELETE FROM term_tags')
+            await cur.execute('DELETE FROM term_categories')
+            await cur.execute('DELETE FROM terms')
+            await cur.execute('DELETE FROM tags')
+            await cur.execute('DELETE FROM categories')
+    pool.close()
+    await pool.wait_closed()
+    print('Cleared.')
+
+asyncio.run(reset())
+"
+
+# Re-run the seed
+uv run python -c "import asyncio; from backend.database import init_db; asyncio.run(init_db())"
+```
+
+> **Note:** This deletes all terms, categories, and tags — including any you have created manually. Export your data first (`GET /api/terms/export`) if you want to keep it.
+
 ---
 
 ## Running the App

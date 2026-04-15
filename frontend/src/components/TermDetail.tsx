@@ -14,7 +14,7 @@ interface TermDetailProps {
   onBack: () => void
 }
 
-function CodeCard({ code, language, className = "mt-6" }: { code: string; language?: string | null; className?: string }) {
+function CodeCard({ code, language, className = "mt-6" }: { code: string; language?: string; className?: string }) {
   const resolvedLanguage = (language ?? "text").toLowerCase()
 
   return (
@@ -25,7 +25,7 @@ function CodeCard({ code, language, className = "mt-6" }: { code: string; langua
       <Highlight
         theme={themes.vsDark}
         code={code}
-        language={resolvedLanguage as string}
+        language={resolvedLanguage}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
@@ -98,17 +98,16 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
             pre: ({ children }) => {
               const child = Array.isArray(children) ? children[0] : children
 
-              if (!isValidElement(child)) {
+              if (!isValidElement<{ className?: string; children?: unknown }>(child)) {
                 return <pre>{children}</pre>
               }
 
-              const childProps = child.props as { className?: string; children?: unknown }
-              const languageMatch = /language-([a-z0-9-]+)/i.exec(childProps.className ?? "")
+              const languageMatch = /language-([a-z0-9-]+)/i.exec(child.props.className ?? "")
               const language = languageMatch?.[1] ?? "text"
 
               return (
                 <CodeCard
-                  code={String(childProps.children ?? "").replace(/\n$/, "")}
+                  code={String(child.props.children ?? "").replace(/\n$/, "")}
                   language={language}
                   className="my-4"
                 />

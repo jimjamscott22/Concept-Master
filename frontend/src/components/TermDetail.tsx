@@ -1,3 +1,4 @@
+import { isValidElement } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Highlight, themes } from "prism-react-renderer"
@@ -94,26 +95,34 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
-            pre: ({ children }) => <>{children}</>,
-            code: ({ inline, className, children, ...props }) => {
-              if (inline) {
+            pre: ({ children }) => {
+              const child = Array.isArray(children) ? children[0] : children
+
+              if (!isValidElement(child)) {
+                return <pre>{children}</pre>
+              }
+
+              const childProps = child.props as { className?: string; children?: unknown }
+              const languageMatch = /language-([a-z0-9-]+)/i.exec(childProps.className ?? "")
+              const language = languageMatch?.[1] ?? "text"
+
+              return (
+                <CodeCard
+                  code={String(childProps.children ?? "").replace(/\n$/, "")}
+                  language={language}
+                  className="my-4"
+                />
+              )
+            },
+            code: ({ className, children, ...props }) => {
+              if (!className?.startsWith("language-")) {
                 return (
                   <code className="font-mono text-accent bg-code px-1 rounded" {...props}>
                     {children}
                   </code>
                 )
               }
-
-              const languageMatch = /language-([a-z0-9-]+)/i.exec(className ?? "")
-              const language = languageMatch?.[1] ?? "text"
-
-              return (
-                <CodeCard
-                  code={String(children).replace(/\n$/, "")}
-                  language={language}
-                  className="my-4"
-                />
-              )
+              return <code className={className} {...props}>{children}</code>
             },
           }}
         >

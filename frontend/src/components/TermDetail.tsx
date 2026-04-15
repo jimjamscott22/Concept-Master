@@ -1,3 +1,4 @@
+import { isValidElement } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Highlight, themes } from "prism-react-renderer"
@@ -11,6 +12,38 @@ interface TermDetailProps {
   onToggleFavorite: () => void
   onSelectRelated: (slug: string) => void
   onBack: () => void
+}
+
+function CodeCard({ code, language, className = "mt-6" }: { code: string; language?: string; className?: string }) {
+  const resolvedLanguage = (language ?? "text").toLowerCase()
+
+  return (
+    <div className={className}>
+      <p className="text-xs text-muted mb-2 font-mono uppercase tracking-wider">
+        {resolvedLanguage}
+      </p>
+      <Highlight
+        theme={themes.vsDark}
+        code={code}
+        language={resolvedLanguage}
+      >
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre
+            className={`${className} rounded-lg p-4 overflow-x-auto text-xs leading-relaxed`}
+            style={{ ...style, background: "#1c2128" }}
+          >
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+    </div>
+  )
 }
 
 export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectRelated, onBack }: TermDetailProps) {
@@ -57,39 +90,49 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
 
       {/* Definition */}
       <div className="prose prose-invert max-w-none text-sm leading-relaxed
-                      [&_code]:font-mono [&_code]:text-accent [&_code]:bg-code [&_code]:px-1 [&_code]:rounded
                       [&_table]:border-collapse [&_th]:border [&_th]:border-border [&_th]:px-3 [&_th]:py-1
                       [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-1">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{term.definition}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            pre: ({ children }) => {
+              const child = Array.isArray(children) ? children[0] : children
+
+              if (!isValidElement<{ className?: string; children?: unknown }>(child)) {
+                return <pre>{children}</pre>
+              }
+
+              const languageMatch = /language-([a-z0-9-]+)/i.exec(child.props.className ?? "")
+              const language = languageMatch?.[1] ?? "text"
+
+              return (
+                <CodeCard
+                  code={String(child.props.children ?? "").replace(/\n$/, "")}
+                  language={language}
+                  className="my-4"
+                />
+              )
+            },
+            code: ({ className, children, ...props }) => {
+              if (!className?.startsWith("language-")) {
+                return (
+                  <code className="font-mono text-accent bg-code px-1 rounded" {...props}>
+                    {children}
+                  </code>
+                )
+              }
+              // Preserve language-* class for fenced blocks so the `pre` renderer can parse language metadata.
+              return <code className={className} {...props}>{children}</code>
+            },
+          }}
+        >
+          {term.definition}
+        </ReactMarkdown>
       </div>
 
       {/* Code block */}
       {term.example_code && (
-        <div className="mt-6">
-          <p className="text-xs text-muted mb-2 font-mono uppercase tracking-wider">
-            {term.code_lang ?? "code"}
-          </p>
-          <Highlight
-            theme={themes.vsDark}
-            code={term.example_code}
-            language={(term.code_lang ?? "text") as string}
-          >
-            {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <pre
-                className={`${className} rounded-lg p-4 overflow-x-auto text-xs leading-relaxed`}
-                style={{ ...style, background: "#1c2128" }}
-              >
-                {tokens.map((line, i) => (
-                  <div key={i} {...getLineProps({ line })}>
-                    {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token })} />
-                    ))}
-                  </div>
-                ))}
-              </pre>
-            )}
-          </Highlight>
-        </div>
+        <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
       )}
 
       <ConceptVisual slug={term.slug} name={term.name} />

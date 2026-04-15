@@ -122,6 +122,7 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
                   </code>
                 )
               }
+              // Preserve language-* class for fenced blocks so the `pre` renderer can parse language metadata.
               return <code className={className} {...props}>{children}</code>
             },
           }}
@@ -132,7 +133,7 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
 
       {/* Code block */}
       {term.example_code && (
-        <CodeCard code={term.example_code} language={term.code_lang ?? "code"} />
+        <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
       )}
 
       <ConceptVisual slug={term.slug} name={term.name} />

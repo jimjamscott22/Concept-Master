@@ -699,3 +699,99 @@ SELECT t.id, tg.id FROM terms t, tags tg WHERE
   (t.slug IN ('stack-vs-heap-memory','pointer') AND tg.name = 'interview-prep') OR
   (t.slug IN ('stack-vs-heap-memory','pointer') AND tg.name = 'systems') OR
   (t.slug = 'stack-vs-heap-memory' AND tg.name = 'java');
+
+INSERT IGNORE INTO terms (name, slug, definition, example_code, code_lang) VALUES
+('Abstract Data Type (ADT)',
+  'abstract-data-type',
+  'An abstract data type defines a data model and the operations allowed on it, without specifying implementation details. In Java, interfaces are often used to model ADTs while classes provide concrete implementations.\n\nExample ADTs include List, Stack, Queue, Set, and Map.',
+  'import java.util.ArrayList;\nimport java.util.List;\n\nList<Integer> numbers = new ArrayList<>();\nnumbers.add(10);\nnumbers.add(20);\nSystem.out.println(numbers.get(0));',
+  'java'),
+
+('Java Interface',
+  'java-interface',
+  'An interface defines a contract of methods that implementing classes must provide. It enables abstraction and polymorphism, which are core ideas behind modeling ADTs in Java.\n\nCollections like `List`, `Set`, and `Map` are defined as interfaces.',
+  'interface Stack<T> {\n    void push(T value);\n    T pop();\n    boolean isEmpty();\n}\n\nclass IntStack implements Stack<Integer> {\n    private final java.util.Deque<Integer> data = new java.util.ArrayDeque<>();\n    public void push(Integer value) { data.push(value); }\n    public Integer pop() { return data.pop(); }\n    public boolean isEmpty() { return data.isEmpty(); }\n}',
+  'java'),
+
+('Java Generics',
+  'java-generics',
+  'Generics let classes and methods work with type parameters, giving compile-time type safety and reducing casts. They are essential for reusable data structures like `List<T>` and `Map<K, V>`.',
+  'class Box<T> {\n    private T value;\n    void set(T value) { this.value = value; }\n    T get() { return value; }\n}\n\nBox<String> box = new Box<>();\nbox.set("hello");\nString text = box.get();',
+  'java'),
+
+('Java Collections Framework',
+  'java-collections-framework',
+  'The Java Collections Framework is a unified architecture for representing and manipulating groups of objects. It provides core interfaces (`Collection`, `List`, `Set`, `Map`, `Queue`) and standard implementations (`ArrayList`, `HashSet`, `TreeMap`, `PriorityQueue`).',
+  'import java.util.*;\n\nList<String> list = new ArrayList<>();\nSet<String> set = new HashSet<>();\nMap<String, Integer> map = new TreeMap<>();\nQueue<Integer> pq = new PriorityQueue<>();',
+  'java'),
+
+('ArrayList',
+  'arraylist',
+  'ArrayList is a resizable-array implementation of the `List` interface. It offers O(1) random access and amortized O(1) append, while insertions/removals in the middle are O(n).',
+  'import java.util.ArrayList;\nimport java.util.List;\n\nList<String> names = new ArrayList<>();\nnames.add("Ada");\nnames.add("Grace");\nSystem.out.println(names.get(1)); // Grace',
+  'java'),
+
+('HashSet',
+  'hashset',
+  'HashSet is a hash-table-backed implementation of `Set` that stores unique elements with no guaranteed iteration order. It provides average O(1) add, contains, and remove operations.',
+  'import java.util.HashSet;\nimport java.util.Set;\n\nSet<Integer> seen = new HashSet<>();\nseen.add(5);\nseen.add(5);\nSystem.out.println(seen.size()); // 1',
+  'java'),
+
+('TreeMap',
+  'treemap',
+  'TreeMap is a red-black tree implementation of `Map` that keeps keys sorted. Typical operations (`get`, `put`, `remove`) are O(log n), making it useful when ordered key traversal is required.',
+  'import java.util.Map;\nimport java.util.TreeMap;\n\nMap<String, Integer> scores = new TreeMap<>();\nscores.put("bob", 80);\nscores.put("alice", 95);\nSystem.out.println(scores.keySet()); // [alice, bob]',
+  'java'),
+
+('Iterator',
+  'iterator',
+  'An iterator provides a standard way to traverse elements in a collection without exposing internal representation. Java collections provide iterators for sequential access and safe in-loop removal.',
+  'import java.util.Iterator;\nimport java.util.List;\n\nList<Integer> values = new java.util.ArrayList<>(List.of(1, 2, 3, 4));\nIterator<Integer> it = values.iterator();\nwhile (it.hasNext()) {\n    if (it.next() % 2 == 0) it.remove();\n}\nSystem.out.println(values); // [1, 3]',
+  'java'),
+
+('Comparable vs Comparator',
+  'comparable-vs-comparator',
+  '`Comparable` defines an object''s natural ordering, while `Comparator` defines external/custom ordering strategies. These interfaces are central to sorting and ordered data structures in Java.',
+  'import java.util.*;\n\nrecord Student(String name, int grade) {}\n\nList<Student> students = new ArrayList<>(List.of(\n    new Student("Ava", 88),\n    new Student("Ben", 95)\n));\n\nstudents.sort(Comparator.comparingInt(Student::grade).reversed());',
+  'java'),
+
+('PriorityQueue (Java)',
+  'priorityqueue-java',
+  'PriorityQueue is a heap-backed queue that removes elements by priority instead of insertion order. By default, Java uses a min-heap, so the smallest element is removed first.',
+  'import java.util.PriorityQueue;\n\nPriorityQueue<Integer> pq = new PriorityQueue<>();\npq.offer(30);\npq.offer(10);\npq.offer(20);\nSystem.out.println(pq.poll()); // 10',
+  'java');
+
+-- Java concepts batch: category associations
+INSERT IGNORE INTO term_categories (term_id, category_id)
+SELECT t.id, c.id FROM terms t, categories c WHERE
+  (t.slug = 'abstract-data-type'         AND c.slug = 'data-structures') OR
+  (t.slug = 'java-interface'             AND c.slug = 'object-oriented') OR
+  (t.slug = 'java-generics'              AND c.slug = 'object-oriented') OR
+  (t.slug = 'java-collections-framework' AND c.slug = 'data-structures') OR
+  (t.slug = 'arraylist'                  AND c.slug = 'data-structures') OR
+  (t.slug = 'hashset'                    AND c.slug = 'data-structures') OR
+  (t.slug = 'treemap'                    AND c.slug = 'data-structures') OR
+  (t.slug = 'iterator'                   AND c.slug = 'data-structures') OR
+  (t.slug = 'comparable-vs-comparator'   AND c.slug = 'algorithms') OR
+  (t.slug = 'priorityqueue-java'         AND c.slug = 'data-structures');
+
+-- Java concepts batch: tag associations
+INSERT IGNORE INTO term_tags (term_id, tag_id)
+SELECT t.id, tg.id FROM terms t, tags tg WHERE
+  (t.slug IN (
+    'abstract-data-type','java-interface','java-generics','java-collections-framework',
+    'arraylist','hashset','treemap','iterator','comparable-vs-comparator','priorityqueue-java'
+  ) AND tg.name = 'java') OR
+  (t.slug IN (
+    'abstract-data-type','java-interface','java-collections-framework','arraylist',
+    'hashset','treemap','iterator','priorityqueue-java'
+  ) AND tg.name = 'fundamentals') OR
+  (t.slug IN (
+    'java-generics','comparable-vs-comparator','priorityqueue-java','treemap'
+  ) AND tg.name = 'interview-prep') OR
+  (t.slug IN (
+    'java-generics','comparable-vs-comparator','iterator'
+  ) AND tg.name = 'advanced') OR
+  (t.slug IN (
+    'abstract-data-type','java-interface','arraylist','hashset','priorityqueue-java'
+  ) AND tg.name = 'exam-review');

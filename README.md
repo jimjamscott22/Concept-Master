@@ -17,6 +17,7 @@ A local-first desktop web application for building and browsing a personal gloss
 - **Stats panel** — total term count, per-category breakdown, recently added, and most-favourited terms
 - **Keyboard navigation** — arrow keys to move through the list, `Enter` to expand, `Escape` to collapse
 - **Concept visuals** — inline SVG diagrams in the term detail view for seeded glossary concepts
+- **Theme picker** — palette icon in the upper-left switches between built-in themes (GitHub Dark, Dracula, Nord, Solarized Dark, Monokai, Gruvbox Light); selection persists across sessions
 
 ---
 

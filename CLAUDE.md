@@ -60,6 +60,7 @@ glossary/
 │   │   │   ├── TermDetail.tsx      # Expanded view: full definition, code, related
 │   │   │   ├── TermForm.tsx        # Create/Edit term form
 │   │   │   ├── StatsPanel.tsx      # Glossary statistics
+│   │   │   ├── ThemePicker.tsx     # Palette icon + theme switcher (upper-left)
 │   │   │   └── EmptyState.tsx      # No results / empty glossary messaging
 │   │   ├── hooks/
 │   │   │   ├── useTerms.ts         # Fetch, search, filter terms
@@ -257,6 +258,14 @@ All responses return JSON. All request bodies are JSON.
 - **Borders:** Subtle (`#30363d`)
 - **Cards:** Rounded corners (8px), subtle border, slight hover lift/glow effect
 - **Typography:** Monospace for code and term names; clean sans-serif (e.g., IBM Plex Sans) for definitions and body text
+
+### Theming
+
+- All Tailwind color tokens (`bg`, `surface`, `border`, `text`, `muted`, `accent`, `green`, `code`) resolve to CSS variables (`--c-*`) defined in `frontend/src/styles/globals.css`.
+- Themes are selected via a `data-theme="<id>"` attribute on `<html>`. Built-ins: `github-dark` (default), `dracula`, `nord`, `solarized-dark`, `monokai`, `gruvbox-light`.
+- The `ThemePicker` component (palette icon, upper-left of the shell) lets the user switch themes; the choice is persisted to `localStorage` under `concept-master.theme`.
+- To add a theme: append a new `[data-theme="..."]` block in `globals.css` and a matching entry in `THEMES` in `ThemePicker.tsx`.
+- Note: code-block syntax colors come from `prism-react-renderer`'s own palette and do not follow the active theme.
 
 ---
 

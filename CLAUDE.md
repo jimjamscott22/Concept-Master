@@ -12,8 +12,8 @@ A personal-use, local-first desktop web application providing a searchable, cate
 
 | Layer             | Technology                          | Notes                                         |
 | ----------------- | ----------------------------------- | --------------------------------------------- |
-| Backend           | Python 3.12+, FastAPI, SQLite       | Single-file DB at `backend/glossary.db`        |
-| ORM / Migrations  | None — raw SQL via `aiosqlite`      | Schema managed via `schema.sql`                |
+| Backend           | Python 3.12+, FastAPI, MariaDB      | Remote DB; creds in `backend/.env`             |
+| ORM / Migrations  | None — raw SQL via `aiomysql`       | Schema in `schema.sql`; MySQL dialect          |
 | Frontend          | React 18 + Vite + TypeScript        | SPA, no SSR                                    |
 | Styling           | Tailwind CSS                        | Dark theme, terminal aesthetic                 |
 | Code Highlighting | Prism.js (`prism-react-renderer`)   | Support: Python, Java, JavaScript, TypeScript, SQL, Bash, C, JSON |
@@ -292,6 +292,14 @@ npm run dev
 - **Naming:** Python = snake_case. TypeScript = camelCase for variables/functions, PascalCase for components/interfaces. SQL = snake_case.
 - **Error handling:** Backend returns consistent error JSON `{"detail": "message"}` with appropriate HTTP status codes. Frontend shows toast/inline error messages.
 - **Slugs:** Auto-generated from name via `slugify` (lowercase, hyphens, strip special chars). Slugs are the URL identifier for terms.
+
+---
+
+## Docs Layout
+
+- `docs/superpowers/plans/YYYY-MM-DD-<slug>.md` — implementation plans (checkbox tasks)
+- `docs/superpowers/specs/YYYY-MM-DD-<slug>.md` — design specs
+- `frontend/public/concepts/<slug>.svg` — per-term concept diagrams, 960×540, dark theme (see `stack.svg` as template)
 
 ---
 

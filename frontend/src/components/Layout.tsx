@@ -1,5 +1,6 @@
 import type React from "react"
 import { useState } from "react"
+import { ThemePicker } from "./ThemePicker"
 
 interface LayoutProps {
   sidebar: React.ReactNode
@@ -10,7 +11,8 @@ export function Layout({ sidebar, children }: LayoutProps) {
   const [open, setOpen] = useState(true)
 
   return (
-    <div className="flex h-screen overflow-hidden bg-bg">
+    <div className="relative flex h-screen overflow-hidden bg-bg">
+      <ThemePicker />
       <aside
         className={`relative flex-shrink-0 border-r border-border bg-surface overflow-hidden transition-all duration-200 ${open ? "w-64" : "w-10"}`}
       >

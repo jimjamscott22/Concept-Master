@@ -5,14 +5,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg:      "#0d1117",
-        surface: "#161b22",
-        border:  "#30363d",
-        text:    "#e6edf3",
-        muted:   "#8b949e",
-        accent:  "#58a6ff",
-        green:   "#39d353",
-        code:    "#1c2128",
+        bg:      "rgb(var(--c-bg) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        border:  "rgb(var(--c-border) / <alpha-value>)",
+        text:    "rgb(var(--c-text) / <alpha-value>)",
+        muted:   "rgb(var(--c-muted) / <alpha-value>)",
+        accent:  "rgb(var(--c-accent) / <alpha-value>)",
+        green:   "rgb(var(--c-green) / <alpha-value>)",
+        code:    "rgb(var(--c-code) / <alpha-value>)",
       },
       fontFamily: {
         mono: ["JetBrains Mono", "Fira Code", "monospace"],

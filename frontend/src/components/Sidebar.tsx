@@ -23,7 +23,7 @@ export function Sidebar({
   return (
     <nav className="flex flex-col h-full text-sm">
       {/* Header */}
-      <div className="px-4 py-4 border-b border-border">
+      <div className="pl-12 pr-4 py-4 border-b border-border">
         <h1 className="text-accent font-mono font-bold text-lg tracking-tight">
           &gt; concept-master
         </h1>

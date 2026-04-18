@@ -4,8 +4,78 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* Default theme (github-dark) */
+:root,
+[data-theme="github-dark"] {
   color-scheme: dark;
+  --c-bg:      13 17 23;
+  --c-surface: 22 27 34;
+  --c-border:  48 54 61;
+  --c-text:    230 237 243;
+  --c-muted:   139 148 158;
+  --c-accent:  88 166 255;
+  --c-green:   57 211 83;
+  --c-code:    28 33 40;
+}
+
+[data-theme="dracula"] {
+  color-scheme: dark;
+  --c-bg:      40 42 54;
+  --c-surface: 33 34 44;
+  --c-border:  68 71 90;
+  --c-text:    248 248 242;
+  --c-muted:   139 139 165;
+  --c-accent:  189 147 249;
+  --c-green:   80 250 123;
+  --c-code:    30 31 40;
+}
+
+[data-theme="nord"] {
+  color-scheme: dark;
+  --c-bg:      46 52 64;
+  --c-surface: 59 66 82;
+  --c-border:  76 86 106;
+  --c-text:    236 239 244;
+  --c-muted:   136 144 161;
+  --c-accent:  136 192 208;
+  --c-green:   163 190 140;
+  --c-code:    36 41 51;
+}
+
+[data-theme="solarized-dark"] {
+  color-scheme: dark;
+  --c-bg:        0  43  54;
+  --c-surface:   7  54  66;
+  --c-border:   88 110 117;
+  --c-text:    238 232 213;
+  --c-muted:   147 161 161;
+  --c-accent:  38 139 210;
+  --c-green:  133 153   0;
+  --c-code:    0  35  44;
+}
+
+[data-theme="monokai"] {
+  color-scheme: dark;
+  --c-bg:      39 40 34;
+  --c-surface: 49 50 44;
+  --c-border:  73 72 62;
+  --c-text:    248 248 242;
+  --c-muted:   117 113 94;
+  --c-accent:  249 38 114;
+  --c-green:  166 226 46;
+  --c-code:    30 31 26;
+}
+
+[data-theme="gruvbox-light"] {
+  color-scheme: light;
+  --c-bg:      251 241 199;
+  --c-surface: 235 219 178;
+  --c-border:  189 174 147;
+  --c-text:     60  56  54;
+  --c-muted:   124 111 100;
+  --c-accent:  175  58   3;
+  --c-green:    121 116  14;
+  --c-code:    242 229 188;
 }
 
 body {
@@ -19,15 +89,15 @@ body {
 
 ::-webkit-scrollbar        { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track  { background: transparent; }
-::-webkit-scrollbar-thumb  { background: #30363d; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #8b949e; }
+::-webkit-scrollbar-thumb  { background: rgb(var(--c-border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-muted)); }
 
 /* Card hover glow */
 .card-hover {
   @apply transition-all duration-150 ease-in-out;
 }
 .card-hover:hover {
-  box-shadow: 0 0 0 1px #30363d, 0 2px 8px rgba(88, 166, 255, 0.08);
+  box-shadow: 0 0 0 1px rgb(var(--c-border)), 0 2px 8px rgb(var(--c-accent) / 0.12);
   transform: translateY(-1px);
 }
 

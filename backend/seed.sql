@@ -1,4 +1,10 @@
--- Concept Master — Seed Data
+-- Concept Master — Seed Data (DEPRECATED)
+--
+-- This file is archived for historical reference only. The glossary's source
+-- of truth is now the `content/` directory (Markdown files + categories.yml).
+-- Use `uv run python -m backend.sync_content` to populate the database from
+-- `content/`. This SQL file is no longer executed by `init_db()`.
+--
 -- 11 categories, 8 tags, 52 terms
 
 INSERT IGNORE INTO categories (name, slug) VALUES

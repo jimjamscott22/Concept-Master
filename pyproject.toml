@@ -11,6 +11,8 @@ dependencies = [
     "python-slugify>=8.0.0",
     "python-dotenv>=1.0.0",
     "sqlparse>=0.5.0",
+    "python-frontmatter>=1.1.0",
+    "pyyaml>=6.0.0",
 ]
 
 [dependency-groups]

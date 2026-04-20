@@ -3,11 +3,41 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Optional, List
 from slugify import slugify
 
-from ..database import get_db
+from ..content_loader import TermFile
+from ..content_writer import delete_term as delete_term_file, write_term
+from ..database import PROJECT_ROOT, get_db
 from ..models import (
     TermCreate, TermUpdate, TermResponse, TermDetailResponse,
     TermListResponse, TermSummary, ImportItem,
 )
+
+
+CONTENT_ROOT = PROJECT_ROOT / "content"
+
+
+async def _term_to_file(conn: aiomysql.Connection, row: dict) -> TermFile:
+    """Build a :class:`TermFile` snapshot of a DB term for on-disk persistence."""
+    cats = await _get_term_categories(conn, row["id"])
+    tags = await _get_term_tags(conn, row["id"])
+    related = await _get_related_terms(conn, row["id"])
+    return TermFile(
+        slug=row["slug"],
+        name=row["name"],
+        definition=(row.get("definition") or "").strip(),
+        example_code=row.get("example_code"),
+        code_lang=row.get("code_lang"),
+        is_favorite=bool(row.get("is_favorite")),
+        categories=sorted(c["slug"] for c in cats),
+        tags=sorted(t["name"] for t in tags),
+        related=sorted({r["slug"] for r in related}),
+    )
+
+
+async def _persist_to_disk(conn: aiomysql.Connection, slug: str) -> None:
+    """Write the current DB state of a term back to its ``.md`` file."""
+    row = await _get_term_row(conn, slug)
+    term_file = await _term_to_file(conn, row)
+    write_term(term_file, CONTENT_ROOT)
 
 router = APIRouter()
 
@@ -210,6 +240,12 @@ async def create_term(body: TermCreate, conn: aiomysql.Connection = Depends(get_
             raise HTTPException(status_code=409, detail=f"Term '{body.name}' already exists")
 
     await _sync_associations(conn, term_id, body.category_ids, body.tag_names, body.related_term_ids)
+    try:
+        await _persist_to_disk(conn, slug)
+    except Exception:
+        async with conn.cursor() as cur:
+            await cur.execute("DELETE FROM terms WHERE id = %s", (term_id,))
+        raise
     row = await _get_term_row(conn, slug)
     row = await _enrich_term(conn, row)
     row["related_terms"] = await _get_related_terms(conn, row["id"])
@@ -235,6 +271,9 @@ async def update_term(
             raise HTTPException(status_code=409, detail=f"Name '{body.name}' is already taken")
 
     await _sync_associations(conn, row["id"], body.category_ids, body.tag_names, body.related_term_ids)
+    await _persist_to_disk(conn, new_slug)
+    if new_slug != slug:
+        delete_term_file(slug, CONTENT_ROOT)
     updated = await _get_term_row(conn, new_slug)
     updated = await _enrich_term(conn, updated)
     updated["related_terms"] = await _get_related_terms(conn, updated["id"])
@@ -246,6 +285,7 @@ async def delete_term(slug: str, conn: aiomysql.Connection = Depends(get_db)):
     row = await _get_term_row(conn, slug)
     async with conn.cursor() as cur:
         await cur.execute("DELETE FROM terms WHERE id = %s", (row["id"],))
+    delete_term_file(slug, CONTENT_ROOT)
 
 
 @router.patch("/{slug}/favorite", response_model=TermResponse)
@@ -256,6 +296,7 @@ async def toggle_favorite(slug: str, conn: aiomysql.Connection = Depends(get_db)
         await cur.execute(
             "UPDATE terms SET is_favorite = %s WHERE id = %s", (new_val, row["id"])
         )
+    await _persist_to_disk(conn, slug)
     updated = await _get_term_row(conn, slug)
     return await _enrich_term(conn, updated)
 

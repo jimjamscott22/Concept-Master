@@ -73,7 +73,7 @@ async def init_db(
     password: Optional[str] = DB_PASS,
     db_name: str = DB_NAME,
 ) -> None:
-    """Create schema and seed data. Safe to re-run (IF NOT EXISTS guards)."""
+    """Create the schema. Data is populated from ``content/`` via ``sync_content``."""
     pool = await create_pool(
         host=host,
         port=port,
@@ -83,13 +83,7 @@ async def init_db(
     )
     async with pool.acquire() as conn:
         schema = Path(__file__).parent / "schema.sql"
-        seed = Path(__file__).parent / "seed.sql"
         await _exec_sql_file(conn, schema)
-        async with conn.cursor(aiomysql.DictCursor) as cur:
-            await cur.execute("SELECT COUNT(*) AS cnt FROM categories")
-            row = await cur.fetchone()
-        if row["cnt"] == 0:
-            await _exec_sql_file(conn, seed)
     pool.close()
     await pool.wait_closed()
 

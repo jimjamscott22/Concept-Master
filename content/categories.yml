@@ -1,0 +1,22 @@
+- name: Algorithms
+  slug: algorithms
+- name: Concurrency
+  slug: concurrency
+- name: Cybersecurity
+  slug: cybersecurity
+- name: Data Structures
+  slug: data-structures
+- name: Databases
+  slug: databases
+- name: Design Patterns
+  slug: design-patterns
+- name: Functional Programming
+  slug: functional-programming
+- name: Memory Management
+  slug: memory-management
+- name: Networking
+  slug: networking
+- name: Object-Oriented
+  slug: object-oriented
+- name: Web
+  slug: web

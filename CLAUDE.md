@@ -275,10 +275,14 @@ All responses return JSON. All request bodies are JSON.
 # Backend — install / sync all dependencies (run from repo root)
 uv sync --group dev
 
-# Initialize DB (creates glossary.db, runs schema.sql and seed.sql)
-uv run python -c "import asyncio; from backend.database import init_db; asyncio.run(init_db())"
+# Initialize DB schema (no seed data — content/ is the source of truth)
+uv run python -m backend.database
+
+# Reconcile content/ -> database (safe to re-run; idempotent)
+uv run python -m backend.sync_content
 
 # Start backend dev server (from repo root)
+# Set SYNC_ON_START=1 in .env to auto-sync content on boot
 uv run uvicorn backend.main:app --reload --port 8000
 
 # Run tests
@@ -290,6 +294,55 @@ npm install
 npm run dev
 # Runs on http://localhost:5173, proxies /api to :8000
 ```
+
+---
+
+## Content (source of truth)
+
+Glossary data lives in `content/`, not in SQL seeds. Files are authoritative; the database is a rebuildable search index.
+
+```
+content/
+├── categories.yml          # list of {name, slug} entries
+└── terms/
+    ├── <slug>.md           # one file per term; filename = slug
+    └── ...
+```
+
+**Term file format** — YAML frontmatter + Markdown body:
+
+```markdown
+---
+name: Binary Search Tree
+categories: [data-structures]
+tags: [exam-review, interview-prep]
+related: [tree, hash-map]
+code_lang: python
+is_favorite: false
+---
+
+A node-based binary tree where…
+
+```python
+class Node: ...
+```
+```
+
+**Rules:**
+- Filename stem is the slug. Frontmatter `name` is the human-readable label.
+- Body is the `definition` (rendered as Markdown in the UI).
+- The fenced code block whose info-string matches `code_lang` (fallback: first fenced block) is extracted as `example_code` and removed from the definition.
+- `categories` must reference slugs declared in `categories.yml` (unknown = error).
+- `tags` are free-form (unknown tags auto-created).
+- `related` references other terms by slug (unknown = warning, not error).
+- `is_favorite` defaults to `false`; omit unless `true`.
+
+**Workflow:**
+- **Add a term:** create a new `.md` file, run `uv run python -m backend.sync_content` (or restart with `SYNC_ON_START=1`).
+- **Edit a term:** edit the `.md` file or use the in-app CRUD UI — both keep the file and DB in sync.
+- **Delete a term:** delete the `.md` file and run `sync_content --prune`, or use the DELETE endpoint.
+
+CRUD endpoints persist every write back to the corresponding `.md` file, so in-app edits show up as `git diff` changes.
 
 ---
 
@@ -316,7 +369,7 @@ npm run dev
 
 Execute phases in order. Each phase should be fully working before moving on.
 
-1. **Phase 1 — Backend + DB:** Schema, seed data, all API endpoints, test with curl
+1. **Phase 1 — Backend + DB:** Schema, `content/` directory, `sync_content`, all API endpoints, test with curl
 2. **Phase 2 — Frontend Shell:** Vite + React + Tailwind setup, layout, search, term list, term detail (read-only)
-3. **Phase 3 — CRUD + Power Features:** Create/edit/delete forms, favorites, tags, related terms, Markdown preview
+3. **Phase 3 — CRUD + Power Features:** Create/edit/delete forms, favorites, tags, related terms, Markdown preview (edits round-trip to `content/*.md`)
 4. **Phase 4 — Polish:** Keyboard navigation, Ctrl+K, stats panel, import/export, animations, responsive tweaks

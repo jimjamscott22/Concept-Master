@@ -1,14 +1,20 @@
+import os
 from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import create_pool
 from .routers import categories, tags, terms, stats
+from .sync_content import DEFAULT_CONTENT_ROOT, sync_content
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.pool = await create_pool()
+    if os.getenv("SYNC_ON_START") == "1":
+        report = await sync_content(app.state.pool, DEFAULT_CONTENT_ROOT)
+        print(report.format())
     yield
     app.state.pool.close()
     await app.state.pool.wait_closed()

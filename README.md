@@ -25,7 +25,7 @@ A local-first desktop web application for building and browsing a personal gloss
 
 | Layer | Technology |
 |---|---|
-| Backend | Python 3.12+, FastAPI, MySQL (`aiomysql`) |
+| Backend | Python 3.12+, FastAPI, MariaDB (`aiomysql`) |
 | Frontend | React 19, Vite, TypeScript |
 | Styling | Tailwind CSS (dark terminal theme) |
 | Code highlighting | `prism-react-renderer` |
@@ -37,7 +37,7 @@ A local-first desktop web application for building and browsing a personal gloss
 
 - **uv** — [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) (manages Python and all backend dependencies)
 - **Node.js 18+** and **npm** — [nodejs.org](https://nodejs.org/)
-- **MySQL 8+** — a running MySQL server accessible from your machine
+- **MariaDB 10.6+** — a running MariaDB server accessible from your machine (the `aiomysql` driver speaks the MySQL wire protocol, which MariaDB is compatible with)
 
 ---
 
@@ -58,22 +58,28 @@ uv sync --group dev
 
 This resolves all backend dependencies (including dev tools like pytest) into a local `.venv` using the locked versions in `uv.lock`. No manual `pip install` or virtual environment creation needed.
 
-### 3. Database — provision MySQL
+### 3. Database — provision MariaDB
 
-The `setup_db.py` script creates the `concept_master` database, creates the app user from your `.env` (`DB_USER` / `DB_PASS`), applies the schema, and seeds initial data — all in one step.
+The `setup_db.py` script creates the `concept_master` database, creates the app user from your `.env` (`DB_USER` / `DB_PASS`), and applies the schema.
 
 ```bash
 # Run from the repo root
-python backend/setup_db.py --root-password <your-mysql-root-password>
+python backend/setup_db.py --root-password <your-mariadb-root-password>
 ```
 
-By default the script connects to `127.0.0.1:3306`. Override with `--host` and `--port` if your MySQL server is elsewhere:
+By default the script connects to `127.0.0.1:3306`. Override with `--host` and `--port` if your MariaDB server is elsewhere:
 
 ```bash
 python backend/setup_db.py --root-password <password> --host 127.0.0.1 --port 3306
 ```
 
-> **Tip — skip the script and use an existing user:** If you already have a database user with the necessary privileges, you can skip `setup_db.py` and configure the connection via environment variables (see step 4) instead.
+> **Tip — skip the script and use an existing user:** If you already have a database user with the necessary privileges, you can skip `setup_db.py` and configure the connection via environment variables (see step 4) instead. You can then initialize the schema with `uv run python -m backend.database`.
+
+After the schema exists, populate the glossary from the `content/` directory (the source of truth):
+
+```bash
+uv run python -m backend.sync_content
+```
 
 ### 4. Backend — environment variables
 
@@ -85,6 +91,8 @@ DB_PORT=3306
 DB_USER=concept_user
 DB_PASS=your_password
 DB_NAME=concept_master
+# Optional: run `sync_content` automatically in the backend lifespan
+# SYNC_ON_START=1
 ```
 
 You can copy `.env.example` and then fill in your values.
@@ -97,38 +105,21 @@ cd frontend
 npm install
 ```
 
-### Re-seeding the database
+### Content as source of truth
 
-If the seed data has been updated (e.g. new code examples added to existing terms), you need to clear the existing data and re-run the seed, since `seed.sql` uses `INSERT IGNORE` and won't overwrite existing rows.
+Glossary content lives in `content/` as Markdown files — one file per term (filename = slug) plus `content/categories.yml`. Adding, editing, or deleting a term is just an edit to those files. Commit them to git for history.
 
 ```bash
-# Clear all seed data
-uv run python -c "
-import asyncio, aiomysql
-from backend.database import create_pool
+# Reconcile content/ -> database
+uv run python -m backend.sync_content
 
-async def reset():
-    pool = await create_pool()
-    async with pool.acquire() as conn:
-        async with conn.cursor() as cur:
-            await cur.execute('DELETE FROM related_terms')
-            await cur.execute('DELETE FROM term_tags')
-            await cur.execute('DELETE FROM term_categories')
-            await cur.execute('DELETE FROM terms')
-            await cur.execute('DELETE FROM tags')
-            await cur.execute('DELETE FROM categories')
-    pool.close()
-    await pool.wait_closed()
-    print('Cleared.')
-
-asyncio.run(reset())
-"
-
-# Re-run the seed
-uv run python -c "import asyncio; from backend.database import init_db; asyncio.run(init_db())"
+# Delete DB terms whose .md file no longer exists
+uv run python -m backend.sync_content --prune
 ```
 
-> **Note:** This deletes all terms, categories, and tags — including any you have created manually. Export your data first (`GET /api/terms/export`) if you want to keep it.
+Sync is idempotent and safe to re-run. To run it automatically at backend startup, set `SYNC_ON_START=1` in `.env`.
+
+The in-app CRUD endpoints continue to work: every POST/PUT/DELETE/PATCH also writes (or removes) the corresponding `.md` file so the tree and the DB stay coherent. `git status` after a session shows exactly what changed.
 
 ---
 
@@ -159,17 +150,22 @@ Then open **[http://localhost:5173](http://localhost:5173)** in your browser. Th
 Concept-Master/
 ├── backend/
 │   ├── main.py          # FastAPI app & CORS config
-│   ├── database.py      # MySQL connection pool & DB helpers
+│   ├── database.py      # MariaDB connection pool & DB helpers
 │   ├── models.py        # Pydantic request/response models
 │   ├── setup_db.py      # One-shot database provisioning script
 │   ├── schema.sql       # CREATE TABLE statements
-│   ├── seed.sql         # Initial seed data
+│   ├── content_loader.py# Parse content/terms/*.md
+│   ├── content_writer.py# Serialize terms back to .md
+│   ├── sync_content.py  # Reconcile content/ -> database
 │   ├── requirements.txt
 │   └── routers/
 │       ├── terms.py     # /api/terms endpoints
 │       ├── categories.py
 │       ├── tags.py
 │       └── stats.py
+├── content/
+│   ├── categories.yml   # Canonical category list
+│   └── terms/           # One .md file per term (source of truth)
 └── frontend/
     ├── src/
     │   ├── App.tsx

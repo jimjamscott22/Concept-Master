@@ -62,3 +62,30 @@ CREATE INDEX IF NOT EXISTS idx_terms_favorite  ON terms(is_favorite);
 CREATE INDEX IF NOT EXISTS idx_terms_created   ON terms(created_at);
 CREATE INDEX IF NOT EXISTS idx_categories_slug ON categories(slug);
 CREATE INDEX IF NOT EXISTS idx_tags_name       ON tags(name);
+
+-- ── Spaced-repetition / retention tables ─────────────────────────────────────
+
+-- Per-term scheduling state (SM-2 lite). One row per term that has ever been
+-- reviewed; missing rows imply "new, due immediately".
+CREATE TABLE IF NOT EXISTS term_reviews (
+    term_id          INT          NOT NULL,
+    ease             FLOAT        NOT NULL DEFAULT 2.5,
+    interval_days    INT          NOT NULL DEFAULT 0,
+    reps             INT          NOT NULL DEFAULT 0,
+    lapses           INT          NOT NULL DEFAULT 0,
+    due_at           DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_rating      VARCHAR(10),
+    last_reviewed_at DATETIME,
+    PRIMARY KEY (term_id),
+    CONSTRAINT fk_tr_term FOREIGN KEY (term_id) REFERENCES terms(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE INDEX IF NOT EXISTS idx_term_reviews_due ON term_reviews(due_at);
+
+-- One row per calendar date the user studied; powers the streak + heatmap.
+CREATE TABLE IF NOT EXISTS review_sessions (
+    session_date    DATE NOT NULL,
+    reviewed_count  INT  NOT NULL DEFAULT 0,
+    correct_count   INT  NOT NULL DEFAULT 0,
+    PRIMARY KEY (session_date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

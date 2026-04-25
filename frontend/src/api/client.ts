@@ -1,6 +1,7 @@
 import type {
   Term, TermDetail, TermListResponse, TermCreatePayload,
   TermUpdatePayload, Category, Tag, Stats,
+  ReviewQueueResponse, ReviewState, ReviewRating, StreakResponse,
 } from "../types"
 
 const BASE = "/api"
@@ -44,5 +45,14 @@ export const api = {
   },
   stats: {
     get: () => request<Stats>("/stats"),
+  },
+  review: {
+    queue: (limit = 20) => request<ReviewQueueResponse>(`/review/queue?limit=${limit}`),
+    rate: (slug: string, rating: ReviewRating) =>
+      request<ReviewState>(`/review/${slug}`, {
+        method: "POST",
+        body: JSON.stringify({ rating }),
+      }),
+    streak: () => request<StreakResponse>("/review/streak"),
   },
 }

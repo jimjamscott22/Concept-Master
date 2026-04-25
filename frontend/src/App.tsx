@@ -6,6 +6,7 @@ import { TermCard }  from "./components/TermCard"
 import { TermDetail } from "./components/TermDetail"
 import { TermForm }   from "./components/TermForm"
 import { StatsPanel } from "./components/StatsPanel"
+import { ReviewPanel } from "./components/ReviewPanel"
 import { EmptyState } from "./components/EmptyState"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
@@ -13,7 +14,7 @@ import { useTerms }      from "./hooks/useTerms"
 import { api }           from "./api/client"
 import type { TermDetail as TermDetailType, TermCreatePayload } from "./types"
 
-type View = "terms" | "stats" | "form"
+type View = "terms" | "stats" | "form" | "review"
 
 export default function App() {
   const [search,           setSearch]           = useState("")
@@ -25,7 +26,16 @@ export default function App() {
   const [view,             setView]             = useState<View>("terms")
   const [editingSlug,      setEditingSlug]      = useState<string | null | "new">(null)
   const [showDetail,       setShowDetail]       = useState(false)
+  const [dueCount,         setDueCount]         = useState(0)
   const listRef = useRef<HTMLDivElement>(null)
+
+  const refetchDueCount = useCallback(() => {
+    api.review.streak()
+      .then(s => setDueCount(s.today_due))
+      .catch(() => { /* badge is best-effort */ })
+  }, [])
+
+  useEffect(() => { refetchDueCount() }, [refetchDueCount])
 
   const { categories } = useCategories()
   const { tags }       = useTags()
@@ -143,10 +153,12 @@ export default function App() {
         selectedCategory={selectedCategory}
         selectedTag={selectedTag}
         favoritesOnly={favoritesOnly}
+        dueCount={dueCount}
         onSelectCategory={setSelectedCategory}
         onSelectTag={setSelectedTag}
         onToggleFavorites={() => setFavoritesOnly(v => !v)}
         onShowStats={() => setView("stats")}
+        onShowReview={() => setView("review")}
         onNewTerm={() => { setEditingSlug("new"); setView("form") }}
         onExport={handleExport}
         onImport={handleImport}
@@ -203,6 +215,14 @@ export default function App() {
             setView("terms")
             handleSelectTerm(slug)
           }}
+          onStartReview={() => setView("review")}
+        />
+      )}
+
+      {view === "review" && (
+        <ReviewPanel
+          onDone={() => { setView("terms"); refetchDueCount() }}
+          onReviewSubmitted={refetchDueCount}
         />
       )}
 

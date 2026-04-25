@@ -6,10 +6,12 @@ interface SidebarProps {
   selectedCategory: string | null
   selectedTag: string | null
   favoritesOnly: boolean
+  dueCount?: number
   onSelectCategory: (slug: string | null) => void
   onSelectTag: (name: string | null) => void
   onToggleFavorites: () => void
   onShowStats: () => void
+  onShowReview: () => void
   onNewTerm: () => void
   onExport: () => void
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -17,8 +19,10 @@ interface SidebarProps {
 
 export function Sidebar({
   categories, tags, selectedCategory, selectedTag,
-  favoritesOnly, onSelectCategory, onSelectTag,
-  onToggleFavorites, onShowStats, onNewTerm, onExport, onImport,
+  favoritesOnly, dueCount = 0,
+  onSelectCategory, onSelectTag,
+  onToggleFavorites, onShowStats, onShowReview,
+  onNewTerm, onExport, onImport,
 }: SidebarProps) {
   return (
     <nav className="flex flex-col h-full text-sm">
@@ -37,6 +41,18 @@ export function Sidebar({
                      hover:bg-accent/20 transition-colors font-medium text-xs"
         >
           + New Term
+        </button>
+        <button
+          onClick={onShowReview}
+          className="w-full text-left px-3 py-2 rounded-md text-muted
+                     hover:bg-surface hover:text-text transition-colors flex items-center justify-between"
+        >
+          <span>📚 Review</span>
+          {dueCount > 0 && (
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-green/20 text-green border border-green/30">
+              {dueCount > 99 ? "99+" : dueCount} due
+            </span>
+          )}
         </button>
         <button
           onClick={onShowStats}

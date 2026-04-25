@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import create_pool
-from .routers import categories, tags, terms, stats
+from .routers import categories, tags, terms, stats, review
 from .sync_content import DEFAULT_CONTENT_ROOT, sync_content
 
 
@@ -33,3 +33,4 @@ app.include_router(categories.router, prefix="/api/categories", tags=["categorie
 app.include_router(tags.router,       prefix="/api/tags",       tags=["tags"])
 app.include_router(terms.router,      prefix="/api/terms",      tags=["terms"])
 app.include_router(stats.router,      prefix="/api/stats",      tags=["stats"])
+app.include_router(review.router,     prefix="/api/review",     tags=["review"])

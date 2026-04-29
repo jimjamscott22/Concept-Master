@@ -8,6 +8,7 @@ tags:
 - java
 - python
 code_lang: python
+is_favorite: true
 ---
 
 A function that always returns the same output for the same inputs and produces no side effects — no mutation, no I/O, no global state changes. Pure functions are easier to reason about, test, and parallelize because they depend only on their arguments and guarantee no hidden interactions.

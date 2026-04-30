@@ -65,6 +65,49 @@ def test_update_rewrites_file(client):
         client.delete(f"/api/terms/{slug}")
 
 
+def test_update_related_terms_rewrites_file(client):
+    first = client.post(
+        "/api/terms",
+        json={
+            "name": "Writeback Related Source XYZ",
+            "definition": "Source term",
+            "category_ids": [],
+            "tag_names": [],
+            "related_term_ids": [],
+        },
+    )
+    second = client.post(
+        "/api/terms",
+        json={
+            "name": "Writeback Related Target XYZ",
+            "definition": "Target term",
+            "category_ids": [],
+            "tag_names": [],
+            "related_term_ids": [],
+        },
+    )
+    source = first.json()
+    target = second.json()
+    try:
+        resp = client.put(
+            f"/api/terms/{source['slug']}",
+            json={
+                "name": source["name"],
+                "definition": source["definition"],
+                "category_ids": [],
+                "tag_names": [],
+                "related_term_ids": [target["id"]],
+            },
+        )
+        assert resp.status_code == 200
+        text = _term_path(source["slug"]).read_text(encoding="utf-8")
+        assert "related:" in text
+        assert f"- {target['slug']}" in text
+    finally:
+        client.delete(f"/api/terms/{source['slug']}")
+        client.delete(f"/api/terms/{target['slug']}")
+
+
 def test_delete_removes_file(client):
     create = client.post(
         "/api/terms",

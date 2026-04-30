@@ -12,7 +12,7 @@ import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
 import { useTerms }      from "./hooks/useTerms"
 import { api }           from "./api/client"
-import type { TermDetail as TermDetailType, TermCreatePayload } from "./types"
+import type { TermDetail as TermDetailType, TermCreatePayload, TermSummary } from "./types"
 
 type View = "terms" | "stats" | "form" | "review"
 
@@ -27,6 +27,7 @@ export default function App() {
   const [editingSlug,      setEditingSlug]      = useState<string | null | "new">(null)
   const [showDetail,       setShowDetail]       = useState(false)
   const [dueCount,         setDueCount]         = useState(0)
+  const [allTerms,         setAllTerms]         = useState<TermSummary[]>([])
   const listRef = useRef<HTMLDivElement>(null)
 
   const refetchDueCount = useCallback(() => {
@@ -36,6 +37,14 @@ export default function App() {
   }, [])
 
   useEffect(() => { refetchDueCount() }, [refetchDueCount])
+
+  const refetchTermSummaries = useCallback(() => {
+    api.terms.summaries()
+      .then(setAllTerms)
+      .catch(() => { /* related-term selector is best-effort */ })
+  }, [])
+
+  useEffect(() => { refetchTermSummaries() }, [refetchTermSummaries])
 
   const { categories } = useCategories()
   const { tags }       = useTags()
@@ -66,15 +75,17 @@ export default function App() {
       setEditingSlug(null)
       setView("terms")
       refetch()
+      refetchTermSummaries()
       await handleSelectTerm(created.slug)
     } else if (editingSlug) {
       const updated = await api.terms.update(editingSlug, payload)
       setEditingSlug(null)
       setView("terms")
       refetch()
+      refetchTermSummaries()
       setExpandedTerm(updated)
     }
-  }, [editingSlug, refetch, handleSelectTerm])
+  }, [editingSlug, refetch, refetchTermSummaries, handleSelectTerm])
 
   const handleDelete = useCallback(async (slug: string) => {
     if (!confirm(`Delete "${slug}"?`)) return
@@ -83,7 +94,8 @@ export default function App() {
     setExpandedTerm(null)
     setShowDetail(false)
     refetch()
-  }, [refetch])
+    refetchTermSummaries()
+  }, [refetch, refetchTermSummaries])
 
   const handleExport = useCallback(async () => {
     const data = await api.terms.export()
@@ -105,12 +117,13 @@ export default function App() {
       const result = await api.terms.import(items)
       alert(`Imported ${result.imported} terms, skipped ${result.skipped} duplicates.`)
       refetch()
+      refetchTermSummaries()
     } catch (err) {
       alert(`Import failed: ${err instanceof Error ? err.message : "Invalid file"}`)
     } finally {
       e.target.value = ""
     }
-  }, [refetch])
+  }, [refetch, refetchTermSummaries])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -232,6 +245,7 @@ export default function App() {
           initial={editingSlug !== "new" ? expandedTerm : null}
           categories={categories}
           allTags={tags}
+          allTerms={allTerms}
           onSave={handleSaveTerm}
           onCancel={() => setView("terms")}
         />

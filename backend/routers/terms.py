@@ -215,6 +215,14 @@ async def export_terms(conn: aiomysql.Connection = Depends(get_db)):
     return result
 
 
+@router.get("/summaries", response_model=List[TermSummary])
+async def list_term_summaries(conn: aiomysql.Connection = Depends(get_db)):
+    """Return lightweight term records for selectors and relationship editors."""
+    async with conn.cursor(aiomysql.DictCursor) as cur:
+        await cur.execute("SELECT id, name, slug FROM terms ORDER BY name")
+        return await cur.fetchall()
+
+
 @router.get("/{slug}", response_model=TermDetailResponse)
 async def get_term(slug: str, conn: aiomysql.Connection = Depends(get_db)):
     row = await _get_term_row(conn, slug)

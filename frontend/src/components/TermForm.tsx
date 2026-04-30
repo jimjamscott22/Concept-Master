@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import type { TermDetail, Category, Tag, TermCreatePayload } from "../types"
+import type { TermDetail, Category, Tag, TermCreatePayload, TermSummary } from "../types"
 
 const CODE_LANGS = ["python", "java", "javascript", "typescript", "sql", "bash", "c", "json"]
 
@@ -9,11 +9,12 @@ interface TermFormProps {
   initial?: TermDetail | null
   categories: Category[]
   allTags: Tag[]
+  allTerms: TermSummary[]
   onSave: (payload: TermCreatePayload) => Promise<void>
   onCancel: () => void
 }
 
-export function TermForm({ initial, categories, allTags, onSave, onCancel }: TermFormProps) {
+export function TermForm({ initial, categories, allTags, allTerms, onSave, onCancel }: TermFormProps) {
   const [name,        setName]        = useState(initial?.name        ?? "")
   const [definition,  setDefinition]  = useState(initial?.definition  ?? "")
   const [exampleCode, setExampleCode] = useState(initial?.example_code ?? "")
@@ -21,13 +22,29 @@ export function TermForm({ initial, categories, allTags, onSave, onCancel }: Ter
   const [catIds,      setCatIds]      = useState<number[]>(initial?.categories.map(c => c.id) ?? [])
   const [tagInput,    setTagInput]    = useState(initial?.tags.map(t => t.name).join(", ") ?? "")
   const [relatedIds,  setRelatedIds]  = useState<number[]>(initial?.related_terms?.map(r => r.id) ?? [])
+  const [relatedQuery, setRelatedQuery] = useState("")
   const [preview,     setPreview]     = useState(false)
   const [saving,      setSaving]      = useState(false)
   const [error,       setError]       = useState<string | null>(null)
 
-  // relatedIds is stored but not exposed in the form UI (no multi-select widget yet)
-  void relatedIds
-  void setRelatedIds
+  const currentTermId = initial?.id ?? null
+  const selectedRelated = useMemo(() => {
+    const initialRelated = new Map(initial?.related_terms.map(t => [t.id, t]) ?? [])
+    return relatedIds.flatMap(id => {
+      const term = allTerms.find(t => t.id === id) ?? initialRelated.get(id)
+      return term ? [term] : []
+    })
+  }, [allTerms, initial?.related_terms, relatedIds])
+
+  const relatedCandidates = useMemo(() => {
+    const selected = new Set(relatedIds)
+    const query = relatedQuery.trim().toLowerCase()
+    return allTerms
+      .filter(term => term.id !== currentTermId)
+      .filter(term => !selected.has(term.id))
+      .filter(term => !query || term.name.toLowerCase().includes(query) || term.slug.toLowerCase().includes(query))
+      .slice(0, 8)
+  }, [allTerms, currentTermId, relatedIds, relatedQuery])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,6 +74,14 @@ export function TermForm({ initial, categories, allTags, onSave, onCancel }: Ter
 
   const toggleCat = (id: number) =>
     setCatIds(ids => ids.includes(id) ? ids.filter(i => i !== id) : [...ids, id])
+
+  const addRelated = (id: number) => {
+    setRelatedIds(ids => ids.includes(id) ? ids : [...ids, id])
+    setRelatedQuery("")
+  }
+
+  const removeRelated = (id: number) =>
+    setRelatedIds(ids => ids.filter(existingId => existingId !== id))
 
   return (
     <form onSubmit={handleSubmit} className="max-w-2xl mx-auto px-6 py-6">
@@ -166,6 +191,55 @@ export function TermForm({ initial, categories, allTags, onSave, onCancel }: Ter
           {allTags.map(t => <option key={t.id} value={t.name} />)}
         </datalist>
       </label>
+
+      {/* Related terms */}
+      <div className="mb-6">
+        <span className="text-xs text-muted uppercase tracking-wider">Related terms</span>
+        {selectedRelated.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-2">
+            {selectedRelated.map(term => (
+              <span
+                key={term.id}
+                className="inline-flex items-center gap-1.5 text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-1 rounded-full"
+              >
+                {term.name}
+                <button
+                  type="button"
+                  onClick={() => removeRelated(term.id)}
+                  className="text-muted hover:text-text transition-colors"
+                  aria-label={`Remove ${term.name}`}
+                >
+                  &times;
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
+        <input
+          value={relatedQuery}
+          onChange={e => setRelatedQuery(e.target.value)}
+          className="mt-2 w-full bg-code border border-border rounded-md px-3 py-2 text-sm text-text
+                     focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
+          placeholder="Search existing terms to relate…"
+        />
+        {relatedCandidates.length > 0 ? (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {relatedCandidates.map(term => (
+              <button
+                key={term.id}
+                type="button"
+                onClick={() => addRelated(term.id)}
+                className="text-xs bg-code border border-border text-muted px-2 py-1 rounded font-mono
+                           hover:border-accent hover:text-accent transition-colors"
+              >
+                + {term.name}
+              </button>
+            ))}
+          </div>
+        ) : relatedQuery.trim() ? (
+          <p className="mt-2 text-xs text-muted">No matching terms found.</p>
+        ) : null}
+      </div>
 
       {/* Actions */}
       <div className="flex gap-3">

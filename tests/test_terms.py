@@ -14,6 +14,15 @@ def test_list_terms_default_limit(client):
     assert len(data["terms"]) <= 20
 
 
+def test_list_term_summaries_sorted(client):
+    response = client.get("/api/terms/summaries")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) >= 1
+    assert set(data[0]) == {"id", "name", "slug"}
+    assert [t["name"].casefold() for t in data] == sorted(t["name"].casefold() for t in data)
+
+
 def test_search_terms(client):
     response = client.get("/api/terms?q=array")
     data = response.json()

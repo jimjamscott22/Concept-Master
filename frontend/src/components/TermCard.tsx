@@ -8,7 +8,7 @@ interface TermCardProps {
 }
 
 export function TermCard({ term, isSelected, onClick, onToggleFavorite }: TermCardProps) {
-  const preview = term.definition.replace(/[*_`#\[\]]/g, "").slice(0, 120)
+  const preview = term.definition.replace(/[*_`#[\]]/g, "").slice(0, 120)
 
   return (
     <div

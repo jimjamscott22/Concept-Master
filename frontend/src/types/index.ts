@@ -35,6 +35,8 @@ export interface TermDetail extends Term {
   related_terms: TermSummary[]
 }
 
+export type StudyCard = Term
+
 export interface TermListResponse {
   terms: Term[]
   total: number

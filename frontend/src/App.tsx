@@ -7,6 +7,7 @@ import { TermDetail } from "./components/TermDetail"
 import { TermForm }   from "./components/TermForm"
 import { StatsPanel } from "./components/StatsPanel"
 import { ReviewPanel } from "./components/ReviewPanel"
+import { StudyPanel } from "./components/StudyPanel"
 import { EmptyState } from "./components/EmptyState"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
@@ -14,7 +15,7 @@ import { useTerms }      from "./hooks/useTerms"
 import { api }           from "./api/client"
 import type { TermDetail as TermDetailType, TermCreatePayload, TermSummary } from "./types"
 
-type View = "terms" | "stats" | "form" | "review"
+type View = "terms" | "stats" | "form" | "review" | "study"
 
 export default function App() {
   const [search,           setSearch]           = useState("")
@@ -170,6 +171,7 @@ export default function App() {
         onSelectCategory={setSelectedCategory}
         onSelectTag={setSelectedTag}
         onToggleFavorites={() => setFavoritesOnly(v => !v)}
+        onShowStudy={() => setView("study")}
         onShowStats={() => setView("stats")}
         onShowReview={() => setView("review")}
         onNewTerm={() => { setEditingSlug("new"); setView("form") }}
@@ -237,6 +239,10 @@ export default function App() {
           onDone={() => { setView("terms"); refetchDueCount() }}
           onReviewSubmitted={refetchDueCount}
         />
+      )}
+
+      {view === "study" && (
+        <StudyPanel onDone={() => setView("terms")} />
       )}
 
       {view === "form" && (

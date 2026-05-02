@@ -35,7 +35,10 @@ export function useTerms(opts: UseTermsOptions) {
       .finally(() => setLoading(false))
   }, [debouncedSearch, opts.category, opts.tag, opts.favoritesOnly, opts.limit, opts.offset])
 
-  useEffect(() => { fetch() }, [fetch])
+  useEffect(() => {
+    const timeout = window.setTimeout(() => { fetch() }, 0)
+    return () => window.clearTimeout(timeout)
+  }, [fetch])
 
   return { ...data, loading, error, refetch: fetch }
 }

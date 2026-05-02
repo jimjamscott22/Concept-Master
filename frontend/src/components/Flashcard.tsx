@@ -1,18 +1,18 @@
-import { useMemo, useState, useEffect } from "react"
+import { useMemo, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Highlight, themes } from "prism-react-renderer"
-import type { ReviewCard, FlashcardMode } from "../types"
+import type { StudyCard, FlashcardMode } from "../types"
 
 interface FlashcardProps {
-  card: ReviewCard
+  card: StudyCard
   mode: FlashcardMode
   revealed: boolean
   onReveal: () => void
 }
 
 /** Pick a deterministic-but-card-specific cloze blank from the definition. */
-function pickCloze(card: ReviewCard): { sentence: string; blank: string } | null {
+function pickCloze(card: StudyCard): { sentence: string; blank: string } | null {
   // Pick the first sentence with a "meaty" word (length >= 5, alphanumeric).
   const text = card.definition.replace(/```[\s\S]*?```/g, " ").replace(/`[^`]*`/g, " ")
   const sentences = text
@@ -67,13 +67,10 @@ function CodeBlock({ code, language }: { code: string; language: string }) {
 }
 
 export function Flashcard({ card, mode, revealed, onReveal }: FlashcardProps) {
-  const [clozeGuess, setClozeGuess] = useState("")
+  const [clozeGuessState, setClozeGuessState] = useState({ key: "", value: "" })
   const cloze = useMemo(() => pickCloze(card), [card])
-
-  // Reset cloze input whenever we move to the next card or change mode.
-  useEffect(() => {
-    setClozeGuess("")
-  }, [card.id, mode])
+  const clozeGuessKey = `${card.id}:${mode}`
+  const clozeGuess = clozeGuessState.key === clozeGuessKey ? clozeGuessState.value : ""
 
   // ── Effective mode: fall back if a mode isn't applicable for this card ──
   let effectiveMode: FlashcardMode = mode
@@ -146,7 +143,7 @@ export function Flashcard({ card, mode, revealed, onReveal }: FlashcardProps) {
             {!revealed && (
               <input
                 value={clozeGuess}
-                onChange={(e) => setClozeGuess(e.target.value)}
+                onChange={(e) => setClozeGuessState({ key: clozeGuessKey, value: e.target.value })}
                 onKeyDown={(e) => { if (e.key === "Enter") onReveal() }}
                 placeholder="Your guess (optional)"
                 className="mt-4 w-full px-3 py-2 bg-code border border-border rounded-md

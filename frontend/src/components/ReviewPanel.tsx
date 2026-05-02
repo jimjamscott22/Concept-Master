@@ -73,7 +73,10 @@ export function ReviewPanel({ onDone, onReviewSubmitted }: ReviewPanelProps) {
     }
   }, [])
 
-  useEffect(() => { loadQueue() }, [loadQueue])
+  useEffect(() => {
+    const timeout = window.setTimeout(() => { void loadQueue() }, 0)
+    return () => window.clearTimeout(timeout)
+  }, [loadQueue])
 
   useEffect(() => {
     localStorage.setItem(MODE_STORAGE_KEY, mode)

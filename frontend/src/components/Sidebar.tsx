@@ -10,6 +10,7 @@ interface SidebarProps {
   onSelectCategory: (slug: string | null) => void
   onSelectTag: (name: string | null) => void
   onToggleFavorites: () => void
+  onShowStudy: () => void
   onShowStats: () => void
   onShowReview: () => void
   onNewTerm: () => void
@@ -21,7 +22,7 @@ export function Sidebar({
   categories, tags, selectedCategory, selectedTag,
   favoritesOnly, dueCount = 0,
   onSelectCategory, onSelectTag,
-  onToggleFavorites, onShowStats, onShowReview,
+  onToggleFavorites, onShowStudy, onShowStats, onShowReview,
   onNewTerm, onExport, onImport,
 }: SidebarProps) {
   return (
@@ -47,12 +48,19 @@ export function Sidebar({
           className="w-full text-left px-3 py-2 rounded-md text-muted
                      hover:bg-surface hover:text-text transition-colors flex items-center justify-between"
         >
-          <span>📚 Review</span>
+          <span>Review</span>
           {dueCount > 0 && (
             <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-green/20 text-green border border-green/30">
               {dueCount > 99 ? "99+" : dueCount} due
             </span>
           )}
+        </button>
+        <button
+          onClick={onShowStudy}
+          className="w-full text-left px-3 py-2 rounded-md text-muted
+                     hover:bg-surface hover:text-text transition-colors"
+        >
+          Study
         </button>
         <button
           onClick={onShowStats}

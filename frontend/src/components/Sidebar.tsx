@@ -6,95 +6,43 @@ interface SidebarProps {
   selectedCategory: string | null
   selectedTag: string | null
   favoritesOnly: boolean
-  dueCount?: number
   onSelectCategory: (slug: string | null) => void
   onSelectTag: (name: string | null) => void
   onToggleFavorites: () => void
-  onShowStudy: () => void
-  onShowStats: () => void
-  onShowReview: () => void
-  onNewTerm: () => void
-  onExport: () => void
-  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export function Sidebar({
   categories, tags, selectedCategory, selectedTag,
-  favoritesOnly, dueCount = 0,
-  onSelectCategory, onSelectTag,
-  onToggleFavorites, onShowStudy, onShowStats, onShowReview,
-  onNewTerm, onExport, onImport,
+  favoritesOnly,
+  onSelectCategory, onSelectTag, onToggleFavorites,
 }: SidebarProps) {
   return (
     <nav className="flex flex-col h-full text-sm">
-      {/* Header */}
-      <div className="pl-12 pr-4 py-4 border-b border-border">
-        <h1 className="text-accent font-mono font-bold text-lg tracking-tight">
-          &gt; concept-master
-        </h1>
-      </div>
-
-      {/* Actions */}
-      <div className="px-3 py-3 border-b border-border space-y-1">
-        <button
-          onClick={onNewTerm}
-          className="w-full text-left px-3 py-2 rounded-md bg-accent/10 text-accent
-                     hover:bg-accent/20 transition-colors font-medium text-xs"
-        >
-          + New Term
-        </button>
-        <button
-          onClick={onShowReview}
-          className="w-full text-left px-3 py-2 rounded-md text-muted
-                     hover:bg-surface hover:text-text transition-colors flex items-center justify-between"
-        >
-          <span>Review</span>
-          {dueCount > 0 && (
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-green/20 text-green border border-green/30">
-              {dueCount > 99 ? "99+" : dueCount} due
-            </span>
-          )}
-        </button>
-        <button
-          onClick={onShowStudy}
-          className="w-full text-left px-3 py-2 rounded-md text-muted
-                     hover:bg-surface hover:text-text transition-colors"
-        >
-          Study
-        </button>
-        <button
-          onClick={onShowStats}
-          className="w-full text-left px-3 py-2 rounded-md text-muted
-                     hover:bg-surface hover:text-text transition-colors"
-        >
-          Stats
-        </button>
-        <button
-          onClick={onExport}
-          className="w-full text-left px-3 py-2 rounded-md text-muted hover:bg-surface hover:text-text transition-colors"
-        >
-          ↓ Export JSON
-        </button>
-        <label className="w-full text-left px-3 py-2 rounded-md text-muted hover:bg-surface hover:text-text transition-colors cursor-pointer block">
-          ↑ Import JSON
-          <input type="file" accept=".json" className="hidden" onChange={onImport} />
-        </label>
+      {/* Filters header */}
+      <div className="px-4 pt-4 pb-2">
+        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono">
+          Filters
+        </p>
       </div>
 
       {/* Favorites */}
-      <div className="px-3 py-3 border-b border-border">
+      <div className="px-3 pb-3 border-b border-border">
         <button
           onClick={onToggleFavorites}
           className={`w-full text-left px-3 py-2 rounded-md transition-colors
+            flex items-center gap-2
             ${favoritesOnly ? "bg-green/10 text-green" : "text-muted hover:bg-surface hover:text-text"}`}
         >
-          ★ Favorites
+          <span className={favoritesOnly ? "text-green" : "text-muted/70"}>★</span>
+          <span>Favorites only</span>
         </button>
       </div>
 
       {/* Categories */}
-      <div className="px-3 py-3 border-b border-border overflow-y-auto flex-shrink-0">
-        <p className="text-xs text-muted uppercase tracking-widest mb-2 px-3">Categories</p>
+      <div className="px-3 py-3 border-b border-border flex-shrink-0">
+        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono mb-2 px-3">
+          Categories
+        </p>
         <button
           onClick={() => onSelectCategory(null)}
           className={`w-full text-left px-3 py-1.5 rounded-md transition-colors mb-0.5
@@ -117,7 +65,9 @@ export function Sidebar({
 
       {/* Tags */}
       <div className="px-3 py-3 overflow-y-auto flex-1">
-        <p className="text-xs text-muted uppercase tracking-widest mb-2 px-3">Tags</p>
+        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono mb-2 px-3">
+          Tags
+        </p>
         <div className="flex flex-wrap gap-1 px-1">
           {tags.map(tag => (
             <button

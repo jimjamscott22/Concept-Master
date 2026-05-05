@@ -1,0 +1,109 @@
+---
+description: Standard app shell layout — header + collapsible sidebar + main, with always-visible toggle. Apply to web apps that have sizing, positioning, or hidden-toggle issues.
+alwaysApply: false
+---
+
+# App Shell Layout Pattern
+
+Use this structure for any web app with a sidebar + main content area. It solves the most common layout bugs: tiny/invisible toggles, sidebars that can't be re-opened, header elements floating on top of content, and theme/utility controls drifting around the corner.
+
+## Page Structure (the only correct order)
+
+```
+<div class="flex flex-col h-screen overflow-hidden">
+
+  <header class="flex-shrink-0 h-14 flex items-stretch border-b z-20">
+    [ sidebar-toggle ]   [ brand ]   [ primary nav (flex-1) ]   [ utility cluster (theme, user, etc.) ]
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <aside class="flex-shrink-0 transition-[width] {open ? w-64 : w-0} overflow-hidden">
+      <div class="w-64 h-full overflow-y-auto"> {sidebar} </div>
+    </aside>
+    <main class="flex-1 overflow-y-auto"> {children} </main>
+  </div>
+
+</div>
+```
+
+### Non-negotiable rules
+
+1. **Root is `flex-col h-screen overflow-hidden`.** Header + body row are siblings; never overlap them with `absolute`.
+2. **Header is `flex-shrink-0` with a fixed height** (56px / `h-14` is the default). It owns z-index `z-20`.
+3. **Body row is `flex flex-1 overflow-hidden`.** Sidebar and main scroll independently inside.
+4. **Sidebar is collapsed via width**, not display. Animate `transition-[width]`. Collapsed = `w-0`, expanded = `w-64`.
+5. **Inner sidebar content has a fixed `w-64`** so it doesn't reflow during the collapse animation.
+6. **Main uses `flex-1 overflow-y-auto`** — never set its width manually.
+
+## The Sidebar Toggle (the bug this rule exists for)
+
+The toggle button MUST live in the header, NOT inside the sidebar. If it lives in the sidebar, it disappears when collapsed and the user is stranded.
+
+### Required toggle properties
+
+- Lives in the header bar, leftmost slot.
+- Hit target ≥ 40×40 px (44×44 preferred, 56×56 for desktop apps with a tall header).
+- Has a visible icon (hamburger, chevron, or animated morph between the two).
+- Has `aria-label`, `aria-expanded`, and a `title` tooltip.
+- Hover state changes color/background — never a "ghost" 5×5 button.
+
+### Reference implementation (React + Tailwind)
+
+```tsx
+<button
+  onClick={() => setOpen(v => !v)}
+  title={open ? "Collapse sidebar" : "Expand sidebar"}
+  aria-label={open ? "Collapse sidebar" : "Expand sidebar"}
+  aria-expanded={open}
+  className="w-14 h-full flex items-center justify-center border-r
+             text-muted hover:text-accent hover:bg-accent/5 transition-colors"
+>
+  <span className="relative w-5 h-5 flex flex-col justify-center items-center gap-[3px]">
+    <span className={`block h-[2px] bg-current rounded-full transition-all duration-200
+                      ${open ? "w-3 -translate-x-1 -rotate-45 translate-y-[5px]" : "w-5"}`} />
+    <span className="block h-[2px] w-5 bg-current rounded-full transition-all duration-200" />
+    <span className={`block h-[2px] bg-current rounded-full transition-all duration-200
+                      ${open ? "w-3 -translate-x-1 rotate-45 -translate-y-[5px]" : "w-5"}`} />
+  </span>
+</button>
+```
+
+## Header Slot Conventions
+
+| Slot                | Purpose                                  | Width      |
+| ------------------- | ---------------------------------------- | ---------- |
+| Toggle              | Collapse/expand sidebar                  | 56 px      |
+| Brand               | App name/logo, monospace OK              | auto       |
+| Primary nav         | Top-level routes (Browse / Stats / etc.) | `flex-1`   |
+| Utility cluster     | Theme picker, user menu, settings        | auto, with `border-l` separator |
+
+- Active nav item: subtle accent underline (`absolute bottom-0 h-px bg-accent`), not a filled pill.
+- Utility controls (theme picker, etc.) MUST be inline children of the header. Never `position: absolute` floating in a corner — they overlap content and cause the exact "elements in wrong place" bug.
+- Dropdowns from utility buttons: `position: absolute` relative to the button, anchored to the correct edge (`right-0` for right-side controls).
+
+## Sidebar Conventions
+
+- Sidebar = filtering and secondary navigation only. Primary nav lives in the header.
+- Section labels: `text-[10px] uppercase tracking-[0.2em]` font-mono for terminal aesthetic, or `text-xs uppercase tracking-wider` for a softer look.
+- Each section divided by `border-b`.
+- Tags/chips wrap with `flex flex-wrap gap-1`.
+
+## Common Bugs This Pattern Prevents
+
+| Bug                                                          | Cause                                       | Fix                                                  |
+| ------------------------------------------------------------ | ------------------------------------------- | ---------------------------------------------------- |
+| Sidebar can't be reopened after collapse                     | Toggle lives inside sidebar                 | Move toggle to header                                |
+| Toggle is invisible / 5×5 ghost button                       | Tiny size + no border/bg                    | ≥ 40×40, hover state, visible icon                   |
+| Theme/utility button overlaps brand or content               | `absolute top-2 left-2`                     | Make it an inline header child                       |
+| Sidebar collapse leaves a 40px stub                          | `w-10` instead of `w-0` when collapsed      | Use `w-0` and put toggle elsewhere                   |
+| Content reflows mid-animation                                | Sidebar inner content uses `w-full`         | Inner uses fixed `w-64`, parent animates width       |
+| Header scrolls with content                                  | Header inside the scroll container          | Header is sibling of body row, `flex-shrink-0`       |
+| Dropdown menu clips off-screen                               | Anchored to wrong edge                      | `right-0` for right-side, `left-0` for left-side     |
+
+## When This Rule Applies
+
+Apply when building or refactoring any app that has:
+- A sidebar (collapsible or not)
+- A top header / nav bar
+- Multiple top-level views/routes
+- Sizing, positioning, or "element disappears" complaints

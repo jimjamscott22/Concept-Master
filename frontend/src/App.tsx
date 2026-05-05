@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { Layout }    from "./components/Layout"
 import { SearchBar } from "./components/SearchBar"
 import { Sidebar }   from "./components/Sidebar"
+import { SiteHeader } from "./components/SiteHeader"
 import { TermCard }  from "./components/TermCard"
 import { TermDetail } from "./components/TermDetail"
 import { TermForm }   from "./components/TermForm"
@@ -167,22 +168,29 @@ export default function App() {
         selectedCategory={selectedCategory}
         selectedTag={selectedTag}
         favoritesOnly={favoritesOnly}
-        dueCount={dueCount}
         onSelectCategory={setSelectedCategory}
         onSelectTag={setSelectedTag}
         onToggleFavorites={() => setFavoritesOnly(v => !v)}
-        onShowStudy={() => setView("study")}
-        onShowStats={() => setView("stats")}
-        onShowReview={() => setView("review")}
-        onNewTerm={() => { setEditingSlug("new"); setView("form") }}
-        onExport={handleExport}
-        onImport={handleImport}
       />
     </div>
   )
 
+  const headerNav = (
+    <SiteHeader
+      view={view}
+      dueCount={dueCount}
+      onNavigate={(v) => {
+        if (v === "terms") setShowDetail(false)
+        setView(v)
+      }}
+      onNewTerm={() => { setEditingSlug("new"); setView("form") }}
+      onExport={handleExport}
+      onImport={handleImport}
+    />
+  )
+
   return (
-    <Layout sidebar={sidebar}>
+    <Layout sidebar={sidebar} header={headerNav}>
       {view === "terms" && (
         <div className="flex h-full">
           {/* Term list */}

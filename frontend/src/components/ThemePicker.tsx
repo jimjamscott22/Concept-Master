@@ -48,12 +48,12 @@ export function ThemePicker() {
   }, [open])
 
   return (
-    <div ref={ref} className="absolute top-2 left-2 z-30">
+    <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(v => !v)}
         title="Change theme"
         aria-label="Change theme"
-        className="w-7 h-7 flex items-center justify-center rounded-md text-muted
+        className="w-8 h-8 flex items-center justify-center rounded-md text-muted
                    hover:text-text hover:bg-white/5 transition-colors"
       >
         {/* Palette icon */}
@@ -67,7 +67,7 @@ export function ThemePicker() {
       </button>
 
       {open && (
-        <div className="mt-2 w-52 rounded-md border border-border bg-surface shadow-lg p-1">
+        <div className="absolute right-0 mt-2 w-52 rounded-md border border-border bg-surface shadow-lg p-1 z-30">
           <div className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-muted font-mono">
             Theme
           </div>

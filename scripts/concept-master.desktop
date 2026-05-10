@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Concept Master
+Comment=Run Concept Master backend (FastAPI) and frontend (Vite)
+Exec=/bin/bash /home/jimjamscozz/Desktop/GitHub-Repos/Concept-Master/scripts/start.sh
+Path=/home/jimjamscozz/Desktop/GitHub-Repos/Concept-Master
+Icon=/home/jimjamscozz/Desktop/GitHub-Repos/Concept-Master/frontend/public/icon_ConceptMaster.png
+Terminal=true
+Categories=Development;
+StartupNotify=false

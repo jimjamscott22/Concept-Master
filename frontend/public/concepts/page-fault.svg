@@ -1,0 +1,46 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Page Fault</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">CPU touches an unmapped virtual page; MMU traps to the kernel, which decides what to do</text>
+
+  <rect x="80" y="180" width="220" height="240" rx="16" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="190" y="216" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">virtual memory</text>
+  <rect x="104" y="240" width="172" height="36" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="190" y="264" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">page 0x1000  ✓ mapped</text>
+  <rect x="104" y="284" width="172" height="36" rx="8" fill="#161B22" stroke="#F85149" stroke-width="2"/>
+  <text x="190" y="308" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14">page 0x2000  ✗ absent</text>
+  <rect x="104" y="328" width="172" height="36" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="190" y="352" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">page 0x3000  ✓ mapped</text>
+  <text x="190" y="394" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13">access 0x2000 → fault</text>
+
+  <path d="M300 300 L 360 300" stroke="#F85149" stroke-width="4"/>
+  <polygon points="354,294 354,306 366,300" fill="#F85149"/>
+
+  <rect x="360" y="220" width="240" height="160" rx="16" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="256" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">page-fault handler</text>
+  <text x="380" y="290" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">• valid mapping?</text>
+  <text x="380" y="316" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">• in RAM elsewhere?</text>
+  <text x="380" y="342" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">• on disk?</text>
+  <text x="380" y="368" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">• illegal address?</text>
+
+  <path d="M600 264 L 680 226" stroke="#39D353" stroke-width="3"/>
+  <polygon points="676,220 686,232 690,218" fill="#39D353"/>
+  <rect x="680" y="200" width="200" height="60" rx="12" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="780" y="228" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">minor fault</text>
+  <text x="780" y="248" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">fix PTE, resume</text>
+
+  <path d="M600 300 L 680 300" stroke="#D29922" stroke-width="3"/>
+  <polygon points="676,294 676,306 688,300" fill="#D29922"/>
+  <rect x="680" y="276" width="200" height="60" rx="12" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="780" y="304" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">major fault</text>
+  <text x="780" y="324" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">read from disk</text>
+
+  <path d="M600 340 L 680 380" stroke="#F85149" stroke-width="3"/>
+  <polygon points="676,388 686,376 690,390" fill="#F85149"/>
+  <rect x="680" y="356" width="200" height="60" rx="12" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="780" y="384" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">SIGSEGV</text>
+  <text x="780" y="404" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">kill process</text>
+
+  <text x="480" y="468" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">Demand paging and copy-on-write are built on top of page faults</text>
+</svg>

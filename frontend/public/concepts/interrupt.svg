@@ -1,0 +1,41 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Interrupt</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">A device signals the CPU; execution detours to the ISR, then resumes where it left off</text>
+
+  <rect x="80" y="200" width="800" height="80" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="100" y="190" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">user program timeline</text>
+
+  <rect x="100" y="220" width="180" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="190" y="246" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">instr A</text>
+
+  <rect x="296" y="220" width="180" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="386" y="246" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">instr B</text>
+
+  <rect x="680" y="220" width="180" height="40" rx="8" fill="#161B22" stroke="#58A6FF" stroke-width="2"/>
+  <text x="770" y="246" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">instr C (resumed)</text>
+
+  <path d="M476 240 L 540 240" stroke="#F85149" stroke-width="3" stroke-dasharray="6 6"/>
+  <path d="M620 240 L 680 240" stroke="#39D353" stroke-width="3" stroke-dasharray="6 6"/>
+
+  <rect x="540" y="190" width="80" height="100" rx="10" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="580" y="226" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">IRQ</text>
+  <text x="580" y="248" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="12">save</text>
+  <text x="580" y="262" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="12">PC,regs</text>
+  <text x="580" y="278" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="12">→ ISR</text>
+
+  <rect x="280" y="340" width="400" height="100" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="376" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Interrupt Service Routine</text>
+  <text x="480" y="404" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">acknowledge device · read data</text>
+  <text x="480" y="426" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">defer heavy work to bottom-half</text>
+
+  <path d="M580 290 L 480 340" stroke="#F85149" stroke-width="3"/>
+  <polygon points="478,332 472,346 488,344" fill="#F85149"/>
+  <path d="M480 440 Q 600 460 600 290" stroke="#39D353" stroke-width="3"/>
+  <polygon points="594,296 606,296 600,282" fill="#39D353"/>
+
+  <rect x="80" y="464" width="120" height="28" rx="8" fill="#0D1117" stroke="#D29922" stroke-width="2"/>
+  <circle cx="100" cy="478" r="6" fill="#D29922"/>
+  <text x="200" y="484" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="14">device (NIC, timer, disk) raises IRQ asynchronously</text>
+</svg>

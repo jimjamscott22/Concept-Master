@@ -44,6 +44,16 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing an inner function retaining access to an outer variable.",
     caption: "Visual: returned inner functions can still use variables captured from outer scope.",
   },
+  "condition-variable": {
+    src: "/concepts/condition-variable.svg",
+    alt: "Diagram showing a consumer waiting on a condition variable while a producer notifies after updating shared state under a mutex.",
+    caption: "Visual: waiters sleep while holding no lock; a notifier wakes them after changing state.",
+  },
+  "cpu-scheduling": {
+    src: "/concepts/cpu-scheduling.svg",
+    alt: "Diagram showing a ready queue of processes, a scheduler choosing the next task for the CPU, and a timer interrupt returning control.",
+    caption: "Visual: the scheduler picks who runs next; the timer interrupt brings control back.",
+  },
   "cross-site-scripting-xss": {
     src: "/concepts/cross-site-scripting-xss.svg",
     alt: "Diagram contrasting unsafe HTML rendering with safe text rendering to prevent XSS.",
@@ -124,6 +134,16 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a parent class with child classes inheriting and overriding behavior.",
     caption: "Visual: subclasses reuse parent behavior and specialize it.",
   },
+  interrupt: {
+    src: "/concepts/interrupt.svg",
+    alt: "Diagram showing the CPU pausing a running program to enter an interrupt service routine after a device IRQ, then resuming.",
+    caption: "Visual: a device IRQ detours the CPU into an ISR, then execution resumes where it left off.",
+  },
+  "kernel-vs-user-mode": {
+    src: "/concepts/kernel-vs-user-mode.svg",
+    alt: "Diagram showing user-mode applications crossing into kernel mode via a syscall trap, with the kernel managing hardware and isolation.",
+    caption: "Visual: user code must trap into the kernel to do anything privileged.",
+  },
   "linked-list": {
     src: "/concepts/linked-list.svg",
     alt: "Linked list diagram showing nodes connected by next pointers.",
@@ -159,6 +179,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a subject notifying multiple observers after a state change.",
     caption: "Visual: one subject can broadcast updates to many subscribed observers.",
   },
+  "page-fault": {
+    src: "/concepts/page-fault.svg",
+    alt: "Diagram showing a virtual page access trapping into the kernel page-fault handler, which routes to a minor fault, major fault, or SIGSEGV.",
+    caption: "Visual: touching an absent page traps to the kernel, which fixes it up — or kills you.",
+  },
   pointer: {
     src: "/concepts/pointer.svg",
     alt: "Diagram showing a pointer variable storing a memory address that points to another variable's location.",
@@ -168,6 +193,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/polymorphism.svg",
     alt: "Diagram showing one interface producing different behavior across object types.",
     caption: "Visual: the same method call can behave differently depending on the object.",
+  },
+  "producer-consumer": {
+    src: "/concepts/producer-consumer.svg",
+    alt: "Diagram showing multiple producer threads pushing items into a bounded buffer and consumer threads pulling them out.",
+    caption: "Visual: a bounded buffer decouples producers from consumers, with waits on full/empty.",
   },
   "pure-function": {
     src: "/concepts/pure-function.svg",
@@ -233,6 +263,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/thread.svg",
     alt: "Diagram showing multiple threads sharing a process's memory while keeping separate stacks.",
     caption: "Visual: threads run concurrently while sharing process memory.",
+  },
+  "thread-pool": {
+    src: "/concepts/thread-pool.svg",
+    alt: "Diagram showing tasks queuing into a shared task queue while a fixed pool of worker threads pulls and executes them.",
+    caption: "Visual: a fixed worker pool pulls from a shared queue — amortizes thread cost, caps concurrency.",
   },
   tls: {
     src: "/concepts/tls.svg",

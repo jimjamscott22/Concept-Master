@@ -1,0 +1,42 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Condition Variable</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">Waiters sleep until a peer signals; the mutex guards shared state during the check</text>
+
+  <rect x="80" y="190" width="240" height="240" rx="16" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="200" y="226" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Consumer</text>
+  <text x="100" y="262" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">lock.acquire()</text>
+  <text x="100" y="288" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">while empty:</text>
+  <text x="100" y="312" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14">  cv.wait()</text>
+  <text x="100" y="336" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">  ↳ releases lock</text>
+  <text x="100" y="356" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">     sleeps until notify</text>
+  <text x="100" y="380" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">item = queue.pop()</text>
+  <text x="100" y="406" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">lock.release()</text>
+
+  <rect x="370" y="220" width="220" height="180" rx="16" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="256" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">shared state</text>
+  <rect x="390" y="276" width="180" height="36" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="480" y="300" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">mutex (lock)</text>
+  <rect x="390" y="322" width="180" height="36" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="480" y="346" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">queue: [ ]</text>
+  <rect x="390" y="368" width="180" height="22" rx="6" fill="#161B22" stroke="#F85149" stroke-width="2"/>
+  <text x="480" y="384" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="12">cv wait list: [Consumer]</text>
+
+  <rect x="640" y="190" width="240" height="240" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="760" y="226" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Producer</text>
+  <text x="660" y="262" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">lock.acquire()</text>
+  <text x="660" y="288" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">queue.append(x)</text>
+  <text x="660" y="316" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="14">cv.notify()</text>
+  <text x="660" y="338" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">  ↳ wakes one waiter</text>
+  <text x="660" y="360" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">     (it re-acquires lock</text>
+  <text x="660" y="378" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="12">      then rechecks loop)</text>
+  <text x="660" y="406" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">lock.release()</text>
+
+  <path d="M320 312 L 370 312" stroke="#F85149" stroke-width="3"/>
+  <polygon points="364,306 364,318 376,312" fill="#F85149"/>
+  <path d="M640 316 L 590 316" stroke="#39D353" stroke-width="3"/>
+  <polygon points="596,310 596,322 584,316" fill="#39D353"/>
+
+  <text x="480" y="468" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">Always wait in a `while` loop — spurious wakeups happen</text>
+</svg>

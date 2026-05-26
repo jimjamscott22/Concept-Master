@@ -240,6 +240,35 @@ async def list_article_summaries(conn: aiomysql.Connection = Depends(get_db)):
         return await cur.fetchall()
 
 
+@router.post("/import", status_code=201)
+async def import_articles(
+    items: List[ArticleImportItem], conn: aiomysql.Connection = Depends(get_db)
+):
+    """Bulk import articles. Skips duplicates by title."""
+    imported, skipped = 0, 0
+    for item in items:
+        slug = slugify(item.title)
+        summary = _extract_summary(item.body)
+        reading_time = _reading_time(item.body)
+        async with conn.cursor(aiomysql.DictCursor) as cur:
+            try:
+                await cur.execute(
+                    """INSERT INTO articles (title, slug, subtitle, body, summary, reading_time_minutes)
+                       VALUES (%s, %s, %s, %s, %s, %s)""",
+                    (item.title, slug, item.subtitle, item.body, summary, reading_time),
+                )
+                article_id = cur.lastrowid
+            except aiomysql.IntegrityError:
+                skipped += 1
+                continue
+        await _sync_article_associations(
+            conn, article_id, item.category_ids, item.tag_names,
+            item.related_term_ids, item.related_article_ids,
+        )
+        imported += 1
+    return {"imported": imported, "skipped": skipped}
+
+
 @router.get("/{slug}", response_model=ArticleDetailResponse)
 async def get_article(slug: str, conn: aiomysql.Connection = Depends(get_db)):
     row = await _get_article_row(conn, slug)

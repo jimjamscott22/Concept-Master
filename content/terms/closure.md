@@ -6,6 +6,8 @@ tags:
 - advanced
 - java
 - python
+related:
+- decorator-python
 code_lang: python
 ---
 

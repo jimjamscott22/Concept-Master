@@ -1,15 +1,15 @@
 ---
 name: Virtual Memory
 categories:
-- operating-systems
 - memory-management
+- operating-systems
 tags:
 - exam-review
 - interview-prep
 related:
+- garbage-collection
 - paging
 - stack-vs-heap-memory
-- garbage-collection
 ---
 
 An OS abstraction that gives each process the illusion of a large, contiguous, private address space, while the kernel and MMU transparently map virtual addresses to physical RAM (or disk-backed pages).

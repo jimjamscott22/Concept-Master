@@ -3,8 +3,8 @@ name: Buffer Overflow
 categories:
 - memory-management
 tags:
-- cybersecurity
 - c
+- cybersecurity
 - low-level
 code_lang: bash
 ---

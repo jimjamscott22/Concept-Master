@@ -3,8 +3,8 @@ name: Stored Procedure
 categories:
 - databases
 tags:
-- sql
 - fundamentals
+- sql
 code_lang: sql
 ---
 

@@ -3,8 +3,8 @@ name: Immutability
 categories:
 - functional-programming
 tags:
-- fundamentals
 - concurrency
+- fundamentals
 code_lang: python
 ---
 

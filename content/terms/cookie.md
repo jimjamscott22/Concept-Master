@@ -1,12 +1,12 @@
 ---
 name: Cookie
 categories:
-- web
 - cybersecurity
+- web
 tags:
 - fundamentals
-- security
 - javascript
+- security
 code_lang: javascript
 ---
 

@@ -5,10 +5,9 @@ categories:
 tags:
 - interview-prep
 - patterns
-code_lang: python
 related:
-- two-pointer
 - kadane-algorithm
+code_lang: python
 ---
 
 An algorithmic pattern that maintains a contiguous range `[left, right]` over a sequence and advances the boundaries to answer subarray/substring questions in O(n) instead of O(n²).

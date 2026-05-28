@@ -7,6 +7,8 @@ tags:
 - interview-prep
 - java
 - systems
+related:
+- virtual-memory
 code_lang: c
 ---
 

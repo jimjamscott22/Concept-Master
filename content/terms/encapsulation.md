@@ -5,6 +5,8 @@ categories:
 tags:
 - java
 - python
+related:
+- enum
 code_lang: python
 ---
 

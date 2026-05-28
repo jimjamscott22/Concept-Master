@@ -3,12 +3,12 @@ name: Kadane's Algorithm
 categories:
 - algorithms
 tags:
-- interview-prep
 - dynamic-programming
-code_lang: python
+- interview-prep
 related:
 - dynamic-programming
-- two-pointer
+- sliding-window
+code_lang: python
 ---
 
 A linear-time dynamic programming algorithm for the **maximum subarray sum** problem. At each index, decide whether to extend the current subarray or start a new one beginning at the current element.
@@ -18,6 +18,8 @@ A linear-time dynamic programming algorithm for the **maximum subarray sum** pro
 
 The recurrence is `best_ending_here = max(x, best_ending_here + x)`.
 
+Example: `[-2, 1, -3, 4, -1, 2, 1, -5, 4]` → `6` (subarray `[4, -1, 2, 1]`).
+
 ```python
 def max_subarray(nums):
     best = current = nums[0]
@@ -26,5 +28,3 @@ def max_subarray(nums):
         best = max(best, current)
     return best
 ```
-
-Example: `[-2, 1, -3, 4, -1, 2, 1, -5, 4]` → `6` (subarray `[4, -1, 2, 1]`).

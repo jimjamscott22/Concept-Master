@@ -9,7 +9,6 @@ tags:
 - python
 related:
 - higher-order-function
-- map-filter-reduce
 code_lang: java
 ---
 

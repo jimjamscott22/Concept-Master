@@ -1,15 +1,12 @@
 ---
 name: Autoboxing and Unboxing
 categories:
-- object-oriented
 - memory-management
+- object-oriented
 tags:
 - fundamentals
-- java
 - interview-prep
-related:
-- object
-- java-generics
+- java
 code_lang: java
 ---
 

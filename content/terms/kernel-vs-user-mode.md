@@ -3,10 +3,11 @@ name: Kernel vs User Mode
 categories:
 - operating-systems
 tags:
-- os
 - fundamentals
+- os
 - security
-related: [system-call, interrupt]
+related:
+- interrupt
 code_lang: c
 ---
 

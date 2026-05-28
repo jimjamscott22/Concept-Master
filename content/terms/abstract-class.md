@@ -6,6 +6,8 @@ tags:
 - fundamentals
 - java
 - python
+related:
+- arraylist
 code_lang: python
 ---
 

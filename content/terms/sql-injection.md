@@ -10,6 +10,8 @@ tags:
 - interview-prep
 - java
 - python
+related:
+- update-statement
 code_lang: python
 ---
 

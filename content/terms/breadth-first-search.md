@@ -6,6 +6,8 @@ tags:
 - exam-review
 - interview-prep
 - java
+related:
+- dijkstra-algorithm
 code_lang: python
 ---
 

@@ -7,10 +7,6 @@ tags:
 - interview-prep
 - java
 code_lang: python
-related:
-- heap
-- priorityqueue-java
-- merge-sort
 ---
 
 A comparison-based sort that builds a max-heap from the array, then repeatedly extracts the maximum and places it at the end. In-place but **not stable**.
@@ -19,15 +15,6 @@ A comparison-based sort that builds a max-heap from the array, then repeatedly e
 **Space:** O(1) auxiliary
 
 Useful when worst-case performance matters (unlike Quick Sort) and constant extra memory is required (unlike Merge Sort).
-
-```python
-import heapq
-
-def heap_sort(arr):
-    h = [-x for x in arr]
-    heapq.heapify(h)
-    return [-heapq.heappop(h) for _ in range(len(h))]
-```
 
 **Java (in-place max-heap):**
 ```java
@@ -39,4 +26,13 @@ void heapSort(int[] a) {
         sift(a, i, 0);
     }
 }
+```
+
+```python
+import heapq
+
+def heap_sort(arr):
+    h = [-x for x in arr]
+    heapq.heapify(h)
+    return [-heapq.heappop(h) for _ in range(len(h))]
 ```

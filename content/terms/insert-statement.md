@@ -5,9 +5,6 @@ categories:
 tags:
 - fundamentals
 - sql
-related:
-- transaction
-- primary-key
 code_lang: sql
 ---
 

@@ -3,8 +3,8 @@ name: Cross-Site Request Forgery (CSRF)
 categories:
 - cybersecurity
 tags:
-- web-security
 - attacks
+- web-security
 code_lang: python
 ---
 

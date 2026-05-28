@@ -1,15 +1,17 @@
 ---
 name: Context Switch
 categories:
-- operating-systems
 - concurrency
+- operating-systems
 tags:
 - exam-review
 - interview-prep
 related:
+- cpu-scheduling
+- interrupt
+- paging
 - process-vs-thread
-- thread
-- virtual-memory
+- system-call
 ---
 
 The act of saving the CPU state of one process or thread and restoring the state of another so that multiple tasks can share a single core. Triggered by the scheduler on a time-slice expiry, a blocking system call, an interrupt, or a higher-priority task becoming runnable.

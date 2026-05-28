@@ -9,7 +9,6 @@ tags:
 - systems
 related:
 - garbage-collection
-- stack-vs-heap-memory
 code_lang: java
 ---
 

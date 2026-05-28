@@ -4,9 +4,12 @@ categories:
 - concurrency
 tags:
 - concurrency
-- patterns
 - interview-prep
-related: [condition-variable, semaphore, mutex, queue]
+- patterns
+related:
+- condition-variable
+- mutex
+- thread-pool
 code_lang: python
 ---
 
@@ -20,6 +23,8 @@ A classic concurrency pattern: one or more **producer** threads push work items 
 **Classic solution — two condition variables sharing one mutex:**
 - `not_empty` — consumers wait on this; producers signal it after pushing.
 - `not_full` — producers wait on this; consumers signal it after popping.
+
+**In practice:** you almost never write this by hand — use a thread-safe queue (`queue.Queue` in Python, `BlockingQueue` in Java, channels in Go) which encapsulate exactly this pattern.
 
 ```python
 import threading
@@ -46,5 +51,3 @@ def consume():
         not_full.notify()
     return item
 ```
-
-**In practice:** you almost never write this by hand — use a thread-safe queue (`queue.Queue` in Python, `BlockingQueue` in Java, channels in Go) which encapsulate exactly this pattern.

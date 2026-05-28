@@ -5,10 +5,10 @@ categories:
 tags:
 - exam-review
 - interview-prep
-code_lang: c
 related:
 - context-switch
 - process-vs-thread
+code_lang: c
 ---
 
 The controlled mechanism by which a user-space program requests a service from the OS kernel — file I/O, process creation, network sockets, memory mapping, etc. The CPU traps from **user mode** into **kernel mode**, executes the requested kernel routine, and returns with a result and `errno`.

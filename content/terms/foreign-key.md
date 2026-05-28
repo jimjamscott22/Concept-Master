@@ -7,7 +7,6 @@ tags:
 - mysql
 related:
 - primary-key
-- normalization
 code_lang: sql
 ---
 

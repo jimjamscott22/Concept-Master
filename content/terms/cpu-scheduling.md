@@ -3,9 +3,10 @@ name: CPU Scheduling
 categories:
 - operating-systems
 tags:
-- os
 - fundamentals
-related: [process-vs-thread, context-switch]
+- os
+related:
+- context-switch
 code_lang: python
 ---
 

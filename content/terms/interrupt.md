@@ -3,9 +3,11 @@ name: Interrupt
 categories:
 - operating-systems
 tags:
-- os
 - fundamentals
-related: [system-call, context-switch]
+- os
+related:
+- context-switch
+- kernel-vs-user-mode
 code_lang: c
 ---
 

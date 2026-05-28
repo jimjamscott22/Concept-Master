@@ -3,8 +3,8 @@ name: Composition vs Inheritance
 categories:
 - object-oriented
 tags:
-- fundamentals
 - design
+- fundamentals
 - interview-prep
 code_lang: python
 ---

@@ -6,7 +6,9 @@ tags:
 - concurrency
 - patterns
 - performance
-related: [thread, producer-consumer, asynchronous-programming]
+related:
+- asynchronous-programming
+- producer-consumer
 code_lang: java
 ---
 

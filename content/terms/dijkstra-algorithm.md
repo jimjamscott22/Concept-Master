@@ -4,14 +4,11 @@ categories:
 - algorithms
 tags:
 - exam-review
-- interview-prep
 - graphs
-code_lang: python
+- interview-prep
 related:
-- graph
 - breadth-first-search
-- heap
-- greedy-algorithm
+code_lang: python
 ---
 
 A greedy single-source shortest-path algorithm for **non-negative** edge weights. Maintains a priority queue of vertices keyed by their tentative distance, repeatedly extracting the closest unvisited vertex and relaxing its outgoing edges.

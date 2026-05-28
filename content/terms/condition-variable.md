@@ -5,7 +5,8 @@ categories:
 tags:
 - concurrency
 - synchronization
-related: [mutex, semaphore, producer-consumer]
+related:
+- producer-consumer
 code_lang: python
 ---
 
@@ -17,10 +18,6 @@ A synchronization primitive that lets a thread **wait for some condition on shar
 - **`notify_all()` / `broadcast()`** — wake them all.
 
 **The cardinal rule — always wait in a loop:**
-```python
-while not condition_holds():
-    cv.wait()
-```
 Why? **Spurious wakeups** can happen (the OS may wake a thread without a `notify`), and another thread may have grabbed the resource between your wakeup and your re-acquiring the lock. Re-check.
 
 ```python
@@ -45,3 +42,8 @@ def producer(item):
 ```
 
 **vs. Semaphore:** a semaphore is just a count; a condition variable lets you wait on *any* predicate over arbitrary shared state.
+
+```python
+while not condition_holds():
+    cv.wait()
+```

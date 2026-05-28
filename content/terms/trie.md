@@ -3,8 +3,8 @@ name: Trie
 categories:
 - data-structures
 tags:
-- interview-prep
 - fundamentals
+- interview-prep
 code_lang: python
 ---
 

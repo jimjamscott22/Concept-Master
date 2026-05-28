@@ -4,6 +4,9 @@ categories:
 - databases
 tags:
 - fundamentals
+related:
+- primary-key
+- select-query
 code_lang: sql
 ---
 

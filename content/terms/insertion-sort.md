@@ -6,9 +6,6 @@ tags:
 - exam-review
 - interview-prep
 code_lang: python
-related:
-- merge-sort
-- quick-sort
 ---
 
 A simple, **stable**, in-place sort that builds the sorted array one element at a time by inserting each new element into its correct position among the already-sorted elements.

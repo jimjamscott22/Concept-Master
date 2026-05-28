@@ -5,6 +5,9 @@ categories:
 tags:
 - java
 - python
+related:
+- java-virtual-machine
+- virtual-memory
 code_lang: python
 ---
 

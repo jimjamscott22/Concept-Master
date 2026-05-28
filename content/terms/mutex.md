@@ -5,6 +5,9 @@ categories:
 tags:
 - fundamentals
 - os
+related:
+- process-vs-thread
+- producer-consumer
 code_lang: python
 ---
 

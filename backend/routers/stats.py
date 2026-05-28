@@ -10,14 +10,14 @@ router = APIRouter()
 @router.get("", response_model=StatsResponse)
 async def get_stats(conn: aiomysql.Connection = Depends(get_db)):
     async with conn.cursor(aiomysql.DictCursor) as cur:
-        await cur.execute("SELECT COUNT(*) AS cnt FROM terms")
-        total_terms = (await cur.fetchone())["cnt"]
-
-        await cur.execute("SELECT COUNT(*) AS cnt FROM categories")
-        total_categories = (await cur.fetchone())["cnt"]
-
-        await cur.execute("SELECT COUNT(*) AS cnt FROM tags")
-        total_tags = (await cur.fetchone())["cnt"]
+        # Merge the three independent scalar counts into one round-trip.
+        await cur.execute("""
+            SELECT
+                (SELECT COUNT(*) FROM terms)     AS total_terms,
+                (SELECT COUNT(*) FROM categories) AS total_categories,
+                (SELECT COUNT(*) FROM tags)        AS total_tags
+        """)
+        counts = await cur.fetchone()
 
         await cur.execute("""
             SELECT c.id, c.name, c.slug, COUNT(tc.term_id) AS term_count
@@ -39,9 +39,9 @@ async def get_stats(conn: aiomysql.Connection = Depends(get_db)):
         top_favorites = await cur.fetchall()
 
     return {
-        "total_terms": total_terms,
-        "total_categories": total_categories,
-        "total_tags": total_tags,
+        "total_terms": counts["total_terms"],
+        "total_categories": counts["total_categories"],
+        "total_tags": counts["total_tags"],
         "per_category": per_category,
         "recent_terms": recent_terms,
         "top_favorites": top_favorites,

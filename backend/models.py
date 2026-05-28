@@ -143,3 +143,68 @@ class StreakResponse(BaseModel):
     today_due: int
     daily_goal: int
     heatmap: List[HeatmapDay]  # last 84 days (12 weeks)
+
+
+# ── Article models ────────────────────────────────────────────────────────────
+
+
+class ArticleSummary(BaseModel):
+    id: int
+    title: str
+    slug: str
+
+
+class ArticleBase(BaseModel):
+    title: str
+    subtitle: Optional[str] = None
+    body: str
+
+
+class ArticleCreate(ArticleBase):
+    category_ids: List[int] = []
+    tag_names: List[str] = []
+    related_term_ids: List[int] = []
+    related_article_ids: List[int] = []
+
+
+class ArticleUpdate(ArticleBase):
+    category_ids: List[int] = []
+    tag_names: List[str] = []
+    related_term_ids: List[int] = []
+    related_article_ids: List[int] = []
+
+
+class ArticleResponse(ArticleBase):
+    id: int
+    slug: str
+    summary: Optional[str] = None
+    reading_time_minutes: int
+    is_published: bool
+    categories: List[CategoryResponse] = []
+    tags: List[TagResponse] = []
+    created_at: datetime
+    updated_at: datetime
+
+    @field_validator("is_published", mode="before")
+    @classmethod
+    def coerce_published(cls, v: object) -> bool:
+        return bool(v)
+
+
+class ArticleDetailResponse(ArticleResponse):
+    related_terms: List[TermSummary] = []
+    related_articles: List[ArticleSummary] = []
+
+
+class ArticleListResponse(BaseModel):
+    articles: List[ArticleResponse]
+    total: int
+    limit: int
+    offset: int
+
+
+class ArticleImportItem(ArticleBase):
+    category_ids: List[int] = []
+    tag_names: List[str] = []
+    related_term_ids: List[int] = []
+    related_article_ids: List[int] = []

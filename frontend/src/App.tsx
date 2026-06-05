@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from "react"
+import useSWR, { mutate } from "swr"
 import { Layout }    from "./components/Layout"
 import { SearchBar } from "./components/SearchBar"
 import { Sidebar }   from "./components/Sidebar"
@@ -19,8 +20,8 @@ import { useTerms }      from "./hooks/useTerms"
 import { useArticles }   from "./hooks/useArticles"
 import { api }           from "./api/client"
 import type {
-  TermDetail as TermDetailType, TermCreatePayload, TermSummary,
-  ArticleDetail as ArticleDetailType, ArticleCreatePayload, ArticleSummary,
+  TermDetail as TermDetailType, TermCreatePayload,
+  ArticleDetail as ArticleDetailType, ArticleCreatePayload,
 } from "./types"
 
 type View = "terms" | "stats" | "form" | "review" | "study" | "articles" | "article-form"
@@ -35,47 +36,38 @@ export default function App() {
   const [view,             setView]             = useState<View>("terms")
   const [editingSlug,      setEditingSlug]      = useState<string | null | "new">(null)
   const [showDetail,       setShowDetail]       = useState(false)
-  const [dueCount,         setDueCount]         = useState(0)
-  const [allTerms,         setAllTerms]         = useState<TermSummary[]>([])
-  const [allArticles,      setAllArticles]      = useState<ArticleSummary[]>([])
   const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(null)
   const [expandedArticle,  setExpandedArticle]  = useState<ArticleDetailType | null>(null)
   const [editingArticleSlug, setEditingArticleSlug] = useState<string | null | "new">(null)
   const [showArticleDetail, setShowArticleDetail] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
 
-  const refetchDueCount = useCallback(() => {
-    api.review.streak()
-      .then(s => setDueCount(s.today_due))
-      .catch(() => { /* badge is best-effort */ })
-  }, [])
+  const { data: streakData } = useSWR("/review/streak", api.review.streak)
+  const dueCount = streakData?.today_due ?? 0
+  const refetchDueCount = useCallback(() => mutate("/review/streak"), [])
 
-  useEffect(() => { refetchDueCount() }, [refetchDueCount])
+  const isFormView = view === "form" || view === "article-form"
 
-  const refetchTermSummaries = useCallback(() => {
-    api.terms.summaries()
-      .then(setAllTerms)
-      .catch(() => { /* related-term selector is best-effort */ })
-  }, [])
+  const { data: allTermsData } = useSWR(isFormView ? "/terms/summaries" : null, api.terms.summaries)
+  const allTerms = allTermsData ?? []
+  const refetchTermSummaries = useCallback(() => mutate("/terms/summaries"), [])
 
-  useEffect(() => { refetchTermSummaries() }, [refetchTermSummaries])
-
-  const refetchArticleSummaries = useCallback(() => {
-    api.articles.summaries()
-      .then(setAllArticles)
-      .catch(() => { /* related-article selector is best-effort */ })
-  }, [])
-
-  useEffect(() => { refetchArticleSummaries() }, [refetchArticleSummaries])
+  const { data: allArticlesData } = useSWR(isFormView ? "/articles/summaries" : null, api.articles.summaries)
+  const allArticles = allArticlesData ?? []
+  const refetchArticleSummaries = useCallback(() => mutate("/articles/summaries"), [])
 
   const { categories } = useCategories()
   const { tags }       = useTags()
   const { terms, loading, error, refetch } = useTerms({
     search, category: selectedCategory, tag: selectedTag, favoritesOnly,
+    enabled: view === "terms" || view === "form"
   })
   const {
     articles, loading: articlesLoading, error: articlesError, refetch: refetchArticles,
-  } = useArticles({ search, category: selectedCategory, tag: selectedTag })
+  } = useArticles({
+    search, category: selectedCategory, tag: selectedTag,
+    enabled: view === "articles" || view === "article-form"
+  })
 
   const handleSelectTerm = useCallback(async (slug: string) => {
     setSelectedSlug(slug)

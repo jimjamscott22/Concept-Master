@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import useSWR from "swr"
 import { api } from "../api/client"
 import { useDebounce } from "./useDebounce"
 import type { ArticleListResponse } from "../types"
@@ -9,34 +9,33 @@ interface UseArticlesOptions {
   tag: string | null
   limit?: number
   offset?: number
+  enabled?: boolean
 }
 
 export function useArticles(opts: UseArticlesOptions) {
-  const [data, setData] = useState<ArticleListResponse>({ articles: [], total: 0, limit: 20, offset: 0 })
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
   const debouncedSearch = useDebounce(opts.search, 300)
 
-  const fetch = useCallback(() => {
-    setLoading(true)
-    const params = new URLSearchParams()
-    if (debouncedSearch) params.set("q", debouncedSearch)
-    if (opts.category)   params.set("category", opts.category)
-    if (opts.tag)        params.set("tag", opts.tag)
-    if (opts.limit)  params.set("limit",  String(opts.limit))
-    if (opts.offset) params.set("offset", String(opts.offset))
+  const params = new URLSearchParams()
+  if (debouncedSearch) params.set("q", debouncedSearch)
+  if (opts.category)   params.set("category", opts.category)
+  if (opts.tag)        params.set("tag", opts.tag)
+  if (opts.limit)  params.set("limit",  String(opts.limit))
+  if (opts.offset) params.set("offset", String(opts.offset))
 
-    api.articles.list(params)
-      .then(setData)
-      .catch((e: Error) => setError(e.message))
-      .finally(() => setLoading(false))
-  }, [debouncedSearch, opts.category, opts.tag, opts.limit, opts.offset])
+  const key = opts.enabled !== false ? `/articles?${params.toString()}` : null
 
-  useEffect(() => {
-    const timeout = window.setTimeout(() => { fetch() }, 0)
-    return () => window.clearTimeout(timeout)
-  }, [fetch])
+  const { data, error, isLoading, mutate } = useSWR<ArticleListResponse>(
+    key,
+    () => api.articles.list(params)
+  )
 
-  return { ...data, loading, error, refetch: fetch }
+  return {
+    articles: data?.articles ?? [],
+    total: data?.total ?? 0,
+    limit: data?.limit ?? 20,
+    offset: data?.offset ?? 0,
+    loading: isLoading,
+    error: error?.message ?? null,
+    refetch: mutate
+  }
 }

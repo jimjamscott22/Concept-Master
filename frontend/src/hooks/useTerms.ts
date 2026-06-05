@@ -1,4 +1,5 @@
 import useSWR from "swr"
+import { useMemo } from "react"
 import { api } from "../api/client"
 import { useDebounce } from "./useDebounce"
 import type { TermListResponse } from "../types"
@@ -16,13 +17,16 @@ interface UseTermsOptions {
 export function useTerms(opts: UseTermsOptions) {
   const debouncedSearch = useDebounce(opts.search, 300)
 
-  const params = new URLSearchParams()
-  if (debouncedSearch) params.set("q", debouncedSearch)
-  if (opts.category)    params.set("category", opts.category)
-  if (opts.tag)         params.set("tag", opts.tag)
-  if (opts.favoritesOnly) params.set("favorites_only", "true")
-  if (opts.limit)  params.set("limit",  String(opts.limit))
-  if (opts.offset) params.set("offset", String(opts.offset))
+  const params = useMemo(() => {
+    const p = new URLSearchParams()
+    if (debouncedSearch) p.set("q", debouncedSearch)
+    if (opts.category)    p.set("category", opts.category)
+    if (opts.tag)         p.set("tag", opts.tag)
+    if (opts.favoritesOnly) p.set("favorites_only", "true")
+    if (opts.limit)  p.set("limit",  String(opts.limit))
+    if (opts.offset) p.set("offset", String(opts.offset))
+    return p
+  }, [debouncedSearch, opts.category, opts.tag, opts.favoritesOnly, opts.limit, opts.offset])
 
   const key = opts.enabled !== false ? `/terms?${params.toString()}` : null
   

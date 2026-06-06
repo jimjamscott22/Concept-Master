@@ -231,43 +231,48 @@ export default function App() {
   }, [selectedSlug])
 
   const sidebar = (
-    <div>
-      <SearchBar value={search} onChange={setSearch} />
-      <Sidebar
-        categories={categories}
-        tags={tags}
-        selectedCategory={selectedCategory}
-        selectedTag={selectedTag}
-        favoritesOnly={favoritesOnly}
-        onSelectCategory={setSelectedCategory}
-        onSelectTag={setSelectedTag}
-        onToggleFavorites={() => setFavoritesOnly(v => !v)}
-      />
-    </div>
+    <Sidebar
+      categories={categories}
+      tags={tags}
+      selectedCategory={selectedCategory}
+      selectedTag={selectedTag}
+      favoritesOnly={favoritesOnly}
+      onSelectCategory={setSelectedCategory}
+      onSelectTag={setSelectedTag}
+      onToggleFavorites={() => setFavoritesOnly(v => !v)}
+    />
   )
 
+  const searchPlaceholder = (view === "articles" || view === "article-form")
+    ? "Search articles…"
+    : "Search terms…"
+
   const headerNav = (
-    <SiteHeader
-      view={view}
-      dueCount={dueCount}
-      onNavigate={(v) => {
-        if (v === "terms") setShowDetail(false)
-        if (v === "articles") setShowArticleDetail(false)
-        setView(v)
-      }}
-      onNewTerm={() => {
-        if (isArticleView) {
-          setExpandedArticle(null)
-          setEditingArticleSlug("new")
-          setView("article-form")
-        } else {
-          setEditingSlug("new")
-          setView("form")
-        }
-      }}
-      onExport={handleExport}
-      onImport={handleImport}
-    />
+    <div className="flex items-center gap-2 h-full pl-3 pr-1 flex-1">
+      <SearchBar value={search} onChange={setSearch} placeholder={searchPlaceholder} />
+      <span className="h-5 w-px bg-border flex-shrink-0 mx-1" aria-hidden />
+      <SiteHeader
+        view={view}
+        dueCount={dueCount}
+        onNavigate={(v) => {
+          if (v === "terms") setShowDetail(false)
+          if (v === "articles") setShowArticleDetail(false)
+          setView(v)
+        }}
+        onNewTerm={() => {
+          if (isArticleView) {
+            setExpandedArticle(null)
+            setEditingArticleSlug("new")
+            setView("article-form")
+          } else {
+            setEditingSlug("new")
+            setView("form")
+          }
+        }}
+        onExport={handleExport}
+        onImport={handleImport}
+      />
+    </div>
   )
 
   return (

@@ -20,6 +20,13 @@ A synchronization primitive that lets a thread **wait for some condition on shar
 **The cardinal rule — always wait in a loop:**
 Why? **Spurious wakeups** can happen (the OS may wake a thread without a `notify`), and another thread may have grabbed the resource between your wakeup and your re-acquiring the lock. Re-check.
 
+**vs. Semaphore:** a semaphore is just a count; a condition variable lets you wait on *any* predicate over arbitrary shared state.
+
+```python
+while not condition_holds():
+    cv.wait()
+```
+
 ```python
 import threading
 from collections import deque

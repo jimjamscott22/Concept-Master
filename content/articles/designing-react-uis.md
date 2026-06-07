@@ -5,7 +5,7 @@ is_published: true
 categories: [design]
 tags: [fundamentals, web]
 related_terms: [composition-vs-inheritance, pure-function, immutability, dependency-injection, observer-pattern]
-related_articles: []
+related_articles: [learning-well-styled-react-apps]
 ---
 
 A React UI is two designs wearing one coat: the *component design* (how you cut the

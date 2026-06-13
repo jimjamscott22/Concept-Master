@@ -241,8 +241,16 @@ async def list_terms(
         conditions.append("tg.name = %s")
         params.append(tag)
     if q:
-        conditions.append("(t.name LIKE %s OR t.definition LIKE %s)")
-        params.extend([f"%{q}%", f"%{q}%"])
+        # Use the FULLTEXT index for queries with words >= 3 chars; fall back to
+        # LIKE for short inputs (e.g. "C", "Go") that FULLTEXT can't match.
+        long_words = [w for w in q.split() if len(w) >= 3]
+        if long_words:
+            ft_query = " ".join("+" + w + "*" for w in long_words)
+            conditions.append("MATCH(t.name, t.definition) AGAINST (%s IN BOOLEAN MODE)")
+            params.append(ft_query)
+        else:
+            conditions.append("(t.name LIKE %s OR t.definition LIKE %s)")
+            params.extend([f"%{q}%", f"%{q}%"])
     if favorites_only:
         conditions.append("t.is_favorite = 1")
 
@@ -288,6 +296,11 @@ async def export_terms(conn: aiomysql.Connection = Depends(get_db)):
         row["categories"] = cats_by_term[row["id"]]
         row["tags"] = tags_by_term[row["id"]]
         row["related_terms"] = related_by_term[row["id"]]
+        # Integer-keyed fields so the export is directly consumable by /import
+        # without silently dropping category / tag / related links.
+        row["category_ids"] = [c["id"] for c in row["categories"]]
+        row["tag_names"] = [t["name"] for t in row["tags"]]
+        row["related_term_ids"] = [r["id"] for r in row["related_terms"]]
     return rows
 
 
@@ -355,7 +368,19 @@ async def update_term(
             raise HTTPException(status_code=409, detail=f"Name '{body.name}' is already taken")
 
     await _sync_associations(conn, row["id"], body.category_ids, body.tag_names, body.related_term_ids)
-    await _persist_to_disk(conn, new_slug)
+    try:
+        await _persist_to_disk(conn, new_slug)
+    except Exception:
+        # Revert the DB update so the DB and disk stay in sync.
+        async with conn.cursor() as cur:
+            await cur.execute(
+                """UPDATE terms
+                   SET name=%s, slug=%s, definition=%s, example_code=%s, code_lang=%s
+                   WHERE id=%s""",
+                (row["name"], row["slug"], row.get("definition"), row.get("example_code"),
+                 row.get("code_lang"), row["id"]),
+            )
+        raise
     if new_slug != slug:
         delete_term_file(slug, CONTENT_ROOT)
     updated = await _get_term_row(conn, new_slug)
@@ -380,7 +405,16 @@ async def toggle_favorite(slug: str, conn: aiomysql.Connection = Depends(get_db)
         await cur.execute(
             "UPDATE terms SET is_favorite = %s WHERE id = %s", (new_val, row["id"])
         )
-    await _persist_to_disk(conn, slug)
+    try:
+        await _persist_to_disk(conn, slug)
+    except Exception:
+        # Revert the toggle so the DB and disk stay in sync.
+        async with conn.cursor() as cur:
+            await cur.execute(
+                "UPDATE terms SET is_favorite = %s WHERE id = %s",
+                (row["is_favorite"], row["id"]),
+            )
+        raise
     updated = await _get_term_row(conn, slug)
     return await _enrich_term(conn, updated)
 
@@ -407,5 +441,13 @@ async def import_terms(
                 skipped += 1
                 continue
         await _sync_associations(conn, term_id, item.category_ids, item.tag_names, item.related_term_ids)
+        # Persist to content/ so the imported term survives sync_content --prune
+        # and a DB rebuild (content/ is the source of truth).
+        try:
+            await _persist_to_disk(conn, slug)
+        except Exception:
+            async with conn.cursor() as cur:
+                await cur.execute("DELETE FROM terms WHERE id = %s", (term_id,))
+            raise
         imported += 1
     return {"imported": imported, "skipped": skipped}

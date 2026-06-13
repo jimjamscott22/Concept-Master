@@ -4,11 +4,10 @@ categories:
 - functional-programming
 tags:
 - advanced
-- python
 - interview-prep
+- python
 related:
 - closure
-- higher-order-function
 code_lang: python
 ---
 

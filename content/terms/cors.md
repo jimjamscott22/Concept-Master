@@ -1,8 +1,8 @@
 ---
 name: CORS
 categories:
-- web
 - cybersecurity
+- web
 tags:
 - advanced
 - fundamentals

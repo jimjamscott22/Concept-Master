@@ -5,9 +5,6 @@ categories:
 tags:
 - fundamentals
 - sql
-related:
-- transaction
-- foreign-key
 code_lang: sql
 ---
 

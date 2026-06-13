@@ -3,13 +3,10 @@ name: Exception Handling
 categories:
 - object-oriented
 tags:
+- debugging
 - fundamentals
 - java
 - python
-- debugging
-related:
-- memory-leak
-- race-condition
 code_lang: python
 ---
 

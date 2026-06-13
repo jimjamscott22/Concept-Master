@@ -6,7 +6,6 @@ tags:
 - fundamentals
 - sql
 related:
-- sql-join
 - index-database
 code_lang: sql
 ---

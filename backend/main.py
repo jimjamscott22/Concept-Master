@@ -5,7 +5,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .database import create_pool
-from .routers import categories, tags, terms, stats, review
+from .routers import articles, categories, tags, terms, stats, review
+from .sync_articles import sync_articles
 from .sync_content import DEFAULT_CONTENT_ROOT, sync_content
 
 
@@ -15,6 +16,8 @@ async def lifespan(app: FastAPI):
     if os.getenv("SYNC_ON_START") == "1":
         report = await sync_content(app.state.pool, DEFAULT_CONTENT_ROOT)
         print(report.format())
+        article_report = await sync_articles(app.state.pool, DEFAULT_CONTENT_ROOT)
+        print(article_report.format())
     yield
     app.state.pool.close()
     await app.state.pool.wait_closed()
@@ -34,3 +37,4 @@ app.include_router(tags.router,       prefix="/api/tags",       tags=["tags"])
 app.include_router(terms.router,      prefix="/api/terms",      tags=["terms"])
 app.include_router(stats.router,      prefix="/api/stats",      tags=["stats"])
 app.include_router(review.router,     prefix="/api/review",     tags=["review"])
+app.include_router(articles.router,   prefix="/api/articles",   tags=["articles"])

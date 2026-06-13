@@ -1,3 +1,5 @@
+
+
 # Concept Master
 
 A local-first desktop web application for building and browsing a personal glossary of programming concepts. Designed as a daily reference and study tool for CS students, it combines fast full-text search, rich Markdown definitions with syntax-highlighted code examples, and a dark terminal-inspired aesthetic.

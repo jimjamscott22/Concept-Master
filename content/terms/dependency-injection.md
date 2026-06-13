@@ -7,6 +7,8 @@ tags:
 - fundamentals
 - interview-prep
 - java
+related:
+- virtual-environment-python
 code_lang: java
 ---
 

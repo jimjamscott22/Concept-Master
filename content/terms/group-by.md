@@ -5,8 +5,6 @@ categories:
 tags:
 - fundamentals
 - sql
-related:
-- select-query
 code_lang: sql
 ---
 

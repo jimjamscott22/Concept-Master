@@ -3,8 +3,8 @@ name: Two-Pointer Technique
 categories:
 - algorithms
 tags:
-- interview-prep
 - fundamentals
+- interview-prep
 code_lang: python
 ---
 

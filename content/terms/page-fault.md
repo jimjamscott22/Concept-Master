@@ -1,12 +1,11 @@
 ---
 name: Page Fault
 categories:
-- operating-systems
 - memory-management
+- operating-systems
 tags:
-- os
 - memory
-related: [virtual-memory, paging]
+- os
 code_lang: c
 ---
 
@@ -22,6 +21,8 @@ A CPU exception raised when a program touches a virtual address whose page is **
 - They enable **copy-on-write** for `fork()` — both processes share pages until one writes, which traps and triggers a copy.
 - They enable **memory-mapped files** — disk I/O disguised as memory access.
 
+You can watch them with `getrusage()` (`ru_minflt`, `ru_majflt`) or `/usr/bin/time -v`.
+
 ```c
 // Demonstrating a major fault — first touch of a freshly mapped region
 char *p = mmap(NULL, 4096, PROT_READ | PROT_WRITE,
@@ -30,5 +31,3 @@ char *p = mmap(NULL, 4096, PROT_READ | PROT_WRITE,
 p[0] = 'x';   // page-fault → kernel allocates a zeroed frame → maps it → resumes
 p[1] = 'y';   // no fault: page is now resident
 ```
-
-You can watch them with `getrusage()` (`ru_minflt`, `ru_majflt`) or `/usr/bin/time -v`.

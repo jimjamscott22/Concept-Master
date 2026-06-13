@@ -1,16 +1,16 @@
 ---
 name: Process vs Thread
 categories:
-- operating-systems
 - concurrency
+- operating-systems
 tags:
 - exam-review
 - interview-prep
-code_lang: python
 related:
-- thread
 - context-switch
 - mutex
+- system-call
+code_lang: python
 ---
 
 A **process** is an independent program in execution with its own virtual address space, file descriptors, and OS resources. A **thread** is a unit of execution that lives *inside* a process and shares that process's memory and resources with sibling threads.

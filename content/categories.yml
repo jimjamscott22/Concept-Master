@@ -8,6 +8,8 @@
   slug: data-structures
 - name: Databases
   slug: databases
+- name: Design
+  slug: design
 - name: Design Patterns
   slug: design-patterns
 - name: Functional Programming

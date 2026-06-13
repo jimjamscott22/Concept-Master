@@ -3,8 +3,8 @@ name: Database View
 categories:
 - databases
 tags:
-- sql
 - fundamentals
+- sql
 code_lang: sql
 ---
 

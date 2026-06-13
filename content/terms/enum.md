@@ -7,7 +7,6 @@ tags:
 - java
 - python
 related:
-- object
 - encapsulation
 code_lang: java
 ---

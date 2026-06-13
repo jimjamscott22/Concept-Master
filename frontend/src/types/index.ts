@@ -65,6 +65,53 @@ export interface Stats {
   top_favorites: TermSummary[]
 }
 
+// ── Articles ───────────────────────────────────────────────────────────────
+
+export interface ArticleSummary {
+  id: number
+  title: string
+  slug: string
+}
+
+export interface Article {
+  id: number
+  title: string
+  slug: string
+  subtitle: string | null
+  body: string
+  summary: string | null
+  reading_time_minutes: number
+  is_published: boolean
+  categories: Category[]
+  tags: Tag[]
+  created_at: string
+  updated_at: string
+}
+
+export interface ArticleDetail extends Article {
+  related_terms: TermSummary[]
+  related_articles: ArticleSummary[]
+}
+
+export interface ArticleListResponse {
+  articles: Article[]
+  total: number
+  limit: number
+  offset: number
+}
+
+export interface ArticleCreatePayload {
+  title: string
+  subtitle: string | null
+  body: string
+  category_ids: number[]
+  tag_names: string[]
+  related_term_ids: number[]
+  related_article_ids: number[]
+}
+
+export type ArticleUpdatePayload = ArticleCreatePayload
+
 // ── Review / spaced-repetition ─────────────────────────────────────────────
 
 export type ReviewRating = "again" | "hard" | "good" | "easy"

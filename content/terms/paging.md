@@ -1,13 +1,13 @@
 ---
 name: Paging
 categories:
-- operating-systems
 - memory-management
+- operating-systems
 tags:
 - exam-review
 related:
-- virtual-memory
 - context-switch
+- virtual-memory
 ---
 
 A memory-management scheme that divides virtual and physical memory into fixed-size blocks — **pages** in the virtual space, **frames** in physical RAM — and maps pages to frames through a per-process **page table**.
@@ -19,6 +19,8 @@ A memory-management scheme that divides virtual and physical memory into fixed-s
 
 **Address translation (single-level):**
 
+**Page replacement** — when RAM is full and a new page must be loaded, the kernel evicts an existing frame using a policy like LRU, Clock, or LFU. Poorly tuned working sets cause **thrashing**: the system spends more time paging than computing.
+
 ```
 virtual address: [ page number | offset ]
                        │           │
@@ -28,5 +30,3 @@ virtual address: [ page number | offset ]
                        ▼           ▼
 physical addr:   [ frame number | offset ]
 ```
-
-**Page replacement** — when RAM is full and a new page must be loaded, the kernel evicts an existing frame using a policy like LRU, Clock, or LFU. Poorly tuned working sets cause **thrashing**: the system spends more time paging than computing.

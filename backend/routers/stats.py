@@ -18,6 +18,9 @@ async def get_stats(request: Request):
                 await cur.execute(sql)
                 return await cur.fetchall()
 
+    # Four independent reads; the three scalar counts are merged into one query,
+    # and all four run concurrently over separate pool connections instead of
+    # serially on a single cursor.
     counts_rows, per_category, recent_terms, top_favorites = await asyncio.gather(
         q("""SELECT
                (SELECT COUNT(*) FROM terms)      AS total_terms,

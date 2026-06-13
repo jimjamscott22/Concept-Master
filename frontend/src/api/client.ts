@@ -2,6 +2,8 @@ import type {
   Term, TermDetail, TermListResponse, TermCreatePayload,
   TermUpdatePayload, TermSummary, Category, Tag, Stats,
   ReviewQueueResponse, ReviewState, ReviewRating, StreakResponse,
+  Article, ArticleDetail, ArticleListResponse, ArticleSummary,
+  ArticleCreatePayload, ArticleUpdatePayload,
 } from "../types"
 
 const BASE = "/api"
@@ -55,5 +57,24 @@ export const api = {
         body: JSON.stringify({ rating }),
       }),
     streak: () => request<StreakResponse>("/review/streak"),
+  },
+  articles: {
+    list: (params?: URLSearchParams) =>
+      request<ArticleListResponse>(`/articles${params ? "?" + params.toString() : ""}`),
+    summaries: () => request<ArticleSummary[]>("/articles/summaries"),
+    get: (slug: string) => request<ArticleDetail>(`/articles/${slug}`),
+    create: (payload: ArticleCreatePayload) =>
+      request<ArticleDetail>("/articles", { method: "POST", body: JSON.stringify(payload) }),
+    update: (slug: string, payload: ArticleUpdatePayload) =>
+      request<ArticleDetail>(`/articles/${slug}`, { method: "PUT", body: JSON.stringify(payload) }),
+    delete: (slug: string) => request<void>(`/articles/${slug}`, { method: "DELETE" }),
+    togglePublish: (slug: string) =>
+      request<Article>(`/articles/${slug}/publish`, { method: "PATCH" }),
+    export: () => request<ArticleDetail[]>("/articles/export"),
+    import: (items: ArticleCreatePayload[]) =>
+      request<{ imported: number; skipped: number }>("/articles/import", {
+        method: "POST",
+        body: JSON.stringify(items),
+      }),
   },
 }

@@ -1,0 +1,54 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L7 3L0 6Z" fill="#58A6FF"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0L7 3L0 6Z" fill="#39D353"/>
+    </marker>
+  </defs>
+
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+
+  <text x="72" y="92" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="30" font-weight="700">Running a split app: two shapes</text>
+  <text x="72" y="124" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Same FastAPI + Vite code — served as separate processes, or fused into one</text>
+
+  <line x1="480" y1="166" x2="480" y2="470" stroke="#30363D" stroke-width="2" stroke-dasharray="4 6"/>
+
+  <!-- Option 1 — two processes -->
+  <text x="256" y="194" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Option 1 — two processes</text>
+
+  <rect x="156" y="218" width="200" height="52" rx="10" fill="#0D1117" stroke="#58A6FF" stroke-width="2.5"/>
+  <text x="256" y="250" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">Browser</text>
+
+  <line x1="240" y1="270" x2="180" y2="346" stroke="#58A6FF" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <line x1="272" y1="270" x2="332" y2="346" stroke="#58A6FF" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+
+  <rect x="96" y="350" width="152" height="72" rx="10" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="172" y="384" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">Vite preview</text>
+  <text x="172" y="406" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="15">:5173</text>
+
+  <rect x="264" y="350" width="152" height="72" rx="10" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <text x="340" y="384" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">uvicorn</text>
+  <text x="340" y="406" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="15">:8000  /api</text>
+
+  <text x="256" y="458" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="16">2 ports · needs CORS / proxy config</text>
+
+  <!-- Option 2 — one process -->
+  <text x="704" y="194" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Option 2 — one process</text>
+
+  <rect x="604" y="218" width="200" height="52" rx="10" fill="#0D1117" stroke="#39D353" stroke-width="2.5"/>
+  <text x="704" y="250" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">Browser</text>
+
+  <line x1="704" y1="270" x2="704" y2="324" stroke="#39D353" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+
+  <rect x="576" y="328" width="256" height="96" rx="12" fill="#0D1117" stroke="#39D353" stroke-width="2.5"/>
+  <text x="704" y="354" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16" font-weight="700">uvicorn  :8000</text>
+  <rect x="596" y="366" width="216" height="24" rx="6" fill="#1C2128"/>
+  <text x="704" y="383" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13">static dist/  →  /</text>
+  <rect x="596" y="394" width="216" height="24" rx="6" fill="#1C2128"/>
+  <text x="704" y="411" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="13">API  →  /api/*</text>
+
+  <text x="704" y="458" text-anchor="middle" fill="#39D353" font-family="IBM Plex Sans, sans-serif" font-size="16">1 port · 1 process · no CORS</text>
+</svg>

@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - sql
 related:
-- transaction
 - sql-injection
+- transaction
 code_lang: sql
 ---
 

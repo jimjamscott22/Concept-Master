@@ -4,9 +4,10 @@ categories:
 - concurrency
 - memory-management
 tags:
-- concurrency
 - advanced
-related: [atomic-operation, race-condition]
+- concurrency
+related:
+- atomic-operation
 code_lang: java
 ---
 

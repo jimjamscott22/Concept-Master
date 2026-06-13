@@ -6,6 +6,8 @@ tags:
 - exam-review
 - fundamentals
 - java
+related:
+- arraylist
 code_lang: java
 ---
 

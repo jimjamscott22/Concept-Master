@@ -1,6 +1,6 @@
 import type React from "react"
 
-type View = "terms" | "stats" | "form" | "review" | "study"
+type View = "terms" | "stats" | "form" | "review" | "study" | "articles" | "article-form"
 
 interface SiteHeaderProps {
   view: View
@@ -18,19 +18,23 @@ interface NavItem {
 }
 
 const NAV: NavItem[] = [
-  { id: "terms",  label: "Browse", shortcut: "01" },
-  { id: "study",  label: "Study",  shortcut: "02" },
-  { id: "review", label: "Review", shortcut: "03" },
-  { id: "stats",  label: "Stats",  shortcut: "04" },
+  { id: "terms",    label: "Browse",   shortcut: "01" },
+  { id: "articles", label: "Articles", shortcut: "02" },
+  { id: "study",    label: "Study",    shortcut: "03" },
+  { id: "review",   label: "Review",   shortcut: "04" },
+  { id: "stats",    label: "Stats",    shortcut: "05" },
 ]
 
 export function SiteHeader({
   view, dueCount, onNavigate, onNewTerm, onExport, onImport,
 }: SiteHeaderProps) {
+  const newLabel = view === "articles" || view === "article-form" ? "New Article" : "Create a new term"
   return (
     <nav className="flex items-center gap-1 h-full">
       {NAV.map(item => {
-        const active = view === item.id || (item.id === "terms" && view === "form")
+        const active = view === item.id
+          || (item.id === "terms" && view === "form")
+          || (item.id === "articles" && view === "article-form")
         return (
           <button
             key={item.id}
@@ -63,7 +67,7 @@ export function SiteHeader({
         className="h-7 px-3 rounded-md bg-accent/10 text-accent border border-accent/30
                    hover:bg-accent/20 hover:border-accent/50 transition-colors
                    text-xs font-mono font-medium tracking-wide flex items-center gap-1.5"
-        title="Create a new term"
+        title={newLabel}
       >
         <span className="text-sm leading-none">+</span>
         <span className="uppercase">New</span>

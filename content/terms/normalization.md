@@ -7,6 +7,7 @@ tags:
 - fundamentals
 - interview-prep
 code_lang: sql
+is_favorite: true
 ---
 
 Database normalization is the process of organizing tables to **reduce redundancy** and **prevent update anomalies**.

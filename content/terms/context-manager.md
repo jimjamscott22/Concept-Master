@@ -6,9 +6,6 @@ tags:
 - fundamentals
 - python
 - resources
-related:
-- exception-handling
-- garbage-collection
 code_lang: python
 ---
 

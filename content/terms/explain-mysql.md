@@ -5,10 +5,6 @@ categories:
 tags:
 - mysql
 - performance
-related:
-- index-database
-- select-query
-- sql-join
 code_lang: sql
 ---
 

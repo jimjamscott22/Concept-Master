@@ -3,11 +3,10 @@ name: List Comprehension
 categories:
 - functional-programming
 tags:
+- exam-review
 - fundamentals
 - python
-- exam-review
 related:
-- map-filter-reduce
 - higher-order-function
 code_lang: python
 ---

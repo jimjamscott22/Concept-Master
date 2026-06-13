@@ -4,11 +4,8 @@ categories:
 - object-oriented
 tags:
 - fundamentals
-- python
 - interview-prep
-related:
-- polymorphism
-- java-interface
+- python
 code_lang: python
 ---
 

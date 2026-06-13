@@ -6,6 +6,8 @@ tags:
 - advanced
 - interview-prep
 - java
+related:
+- kadane-algorithm
 code_lang: python
 ---
 

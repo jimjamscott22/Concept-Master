@@ -6,6 +6,8 @@ tags:
 - fundamentals
 - interview-prep
 - java
+related:
+- update-statement
 code_lang: sql
 ---
 

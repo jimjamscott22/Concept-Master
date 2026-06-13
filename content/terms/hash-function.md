@@ -3,8 +3,8 @@ name: Hash Function
 categories:
 - cybersecurity
 tags:
-- fundamentals
 - cryptography
+- fundamentals
 code_lang: python
 ---
 

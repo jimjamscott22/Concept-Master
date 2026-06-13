@@ -3,10 +3,9 @@ name: File Descriptor
 categories:
 - operating-systems
 tags:
+- fundamentals
 - os
 - unix
-- fundamentals
-related: [system-call]
 code_lang: c
 ---
 

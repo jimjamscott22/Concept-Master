@@ -5,7 +5,8 @@ categories:
 tags:
 - concurrency
 - fundamentals
-related: [race-condition, mutex, semaphore]
+related:
+- memory-barrier
 code_lang: java
 ---
 

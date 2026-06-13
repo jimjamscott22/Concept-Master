@@ -1,8 +1,8 @@
 ---
 name: Promise
 categories:
-- web
 - functional-programming
+- web
 tags:
 - fundamentals
 - javascript

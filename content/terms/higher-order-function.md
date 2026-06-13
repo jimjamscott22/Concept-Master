@@ -6,6 +6,9 @@ tags:
 - advanced
 - java
 - python
+related:
+- lambda-expression
+- list-comprehension
 code_lang: python
 ---
 

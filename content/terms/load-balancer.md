@@ -3,8 +3,8 @@ name: Load Balancer
 categories:
 - networking
 tags:
-- infrastructure
 - distributed-systems
+- infrastructure
 code_lang: bash
 ---
 

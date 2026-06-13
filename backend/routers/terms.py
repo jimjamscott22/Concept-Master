@@ -1,4 +1,5 @@
 import aiomysql
+from collections import defaultdict
 from fastapi import APIRouter, Depends, HTTPException, Query
 from typing import Optional, List
 from slugify import slugify
@@ -77,69 +78,6 @@ async def _get_related_terms(conn: aiomysql.Connection, term_id: int) -> list:
         return await cur.fetchall()
 
 
-async def _batch_get_categories(conn: aiomysql.Connection, term_ids: list) -> dict:
-    """Fetch categories for multiple terms at once. Returns {term_id: [cat_dict]}."""
-    if not term_ids:
-        return {}
-    placeholders = ",".join(["%s"] * len(term_ids))
-    async with conn.cursor(aiomysql.DictCursor) as cur:
-        await cur.execute(f"""
-            SELECT tc.term_id, c.id, c.name, c.slug, 0 AS term_count
-            FROM categories c
-            JOIN term_categories tc ON c.id = tc.category_id
-            WHERE tc.term_id IN ({placeholders})
-        """, term_ids)
-        rows = await cur.fetchall()
-    result: dict = {}
-    for row in rows:
-        tid = row.pop("term_id")
-        result.setdefault(tid, []).append(row)
-    return result
-
-
-async def _batch_get_tags(conn: aiomysql.Connection, term_ids: list) -> dict:
-    """Fetch tags for multiple terms at once. Returns {term_id: [tag_dict]}."""
-    if not term_ids:
-        return {}
-    placeholders = ",".join(["%s"] * len(term_ids))
-    async with conn.cursor(aiomysql.DictCursor) as cur:
-        await cur.execute(f"""
-            SELECT tt.term_id, t.id, t.name, 0 AS term_count
-            FROM tags t
-            JOIN term_tags tt ON t.id = tt.tag_id
-            WHERE tt.term_id IN ({placeholders})
-        """, term_ids)
-        rows = await cur.fetchall()
-    result: dict = {}
-    for row in rows:
-        tid = row.pop("term_id")
-        result.setdefault(tid, []).append(row)
-    return result
-
-
-async def _batch_get_related(conn: aiomysql.Connection, term_ids: list) -> dict:
-    """Fetch related terms for multiple terms at once. Returns {term_id: [summary_dict]}."""
-    if not term_ids:
-        return {}
-    placeholders = ",".join(["%s"] * len(term_ids))
-    async with conn.cursor(aiomysql.DictCursor) as cur:
-        await cur.execute(f"""
-            SELECT rt.term_a AS owner_id, t.id, t.name, t.slug
-            FROM related_terms rt JOIN terms t ON t.id = rt.term_b
-            WHERE rt.term_a IN ({placeholders})
-            UNION ALL
-            SELECT rt.term_b AS owner_id, t.id, t.name, t.slug
-            FROM related_terms rt JOIN terms t ON t.id = rt.term_a
-            WHERE rt.term_b IN ({placeholders})
-        """, term_ids + term_ids)
-        rows = await cur.fetchall()
-    result: dict = {}
-    for row in rows:
-        owner = row.pop("owner_id")
-        result.setdefault(owner, []).append(row)
-    return result
-
-
 async def _enrich_term(conn: aiomysql.Connection, row: dict) -> dict:
     """Add categories and tags to a term dict."""
     row["is_favorite"] = bool(row["is_favorite"])
@@ -159,22 +97,78 @@ async def _get_term_row(conn: aiomysql.Connection, slug: str) -> dict:
     return row
 
 
+async def _batch_get_categories(conn: aiomysql.Connection, term_ids: list) -> defaultdict:
+    """Return {term_id: [category_dict, ...]} for all given term IDs in 1 query."""
+    result: defaultdict = defaultdict(list)
+    if not term_ids:
+        return result
+    ph = ",".join(["%s"] * len(term_ids))
+    async with conn.cursor(aiomysql.DictCursor) as cur:
+        await cur.execute(f"""
+            SELECT tc.term_id, c.id, c.name, c.slug, 0 AS term_count
+            FROM term_categories tc
+            JOIN categories c ON tc.category_id = c.id
+            WHERE tc.term_id IN ({ph})
+        """, term_ids)
+        for r in await cur.fetchall():
+            tid = r["term_id"]
+            result[tid].append({"id": r["id"], "name": r["name"], "slug": r["slug"], "term_count": 0})
+    return result
+
+
+async def _batch_get_tags(conn: aiomysql.Connection, term_ids: list) -> defaultdict:
+    """Return {term_id: [tag_dict, ...]} for all given term IDs in 1 query."""
+    result: defaultdict = defaultdict(list)
+    if not term_ids:
+        return result
+    ph = ",".join(["%s"] * len(term_ids))
+    async with conn.cursor(aiomysql.DictCursor) as cur:
+        await cur.execute(f"""
+            SELECT tt.term_id, t.id, t.name, 0 AS term_count
+            FROM term_tags tt
+            JOIN tags t ON tt.tag_id = t.id
+            WHERE tt.term_id IN ({ph})
+        """, term_ids)
+        for r in await cur.fetchall():
+            tid = r["term_id"]
+            result[tid].append({"id": r["id"], "name": r["name"], "term_count": 0})
+    return result
+
+
+async def _batch_get_related(conn: aiomysql.Connection, term_ids: list) -> defaultdict:
+    """Return {term_id: [related_dict, ...]} for all given term IDs in 1 query."""
+    result: defaultdict = defaultdict(list)
+    if not term_ids:
+        return result
+    ph = ",".join(["%s"] * len(term_ids))
+    async with conn.cursor(aiomysql.DictCursor) as cur:
+        # related_terms stores (term_a, term_b) with term_a < term_b; cover both directions
+        await cur.execute(f"""
+            SELECT rt.term_a AS owner_id, t.id, t.name, t.slug
+            FROM related_terms rt JOIN terms t ON t.id = rt.term_b
+            WHERE rt.term_a IN ({ph})
+            UNION ALL
+            SELECT rt.term_b AS owner_id, t.id, t.name, t.slug
+            FROM related_terms rt JOIN terms t ON t.id = rt.term_a
+            WHERE rt.term_b IN ({ph})
+        """, term_ids + term_ids)
+        for r in await cur.fetchall():
+            tid = r["owner_id"]
+            result[tid].append({"id": r["id"], "name": r["name"], "slug": r["slug"]})
+    return result
+
+
 async def _upsert_tags(conn: aiomysql.Connection, tag_names: List[str]) -> List[int]:
     """Insert tags that don't exist, return their ids."""
-    ids = []
+    names = [n.strip().lower() for n in tag_names if n.strip()]
+    if not names:
+        return []
     async with conn.cursor(aiomysql.DictCursor) as cur:
-        for name in tag_names:
-            name = name.strip().lower()
-            if not name:
-                continue
-            await cur.execute(
-                "INSERT IGNORE INTO tags (name) VALUES (%s)", (name,)
-            )
-            await cur.execute("SELECT id FROM tags WHERE name = %s", (name,))
-            row = await cur.fetchone()
-            if row:
-                ids.append(row["id"])
-    return ids
+        ph_vals = ",".join(["(%s)"] * len(names))
+        await cur.execute(f"INSERT IGNORE INTO tags (name) VALUES {ph_vals}", names)
+        ph_in = ",".join(["%s"] * len(names))
+        await cur.execute(f"SELECT id FROM tags WHERE name IN ({ph_in})", names)
+        return [r["id"] for r in await cur.fetchall()]
 
 
 async def _sync_associations(
@@ -185,6 +179,9 @@ async def _sync_associations(
     related_term_ids: List[int],
 ) -> None:
     """Replace all category, tag, and related-term associations."""
+    # Resolve tags first (opens its own cursor) before entering the main cursor block.
+    tag_ids = await _upsert_tags(conn, tag_names)
+
     async with conn.cursor() as cur:
         await cur.execute("DELETE FROM term_categories WHERE term_id = %s", (term_id,))
         await cur.execute("DELETE FROM term_tags WHERE term_id = %s", (term_id,))
@@ -194,26 +191,30 @@ async def _sync_associations(
             (term_id, term_id),
         )
 
-        for cat_id in category_ids:
+        if category_ids:
+            ph = ",".join(["(%s,%s)"] * len(category_ids))
+            vals = [v for cat_id in category_ids for v in (term_id, cat_id)]
             await cur.execute(
-                "INSERT IGNORE INTO term_categories (term_id, category_id) VALUES (%s, %s)",
-                (term_id, cat_id),
+                f"INSERT IGNORE INTO term_categories (term_id, category_id) VALUES {ph}", vals
             )
 
-        tag_ids = await _upsert_tags(conn, tag_names)
-        for tag_id in tag_ids:
+        if tag_ids:
+            ph = ",".join(["(%s,%s)"] * len(tag_ids))
+            vals = [v for tag_id in tag_ids for v in (term_id, tag_id)]
             await cur.execute(
-                "INSERT IGNORE INTO term_tags (term_id, tag_id) VALUES (%s, %s)",
-                (term_id, tag_id),
+                f"INSERT IGNORE INTO term_tags (term_id, tag_id) VALUES {ph}", vals
             )
 
-        for other_id in related_term_ids:
-            if other_id == term_id:
-                continue
-            a, b = (term_id, other_id) if term_id < other_id else (other_id, term_id)
+        pairs = [
+            (term_id, other_id) if term_id < other_id else (other_id, term_id)
+            for other_id in related_term_ids
+            if other_id != term_id
+        ]
+        if pairs:
+            ph = ",".join(["(%s,%s)"] * len(pairs))
+            vals = [v for a, b in pairs for v in (a, b)]
             await cur.execute(
-                "INSERT IGNORE INTO related_terms (term_a, term_b) VALUES (%s, %s)",
-                (a, b),
+                f"INSERT IGNORE INTO related_terms (term_a, term_b) VALUES {ph}", vals
             )
 
 
@@ -240,7 +241,8 @@ async def list_terms(
         conditions.append("tg.name = %s")
         params.append(tag)
     if q:
-        # Use FULLTEXT for queries with words >= 3 chars; fall back to LIKE for short inputs.
+        # Use the FULLTEXT index for queries with words >= 3 chars; fall back to
+        # LIKE for short inputs (e.g. "C", "Go") that FULLTEXT can't match.
         long_words = [w for w in q.split() if len(w) >= 3]
         if long_words:
             ft_query = " ".join("+" + w + "*" for w in long_words)
@@ -266,49 +268,40 @@ async def list_terms(
         )
         rows = await cur.fetchall()
 
-    if rows:
-        term_ids = [r["id"] for r in rows]
-        cats_by_term = await _batch_get_categories(conn, term_ids)
-        tags_by_term = await _batch_get_tags(conn, term_ids)
-        terms = []
-        for row in rows:
-            row["is_favorite"] = bool(row["is_favorite"])
-            row["categories"] = cats_by_term.get(row["id"], [])
-            row["tags"] = tags_by_term.get(row["id"], [])
-            terms.append(row)
-    else:
-        terms = []
-
+    ids = [r["id"] for r in rows]
+    cats_by_term = await _batch_get_categories(conn, ids)
+    tags_by_term = await _batch_get_tags(conn, ids)
+    terms = []
+    for row in rows:
+        row["is_favorite"] = bool(row["is_favorite"])
+        row["categories"] = cats_by_term[row["id"]]
+        row["tags"] = tags_by_term[row["id"]]
+        terms.append(row)
     return {"terms": terms, "total": total, "limit": limit, "offset": offset}
 
 
 @router.get("/export")
 async def export_terms(conn: aiomysql.Connection = Depends(get_db)):
-    """Export all terms as a JSON array compatible with the /import endpoint."""
+    """Export all terms as a JSON array (for bulk import)."""
     async with conn.cursor(aiomysql.DictCursor) as cur:
         await cur.execute("SELECT * FROM terms ORDER BY name")
         rows = await cur.fetchall()
 
-    if not rows:
-        return []
-
-    term_ids = [r["id"] for r in rows]
-    cats_by_term = await _batch_get_categories(conn, term_ids)
-    tags_by_term = await _batch_get_tags(conn, term_ids)
-    related_by_term = await _batch_get_related(conn, term_ids)
-
-    result = []
+    ids = [r["id"] for r in rows]
+    cats_by_term = await _batch_get_categories(conn, ids)
+    tags_by_term = await _batch_get_tags(conn, ids)
+    related_by_term = await _batch_get_related(conn, ids)
     for row in rows:
         row["is_favorite"] = bool(row["is_favorite"])
-        row["categories"] = cats_by_term.get(row["id"], [])
-        row["tags"] = tags_by_term.get(row["id"], [])
-        row["related_terms"] = related_by_term.get(row["id"], [])
-        # Integer-keyed fields for round-trip import compatibility
+        row["categories"] = cats_by_term[row["id"]]
+        row["tags"] = tags_by_term[row["id"]]
+        row["related_terms"] = related_by_term[row["id"]]
+        # Integer-keyed fields so the export is directly consumable by /import
+        # without silently dropping category / tag / related links.
         row["category_ids"] = [c["id"] for c in row["categories"]]
         row["tag_names"] = [t["name"] for t in row["tags"]]
         row["related_term_ids"] = [r["id"] for r in row["related_terms"]]
-        result.append(row)
-    return result
+    return rows
 
 
 @router.get("/summaries", response_model=List[TermSummary])
@@ -415,7 +408,7 @@ async def toggle_favorite(slug: str, conn: aiomysql.Connection = Depends(get_db)
     try:
         await _persist_to_disk(conn, slug)
     except Exception:
-        # Revert the toggle in the DB so the DB and disk stay in sync.
+        # Revert the toggle so the DB and disk stay in sync.
         async with conn.cursor() as cur:
             await cur.execute(
                 "UPDATE terms SET is_favorite = %s WHERE id = %s",
@@ -448,6 +441,8 @@ async def import_terms(
                 skipped += 1
                 continue
         await _sync_associations(conn, term_id, item.category_ids, item.tag_names, item.related_term_ids)
+        # Persist to content/ so the imported term survives sync_content --prune
+        # and a DB rebuild (content/ is the source of truth).
         try:
             await _persist_to_disk(conn, slug)
         except Exception:

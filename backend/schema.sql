@@ -60,6 +60,7 @@ CREATE INDEX IF NOT EXISTS idx_terms_name      ON terms(name);
 CREATE INDEX IF NOT EXISTS idx_terms_slug      ON terms(slug);
 CREATE INDEX IF NOT EXISTS idx_terms_favorite  ON terms(is_favorite);
 CREATE INDEX IF NOT EXISTS idx_terms_created   ON terms(created_at);
+CREATE FULLTEXT INDEX IF NOT EXISTS idx_terms_fulltext ON terms(name, definition);
 CREATE INDEX IF NOT EXISTS idx_categories_slug ON categories(slug);
 CREATE INDEX IF NOT EXISTS idx_tags_name       ON tags(name);
 

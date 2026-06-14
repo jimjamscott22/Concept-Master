@@ -12,6 +12,8 @@
   slug: design
 - name: Design Patterns
   slug: design-patterns
+- name: DevOps
+  slug: devops
 - name: Functional Programming
   slug: functional-programming
 - name: Memory Management

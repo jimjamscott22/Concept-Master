@@ -4,6 +4,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing the four ACID properties — Atomicity, Consistency, Isolation, Durability — around a central transaction.",
     caption: "Visual: ACID guarantees make database transactions safe and predictable.",
   },
+  "adapter-pattern": {
+    src: "/concepts/adapter-pattern.svg",
+    alt: "Diagram showing a client calling an adapter that translates requests for a legacy API.",
+    caption: "Visual: an adapter changes the interface while preserving the wrapped object's behavior.",
+  },
   array: {
     src: "/concepts/array.svg",
     alt: "Diagram showing indexed array slots and constant-time access by index.",
@@ -49,6 +54,21 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a consumer waiting on a condition variable while a producer notifies after updating shared state under a mutex.",
     caption: "Visual: waiters sleep while holding no lock; a notifier wakes them after changing state.",
   },
+  cohesion: {
+    src: "/concepts/cohesion.svg",
+    alt: "Diagram contrasting a cohesive module with related responsibilities against a low-cohesion module with scattered duties.",
+    caption: "Visual: high cohesion keeps related responsibilities grouped around one clear purpose.",
+  },
+  "content-security-policy": {
+    src: "/concepts/content-security-policy.svg",
+    alt: "Diagram showing a web page request checked by a Content Security Policy before trusted or blocked scripts load.",
+    caption: "Visual: CSP restricts which sources a browser may load or execute.",
+  },
+  coupling: {
+    src: "/concepts/coupling.svg",
+    alt: "Diagram comparing tight coupling through concrete details with loose coupling through a small interface.",
+    caption: "Visual: loose coupling lets parts collaborate through small contracts instead of implementation details.",
+  },
   "cpu-scheduling": {
     src: "/concepts/cpu-scheduling.svg",
     alt: "Diagram showing a ready queue of processes, a scheduler choosing the next task for the CPU, and a timer interrupt returning control.",
@@ -74,6 +94,16 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a DNS query resolving a domain name to an IP address.",
     caption: "Visual: DNS translates a human-readable domain into the server's IP address.",
   },
+  "dns-record": {
+    src: "/concepts/dns-record.svg",
+    alt: "Diagram showing DNS record types for a domain resolving to connection data such as IP addresses and mail servers.",
+    caption: "Visual: DNS records store typed answers for names, addresses, mail routing, and metadata.",
+  },
+  "dry-principle": {
+    src: "/concepts/dry-principle.svg",
+    alt: "Diagram showing duplicated formatting logic replaced by a single reusable rule.",
+    caption: "Visual: DRY keeps important knowledge in one authoritative representation.",
+  },
   "dynamic-programming": {
     src: "/concepts/dynamic-programming.svg",
     alt: "Diagram showing dynamic programming reusing cached subproblem results.",
@@ -93,6 +123,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/factory-pattern.svg",
     alt: "Diagram showing a factory receiving a type parameter and producing different concrete objects.",
     caption: "Visual: the client asks a factory to create objects without knowing the concrete class.",
+  },
+  "facade-pattern": {
+    src: "/concepts/facade-pattern.svg",
+    alt: "Diagram showing a client calling a facade that coordinates loader, analyzer, and exporter subsystem steps.",
+    caption: "Visual: a facade offers one simple entry point over a multi-step subsystem.",
   },
   "garbage-collection": {
     src: "/concepts/garbage-collection.svg",
@@ -114,6 +149,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Min-heap tree diagram showing the smallest value at the root.",
     caption: "Visual: heap ordering keeps the highest-priority value near the top.",
   },
+  idempotency: {
+    src: "/concepts/idempotency.svg",
+    alt: "Diagram showing repeated PUT requests reaching a server while the final state remains unchanged.",
+    caption: "Visual: an idempotent operation can be retried without creating duplicate effects.",
+  },
   "higher-order-function": {
     src: "/concepts/higher-order-function.svg",
     alt: "Diagram showing a function passed into another function to produce a result.",
@@ -128,6 +168,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/index-database.svg",
     alt: "Diagram showing a database index pointing quickly to matching rows.",
     caption: "Visual: indexes help the database jump directly to matching rows.",
+  },
+  inode: {
+    src: "/concepts/inode.svg",
+    alt: "Diagram showing a filename pointing to an inode, which stores metadata and points to data blocks.",
+    caption: "Visual: filenames point to inodes; inodes describe and locate file data.",
   },
   inheritance: {
     src: "/concepts/inheritance.svg",
@@ -144,6 +189,21 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing user-mode applications crossing into kernel mode via a syscall trap, with the kernel managing hardware and isolation.",
     caption: "Visual: user code must trap into the kernel to do anything privileged.",
   },
+  "json-web-token-jwt": {
+    src: "/concepts/json-web-token-jwt.svg",
+    alt: "Diagram showing a JWT split into header, payload, and signature parts with a reminder that signing is not encryption.",
+    caption: "Visual: JWTs carry signed claims in header, payload, and signature segments.",
+  },
+  "kiss-principle": {
+    src: "/concepts/kiss-principle.svg",
+    alt: "Diagram contrasting an overbuilt curved path with a simple direct path through the same requirement.",
+    caption: "Visual: KISS favors clear solutions with fewer moving parts.",
+  },
+  "latency-vs-throughput": {
+    src: "/concepts/latency-vs-throughput.svg",
+    alt: "Diagram comparing latency as one request duration with throughput as many requests completed per second.",
+    caption: "Visual: latency measures one operation's wait; throughput measures total completed work.",
+  },
   "linked-list": {
     src: "/concepts/linked-list.svg",
     alt: "Linked list diagram showing nodes connected by next pointers.",
@@ -158,6 +218,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/memory-leak.svg",
     alt: "Diagram showing retained references causing memory usage to grow over time.",
     caption: "Visual: memory leaks happen when unneeded data stays referenced.",
+  },
+  "model-view-controller": {
+    src: "/concepts/model-view-controller.svg",
+    alt: "Diagram showing Model, View, and Controller boxes connected to separate application state, presentation, and coordination responsibilities.",
+    caption: "Visual: MVC separates data, rendering, and request coordination.",
   },
   "merge-sort": {
     src: "/concepts/merge-sort.svg",
@@ -179,6 +244,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a subject notifying multiple observers after a state change.",
     caption: "Visual: one subject can broadcast updates to many subscribed observers.",
   },
+  oauth: {
+    src: "/concepts/oauth.svg",
+    alt: "Diagram showing a user, app, authorization server, and API exchanging delegated access without sharing the user's password.",
+    caption: "Visual: OAuth gives apps delegated access through authorization grants and tokens.",
+  },
   "page-fault": {
     src: "/concepts/page-fault.svg",
     alt: "Diagram showing a virtual page access trapping into the kernel page-fault handler, which routes to a minor fault, major fault, or SIGSEGV.",
@@ -198,6 +268,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/producer-consumer.svg",
     alt: "Diagram showing multiple producer threads pushing items into a bounded buffer and consumer threads pulling them out.",
     caption: "Visual: a bounded buffer decouples producers from consumers, with waits on full/empty.",
+  },
+  "proxy-pattern": {
+    src: "/concepts/proxy-pattern.svg",
+    alt: "Diagram showing a client calling a proxy that performs authorization and caching before forwarding to a real object.",
+    caption: "Visual: a proxy stands in front of a real object to control access or add behavior.",
   },
   "pure-function": {
     src: "/concepts/pure-function.svg",
@@ -224,6 +299,16 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing a function calling itself on smaller inputs until a base case is reached.",
     caption: "Visual: recursion solves a problem by reducing it until a base case stops the calls.",
   },
+  "separation-of-concerns": {
+    src: "/concepts/separation-of-concerns.svg",
+    alt: "Diagram showing data access, business rules, and rendering separated into connected responsibility boxes.",
+    caption: "Visual: separate concerns change independently and connect through small interfaces.",
+  },
+  signal: {
+    src: "/concepts/signal.svg",
+    alt: "Diagram showing a terminal event routed by the operating system as SIGINT to a running process.",
+    caption: "Visual: signals are asynchronous notifications delivered by the operating system.",
+  },
   rest: {
     src: "/concepts/rest.svg",
     alt: "Diagram showing REST resources, HTTP verbs, and stateless API requests.",
@@ -239,6 +324,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     alt: "Diagram showing two related tables combined through a join condition.",
     caption: "Visual: SQL joins connect related rows across multiple tables.",
   },
+  "solid-principles": {
+    src: "/concepts/solid-principles.svg",
+    alt: "Diagram showing five blocks labeled S, O, L, I, and D with short object-oriented design guidance.",
+    caption: "Visual: SOLID groups five guidelines for flexible, testable object-oriented design.",
+  },
   stack: {
     src: "/concepts/stack.svg",
     alt: "Diagram showing a stack with push and pop operations at the top.",
@@ -253,6 +343,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/strategy-pattern.svg",
     alt: "Diagram showing a context object delegating to interchangeable strategy implementations.",
     caption: "Visual: the strategy pattern lets you swap algorithms at runtime without changing the context.",
+  },
+  "template-method-pattern": {
+    src: "/concepts/template-method-pattern.svg",
+    alt: "Diagram showing a base class algorithm skeleton with subclasses customizing read, parse, and save steps.",
+    caption: "Visual: template method fixes the workflow order while subclasses fill selected steps.",
   },
   tcp: {
     src: "/concepts/tcp.svg",
@@ -288,6 +383,11 @@ const conceptVisuals: Record<string, { src: string; alt: string; caption: string
     src: "/concepts/websocket.svg",
     alt: "Diagram showing a persistent two-way WebSocket connection between client and server.",
     caption: "Visual: WebSockets enable long-lived bidirectional real-time communication.",
+  },
+  yagni: {
+    src: "/concepts/yagni.svg",
+    alt: "Diagram contrasting speculative future features with the smaller current requirement that should be built now.",
+    caption: "Visual: YAGNI keeps work focused on requirements that exist now.",
   },
 }
 

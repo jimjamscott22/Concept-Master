@@ -1,0 +1,20 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Inode</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Filesystem metadata plus pointers to the blocks that hold file data</text>
+  <rect x="116" y="198" width="230" height="156" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="231" y="252" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Filename</text>
+  <text x="231" y="300" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">notes.txt</text>
+  <rect x="402" y="164" width="180" height="224" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="492" y="214" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Inode</text>
+  <text x="492" y="258" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">owner</text>
+  <text x="492" y="292" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">size</text>
+  <text x="492" y="326" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="16">block map</text>
+  <rect x="652" y="196" width="196" height="70" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <rect x="652" y="296" width="196" height="70" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="750" y="240" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">data block</text>
+  <text x="750" y="340" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">data block</text>
+  <path d="M346 276H402M582 276H652M582 276L652 231M582 276L652 331" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="448" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Directory names point to inodes; inodes describe and locate the actual file</text>
+</svg>

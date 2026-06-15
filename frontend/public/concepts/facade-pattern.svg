@@ -1,0 +1,19 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Facade Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A simple front door over a workflow that has many internal steps</text>
+  <rect x="112" y="216" width="216" height="124" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="220" y="288" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Client</text>
+  <rect x="392" y="182" width="176" height="192" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="246" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Facade</text>
+  <text x="480" y="296" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">buildPdf()</text>
+  <rect x="648" y="160" width="188" height="66" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <rect x="648" y="246" width="188" height="66" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <rect x="648" y="332" width="188" height="66" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="742" y="202" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">loader</text>
+  <text x="742" y="288" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">analyzer</text>
+  <text x="742" y="374" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">exporter</text>
+  <path d="M328 278H392M568 278H648M568 278L648 193M568 278L648 365" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="452" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Callers use one clean method while the facade coordinates the subsystem</text>
+</svg>

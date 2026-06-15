@@ -1,0 +1,15 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Model-View-Controller</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Separate state, presentation, and input coordination</text>
+  <rect x="372" y="166" width="216" height="112" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="480" y="232" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Controller</text>
+  <rect x="138" y="342" width="216" height="112" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="246" y="408" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Model</text>
+  <rect x="606" y="342" width="216" height="112" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="714" y="408" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">View</text>
+  <path d="M438 278L302 342M522 278L658 342M354 398H606" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="314" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">coordinates</text>
+  <text x="480" y="482" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">MVC keeps business data, rendered output, and request handling distinct</text>
+</svg>

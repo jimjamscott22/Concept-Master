@@ -1,0 +1,19 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">JSON Web Token (JWT)</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A signed three-part token carrying claims between systems</text>
+  <rect x="96" y="198" width="214" height="154" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="203" y="250" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Header</text>
+  <text x="203" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">alg, typ</text>
+  <rect x="374" y="198" width="214" height="154" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="481" y="250" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Payload</text>
+  <text x="481" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">claims</text>
+  <rect x="652" y="198" width="214" height="154" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="759" y="250" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Signature</text>
+  <text x="759" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">verify</text>
+  <circle cx="342" cy="276" r="5" fill="#8B949E"/>
+  <circle cx="620" cy="276" r="5" fill="#8B949E"/>
+  <text x="480" y="410" text-anchor="middle" fill="#F85149" font-family="IBM Plex Sans, sans-serif" font-size="20">Signed does not mean encrypted</text>
+  <text x="480" y="448" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Receivers validate the signature before trusting the claims</text>
+</svg>

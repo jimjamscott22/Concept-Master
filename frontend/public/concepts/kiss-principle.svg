@@ -1,0 +1,17 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">KISS Principle</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Prefer the simplest design that clearly solves the current problem</text>
+  <path d="M152 326C254 218 350 218 452 326" stroke="#F85149" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 12"/>
+  <path d="M508 326H808" stroke="#39D353" stroke-width="6" stroke-linecap="round"/>
+  <rect x="156" y="186" width="292" height="188" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="302" y="238" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Overbuilt</text>
+  <text x="302" y="286" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">extra layers</text>
+  <text x="302" y="320" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">extra cases</text>
+  <rect x="512" y="186" width="292" height="188" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="658" y="238" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Simple</text>
+  <text x="658" y="286" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">clear function</text>
+  <text x="658" y="320" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">few moving parts</text>
+  <text x="480" y="444" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Simplicity means every abstraction has earned its keep</text>
+</svg>

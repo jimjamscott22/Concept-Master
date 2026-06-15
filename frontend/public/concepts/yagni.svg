@@ -1,0 +1,17 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">YAGNI</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Do not build features or abstractions before there is a real requirement</text>
+  <rect x="126" y="194" width="292" height="180" rx="18" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="272" y="244" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Maybe later</text>
+  <text x="272" y="292" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">unused plugin layer</text>
+  <text x="272" y="326" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">future configuration</text>
+  <rect x="542" y="194" width="292" height="180" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="688" y="244" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Needed now</text>
+  <text x="688" y="292" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">current requirement</text>
+  <text x="688" y="326" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">small step</text>
+  <path d="M474 206V370" stroke="#30363D" stroke-width="3" stroke-linecap="round"/>
+  <path d="M392 424L568 424" stroke="#39D353" stroke-width="5" stroke-linecap="round"/>
+  <text x="480" y="462" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Keep design reversible until evidence justifies the extra structure</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Adapter Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Wrap one interface and translate it into the interface a client expects</text>
+  <rect x="96" y="210" width="224" height="132" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="208" y="262" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Client</text>
+  <text x="208" y="302" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">charge(cents)</text>
+  <rect x="368" y="184" width="224" height="184" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="236" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Adapter</text>
+  <text x="480" y="280" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">translate call</text>
+  <text x="480" y="316" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">same useful behavior</text>
+  <rect x="640" y="210" width="224" height="132" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="752" y="262" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Legacy API</text>
+  <text x="752" y="302" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">createCharge()</text>
+  <path d="M320 276H368M592 276H640" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="438" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">The wrapper changes the shape of calls without changing the wrapped object</text>
+</svg>

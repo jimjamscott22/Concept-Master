@@ -1,0 +1,18 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Idempotency</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Repeat the same operation and the final state stays the same</text>
+  <rect x="108" y="186" width="220" height="188" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="218" y="236" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Retry</text>
+  <text x="218" y="286" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">PUT email</text>
+  <text x="218" y="322" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">PUT email</text>
+  <rect x="400" y="214" width="160" height="132" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="288" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Server</text>
+  <rect x="632" y="186" width="220" height="188" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="742" y="236" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">State</text>
+  <text x="742" y="286" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">email = dev@</text>
+  <text x="742" y="322" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">unchanged by retry</text>
+  <path d="M328 280H400M560 280H632" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="444" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">Safe retries are easier when duplicate requests do not create duplicate effects</text>
+</svg>

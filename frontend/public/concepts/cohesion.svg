@@ -1,0 +1,20 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Cohesion</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Responsibilities inside one unit should belong clearly together</text>
+  <rect x="104" y="176" width="304" height="224" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="256" y="222" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">High cohesion</text>
+  <circle cx="202" cy="292" r="28" fill="#161B22" stroke="#39D353" stroke-width="3"/>
+  <circle cx="256" cy="292" r="28" fill="#161B22" stroke="#39D353" stroke-width="3"/>
+  <circle cx="310" cy="292" r="28" fill="#161B22" stroke="#39D353" stroke-width="3"/>
+  <path d="M230 292H228M284 292H282" stroke="#39D353" stroke-width="4" stroke-linecap="round"/>
+  <text x="256" y="356" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">one focused purpose</text>
+  <rect x="552" y="176" width="304" height="224" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="704" y="222" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Low cohesion</text>
+  <circle cx="636" cy="280" r="24" fill="#161B22" stroke="#D29922" stroke-width="3"/>
+  <circle cx="704" cy="326" r="24" fill="#161B22" stroke="#58A6FF" stroke-width="3"/>
+  <circle cx="772" cy="272" r="24" fill="#161B22" stroke="#F85149" stroke-width="3"/>
+  <text x="704" y="374" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="18">unrelated duties mixed</text>
+  <text x="480" y="456" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">A cohesive class is easy to name because its parts support the same job</text>
+</svg>

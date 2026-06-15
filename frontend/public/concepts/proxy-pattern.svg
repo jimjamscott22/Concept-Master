@@ -1,0 +1,16 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Proxy Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Place a stand-in object in front of the real service to control access</text>
+  <rect x="104" y="214" width="206" height="124" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="207" y="286" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Client</text>
+  <rect x="382" y="178" width="196" height="196" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="232" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Proxy</text>
+  <text x="480" y="278" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">auth</text>
+  <text x="480" y="312" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="17">cache</text>
+  <rect x="650" y="214" width="206" height="124" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="753" y="286" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Real object</text>
+  <path d="M310 276H382M578 276H650" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="444" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">The proxy preserves the interface while adding checks before forwarding calls</text>
+</svg>

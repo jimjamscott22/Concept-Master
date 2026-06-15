@@ -1,0 +1,15 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Signal</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">A limited asynchronous notification delivered to a process or thread</text>
+  <rect x="118" y="214" width="220" height="124" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="228" y="286" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Terminal</text>
+  <rect x="414" y="172" width="132" height="208" rx="18" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="480" y="242" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">OS</text>
+  <text x="480" y="294" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">SIGINT</text>
+  <rect x="622" y="214" width="220" height="124" rx="18" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="732" y="286" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">Process</text>
+  <path d="M338 276H414M546 276H622" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="444" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">A process may handle, ignore, or accept the default behavior for a signal</text>
+</svg>

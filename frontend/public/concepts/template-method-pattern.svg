@@ -1,0 +1,16 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Template Method Pattern</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Fix the algorithm order in a base class and let subclasses fill selected steps</text>
+  <rect x="178" y="176" width="604" height="92" rx="18" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="480" y="232" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="24" font-weight="700">importData(): read -> parse -> save</text>
+  <rect x="148" y="334" width="196" height="80" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <rect x="382" y="334" width="196" height="80" rx="16" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <rect x="616" y="334" width="196" height="80" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="246" y="382" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">CSV read()</text>
+  <text x="480" y="382" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">JSON parse()</text>
+  <text x="714" y="382" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="18">DB save()</text>
+  <path d="M246 334L376 268M480 334V268M714 334L584 268" stroke="#58A6FF" stroke-width="4" stroke-linecap="round"/>
+  <text x="480" y="464" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="20">The skeleton stays stable while subclasses customize the variable operations</text>
+</svg>

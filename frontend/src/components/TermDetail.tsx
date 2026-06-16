@@ -1,9 +1,9 @@
-import { isValidElement } from "react"
+import { isValidElement, useCallback, useEffect, useRef } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Highlight, themes } from "prism-react-renderer"
 import type { TermDetail } from "../types"
-import { ConceptVisual } from "./ConceptVisual"
+import { ConceptVisual, hasConceptVisual } from "./ConceptVisual"
 
 interface TermDetailProps {
   term: TermDetail
@@ -46,7 +46,68 @@ function CodeCard({ code, language, className = "mt-6" }: { code: string; langua
   )
 }
 
+type TermSection = "definition" | "code" | "visual"
+
+function isEditableTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) return false
+
+  const tagName = target.tagName
+  return (
+    tagName === "INPUT" ||
+    tagName === "TEXTAREA" ||
+    tagName === "SELECT" ||
+    target.isContentEditable
+  )
+}
+
 export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectRelated, onBack }: TermDetailProps) {
+  const definitionRef = useRef<HTMLElement | null>(null)
+  const codeRef = useRef<HTMLElement | null>(null)
+  const visualRef = useRef<HTMLDivElement | null>(null)
+  const hasCode = Boolean(term.example_code)
+  const hasVisual = hasConceptVisual(term.slug)
+
+  const scrollToSection = useCallback((section: TermSection) => {
+    const sectionRef = {
+      definition: definitionRef,
+      code: codeRef,
+      visual: visualRef,
+    }[section]
+
+    const target = sectionRef.current
+    if (!target) return
+
+    target.scrollIntoView({ block: "start", behavior: "smooth" })
+    target.focus({ preventScroll: true })
+  }, [])
+
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (!event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
+      if (isEditableTarget(event.target)) return
+
+      const sectionByKey: Record<string, TermSection> = {
+        "1": "definition",
+        "2": "code",
+        "3": "visual",
+      }
+      const section = sectionByKey[event.key]
+      if (!section) return
+
+      event.preventDefault()
+      scrollToSection(section)
+    }
+
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [scrollToSection])
+
+  const sectionLinks = [
+    { key: "definition" as const, label: "Definition", shortcut: "Alt+1", available: true },
+    { key: "code" as const, label: "Code", shortcut: "Alt+2", available: hasCode },
+    { key: "visual" as const, label: "Visual", shortcut: "Alt+3", available: hasVisual },
+  ].filter(section => section.available)
+
   return (
     <article className="fade-in max-w-3xl mx-auto px-6 py-6">
       <button onClick={onBack} className="md:hidden mb-4 text-muted text-sm hover:text-text transition-colors">← Back</button>
@@ -88,10 +149,37 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
         </div>
       )}
 
+      {sectionLinks.length > 1 && (
+        <nav
+          aria-label="Term sections"
+          className="sticky top-0 z-10 -mx-1 mb-5 flex gap-1 overflow-x-auto border-y border-border bg-bg/95 px-1 py-2 backdrop-blur"
+        >
+          {sectionLinks.map(section => (
+            <button
+              key={section.key}
+              type="button"
+              onClick={() => scrollToSection(section.key)}
+              className="flex flex-shrink-0 items-center gap-2 rounded-md border border-border bg-surface/70 px-2.5 py-1.5
+                         text-xs text-muted transition-colors hover:border-accent hover:text-accent
+                         focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
+            >
+              <span>{section.label}</span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-muted/80">{section.shortcut}</span>
+            </button>
+          ))}
+        </nav>
+      )}
+
       {/* Definition */}
-      <div className="prose prose-invert max-w-none text-sm leading-relaxed
-                      [&_table]:border-collapse [&_th]:border [&_th]:border-border [&_th]:px-3 [&_th]:py-1
-                      [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-1">
+      <section
+        id="term-section-definition"
+        ref={definitionRef}
+        tabIndex={-1}
+        className="scroll-mt-16 focus:outline-none"
+      >
+        <div className="prose prose-invert max-w-none text-sm leading-relaxed
+                        [&_table]:border-collapse [&_th]:border [&_th]:border-border [&_th]:px-3 [&_th]:py-1
+                        [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-1">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           components={{
@@ -128,14 +216,31 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
         >
           {term.definition}
         </ReactMarkdown>
-      </div>
+        </div>
+      </section>
 
       {/* Code block */}
-      {term.example_code && (
-        <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
+      {hasCode && term.example_code && (
+        <section
+          id="term-section-code"
+          ref={codeRef}
+          tabIndex={-1}
+          className="scroll-mt-16 focus:outline-none"
+        >
+          <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
+        </section>
       )}
 
-      <ConceptVisual slug={term.slug} name={term.name} />
+      {hasVisual && (
+        <div
+          id="term-section-visual"
+          ref={visualRef}
+          tabIndex={-1}
+          className="scroll-mt-16 focus:outline-none"
+        >
+          <ConceptVisual slug={term.slug} name={term.name} />
+        </div>
+      )}
 
       {/* Tags */}
       {term.tags.length > 0 && (

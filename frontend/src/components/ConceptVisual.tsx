@@ -1,4 +1,14 @@
-const conceptVisuals: Record<string, { src: string; alt: string; caption: string }> = {
+/* eslint-disable react-refresh/only-export-components */
+import { useEffect, useRef, useState, type MouseEvent } from "react"
+
+export interface ConceptVisualMeta {
+  src: string
+  alt: string
+  caption?: string
+  note?: string
+}
+
+const conceptVisuals: Record<string, ConceptVisualMeta> = {
   acid: {
     src: "/concepts/acid.svg",
     alt: "Diagram showing the four ACID properties — Atomicity, Consistency, Isolation, Durability — around a central transaction.",
@@ -396,26 +406,121 @@ interface ConceptVisualProps {
   name: string
 }
 
+export function getConceptVisual(slug: string): ConceptVisualMeta | undefined {
+  return conceptVisuals[slug]
+}
+
+export function hasConceptVisual(slug: string): boolean {
+  return Boolean(getConceptVisual(slug))
+}
+
 export function ConceptVisual({ slug, name }: ConceptVisualProps) {
-  const visual = conceptVisuals[slug]
+  const visual = getConceptVisual(slug)
+  const [isZoomOpen, setIsZoomOpen] = useState(false)
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!isZoomOpen || !dialog) return
+
+    if (!dialog.open) {
+      dialog.showModal()
+    }
+
+    const handleClose = () => setIsZoomOpen(false)
+    dialog.addEventListener("close", handleClose)
+
+    return () => {
+      dialog.removeEventListener("close", handleClose)
+      if (dialog.open) {
+        dialog.close()
+      }
+    }
+  }, [isZoomOpen])
 
   if (!visual) return null
+
+  const title = `${name} at a glance`
+
+  function handleBackdropClick(event: MouseEvent<HTMLDialogElement>) {
+    if (event.target === event.currentTarget) {
+      setIsZoomOpen(false)
+    }
+  }
 
   return (
     <section className="mt-6 rounded-xl border border-border bg-surface/70 p-4">
       <div className="mb-3 flex items-center justify-between gap-3">
         <div>
           <p className="text-xs uppercase tracking-wider text-muted">Visual Representation</p>
-          <p className="text-sm text-text">{name} at a glance</p>
+          <p className="text-sm text-text">{title}</p>
         </div>
       </div>
-      <img
-        src={visual.src}
-        alt={visual.alt}
-        className="w-full rounded-lg border border-border bg-bg object-cover"
-        loading="lazy"
-      />
-      <p className="mt-3 text-xs text-muted">{visual.caption}</p>
+      <button
+        type="button"
+        onClick={() => setIsZoomOpen(true)}
+        className="group relative block w-full overflow-hidden rounded-lg border border-border bg-bg text-left
+                   focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
+        aria-label={`Open larger visual diagram for ${name}`}
+      >
+        <img
+          src={visual.src}
+          alt={visual.alt}
+          className="w-full object-cover transition-transform duration-200 group-hover:scale-[1.01]"
+          loading="lazy"
+        />
+        <span className="absolute right-3 top-3 rounded-md border border-border bg-bg/90 px-2 py-1
+                         font-mono text-[10px] uppercase tracking-wider text-muted opacity-0 shadow-sm
+                         transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+          Zoom
+        </span>
+      </button>
+      {visual.caption && <p className="mt-3 text-xs text-muted">{visual.caption}</p>}
+      {visual.note && (
+        <p className="mt-2 rounded-md border border-border bg-code/60 px-3 py-2 text-xs leading-relaxed text-muted">
+          {visual.note}
+        </p>
+      )}
+
+      <dialog
+        ref={dialogRef}
+        onClick={handleBackdropClick}
+        className="w-[min(92vw,72rem)] max-w-6xl rounded-xl border border-border bg-surface p-0 text-text shadow-2xl
+                   backdrop:bg-bg/80 backdrop:backdrop-blur-sm"
+        aria-label={`${name} visual diagram expanded view`}
+      >
+        <div className="flex max-h-[90vh] flex-col">
+          <div className="flex items-center justify-between gap-4 border-b border-border px-4 py-3">
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-wider text-muted">Visual Representation</p>
+              <p className="truncate text-sm font-medium text-text">{title}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsZoomOpen(false)}
+              className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md border border-border
+                         font-mono text-lg leading-none text-muted transition-colors hover:border-accent hover:text-accent
+                         focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface"
+              aria-label="Close expanded visual diagram"
+            >
+              ×
+            </button>
+          </div>
+          <div className="overflow-auto bg-bg p-4">
+            <img
+              src={visual.src}
+              alt={visual.alt}
+              className="mx-auto max-h-[70vh] w-full max-w-none rounded-lg border border-border bg-bg object-contain"
+            />
+          </div>
+          {(visual.caption || visual.note) && (
+            <div className="border-t border-border px-4 py-3 text-xs leading-relaxed text-muted">
+              {visual.caption && <p>{visual.caption}</p>}
+              {visual.note && <p className="mt-2">{visual.note}</p>}
+            </div>
+          )}
+        </div>
+      </dialog>
     </section>
   )
 }

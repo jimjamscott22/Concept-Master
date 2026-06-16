@@ -209,20 +209,20 @@ The glossary now includes a diagram system for concept entries in the detail vie
 
 - Visuals are stored as lightweight SVG assets in `frontend/public/concepts`
 - The frontend maps term slugs to diagrams in `frontend/src/components/ConceptVisual.tsx`
-- Matching terms automatically render a `Visual Representation` panel below the main content in the detail view
+- Matching terms automatically render a `Visual Representation` panel below the main content in the detail view, plus a compact visual badge in the term list
+- Diagrams can be opened in a larger modal view from the detail panel
+- `Alt+1`, `Alt+2`, and `Alt+3` jump between definition, code example, and visual sections when available
 - SVG was chosen so diagrams stay sharp, load quickly, and remain easy to maintain in-repo
+- Use `scripts/new_concept_visual.py` and `docs/concept-visuals.md` to create future diagrams consistently
 
 ---
 
 ## Next Steps
 
-Suggested polish tasks for the new concept-visual system:
+Suggested future improvements:
 
-- Add click-to-expand or modal zoom for larger diagram viewing
-- Show a small visual badge on term cards when a term has an attached diagram
-- Add keyboard navigation support for jumping between definition, code example, and visual sections
-- Add a reusable template or generator workflow for creating future SVG concept diagrams consistently
-- Consider optional per-term captions or learning notes below each diagram
+- Add more concept diagrams for glossary terms that do not have visuals yet
+- Consider a lightweight validation script that checks every registry entry has a matching SVG asset and useful alt text
 
 ---
 

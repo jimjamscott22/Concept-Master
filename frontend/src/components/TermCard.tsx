@@ -1,4 +1,5 @@
 import type { Term } from "../types"
+import { hasConceptVisual } from "./ConceptVisual"
 
 interface TermCardProps {
   term: Term
@@ -9,6 +10,7 @@ interface TermCardProps {
 
 export function TermCard({ term, isSelected, onClick, onToggleFavorite }: TermCardProps) {
   const preview = term.definition.replace(/[*_`#[\]]/g, "").slice(0, 120)
+  const hasVisual = hasConceptVisual(term.slug)
 
   return (
     <div
@@ -23,13 +25,24 @@ export function TermCard({ term, isSelected, onClick, onToggleFavorite }: TermCa
           <h3 className="font-mono font-medium text-sm text-text truncate">{term.name}</h3>
           <p className="text-xs text-muted mt-0.5 leading-relaxed line-clamp-2">{preview}…</p>
         </div>
-        <button
-          onClick={e => { e.stopPropagation(); onToggleFavorite() }}
-          className={`flex-shrink-0 text-sm transition-colors
-            ${term.is_favorite ? "text-green" : "text-muted hover:text-green"}`}
-        >
-          {term.is_favorite ? "★" : "☆"}
-        </button>
+        <div className="flex flex-shrink-0 items-center gap-1.5">
+          {hasVisual && (
+            <span
+              title="Includes concept visual"
+              aria-label="Includes concept visual"
+              className="rounded border border-accent/30 bg-accent/10 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent"
+            >
+              Visual
+            </span>
+          )}
+          <button
+            onClick={e => { e.stopPropagation(); onToggleFavorite() }}
+            className={`text-sm transition-colors
+              ${term.is_favorite ? "text-green" : "text-muted hover:text-green"}`}
+          >
+            {term.is_favorite ? "★" : "☆"}
+          </button>
+        </div>
       </div>
       {term.categories.length > 0 && (
         <div className="flex flex-wrap gap-1 mt-2">

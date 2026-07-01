@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">AI Coding Agent concept diagram</title>
+  <desc id="desc">The agentic loop: read, plan, act, observe, repeating until the goal is met.</desc>
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">AI Coding Agent</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">The agentic loop repeats until the goal is met</text>
+
+  <text x="480" y="176" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="16">Goal: "add input validation and a test"</text>
+
+  <rect x="120" y="212" width="180" height="92" rx="16" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="210" y="252" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Read</text>
+  <text x="210" y="278" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="14">inspect files, tests</text>
+
+  <rect x="390" y="212" width="180" height="92" rx="16" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="480" y="252" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Plan</text>
+  <text x="480" y="278" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="14">break into steps</text>
+
+  <rect x="660" y="212" width="180" height="92" rx="16" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="750" y="252" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Act</text>
+  <text x="750" y="278" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="14">call a tool</text>
+
+  <rect x="390" y="372" width="180" height="92" rx="16" fill="#0D1117" stroke="#F85149" stroke-width="3"/>
+  <text x="480" y="412" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Observe</text>
+  <text x="480" y="438" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="14">read the result</text>
+
+  <path d="M300 258H390" stroke="#8B949E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M378 250l14 8-14 8" stroke="#8B949E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M570 258H660" stroke="#8B949E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M648 250l14 8-14 8" stroke="#8B949E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M750 304V372" stroke="#8B949E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M742 360l8 14 8-14" stroke="#8B949E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M660 418H570" stroke="#8B949E" stroke-width="4" stroke-linecap="round"/>
+  <path d="M582 410l-14 8 14 8" stroke="#8B949E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M390 418C300 418 210 390 210 304" stroke="#8B949E" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M202 316l8-16 12 14" stroke="#8B949E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <text x="480" y="498" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Loops until the tests pass, then reports back — asking permission before risky actions</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Context Window concept diagram</title>
+  <desc id="desc">A fixed token budget filled by system prompt, instructions, history, and file content, with older content pushed out once the limit is reached.</desc>
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="98" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="32" font-weight="700">Context Window</text>
+  <text x="72" y="132" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Everything the model sees shares one fixed token budget</text>
+
+  <rect x="72" y="220" width="720" height="88" rx="12" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
+  <rect x="72" y="220" width="90" height="88" fill="#58A6FF"/>
+  <rect x="162" y="220" width="100" height="88" fill="#39D353"/>
+  <rect x="262" y="220" width="180" height="88" fill="#D29922"/>
+  <rect x="442" y="220" width="230" height="88" fill="#BC8CFF"/>
+  <rect x="672" y="220" width="120" height="88" fill="#161B22" stroke="#30363D" stroke-dasharray="6 6"/>
+  <text x="732" y="270" text-anchor="middle" fill="#8B949E" font-family="JetBrains Mono, monospace" font-size="14">free</text>
+
+  <line x1="792" y1="200" x2="792" y2="330" stroke="#F85149" stroke-width="3" stroke-dasharray="4 6"/>
+  <text x="792" y="188" text-anchor="middle" fill="#F85149" font-family="JetBrains Mono, monospace" font-size="14">limit</text>
+
+  <text x="117" y="336" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="13">system</text>
+  <text x="212" y="336" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="13">instructions</text>
+  <text x="352" y="336" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="13">history</text>
+  <text x="557" y="336" text-anchor="middle" fill="#BC8CFF" font-family="JetBrains Mono, monospace" font-size="13">files / tool output</text>
+
+  <path d="M262 372C400 372 500 372 672 372" stroke="#8B949E" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M660 364l14 8-14 8" stroke="#8B949E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="467" y="398" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="15">as the session grows, the oldest content is summarized or dropped to stay under the limit</text>
+
+  <text x="440" y="452" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Keep working context lean — the budget is shared by everything the model reads and writes</text>
+</svg>

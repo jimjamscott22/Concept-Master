@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Model Context Protocol (MCP) concept diagram</title>
+  <desc id="desc">One MCP client connecting through a standard JSON-RPC protocol to multiple independent MCP servers such as filesystem, database, and GitHub.</desc>
+  <rect width="960" height="540" rx="24" fill="#0D1117"/>
+  <rect x="32" y="32" width="896" height="476" rx="20" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="72" y="94" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="28" font-weight="700">Model Context Protocol (MCP)</text>
+  <text x="72" y="126" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">One standard protocol, many independent tool servers</text>
+
+  <rect x="88" y="220" width="220" height="110" rx="16" fill="#0D1117" stroke="#58A6FF" stroke-width="3"/>
+  <text x="198" y="266" text-anchor="middle" fill="#58A6FF" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700">Agent</text>
+  <text x="198" y="292" text-anchor="middle" fill="#E6EDF3" font-family="IBM Plex Sans, sans-serif" font-size="14">MCP client</text>
+
+  <rect x="620" y="150" width="252" height="80" rx="14" fill="#0D1117" stroke="#39D353" stroke-width="3"/>
+  <text x="746" y="184" text-anchor="middle" fill="#39D353" font-family="JetBrains Mono, monospace" font-size="17" font-weight="700">Filesystem Server</text>
+  <text x="746" y="208" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="12">MCP server</text>
+
+  <rect x="620" y="248" width="252" height="80" rx="14" fill="#0D1117" stroke="#D29922" stroke-width="3"/>
+  <text x="746" y="282" text-anchor="middle" fill="#D29922" font-family="JetBrains Mono, monospace" font-size="17" font-weight="700">Database Server</text>
+  <text x="746" y="306" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="12">MCP server</text>
+
+  <rect x="620" y="346" width="252" height="80" rx="14" fill="#0D1117" stroke="#BC8CFF" stroke-width="3"/>
+  <text x="746" y="380" text-anchor="middle" fill="#BC8CFF" font-family="JetBrains Mono, monospace" font-size="17" font-weight="700">GitHub Server</text>
+  <text x="746" y="404" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="12">MCP server</text>
+
+  <path d="M308 258C440 258 480 190 620 190" stroke="#8B949E" stroke-width="3" fill="none"/>
+  <path d="M308 275H620" stroke="#8B949E" stroke-width="3" fill="none"/>
+  <path d="M308 292C440 292 480 386 620 386" stroke="#8B949E" stroke-width="3" fill="none"/>
+
+  <rect x="380" y="252" width="112" height="46" rx="8" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <text x="436" y="281" text-anchor="middle" fill="#E6EDF3" font-family="JetBrains Mono, monospace" font-size="14">JSON-RPC</text>
+
+  <text x="480" y="466" text-anchor="middle" fill="#8B949E" font-family="IBM Plex Sans, sans-serif" font-size="18">Any MCP-compliant client can use any MCP server — no custom integration per pair</text>
+</svg>

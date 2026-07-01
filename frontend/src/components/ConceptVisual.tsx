@@ -19,6 +19,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing a client calling an adapter that translates requests for a legacy API.",
     caption: "Visual: an adapter changes the interface while preserving the wrapped object's behavior.",
   },
+  "ai-coding-agent": {
+    src: "/concepts/ai-coding-agent.svg",
+    alt: "Diagram of the agentic loop: read the codebase, plan steps, call a tool to act, observe the result, and repeat until the goal is met.",
+    caption: "Visual: an agent repeats read, plan, act, observe until the task is done.",
+  },
   array: {
     src: "/concepts/array.svg",
     alt: "Diagram showing indexed array slots and constant-time access by index.",
@@ -73,6 +78,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/content-security-policy.svg",
     alt: "Diagram showing a web page request checked by a Content Security Policy before trusted or blocked scripts load.",
     caption: "Visual: CSP restricts which sources a browser may load or execute.",
+  },
+  "context-window": {
+    src: "/concepts/context-window.svg",
+    alt: "Diagram of a fixed token budget bar filled by system prompt, instructions, history, and file content, with older content pushed out once the limit is reached.",
+    caption: "Visual: everything the model sees shares one fixed token budget.",
   },
   coupling: {
     src: "/concepts/coupling.svg",
@@ -229,6 +239,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing retained references causing memory usage to grow over time.",
     caption: "Visual: memory leaks happen when unneeded data stays referenced.",
   },
+  "model-context-protocol": {
+    src: "/concepts/model-context-protocol.svg",
+    alt: "Diagram showing one MCP client connecting through a standard JSON-RPC protocol to multiple independent MCP servers such as filesystem, database, and GitHub.",
+    caption: "Visual: MCP lets one client talk to many tool servers through a single standard protocol.",
+  },
   "model-view-controller": {
     src: "/concepts/model-view-controller.svg",
     alt: "Diagram showing Model, View, and Controller boxes connected to separate application state, presentation, and coordination responsibilities.",
@@ -378,6 +393,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/tls.svg",
     alt: "Diagram showing a TLS handshake, certificate verification, and encrypted session.",
     caption: "Visual: TLS secures traffic through identity checks and encryption.",
+  },
+  "tool-use": {
+    src: "/concepts/tool-use.svg",
+    alt: "Diagram showing the model requesting a tool call with structured arguments, the application executing it, and the result being returned to the model.",
+    caption: "Visual: the model only requests a tool call; the surrounding app decides whether to run it.",
   },
   transaction: {
     src: "/concepts/transaction.svg",

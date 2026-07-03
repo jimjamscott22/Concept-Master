@@ -1,0 +1,15 @@
+.git
+.claude
+.cursor
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.env
+*.env
+node_modules
+frontend/node_modules
+frontend/dist
+frontend/.vite
+.worktrees

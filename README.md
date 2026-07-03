@@ -127,6 +127,18 @@ The in-app CRUD endpoints continue to work: every POST/PUT/DELETE/PATCH also wri
 
 ## Running the App
 
+### Docker Compose
+
+The quickest full-stack path is Docker Compose, which starts MariaDB, the FastAPI backend, and the Vite frontend together:
+
+```bash
+docker compose up --build
+```
+
+Then open **[http://localhost:5173](http://localhost:5173)**. The backend is also exposed at **[http://localhost:8000](http://localhost:8000)**, and MariaDB is exposed on host port `3307` by default to avoid colliding with a local database. See [docs/docker-compose-setup.md](docs/docker-compose-setup.md) for environment overrides and reset commands.
+
+### Local development
+
 Open **two terminals** — one for the backend and one for the frontend.
 
 **Terminal 1 — backend API (port 8000):**

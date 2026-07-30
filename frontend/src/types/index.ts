@@ -17,6 +17,15 @@ export interface TermSummary {
   slug: string
 }
 
+export interface TermMapNode {
+  id: number
+  name: string
+  slug: string
+  is_favorite: boolean
+  categories: Category[]
+  related_count: number
+}
+
 export interface Term {
   id: number
   name: string

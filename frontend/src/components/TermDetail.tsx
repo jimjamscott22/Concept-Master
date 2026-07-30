@@ -1,9 +1,10 @@
-import { isValidElement, useCallback, useEffect, useRef } from "react"
+import { isValidElement, useEffect, useState } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
-import { Highlight, themes } from "prism-react-renderer"
+import { Highlight } from "prism-react-renderer"
 import type { TermDetail } from "../types"
 import { ConceptVisual, hasConceptVisual } from "./ConceptVisual"
+import { conceptMasterPrismTheme } from "../lib/prismTheme"
 
 interface TermDetailProps {
   term: TermDetail
@@ -14,268 +15,193 @@ interface TermDetailProps {
   onBack: () => void
 }
 
-function CodeCard({ code, language, className = "mt-6" }: { code: string; language?: string; className?: string }) {
-  const resolvedLanguage = (language ?? "text").toLowerCase()
+type Tab = "def" | "code" | "visual"
 
+function CodeCard({ code, language }: { code: string; language: string }) {
   return (
-    <div className={className}>
-      <p className="text-xs text-muted mb-2 font-mono uppercase tracking-wider">
-        {resolvedLanguage}
-      </p>
-      <Highlight
-        theme={themes.vsDark}
-        code={code}
-        language={resolvedLanguage}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={`${className} rounded-lg p-4 overflow-x-auto text-xs leading-relaxed`}
-            style={{ ...style, background: "#1c2128" }}
-          >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-    </div>
+    <Highlight theme={conceptMasterPrismTheme} code={code} language={language.toLowerCase()}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre
+          className={`${className} bg-codeBg border border-line rounded-[10px] p-[20px_22px] overflow-x-auto text-[13.5px] leading-[1.75]`}
+          style={style}
+        >
+          {tokens.map((line, i) => (
+            <div key={i} {...getLineProps({ line })}>
+              {line.map((token, key) => <span key={key} {...getTokenProps({ token })} />)}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
   )
 }
-
-type TermSection = "definition" | "code" | "visual"
 
 function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) return false
-
-  const tagName = target.tagName
-  return (
-    tagName === "INPUT" ||
-    tagName === "TEXTAREA" ||
-    tagName === "SELECT" ||
-    target.isContentEditable
-  )
+  return target.tagName === "INPUT" || target.tagName === "TEXTAREA" ||
+    target.tagName === "SELECT" || target.isContentEditable
 }
 
 export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectRelated, onBack }: TermDetailProps) {
-  const definitionRef = useRef<HTMLElement | null>(null)
-  const codeRef = useRef<HTMLElement | null>(null)
-  const visualRef = useRef<HTMLDivElement | null>(null)
   const hasCode = Boolean(term.example_code)
   const hasVisual = hasConceptVisual(term.slug)
+  const [tab, setTab] = useState<Tab>("def")
 
-  const scrollToSection = useCallback((section: TermSection) => {
-    const sectionRef = {
-      definition: definitionRef,
-      code: codeRef,
-      visual: visualRef,
-    }[section]
-
-    const target = sectionRef.current
-    if (!target) return
-
-    target.scrollIntoView({ block: "start", behavior: "smooth" })
-    target.focus({ preventScroll: true })
-  }, [])
+  // Reset to Definition whenever the selected term changes (spec: "resets the content tab to Definition").
+  useEffect(() => { setTab("def") }, [term.slug])
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (!event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return
       if (isEditableTarget(event.target)) return
-
-      const sectionByKey: Record<string, TermSection> = {
-        "1": "definition",
-        "2": "code",
-        "3": "visual",
-      }
-      const section = sectionByKey[event.key]
-      if (!section) return
-
+      const byKey: Record<string, Tab> = { "1": "def", "2": "code", "3": "visual" }
+      const next = byKey[event.key]
+      if (!next) return
+      if (next === "code" && !hasCode) return
+      if (next === "visual" && !hasVisual) return
       event.preventDefault()
-      scrollToSection(section)
+      setTab(next)
     }
-
     window.addEventListener("keydown", handler)
     return () => window.removeEventListener("keydown", handler)
-  }, [scrollToSection])
+  }, [hasCode, hasVisual])
 
-  const sectionLinks = [
-    { key: "definition" as const, label: "Definition", shortcut: "Alt+1", available: true },
-    { key: "code" as const, label: "Code", shortcut: "Alt+2", available: hasCode },
-    { key: "visual" as const, label: "Visual", shortcut: "Alt+3", available: hasVisual },
-  ].filter(section => section.available)
+  const tabs: { key: Tab; label: string; shortcut: string; available: boolean }[] = [
+    { key: "def",    label: "Definition", shortcut: "ALT+1", available: true },
+    { key: "code",   label: "Code",       shortcut: "ALT+2", available: hasCode },
+    { key: "visual", label: "Diagram",    shortcut: "ALT+3", available: hasVisual },
+  ]
 
   return (
-    <article className="fade-in max-w-3xl mx-auto px-6 py-6">
-      <button onClick={onBack} className="md:hidden mb-4 text-muted text-sm hover:text-text transition-colors">← Back</button>
-      {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <h2 className="font-mono font-bold text-xl text-text">{term.name}</h2>
-        <div className="flex items-center gap-2">
+    <article className="fade-in max-w-[900px] mx-0 px-[44px] pt-[34px] pb-[90px]">
+      <button onClick={onBack} className="md:hidden mb-4 text-fg3 text-sm hover:text-fg transition-colors">← Back</button>
+
+      {/* Metadata above title */}
+      <div className="flex flex-wrap gap-2 mb-[14px]">
+        {term.categories.map(c => (
+          <span key={c.id} className="text-[11px] tracking-[.12em] font-semibold rounded uppercase px-[9px] py-[3px] bg-accent text-bg2">
+            {c.name}
+          </span>
+        ))}
+        {term.tags.map(t => (
+          <span key={t.id} className="text-[11.5px] text-tagFg bg-tagBg border border-tagLine rounded px-[9px] py-[3px]">
+            #{t.name}
+          </span>
+        ))}
+        {hasVisual && (
+          <span className="text-[10.5px] tracking-[.1em] text-fg3 border border-dashed border-line rounded px-2 py-[3px] uppercase">
+            Has diagram
+          </span>
+        )}
+      </div>
+
+      <div className="flex items-start justify-between gap-6 mb-4">
+        <h1 className="text-[34px] leading-[1.15] tracking-[-0.025em] font-bold text-fg m-0">{term.name}</h1>
+        <div className="flex-none flex items-center gap-[7px]">
           <button
             onClick={onToggleFavorite}
-            className={`text-lg transition-colors ${term.is_favorite ? "text-green" : "text-muted hover:text-green"}`}
+            className={`w-8 h-8 rounded-md border border-line bg-bg2 ${term.is_favorite ? "text-accent" : "text-fg3"}`}
           >
-            {term.is_favorite ? "★" : "☆"}
+            ★
           </button>
-          <button
-            onClick={onEdit}
-            className="text-xs px-3 py-1.5 border border-border rounded-md text-muted
-                       hover:border-accent hover:text-accent transition-colors"
-          >
+          <button onClick={onEdit} className="h-8 px-[14px] rounded-md border border-line bg-bg2 text-fg2 text-[12.5px] hover:text-fg hover:border-accent transition-colors">
             Edit
           </button>
-          <button
-            onClick={onDelete}
-            className="text-xs px-3 py-1.5 border border-border rounded-md text-muted
-                       hover:border-red-500 hover:text-red-400 transition-colors"
-          >
+          <button onClick={onDelete} className="h-8 px-[14px] rounded-md border border-line bg-bg2 text-fg3 text-[12.5px] hover:text-fg transition-colors">
             Delete
           </button>
         </div>
       </div>
 
-      {/* Category badges */}
-      {term.categories.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {term.categories.map(c => (
-            <span key={c.id} className="text-xs bg-accent/10 text-accent border border-accent/20 px-2 py-0.5 rounded-full">
-              {c.name}
-            </span>
-          ))}
-        </div>
-      )}
+      {/* Tab bar */}
+      <div className="flex gap-1 border-b border-line mt-[26px]">
+        {tabs.filter(t => t.available).map(t => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={`px-4 py-[11px] text-[12.5px] tracking-[.04em] -mb-px border-b-2 transition-colors
+              ${tab === t.key ? "text-fg font-semibold border-accent" : "text-fg3 border-transparent hover:text-fg"}`}
+          >
+            {t.label} <span className="opacity-45 text-[10.5px] ml-2">{t.shortcut}</span>
+          </button>
+        ))}
+      </div>
 
-      {sectionLinks.length > 1 && (
-        <nav
-          aria-label="Term sections"
-          className="sticky top-0 z-10 -mx-1 mb-5 flex gap-1 overflow-x-auto border-y border-border bg-bg/95 px-1 py-2 backdrop-blur"
-        >
-          {sectionLinks.map(section => (
-            <button
-              key={section.key}
-              type="button"
-              onClick={() => scrollToSection(section.key)}
-              className="flex flex-shrink-0 items-center gap-2 rounded-md border border-border bg-surface/70 px-2.5 py-1.5
-                         text-xs text-muted transition-colors hover:border-accent hover:text-accent
-                         focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-bg"
-            >
-              <span>{section.label}</span>
-              <span className="font-mono text-[10px] uppercase tracking-wider text-muted/80">{section.shortcut}</span>
-            </button>
-          ))}
-        </nav>
-      )}
-
-      {/* Definition */}
-      <section
-        id="term-section-definition"
-        ref={definitionRef}
-        tabIndex={-1}
-        className="scroll-mt-16 focus:outline-none"
-      >
-        <div className="prose prose-invert max-w-none text-sm leading-relaxed
-                        [&_table]:border-collapse [&_th]:border [&_th]:border-border [&_th]:px-3 [&_th]:py-1
-                        [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-1">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          components={{
-            pre: ({ children }) => {
-              const child = Array.isArray(children) ? children[0] : children
-
-              if (!isValidElement<{ className?: string; children?: unknown }>(child)) {
-                return <pre>{children}</pre>
-              }
-
-              const languageMatch = /language-([a-z0-9-]+)/i.exec(child.props.className ?? "")
-              const language = languageMatch?.[1] ?? "text"
-
-              return (
-                <CodeCard
-                  code={String(child.props.children ?? "").replace(/\n$/, "")}
-                  language={language}
-                  className="my-4"
-                />
-              )
-            },
-            code: ({ className, children, ...props }) => {
-              if (!className?.startsWith("language-")) {
-                return (
-                  <code className="font-mono text-accent bg-code px-1 rounded" {...props}>
-                    {children}
-                  </code>
-                )
-              }
-              // Preserve language-* class for fenced blocks so the `pre` renderer can parse language metadata.
-              return <code className={className} {...props}>{children}</code>
-            },
-          }}
-        >
-          {term.definition}
-        </ReactMarkdown>
-        </div>
-      </section>
-
-      {/* Code block */}
-      {hasCode && term.example_code && (
-        <section
-          id="term-section-code"
-          ref={codeRef}
-          tabIndex={-1}
-          className="scroll-mt-16 focus:outline-none"
-        >
-          <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
-        </section>
-      )}
-
-      {hasVisual && (
+      {/* Definition tab */}
+      {tab === "def" && (
         <div
-          id="term-section-visual"
-          ref={visualRef}
-          tabIndex={-1}
-          className="scroll-mt-16 focus:outline-none"
+          className="pt-[26px] max-w-[68ch] text-fg"
+          style={{ fontFamily: "var(--body)", fontSize: "var(--bodysize)", lineHeight: "var(--bodylh)" }}
         >
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              pre: ({ children }) => {
+                const child = Array.isArray(children) ? children[0] : children
+                if (!isValidElement<{ className?: string; children?: unknown }>(child)) return <pre>{children}</pre>
+                const languageMatch = /language-([a-z0-9-]+)/i.exec(child.props.className ?? "")
+                return (
+                  <div className="my-5">
+                    <CodeCard code={String(child.props.children ?? "").replace(/\n$/, "")} language={languageMatch?.[1] ?? "text"} />
+                  </div>
+                )
+              },
+              code: ({ className, children, ...props }) => {
+                if (!className?.startsWith("language-")) {
+                  return (
+                    <code className="bg-bg2 border border-line text-accent rounded px-[5px] py-px text-[0.86em]" style={{ fontFamily: "var(--font-mono, monospace)" }} {...props}>
+                      {children}
+                    </code>
+                  )
+                }
+                return <code className={className} {...props}>{children}</code>
+              },
+            }}
+          >
+            {term.definition}
+          </ReactMarkdown>
+
+          {term.related_terms.length > 0 && (
+            <div className="mt-[34px] pt-5 border-t border-line">
+              <p className="text-[11px] tracking-[.14em] text-fg3 uppercase mb-[10px]">Related</p>
+              <div className="flex flex-wrap gap-2">
+                {term.related_terms.map(r => (
+                  <button
+                    key={r.id}
+                    onClick={() => onSelectRelated(r.slug)}
+                    className="text-[12.5px] text-fg2 bg-bg2 border border-line rounded-md px-3 py-[6px] hover:border-accent hover:text-fg transition-colors"
+                  >
+                    {r.name} <span className="text-fg3">→</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Code tab */}
+      {tab === "code" && hasCode && term.example_code && (
+        <div className="pt-[22px]">
+          <div className="flex gap-[6px] mb-3">
+            <span className="px-[13px] py-[6px] rounded-md text-xs border border-accent bg-bg3 text-fg">
+              {term.code_lang ?? "text"}
+            </span>
+          </div>
+          <CodeCard code={term.example_code} language={term.code_lang ?? "text"} />
+        </div>
+      )}
+
+      {/* Diagram tab — real ConceptVisual content, not the spec's placeholder bars */}
+      {tab === "visual" && hasVisual && (
+        <div className="pt-[22px]">
           <ConceptVisual slug={term.slug} name={term.name} />
         </div>
       )}
 
-      {/* Tags */}
-      {term.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mt-6">
-          {term.tags.map(t => (
-            <span key={t.id} className="text-xs bg-code border border-border text-muted px-2 py-0.5 rounded font-mono">
-              #{t.name}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Related terms */}
-      {term.related_terms.length > 0 && (
-        <div className="mt-6">
-          <p className="text-xs text-muted uppercase tracking-wider mb-2">Related</p>
-          <div className="flex flex-wrap gap-2">
-            {term.related_terms.map(r => (
-              <button
-                key={r.id}
-                onClick={() => onSelectRelated(r.slug)}
-                className="text-sm text-accent hover:underline font-mono"
-              >
-                {r.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Meta */}
-      <p className="text-xs text-muted mt-8 font-mono">
+      <p className="text-xs text-fg3 mt-8">
         Added {new Date(term.created_at).toLocaleDateString()}
-        {term.updated_at !== term.created_at &&
-          ` · Updated ${new Date(term.updated_at).toLocaleDateString()}`}
+        {term.updated_at !== term.created_at && ` · Updated ${new Date(term.updated_at).toLocaleDateString()}`}
       </p>
     </article>
   )

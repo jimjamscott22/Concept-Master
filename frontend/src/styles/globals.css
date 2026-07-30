@@ -1,81 +1,128 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Default theme (github-dark) */
+/* ── Themes ──────────────────────────────────────────────────────────────── */
+/* Midnight (dark) — default */
 :root,
-[data-theme="github-dark"] {
+[data-theme="midnight"] {
   color-scheme: dark;
-  --c-bg:      13 17 23;
-  --c-surface: 22 27 34;
-  --c-border:  48 54 61;
-  --c-text:    230 237 243;
-  --c-muted:   139 148 158;
-  --c-accent:  88 166 255;
-  --c-green:   57 211 83;
-  --c-code:    28 33 40;
+  --c-bg:      15  18  22;
+  --c-bg2:     21  26  33;
+  --c-bg3:     28  35  44;
+  --c-line:    43  51  62;
+  --c-fg:     233 238 244;
+  --c-fg2:    169 182 196;
+  --c-fg3:    124 138 153;
+  --c-accent: 124 196 255;
+  --c-accent2: 154 230 180;
+  --c-sel:     39  64  90;
+  --c-codebg:  10  13  17;
+  --c-tagbg:   29  39  51;
+  --c-tagfg:  159 208 255;
+  --c-tagline: 47  67  86;
+  --c-kw:  #82aaff; --c-str: #c3e88d; --c-num: #f78c6c;
+  --c-com: #6b7c8f; --c-fn:  #ffcb6b; --c-txt: #dbe4ee;
 }
 
-[data-theme="dracula"] {
-  color-scheme: dark;
-  --c-bg:      40 42 54;
-  --c-surface: 33 34 44;
-  --c-border:  68 71 90;
-  --c-text:    248 248 242;
-  --c-muted:   139 139 165;
-  --c-accent:  189 147 249;
-  --c-green:   80 250 123;
-  --c-code:    30 31 40;
-}
-
-[data-theme="nord"] {
-  color-scheme: dark;
-  --c-bg:      46 52 64;
-  --c-surface: 59 66 82;
-  --c-border:  76 86 106;
-  --c-text:    236 239 244;
-  --c-muted:   136 144 161;
-  --c-accent:  136 192 208;
-  --c-green:   163 190 140;
-  --c-code:    36 41 51;
-}
-
-[data-theme="solarized-dark"] {
-  color-scheme: dark;
-  --c-bg:        0  43  54;
-  --c-surface:   7  54  66;
-  --c-border:   88 110 117;
-  --c-text:    238 232 213;
-  --c-muted:   147 161 161;
-  --c-accent:  38 139 210;
-  --c-green:  133 153   0;
-  --c-code:    0  35  44;
-}
-
-[data-theme="monokai"] {
-  color-scheme: dark;
-  --c-bg:      39 40 34;
-  --c-surface: 49 50 44;
-  --c-border:  73 72 62;
-  --c-text:    248 248 242;
-  --c-muted:   117 113 94;
-  --c-accent:  249 38 114;
-  --c-green:  166 226 46;
-  --c-code:    30 31 26;
-}
-
-[data-theme="gruvbox-light"] {
+/* Paper (light) */
+[data-theme="paper"] {
   color-scheme: light;
-  --c-bg:      251 241 199;
-  --c-surface: 235 219 178;
-  --c-border:  189 174 147;
-  --c-text:     60  56  54;
-  --c-muted:   124 111 100;
-  --c-accent:  175  58   3;
-  --c-green:    121 116  14;
-  --c-code:    242 229 188;
+  --c-bg:     250 249 247;
+  --c-bg2:    242 240 236;
+  --c-bg3:    233 230 224;
+  --c-line:   221 215 205;
+  --c-fg:      26  28  31;
+  --c-fg2:     76  82  90;
+  --c-fg3:    120 127 136;
+  --c-accent:  11  98 196;
+  --c-accent2: 15 122  82;
+  --c-sel:    207 226 251;
+  --c-codebg: 245 243 239;
+  --c-tagbg:  231 237 246;
+  --c-tagfg:   18  80 138;
+  --c-tagline:201 216 236;
+  --c-kw:  #0b62c4; --c-str: #0f7a52; --c-num: #a03a12;
+  --c-com: #8a8f96; --c-fn:  #7a3ea8; --c-txt: #24272b;
+}
+
+/* Sepia (warm, low-strain) */
+[data-theme="sepia"] {
+  color-scheme: light;
+  --c-bg:     245 237 221;
+  --c-bg2:    238 228 206;
+  --c-bg3:    229 217 191;
+  --c-line:   217 202 171;
+  --c-fg:      46  41  33;
+  --c-fg2:     92  82  67;
+  --c-fg3:    134 123 103;
+  --c-accent: 154  91  31;
+  --c-accent2: 79 107  58;
+  --c-sel:    226 206 160;
+  --c-codebg: 240 230 210;
+  --c-tagbg:  232 222 196;
+  --c-tagfg:  122  74  19;
+  --c-tagline:211 192 155;
+  --c-kw:  #9a5b1f; --c-str: #4f6b3a; --c-num: #8a3324;
+  --c-com: #9c9078; --c-fn:  #6b4f9a; --c-txt: #37312a;
+}
+
+/* Ocean Blue (light sky) */
+[data-theme="ocean"] {
+  color-scheme: light;
+  --c-bg:     242 248 253;
+  --c-bg2:    230 241 250;
+  --c-bg3:    216 233 246;
+  --c-line:   188 216 236;
+  --c-fg:      15  42  61;
+  --c-fg2:     60  95 120;
+  --c-fg3:    109 139 161;
+  --c-accent:  10 110 168;
+  --c-accent2: 15 143 143;
+  --c-sel:    191 224 245;
+  --c-codebg: 234 243 251;
+  --c-tagbg:  219 236 248;
+  --c-tagfg:   10  92 140;
+  --c-tagline:179 213 236;
+  --c-kw:  #0a6ea8; --c-str: #0f7a63; --c-num: #a2521a;
+  --c-com: #7d97a9; --c-fn:  #6a4fa3; --c-txt: #17384f;
+}
+
+/* High contrast */
+[data-theme="contrast"] {
+  color-scheme: dark;
+  --c-bg:       0   0   0;
+  --c-bg2:     12  12  12;
+  --c-bg3:     25  25  25;
+  --c-line:    61  61  61;
+  --c-fg:     255 255 255;
+  --c-fg2:    214 214 214;
+  --c-fg3:    166 166 166;
+  --c-accent: 255 212   0;
+  --c-accent2:125 255 159;
+  --c-sel:     58  52   0;
+  --c-codebg:   0   0   0;
+  --c-tagbg:   27  27  27;
+  --c-tagfg:  255 212   0;
+  --c-tagline: 74  66   0;
+  --c-kw:  #ffd400; --c-str: #7dff9f; --c-num: #ff9d5c;
+  --c-com: #9a9a9a; --c-fn:  #8ecbff; --c-txt: #f2f2f2;
+}
+
+/* ── Typography mode ─────────────────────────────────────────────────────── */
+/* hybrid = serif body prose (default); mono = all-monospace */
+:root,
+[data-type="hybrid"] {
+  --body: 'Source Serif 4', Georgia, serif;
+  --bodysize: 17.5px;
+  --bodylh: 1.72;
+}
+[data-type="mono"] {
+  --body: 'JetBrains Mono', ui-monospace, monospace;
+  --bodysize: 15px;
+  --bodylh: 1.7;
 }
 
 body {

@@ -261,11 +261,12 @@ All responses return JSON. All request bodies are JSON.
 
 ### Theming
 
-- All Tailwind color tokens (`bg`, `surface`, `border`, `text`, `muted`, `accent`, `green`, `code`) resolve to CSS variables (`--c-*`) defined in `frontend/src/styles/globals.css`.
-- Themes are selected via a `data-theme="<id>"` attribute on `<html>`. Built-ins: `github-dark` (default), `dracula`, `nord`, `solarized-dark`, `monokai`, `gruvbox-light`.
-- The `ThemePicker` component (palette icon, upper-left of the shell) lets the user switch themes; the choice is persisted to `localStorage` under `concept-master.theme`.
-- To add a theme: append a new `[data-theme="..."]` block in `globals.css` and a matching entry in `THEMES` in `ThemePicker.tsx`.
-- Note: code-block syntax colors come from `prism-react-renderer`'s own palette and do not follow the active theme.
+- All Tailwind color tokens (`bg`, `bg2`, `bg3`, `line`, `fg`, `fg2`, `fg3`, `accent`, `accent2`, `sel`, `codeBg`, `tagBg`, `tagFg`, `tagLine`) resolve to CSS variables (`--c-*`) defined in `frontend/src/styles/globals.css`. The old token names (`surface`, `border`, `text`, `muted`, `code`, `green`) still work as aliases onto the new tokens, for any not-yet-migrated markup.
+- Themes are selected via a `data-theme="<id>"` attribute on `<html>`, driven by `useUiPrefs()` (`frontend/src/hooks/useUiPrefs.ts`). Built-ins: `midnight` (default, dark), `paper`, `sepia`, `ocean`, `contrast` (high contrast).
+- A typography mode toggle sets `data-type="hybrid"|"mono"` on `<html>` (also via `useUiPrefs()`), swapping `--body`/`--bodysize`/`--bodylh`. `hybrid` (default) uses Source Serif 4 for body prose; `mono` uses JetBrains Mono for everything. Chrome/UI text is always JetBrains Mono in both modes.
+- Code block syntax highlighting uses a custom `prism-react-renderer` theme (`frontend/src/lib/prismTheme.ts`) mapped onto `--c-kw/str/num/com/fn/txt`, so it follows the active theme (no longer a fixed Prism preset).
+- The header's control cluster (`HeaderControls.tsx`) exposes the theme swatches, layout switcher (`three`/`two`/`center` Browse layouts), and type toggle. All three preferences persist to `localStorage` under `concept-master.theme` / `concept-master.layout` / `concept-master.typeMode`.
+- To add a theme: append a new `[data-theme="..."]` block in `globals.css`, plus a matching entry in `THEMES` in `HeaderControls.tsx` and in `VALID_THEMES`/the `Theme` union in `useUiPrefs.ts`.
 
 ---
 

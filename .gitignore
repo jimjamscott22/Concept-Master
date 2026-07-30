@@ -55,3 +55,9 @@ backend/.env
 # OS
 .DS_Store
 Thumbs.db
+
+# Subagent-driven-development scratch state
+.superpowers/
+
+# Extracted design-handoff assets (redundant with the committed .zip)
+docs/new_features/_extracted/

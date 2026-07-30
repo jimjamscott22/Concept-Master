@@ -9,7 +9,7 @@ from ..content_writer import delete_term as delete_term_file, write_term
 from ..database import PROJECT_ROOT, get_db
 from ..models import (
     TermCreate, TermUpdate, TermResponse, TermDetailResponse,
-    TermListResponse, TermSummary, ImportItem,
+    TermListResponse, TermSummary, TermMapNode, ImportItem,
 )
 
 
@@ -310,6 +310,42 @@ async def list_term_summaries(conn: aiomysql.Connection = Depends(get_db)):
     async with conn.cursor(aiomysql.DictCursor) as cur:
         await cur.execute("SELECT id, name, slug FROM terms ORDER BY name")
         return await cur.fetchall()
+
+
+@router.get("/graph", response_model=List[TermMapNode])
+async def list_terms_graph(conn: aiomysql.Connection = Depends(get_db)):
+    """Lightweight per-term data for the Diagram (concept map) page:
+    category membership + how many other terms link to it."""
+    async with conn.cursor(aiomysql.DictCursor) as cur:
+        await cur.execute("SELECT id, name, slug, is_favorite FROM terms ORDER BY name")
+        rows = await cur.fetchall()
+
+        ids = [r["id"] for r in rows]
+        cats_by_term = await _batch_get_categories(conn, ids)
+
+        related_counts: dict = {}
+        if ids:
+            await cur.execute("""
+                SELECT term_id, COUNT(*) AS cnt FROM (
+                    SELECT term_a AS term_id FROM related_terms
+                    UNION ALL
+                    SELECT term_b AS term_id FROM related_terms
+                ) pairs
+                GROUP BY term_id
+            """)
+            related_counts = {r["term_id"]: r["cnt"] for r in await cur.fetchall()}
+
+    return [
+        {
+            "id": row["id"],
+            "name": row["name"],
+            "slug": row["slug"],
+            "is_favorite": bool(row["is_favorite"]),
+            "categories": cats_by_term[row["id"]],
+            "related_count": related_counts.get(row["id"], 0),
+        }
+        for row in rows
+    ]
 
 
 @router.get("/{slug}", response_model=TermDetailResponse)

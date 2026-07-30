@@ -23,6 +23,20 @@ class TermSummary(BaseModel):
     slug: str
 
 
+class TermMapNode(BaseModel):
+    id: int
+    name: str
+    slug: str
+    is_favorite: bool
+    categories: List[CategoryResponse] = []
+    related_count: int = 0
+
+    @field_validator("is_favorite", mode="before")
+    @classmethod
+    def coerce_favorite(cls, v: object) -> bool:
+        return bool(v)
+
+
 class TermBase(BaseModel):
     name: str
     definition: str

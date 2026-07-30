@@ -48,7 +48,13 @@ export function TermDetail({ term, onEdit, onDelete, onToggleFavorite, onSelectR
   const [tab, setTab] = useState<Tab>("def")
 
   // Reset to Definition whenever the selected term changes (spec: "resets the content tab to Definition").
-  useEffect(() => { setTab("def") }, [term.slug])
+  // Adjusted synchronously during render (React's recommended pattern for this) rather than in an
+  // effect, since calling setState from an effect body triggers an avoidable extra render pass.
+  const [prevSlug, setPrevSlug] = useState(term.slug)
+  if (term.slug !== prevSlug) {
+    setPrevSlug(term.slug)
+    setTab("def")
+  }
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {

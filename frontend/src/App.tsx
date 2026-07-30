@@ -18,6 +18,7 @@ import { ArticleCard } from "./components/ArticleCard"
 import { ArticleDetail } from "./components/ArticleDetail"
 import { ArticleForm } from "./components/ArticleForm"
 import { EmptyState } from "./components/EmptyState"
+import { DiagramPage } from "./components/DiagramPage"
 import { useUiPrefs } from "./hooks/useUiPrefs"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
@@ -386,6 +387,13 @@ export default function App() {
 
           {layout === "center" && <JumpToTermPill onClick={openPalette} />}
         </div>
+      )}
+
+      {view === "diagram" && (
+        <DiagramPage
+          selectedSlug={selectedSlug}
+          onSelectTerm={(slug) => { setView("terms"); handleSelectTerm(slug) }}
+        />
       )}
 
       {view === "articles" && (

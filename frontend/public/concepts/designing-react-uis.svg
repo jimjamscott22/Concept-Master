@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">React component and state flow</title>
+  <desc id="desc">A dashboard component owns shared state and passes data down as props to search, list, and detail components, while user events travel upward through callbacks to update that state.</desc>
+  <defs><marker id="down" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0l9 4.5L0 9z" fill="#58a6ff"/></marker><marker id="up" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0l9 4.5L0 9z" fill="#f0883e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">COMPONENT DESIGN</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Put shared state at the nearest common owner</text>
+  <rect x="310" y="127" width="340" height="104" rx="17" fill="#161b22" stroke="#3fb950" stroke-width="3"/>
+  <text x="480" y="159" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="17">&lt;Dashboard /&gt;</text>
+  <text x="480" y="187" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">owns: selectedId · query · items</text>
+  <rect x="382" y="201" width="196" height="21" rx="6" fill="#3fb950" fill-opacity=".12"/>
+  <text x="480" y="216" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="11">single source of truth</text>
+  <g stroke="#58a6ff" stroke-width="3" marker-end="url(#down)"><path d="M393 231L191 306"/><path d="M480 231v75"/><path d="M567 231l202 75"/></g>
+  <text x="337" y="266" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="12">props ↓</text>
+  <text x="500" y="273" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="12">props ↓</text>
+  <text x="646" y="266" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="12">props ↓</text>
+  <g fill="#161b22" stroke="#58a6ff" stroke-width="2">
+    <rect x="52" y="317" width="250" height="110" rx="15"/><rect x="355" y="317" width="250" height="110" rx="15"/><rect x="658" y="317" width="250" height="110" rx="15"/>
+  </g>
+  <g font-family="JetBrains Mono, monospace" text-anchor="middle">
+    <text x="177" y="352" fill="#e6edf3" font-size="16">&lt;Search /&gt;</text><text x="177" y="382" fill="#8b949e" font-size="12">value={query}</text><text x="177" y="405" fill="#f0883e" font-size="12">onChange(query)</text>
+    <text x="480" y="352" fill="#e6edf3" font-size="16">&lt;ItemList /&gt;</text><text x="480" y="382" fill="#8b949e" font-size="12">items={filtered}</text><text x="480" y="405" fill="#f0883e" font-size="12">onSelect(id)</text>
+    <text x="783" y="352" fill="#e6edf3" font-size="16">&lt;Detail /&gt;</text><text x="783" y="382" fill="#8b949e" font-size="12">item={selected}</text><text x="783" y="405" fill="#f0883e" font-size="12">onSave(changes)</text>
+  </g>
+  <g stroke="#f0883e" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#up)"><path d="M177 317c0-46 97-50 190-80"/><path d="M480 317v-74"/><path d="M783 317c0-46-97-50-190-80"/></g>
+  <text x="480" y="464" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="13">events and intent travel up through callbacks ↑</text>
+  <rect x="52" y="484" width="856" height="34" rx="9" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="506" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">Each child receives the smallest interface it needs; rendering stays a pure function of state.</text>
+</svg>

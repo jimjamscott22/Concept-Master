@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Load balancer request distribution</title>
+  <desc id="desc">Client requests enter one load balancer, which performs health checks and routes traffic to three healthy backend servers while excluding an unhealthy server.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8b949e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">TRAFFIC DISTRIBUTION</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">One entry point, many healthy backends</text>
+  <g fill="#161b22" stroke="#58a6ff" stroke-width="2">
+    <rect x="52" y="154" width="150" height="58" rx="12"/><rect x="52" y="238" width="150" height="58" rx="12"/><rect x="52" y="322" width="150" height="58" rx="12"/>
+  </g>
+  <g fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14" text-anchor="middle">
+    <text x="127" y="188">Client A · GET /</text><text x="127" y="272">Client B · GET /api</text><text x="127" y="356">Client C · POST /</text>
+  </g>
+  <path d="M202 183l131 77M202 267h131M202 351l131-77" stroke="#8b949e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="342" y="202" width="232" height="132" rx="18" fill="#161b22" stroke="#f0883e" stroke-width="3"/>
+  <text x="458" y="245" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="18">LOAD BALANCER</text>
+  <text x="458" y="274" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="15">choose a healthy target</text>
+  <text x="458" y="303" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13">round robin · least connections</text>
+  <path d="M574 232l104-61M574 257l104-5M574 283l104 51" stroke="#8b949e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <g fill="#161b22" stroke="#3fb950" stroke-width="2">
+    <rect x="688" y="132" width="220" height="70" rx="12"/><rect x="688" y="218" width="220" height="70" rx="12"/><rect x="688" y="304" width="220" height="70" rx="12"/>
+  </g>
+  <g font-family="JetBrains Mono, monospace">
+    <text x="716" y="161" fill="#3fb950" font-size="14">● healthy</text><text x="716" y="184" fill="#e6edf3" font-size="15">backend-1</text>
+    <text x="716" y="247" fill="#3fb950" font-size="14">● healthy</text><text x="716" y="270" fill="#e6edf3" font-size="15">backend-2</text>
+    <text x="716" y="333" fill="#3fb950" font-size="14">● healthy</text><text x="716" y="356" fill="#e6edf3" font-size="15">backend-3</text>
+  </g>
+  <rect x="688" y="402" width="220" height="58" rx="12" fill="#161b22" stroke="#f85149" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="716" y="427" fill="#f85149" font-family="JetBrains Mono, monospace" font-size="14">× unhealthy</text>
+  <text x="716" y="449" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="14">removed from rotation</text>
+  <path d="M574 315c53 91 52 116 102 116" stroke="#f85149" stroke-width="2" stroke-dasharray="6 5"/>
+  <text x="479" y="382" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">periodic health checks</text>
+  <rect x="52" y="478" width="856" height="38" rx="10" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="502" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="15">Distribution prevents one server from becoming the bottleneck.</text>
+</svg>

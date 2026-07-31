@@ -14,6 +14,8 @@ type, color, motion). Get the first wrong and the app is painful to change; get 
 second wrong and it's painful to use. This article walks through the decisions worth
 making deliberately in both.
 
+![React component hierarchy showing shared state owned by a common parent, props flowing down, and user events flowing up through callbacks.](/concepts/designing-react-uis.svg)
+
 ## Compose, don't configure
 
 The single most useful instinct in React is to **build small components and combine

@@ -29,6 +29,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing indexed array slots and constant-time access by index.",
     caption: "Visual: contiguous indexed slots with direct O(1) lookup.",
   },
+  "asynchronous-programming": {
+    src: "/concepts/asynchronous-programming.svg",
+    alt: "Diagram showing an asynchronous task starting I/O, continuing other work, and resuming after completion.",
+    caption: "Visual: asynchronous code keeps making progress while I/O is waiting, then resumes when the result is ready.",
+  },
   authentication: {
     src: "/concepts/authentication.svg",
     alt: "Diagram showing a user proving identity before access is granted.",
@@ -53,6 +58,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/binary-search-tree.svg",
     alt: "Binary search tree diagram showing left values smaller and right values larger.",
     caption: "Visual: BST ordering rule for left and right subtrees.",
+  },
+  "blue-green-deployment": {
+    src: "/concepts/blue-green-deployment.svg",
+    alt: "Diagram showing live traffic moving from a blue environment to a validated green environment, with a rollback path.",
+    caption: "Visual: traffic switches between two complete environments for fast release and rollback.",
   },
   "breadth-first-search": {
     src: "/concepts/breadth-first-search.svg",
@@ -99,6 +109,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram contrasting unsafe HTML rendering with safe text rendering to prevent XSS.",
     caption: "Visual: untrusted input should be rendered as text, not executed as script.",
   },
+  csrf: {
+    src: "/concepts/csrf.svg",
+    alt: "Diagram contrasting a forged cross-site request carrying a session cookie with a legitimate request that also supplies a CSRF token.",
+    caption: "Visual: CSRF tokens let a server reject forged cookie-bearing requests from another site.",
+  },
   deadlock: {
     src: "/concepts/deadlock.svg",
     alt: "Diagram showing two threads stuck waiting on each other's locks.",
@@ -108,6 +123,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/depth-first-search.svg",
     alt: "Depth-first search diagram showing one branch explored deeply before backtracking.",
     caption: "Visual: DFS dives down a branch first, then backtracks to remaining paths.",
+  },
+  "dijkstra-algorithm": {
+    src: "/concepts/dijkstra-algorithm.svg",
+    alt: "Weighted graph diagram showing tentative distances, the closest unsettled node, and an edge relaxation step.",
+    caption: "Visual: Dijkstra repeatedly chooses the closest unsettled node and relaxes its outgoing edges.",
   },
   dns: {
     src: "/concepts/dns.svg",
@@ -224,6 +244,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram comparing latency as one request duration with throughput as many requests completed per second.",
     caption: "Visual: latency measures one operation's wait; throughput measures total completed work.",
   },
+  "load-balancer": {
+    src: "/concepts/load-balancer.svg",
+    alt: "Diagram showing client requests distributed by a load balancer across healthy backends while an unhealthy backend is excluded.",
+    caption: "Visual: a load balancer sends traffic only to healthy backend servers.",
+  },
   "linked-list": {
     src: "/concepts/linked-list.svg",
     alt: "Linked list diagram showing nodes connected by next pointers.",
@@ -248,6 +273,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/model-view-controller.svg",
     alt: "Diagram showing Model, View, and Controller boxes connected to separate application state, presentation, and coordination responsibilities.",
     caption: "Visual: MVC separates data, rendering, and request coordination.",
+  },
+  mutex: {
+    src: "/concepts/mutex.svg",
+    alt: "Diagram showing one thread owning a mutex inside a critical section while a second thread waits.",
+    caption: "Visual: a mutex gives one thread exclusive ownership of a critical section while others wait.",
   },
   "merge-sort": {
     src: "/concepts/merge-sort.svg",
@@ -293,6 +323,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/producer-consumer.svg",
     alt: "Diagram showing multiple producer threads pushing items into a bounded buffer and consumer threads pulling them out.",
     caption: "Visual: a bounded buffer decouples producers from consumers, with waits on full/empty.",
+  },
+  "process-vs-thread": {
+    src: "/concepts/process-vs-thread.svg",
+    alt: "Diagram comparing isolated process address spaces with threads sharing code and heap while retaining separate stacks.",
+    caption: "Visual: processes isolate memory, while threads share process resources but keep separate stacks.",
   },
   "proxy-pattern": {
     src: "/concepts/proxy-pattern.svg",
@@ -404,10 +439,20 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing the transaction flow from BEGIN through operations to COMMIT or ROLLBACK.",
     caption: "Visual: a transaction groups operations into an all-or-nothing unit of work.",
   },
+  trie: {
+    src: "/concepts/trie.svg",
+    alt: "Prefix tree diagram showing shared character paths for several words and terminal word markers.",
+    caption: "Visual: a trie stores words by sharing their common character prefixes.",
+  },
   udp: {
     src: "/concepts/udp.svg",
     alt: "Diagram showing UDP datagrams sent without delivery guarantees.",
     caption: "Visual: UDP favors speed by sending datagrams without built-in reliability.",
+  },
+  "virtual-memory": {
+    src: "/concepts/virtual-memory.svg",
+    alt: "Diagram showing a virtual address translated through a TLB and page table to a physical memory frame, with a page-fault path.",
+    caption: "Visual: virtual addresses are translated through page tables before reaching physical memory.",
   },
   websocket: {
     src: "/concepts/websocket.svg",

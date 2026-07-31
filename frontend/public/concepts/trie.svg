@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Trie shared-prefix structure</title>
+  <desc id="desc">A prefix tree stores the words car, card, care, cat, and dog by sharing common character paths and marking complete words at terminal nodes.</desc>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">PREFIX TREE</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Common prefixes share the same path</text>
+  <g stroke="#30363d" stroke-width="4" stroke-linecap="round">
+    <path d="M480 142L300 220M480 142l244 78M300 220l-80 86M300 220l80 86M220 306l-90 90M220 306l90 90M380 306l80 90M724 220l0 86M724 306l0 90"/>
+  </g>
+  <g fill="#161b22" stroke="#58a6ff" stroke-width="2">
+    <circle cx="480" cy="142" r="30"/><circle cx="300" cy="220" r="30"/><circle cx="724" cy="220" r="30"/>
+    <circle cx="220" cy="306" r="30"/><circle cx="380" cy="306" r="30"/><circle cx="724" cy="306" r="30"/>
+    <circle cx="130" cy="396" r="30"/><circle cx="310" cy="396" r="30"/><circle cx="460" cy="396" r="30"/><circle cx="724" cy="396" r="30"/>
+  </g>
+  <g fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="20" text-anchor="middle">
+    <text x="480" y="149">root</text><text x="300" y="227">c</text><text x="724" y="227">d</text>
+    <text x="220" y="313">a</text><text x="380" y="313">a</text><text x="724" y="313">o</text>
+    <text x="130" y="403">r</text><text x="310" y="403">t</text><text x="460" y="403">r</text><text x="724" y="403">g</text>
+  </g>
+  <path d="M130 426v42M130 468h-44M130 468h44" stroke="#30363d" stroke-width="4"/>
+  <circle cx="86" cy="468" r="18" fill="#161b22" stroke="#3fb950" stroke-width="3"/>
+  <circle cx="174" cy="468" r="18" fill="#161b22" stroke="#3fb950" stroke-width="3"/>
+  <text x="86" y="474" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="15">d</text>
+  <text x="174" y="474" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="15">e</text>
+  <g fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="13">
+    <text x="100" y="437">● car</text><text x="54" y="510">● card</text><text x="151" y="510">● care</text>
+    <text x="288" y="443">● cat</text><text x="701" y="443">● dog</text>
+  </g>
+  <rect x="536" y="306" width="122" height="94" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="597" y="338" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13">prefix "ca"</text>
+  <text x="597" y="363" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">finds car, card,</text>
+  <text x="597" y="384" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">care, and cat</text>
+</svg>

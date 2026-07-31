@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Asynchronous programming timeline</title>
+  <desc id="desc">A task starts an I/O operation, yields while the event loop continues other work, and resumes after the I/O completion is queued.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8b949e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">NON-BLOCKING FLOW</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Waiting does not have to stop useful work</text>
+  <text x="80" y="156" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="15">TASK</text>
+  <text x="80" y="258" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="15">I/O</text>
+  <text x="80" y="360" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="15">EVENT LOOP</text>
+  <g stroke="#30363d" stroke-width="2"><path d="M160 150h730"/><path d="M160 252h730"/><path d="M160 354h730"/></g>
+  <rect x="182" y="125" width="150" height="50" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="257" y="155" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">start request</text>
+  <path d="M332 150c38 0 34 102 78 102" stroke="#8b949e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="410" y="227" width="208" height="50" rx="10" fill="#161b22" stroke="#f0883e" stroke-width="2"/>
+  <text x="514" y="257" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">network / disk waits</text>
+  <path d="M332 160c34 0 31 194 78 194" stroke="#8b949e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="410" y="329" width="208" height="50" rx="10" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+  <text x="514" y="350" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">run other callbacks</text>
+  <text x="514" y="369" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">the thread stays useful</text>
+  <path d="M618 252c43 0 35 102 78 102" stroke="#f0883e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="696" y="329" width="166" height="50" rx="10" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+  <text x="779" y="350" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="14">result ready</text>
+  <text x="779" y="369" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">queue continuation</text>
+  <path d="M779 329c0-101 1-117 0-142" stroke="#8b949e" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="696" y="125" width="166" height="50" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="779" y="155" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">resume after await</text>
+  <rect x="52" y="430" width="856" height="66" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="457" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="16">Async improves responsiveness during waiting.</text>
+  <text x="480" y="480" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">It does not make CPU-heavy work automatically parallel.</text>
+</svg>

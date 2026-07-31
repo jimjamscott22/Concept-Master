@@ -13,6 +13,8 @@ reduce redundancy and prevent anomalies. This article is the long form — *why*
 anomalies happen, how each normal form removes a specific class of them, and where
 the practical stopping point is.
 
+![Progression from a redundant wide table through first, second, and third normal form, with repeated facts moved into related tables.](/concepts/database-normalization-in-depth.svg)
+
 ## The problem: a single fat table
 
 Imagine tracking course enrollments in one table:

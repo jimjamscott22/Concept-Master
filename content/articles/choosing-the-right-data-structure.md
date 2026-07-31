@@ -12,6 +12,8 @@ Most performance problems aren't about clever algorithms — they're about picki
 data structure whose strengths line up with what your code does most often. Start
 by asking: *what operation am I doing in the hot path?*
 
+![Decision map connecting indexed access, key lookup, sorted lookup, arrival order, and priority handling to suitable data structures.](/concepts/choosing-the-right-data-structure.svg)
+
 ## A cheat sheet for the common cases
 
 | Need                          | Reach for         | Why                              |

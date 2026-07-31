@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Blue-green deployment traffic switch</title>
+  <desc id="desc">A router initially directs production traffic to the blue version while the green version is tested, then switches traffic to green with a fast rollback arrow back to blue.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8b949e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">ZERO-DOWNTIME RELEASE</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Switch traffic between two complete environments</text>
+  <rect x="52" y="207" width="180" height="102" rx="16" fill="#161b22" stroke="#f0883e" stroke-width="2"/>
+  <text x="142" y="241" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="16">ROUTER</text>
+  <text x="142" y="268" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">production traffic</text>
+  <text x="142" y="290" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">one active target</text>
+  <path d="M232 244c59 0 55-77 104-77" stroke="#58a6ff" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M232 272c59 0 55 77 104 77" stroke="#3fb950" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="346" y="122" width="296" height="135" rx="18" fill="#161b22" stroke="#58a6ff" stroke-width="3"/>
+  <text x="494" y="158" text-anchor="middle" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="18">BLUE · v1</text>
+  <text x="494" y="189" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="15">current production</text>
+  <rect x="394" y="211" width="200" height="27" rx="7" fill="#58a6ff" fill-opacity=".12"/>
+  <text x="494" y="230" text-anchor="middle" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="12">LIVE BEFORE SWITCH</text>
+  <rect x="346" y="282" width="296" height="135" rx="18" fill="#161b22" stroke="#3fb950" stroke-width="3"/>
+  <text x="494" y="318" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="18">GREEN · v2</text>
+  <text x="494" y="349" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="15">new release validated off-path</text>
+  <rect x="394" y="371" width="200" height="27" rx="7" fill="#3fb950" fill-opacity=".12"/>
+  <text x="494" y="390" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="12">LIVE AFTER SWITCH</text>
+  <rect x="714" y="136" width="194" height="94" rx="14" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="811" y="169" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">1 · deploy v2</text>
+  <text x="811" y="194" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">2 · test green</text>
+  <text x="811" y="216" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="14">3 · switch</text>
+  <path d="M654 349h48" stroke="#3fb950" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M702 376c-28 73-190 82-301 62-63-11-113-55-113-117" stroke="#f85149" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+  <text x="734" y="405" fill="#f85149" font-family="JetBrains Mono, monospace" font-size="14">rollback → blue</text>
+  <rect x="52" y="472" width="856" height="40" rx="10" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="497" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="15">The tradeoff: near-instant rollback requires two production-capable environments.</text>
+</svg>

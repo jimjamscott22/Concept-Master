@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Virtual memory address translation</title>
+  <desc id="desc">A virtual address is split into a page number and offset, checked in the TLB and page table, then mapped to a physical frame or routed to a page fault.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8b949e"/></marker>
+  </defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">ADDRESS TRANSLATION</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Virtual memory maps private addresses onto physical RAM</text>
+  <rect x="52" y="142" width="220" height="96" rx="14" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="162" y="174" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13">VIRTUAL ADDRESS</text>
+  <rect x="72" y="190" width="112" height="30" rx="6" fill="#1c2128" stroke="#58a6ff"/>
+  <rect x="184" y="190" width="68" height="30" rx="6" fill="#1c2128" stroke="#58a6ff"/>
+  <text x="128" y="210" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">page 0x2A</text>
+  <text x="218" y="210" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">+064</text>
+  <path d="M272 190h64" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="342" y="142" width="172" height="96" rx="14" fill="#161b22" stroke="#f0883e" stroke-width="2"/>
+  <text x="428" y="178" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="16">TLB</text>
+  <text x="428" y="204" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">cached translations</text>
+  <text x="428" y="225" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="13">hit → frame 7</text>
+  <path d="M514 190h64" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="584" y="142" width="166" height="96" rx="14" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+  <text x="667" y="178" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="16">PAGE TABLE</text>
+  <text x="667" y="204" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">page → frame</text>
+  <text x="667" y="225" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="13">permissions: R/W</text>
+  <path d="M750 190h54" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="810" y="142" width="98" height="96" rx="14" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+  <text x="859" y="178" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="15">RAM</text>
+  <text x="859" y="204" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="13">frame 7</text>
+  <text x="859" y="224" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">+064</text>
+  <path d="M667 238v69" stroke="#f85149" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+  <rect x="545" y="316" width="244" height="91" rx="14" fill="#161b22" stroke="#f85149" stroke-width="2"/>
+  <text x="667" y="348" text-anchor="middle" fill="#f85149" font-family="JetBrains Mono, monospace" font-size="16">PAGE FAULT</text>
+  <text x="667" y="374" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">kernel loads the missing page</text>
+  <text x="667" y="394" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="13">or rejects an invalid access</text>
+  <rect x="52" y="446" width="856" height="54" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="479" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="17">Each process sees a private address space; the MMU performs the mapping.</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Database normalization progression</title>
+  <desc id="desc">A wide redundant order table progresses through first normal form with atomic rows, second normal form with product data separated from order items, and third normal form with customer data separated from orders.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#8b949e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">NORMALIZATION</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Split facts until each one has a single home</text>
+  <g font-family="JetBrains Mono, monospace">
+    <rect x="42" y="145" width="205" height="234" rx="14" fill="#161b22" stroke="#f85149" stroke-width="2"/>
+    <text x="144" y="177" text-anchor="middle" fill="#f85149" font-size="16">ONE WIDE TABLE</text>
+    <rect x="61" y="198" width="167" height="30" rx="5" fill="#1c2128"/><text x="72" y="218" fill="#8b949e" font-size="11">order · customer</text>
+    <rect x="61" y="235" width="167" height="45" rx="5" fill="#1c2128"/><text x="72" y="254" fill="#e6edf3" font-size="11">products: [A, B]</text><text x="72" y="270" fill="#f85149" font-size="11">repeating group</text>
+    <rect x="61" y="287" width="167" height="62" rx="5" fill="#1c2128"/><text x="72" y="306" fill="#e6edf3" font-size="11">customer address</text><text x="72" y="323" fill="#e6edf3" font-size="11">copied every order</text><text x="72" y="340" fill="#f85149" font-size="11">update anomaly</text>
+    <path d="M247 262h54" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="307" y="145" width="178" height="234" rx="14" fill="#161b22" stroke="#f0883e" stroke-width="2"/>
+    <text x="396" y="177" text-anchor="middle" fill="#f0883e" font-size="16">1NF</text>
+    <text x="396" y="198" text-anchor="middle" fill="#8b949e" font-size="11">atomic rows</text>
+    <g fill="#1c2128"><rect x="326" y="218" width="140" height="42" rx="5"/><rect x="326" y="268" width="140" height="42" rx="5"/><rect x="326" y="318" width="140" height="42" rx="5"/></g>
+    <g fill="#e6edf3" font-size="11"><text x="337" y="236">order 7 · product A</text><text x="337" y="252">customer Ada</text><text x="337" y="286">order 7 · product B</text><text x="337" y="302">customer Ada</text><text x="337" y="336">order 8 · product A</text><text x="337" y="352">customer Lin</text></g>
+    <path d="M485 262h54" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="545" y="145" width="178" height="234" rx="14" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+    <text x="634" y="177" text-anchor="middle" fill="#58a6ff" font-size="16">2NF</text>
+    <text x="634" y="198" text-anchor="middle" fill="#8b949e" font-size="11">no partial dependency</text>
+    <rect x="564" y="218" width="140" height="58" rx="6" fill="#1c2128" stroke="#58a6ff"/><text x="634" y="239" text-anchor="middle" fill="#58a6ff" font-size="11">ORDER_ITEMS</text><text x="634" y="258" text-anchor="middle" fill="#e6edf3" font-size="11">order_id · product_id</text>
+    <rect x="564" y="294" width="140" height="58" rx="6" fill="#1c2128" stroke="#58a6ff"/><text x="634" y="315" text-anchor="middle" fill="#58a6ff" font-size="11">PRODUCTS</text><text x="634" y="334" text-anchor="middle" fill="#e6edf3" font-size="11">product_id · name</text>
+    <path d="M634 276v18" stroke="#58a6ff" stroke-width="2"/>
+    <path d="M723 262h54" stroke="#8b949e" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="783" y="145" width="135" height="234" rx="14" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+    <text x="850" y="177" text-anchor="middle" fill="#3fb950" font-size="16">3NF</text>
+    <text x="850" y="198" text-anchor="middle" fill="#8b949e" font-size="11">no transitive dep.</text>
+    <rect x="800" y="218" width="101" height="50" rx="6" fill="#1c2128" stroke="#3fb950"/><text x="850" y="239" text-anchor="middle" fill="#3fb950" font-size="11">ORDERS</text><text x="850" y="255" text-anchor="middle" fill="#e6edf3" font-size="11">customer_id FK</text>
+    <rect x="800" y="287" width="101" height="50" rx="6" fill="#1c2128" stroke="#3fb950"/><text x="850" y="308" text-anchor="middle" fill="#3fb950" font-size="11">CUSTOMERS</text><text x="850" y="324" text-anchor="middle" fill="#e6edf3" font-size="11">address only</text>
+    <path d="M850 268v19" stroke="#3fb950" stroke-width="2"/>
+  </g>
+  <rect x="52" y="415" width="856" height="70" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="444" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="16">1NF removes repeating groups · 2NF removes partial dependencies · 3NF removes transitive dependencies</text>
+  <text x="480" y="469" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="14">Foreign keys reconnect the facts without copying them.</text>
+</svg>

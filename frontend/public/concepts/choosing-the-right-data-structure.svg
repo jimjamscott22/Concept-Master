@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Data structure decision map</title>
+  <desc id="desc">A decision map starts with the operation that matters most and routes indexed access to arrays, key lookup to hash maps, ordered lookup to trees, first-in-first-out work to queues, last-in-first-out work to stacks, and priority removal to heaps.</desc>
+  <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0l9 4.5L0 9z" fill="#8b949e"/></marker></defs>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">OPERATION-FIRST CHOICE</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Choose for the work you do most often</text>
+  <rect x="340" y="128" width="280" height="64" rx="14" fill="#161b22" stroke="#f0883e" stroke-width="3"/>
+  <text x="480" y="154" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="15">PRIMARY OPERATION?</text>
+  <text x="480" y="177" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="14">optimize the common path</text>
+  <g stroke="#30363d" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M405 192L178 253"/><path d="M449 192l-116 61"/><path d="M480 192v61"/><path d="M511 192l116 61"/><path d="M555 192l227 61"/>
+  </g>
+  <g fill="#161b22" stroke-width="2">
+    <rect x="52" y="258" width="160" height="96" rx="13" stroke="#58a6ff"/><rect x="226" y="258" width="160" height="96" rx="13" stroke="#58a6ff"/>
+    <rect x="400" y="258" width="160" height="96" rx="13" stroke="#3fb950"/><rect x="574" y="258" width="160" height="96" rx="13" stroke="#f0883e"/>
+    <rect x="748" y="258" width="160" height="96" rx="13" stroke="#f0883e"/>
+  </g>
+  <g font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">
+    <text x="132" y="289" fill="#8b949e">index access</text><text x="132" y="323" fill="#58a6ff" font-size="17">ARRAY</text><text x="132" y="343" fill="#e6edf3">O(1) by index</text>
+    <text x="306" y="289" fill="#8b949e">lookup by key</text><text x="306" y="323" fill="#58a6ff" font-size="17">HASH MAP</text><text x="306" y="343" fill="#e6edf3">O(1) average</text>
+    <text x="480" y="289" fill="#8b949e">sorted lookup</text><text x="480" y="323" fill="#3fb950" font-size="17">TREE</text><text x="480" y="343" fill="#e6edf3">O(log n)</text>
+    <text x="654" y="289" fill="#8b949e">arrival order</text><text x="654" y="323" fill="#f0883e" font-size="17">QUEUE</text><text x="654" y="343" fill="#e6edf3">FIFO</text>
+    <text x="828" y="289" fill="#8b949e">highest priority</text><text x="828" y="323" fill="#f0883e" font-size="17">HEAP</text><text x="828" y="343" fill="#e6edf3">min/max first</text>
+  </g>
+  <path d="M654 354v45" stroke="#30363d" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <rect x="574" y="405" width="160" height="64" rx="12" fill="#161b22" stroke="#a371f7" stroke-width="2"/>
+  <text x="654" y="431" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13">reverse order?</text>
+  <text x="654" y="455" text-anchor="middle" fill="#a371f7" font-family="JetBrains Mono, monospace" font-size="17">STACK · LIFO</text>
+  <rect x="52" y="397" width="456" height="72" rx="12" fill="#161b22" stroke="#30363d"/>
+  <text x="280" y="425" text-anchor="middle" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="15">Then check the tradeoffs:</text>
+  <text x="280" y="451" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13">insert cost · memory · ordering · worst case</text>
+  <text x="480" y="510" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="15">There is no universally best structure—only the best fit for your operations.</text>
+</svg>

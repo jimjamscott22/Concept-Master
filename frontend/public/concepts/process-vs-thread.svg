@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Process and thread memory comparison</title>
+  <desc id="desc">Two processes have isolated address spaces, while two threads inside one process share code, heap, and files but maintain separate stacks and registers.</desc>
+  <rect width="960" height="540" rx="28" fill="#0d1117"/>
+  <text x="52" y="58" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="16" letter-spacing="2">ISOLATION VS SHARING</text>
+  <text x="52" y="94" fill="#e6edf3" font-family="IBM Plex Sans, sans-serif" font-size="30" font-weight="600">Processes isolate resources; threads share them</text>
+  <text x="244" y="140" text-anchor="middle" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="18">TWO PROCESSES</text>
+  <rect x="52" y="160" width="184" height="270" rx="18" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <rect x="252" y="160" width="184" height="270" rx="18" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+  <text x="144" y="192" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="16">Process A</text>
+  <text x="344" y="192" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="16">Process B</text>
+  <g fill="#1c2128" stroke="#30363d">
+    <rect x="72" y="214" width="144" height="42" rx="8"/><rect x="72" y="268" width="144" height="62" rx="8"/><rect x="72" y="342" width="144" height="62" rx="8"/>
+    <rect x="272" y="214" width="144" height="42" rx="8"/><rect x="272" y="268" width="144" height="62" rx="8"/><rect x="272" y="342" width="144" height="62" rx="8"/>
+  </g>
+  <g fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="13" text-anchor="middle">
+    <text x="144" y="240">code + files</text><text x="144" y="302">private heap</text><text x="144" y="376">main stack</text>
+    <text x="344" y="240">code + files</text><text x="344" y="302">private heap</text><text x="344" y="376">main stack</text>
+  </g>
+  <path d="M237 295h14" stroke="#f85149" stroke-width="4" stroke-dasharray="4 5"/>
+  <text x="244" y="455" text-anchor="middle" fill="#f85149" font-family="IBM Plex Sans, sans-serif" font-size="14">separate address spaces</text>
+  <text x="706" y="140" text-anchor="middle" fill="#3fb950" font-family="JetBrains Mono, monospace" font-size="18">TWO THREADS · ONE PROCESS</text>
+  <rect x="478" y="160" width="430" height="270" rx="18" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+  <rect x="504" y="206" width="378" height="54" rx="10" fill="#1c2128" stroke="#3fb950"/>
+  <rect x="504" y="273" width="378" height="54" rx="10" fill="#1c2128" stroke="#3fb950"/>
+  <text x="693" y="238" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">shared code · heap · open files</text>
+  <text x="693" y="305" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14">shared process address space</text>
+  <rect x="504" y="344" width="174" height="60" rx="10" fill="#1c2128" stroke="#58a6ff"/>
+  <rect x="708" y="344" width="174" height="60" rx="10" fill="#1c2128" stroke="#f0883e"/>
+  <text x="591" y="369" text-anchor="middle" fill="#58a6ff" font-family="JetBrains Mono, monospace" font-size="14">Thread 1</text>
+  <text x="591" y="391" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">own stack + registers</text>
+  <text x="795" y="369" text-anchor="middle" fill="#f0883e" font-family="JetBrains Mono, monospace" font-size="14">Thread 2</text>
+  <text x="795" y="391" text-anchor="middle" fill="#8b949e" font-family="JetBrains Mono, monospace" font-size="12">own stack + registers</text>
+  <text x="693" y="455" text-anchor="middle" fill="#3fb950" font-family="IBM Plex Sans, sans-serif" font-size="14">fast communication · synchronization required</text>
+  <rect x="52" y="476" width="856" height="38" rx="10" fill="#161b22" stroke="#30363d"/>
+  <text x="480" y="500" text-anchor="middle" fill="#8b949e" font-family="IBM Plex Sans, sans-serif" font-size="15">Isolation limits blast radius; sharing makes coordination cheaper but riskier.</text>
+</svg>

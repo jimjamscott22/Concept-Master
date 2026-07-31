@@ -1,6 +1,6 @@
 import type {
   Term, TermDetail, TermListResponse, TermCreatePayload,
-  TermUpdatePayload, TermSummary, Category, Tag, Stats,
+  TermUpdatePayload, TermSummary, TermMapNode, Category, Tag, Stats,
   ReviewQueueResponse, ReviewState, ReviewRating, StreakResponse,
   Article, ArticleDetail, ArticleListResponse, ArticleSummary,
   ArticleCreatePayload, ArticleUpdatePayload,
@@ -26,6 +26,7 @@ export const api = {
     list: (params?: URLSearchParams) =>
       request<TermListResponse>(`/terms${params ? "?" + params.toString() : ""}`),
     summaries: () => request<TermSummary[]>("/terms/summaries"),
+    graph: () => request<TermMapNode[]>("/terms/graph"),
     get: (slug: string) => request<TermDetail>(`/terms/${slug}`),
     create: (payload: TermCreatePayload) =>
       request<TermDetail>("/terms", { method: "POST", body: JSON.stringify(payload) }),

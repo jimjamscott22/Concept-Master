@@ -3,7 +3,11 @@ import useSWR, { mutate } from "swr"
 import { Layout }    from "./components/Layout"
 import { SearchBar } from "./components/SearchBar"
 import { Sidebar }   from "./components/Sidebar"
-import { SiteHeader } from "./components/SiteHeader"
+import { HeaderControls } from "./components/HeaderControls"
+import { BrowseNav } from "./components/BrowseNav"
+import { CommandPalette } from "./components/CommandPalette"
+import { CategoryChipRail } from "./components/CategoryChipRail"
+import { JumpToTermPill } from "./components/JumpToTermPill"
 import { TermCard }  from "./components/TermCard"
 import { TermDetail } from "./components/TermDetail"
 import { TermForm }   from "./components/TermForm"
@@ -14,6 +18,8 @@ import { ArticleCard } from "./components/ArticleCard"
 import { ArticleDetail } from "./components/ArticleDetail"
 import { ArticleForm } from "./components/ArticleForm"
 import { EmptyState } from "./components/EmptyState"
+import { DiagramPage } from "./components/DiagramPage"
+import { useUiPrefs } from "./hooks/useUiPrefs"
 import { useCategories } from "./hooks/useCategories"
 import { useTags }       from "./hooks/useTags"
 import { useTerms }      from "./hooks/useTerms"
@@ -24,7 +30,7 @@ import type {
   ArticleDetail as ArticleDetailType, ArticleCreatePayload,
 } from "./types"
 
-type View = "terms" | "stats" | "form" | "review" | "study" | "articles" | "article-form"
+type View = "terms" | "diagram" | "stats" | "form" | "review" | "study" | "articles" | "article-form"
 
 export default function App() {
   const [search,           setSearch]           = useState("")
@@ -41,6 +47,13 @@ export default function App() {
   const [editingArticleSlug, setEditingArticleSlug] = useState<string | null | "new">(null)
   const [showArticleDetail, setShowArticleDetail] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
+
+  const { theme, setTheme, layout, setLayout, typeMode, setTypeMode } = useUiPrefs()
+  const [paletteOpen, setPaletteOpen] = useState(false)
+  const [paletteQuery, setPaletteQuery] = useState("")
+
+  const openPalette = useCallback(() => { setPaletteQuery(""); setPaletteOpen(true) }, [])
+  const closePalette = useCallback(() => { setPaletteOpen(false); setPaletteQuery("") }, [])
 
   const { data: streakData } = useSWR("/review/streak", api.review.streak)
   const dueCount = streakData?.today_due ?? 0
@@ -59,7 +72,7 @@ export default function App() {
   const { categories } = useCategories()
   const { tags }       = useTags()
   const { terms, loading, error, refetch } = useTerms({
-    search, category: selectedCategory, tag: selectedTag, favoritesOnly,
+    search, category: selectedCategory, favoritesOnly,
     enabled: view === "terms" || view === "form"
   })
   const {
@@ -198,6 +211,22 @@ export default function App() {
     }
   }, [isArticleView, refetch, refetchTermSummaries, refetchArticles, refetchArticleSummaries])
 
+  const handlePaletteSelect = useCallback((slug: string) => {
+    closePalette()
+    handleSelectTerm(slug)
+  }, [closePalette, handleSelectTerm])
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault()
+        openPalette()
+      }
+    }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [openPalette])
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (view !== "terms") return
@@ -230,45 +259,70 @@ export default function App() {
     el?.scrollIntoView({ block: "nearest", behavior: "smooth" })
   }, [selectedSlug])
 
-  const sidebar = (
+  const isBrowseTermsView = view === "terms" || view === "form"
+  const isArticleSidebarView = view === "articles" || view === "article-form"
+
+  const sidebar = isBrowseTermsView && layout === "three" ? (
     <Sidebar
       categories={categories}
-      tags={tags}
       selectedCategory={selectedCategory}
-      selectedTag={selectedTag}
       favoritesOnly={favoritesOnly}
       onSelectCategory={setSelectedCategory}
-      onSelectTag={setSelectedTag}
       onToggleFavorites={() => setFavoritesOnly(v => !v)}
     />
-  )
+  ) : isArticleSidebarView ? (
+    <Sidebar
+      categories={categories}
+      selectedCategory={selectedCategory}
+      favoritesOnly={favoritesOnly}
+      onSelectCategory={setSelectedCategory}
+      onToggleFavorites={() => setFavoritesOnly(v => !v)}
+      tags={tags}
+      selectedTag={selectedTag}
+      onSelectTag={setSelectedTag}
+    />
+  ) : null
 
-  const searchPlaceholder = (view === "articles" || view === "article-form")
-    ? "Search articles…"
-    : "Search terms…"
+  const isBrowseView = view === "terms" || view === "form" || view === "diagram"
 
-  const headerNav = (
+  const headerNav = isBrowseView ? (
+    <div className="flex items-center gap-3 h-full pl-3 pr-1 flex-1 min-w-0">
+      <button
+        onClick={openPalette}
+        className="w-[220px] min-w-[150px] flex-shrink h-[34px] px-3 bg-bg border border-line rounded-[7px]
+                   text-[13px] text-fg3 flex items-center gap-2 hover:border-accent hover:text-fg2 transition-colors"
+      >
+        <span>⌕</span>
+        <span className="flex-1 text-left">Search terms…</span>
+        <span className="text-[10.5px] border border-line rounded px-[5px] py-px">CTRL+K</span>
+      </button>
+      <BrowseNav view={view} dueCount={dueCount} onNavigate={(v) => { if (v === "terms") setShowDetail(false); setView(v) }} />
+      <HeaderControls
+        layout={layout} onLayoutChange={setLayout}
+        typeMode={typeMode} onTypeModeChange={setTypeMode}
+        theme={theme} onThemeChange={setTheme}
+        onNewTerm={() => { setEditingSlug("new"); setView("form") }}
+        newLabel="Create a new term"
+        onExport={handleExport}
+        onImport={handleImport}
+      />
+    </div>
+  ) : (
     <div className="flex items-center gap-2 h-full pl-3 pr-1 flex-1">
-      <SearchBar value={search} onChange={setSearch} placeholder={searchPlaceholder} />
-      <span className="h-5 w-px bg-border flex-shrink-0 mx-1" aria-hidden />
-      <SiteHeader
-        view={view}
-        dueCount={dueCount}
-        onNavigate={(v) => {
-          if (v === "terms") setShowDetail(false)
-          if (v === "articles") setShowArticleDetail(false)
-          setView(v)
-        }}
+      <SearchBar value={search} onChange={setSearch} placeholder={
+        (view === "articles" || view === "article-form") ? "Search articles…" : "Search…"
+      } />
+      <span className="h-5 w-px bg-line flex-shrink-0 mx-1" aria-hidden />
+      <BrowseNav view={view} dueCount={dueCount} onNavigate={(v) => { if (v === "articles") setShowArticleDetail(false); setView(v) }} />
+      <HeaderControls
+        layout={layout} onLayoutChange={setLayout}
+        typeMode={typeMode} onTypeModeChange={setTypeMode}
+        theme={theme} onThemeChange={setTheme}
         onNewTerm={() => {
-          if (isArticleView) {
-            setExpandedArticle(null)
-            setEditingArticleSlug("new")
-            setView("article-form")
-          } else {
-            setEditingSlug("new")
-            setView("form")
-          }
+          if (isArticleView) { setExpandedArticle(null); setEditingArticleSlug("new"); setView("article-form") }
+          else { setEditingSlug("new"); setView("form") }
         }}
+        newLabel={isArticleView ? "New Article" : "Create a new term"}
         onExport={handleExport}
         onImport={handleImport}
       />
@@ -276,30 +330,47 @@ export default function App() {
   )
 
   return (
+    <>
     <Layout sidebar={sidebar} header={headerNav}>
       {view === "terms" && (
-        <div className="flex h-full">
-          {/* Term list */}
-          <div
-            ref={listRef}
-            className={`w-80 flex-shrink-0 border-r border-border overflow-y-auto ${showDetail ? "hidden md:block" : "block"}`}
-          >
-            {loading && <p className="p-4 text-muted text-sm">Loading…</p>}
-            {error   && <p className="p-4 text-red-400 text-sm">{error}</p>}
-            {!loading && terms.length === 0 && <EmptyState query={search} />}
-            {terms.map(term => (
-              <TermCard
-                key={term.id}
-                term={term}
-                isSelected={selectedSlug === term.slug}
-                onClick={() => handleSelectTerm(term.slug)}
-                onToggleFavorite={() => handleToggleFavorite(term.slug)}
+        <div className="flex h-full relative">
+          {layout === "two" && (
+            <div className={`w-[380px] flex-shrink-0 border-r border-line flex flex-col overflow-hidden ${showDetail ? "hidden md:flex" : "flex"}`}>
+              <CategoryChipRail
+                categories={categories}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+                totalCount={terms.length}
               />
-            ))}
-          </div>
+              <div ref={listRef} className="flex-1 overflow-y-auto">
+                {loading && <p className="p-4 text-fg3 text-sm">Loading…</p>}
+                {error && <p className="p-4 text-red-400 text-sm">{error}</p>}
+                {!loading && terms.length === 0 && <EmptyState query={search} />}
+                {terms.map(term => (
+                  <TermCard key={term.id} term={term} isSelected={selectedSlug === term.slug}
+                    onClick={() => handleSelectTerm(term.slug)} onToggleFavorite={() => handleToggleFavorite(term.slug)} />
+                ))}
+              </div>
+            </div>
+          )}
 
-          {/* Term detail */}
-          <div className={`flex-1 overflow-y-auto ${showDetail ? "block" : "hidden md:block"}`}>
+          {layout === "three" && (
+            <div ref={listRef} className={`w-[336px] flex-shrink-0 border-r border-line bg-bg2 overflow-y-auto ${showDetail ? "hidden md:block" : "block"}`}>
+              <div className="flex justify-between px-4 py-[11px] border-b border-line text-[11px] tracking-[.1em] text-fg3">
+                <span>{terms.length} TERMS</span>
+                <span>{selectedCategory ? categories.find(c => c.slug === selectedCategory)?.name.toUpperCase() : "ALL CATEGORIES"}</span>
+              </div>
+              {loading && <p className="p-4 text-fg3 text-sm">Loading…</p>}
+              {error && <p className="p-4 text-red-400 text-sm">{error}</p>}
+              {!loading && terms.length === 0 && <EmptyState query={search} />}
+              {terms.map(term => (
+                <TermCard key={term.id} term={term} isSelected={selectedSlug === term.slug}
+                  onClick={() => handleSelectTerm(term.slug)} onToggleFavorite={() => handleToggleFavorite(term.slug)} />
+              ))}
+            </div>
+          )}
+
+          <div className={`flex-1 overflow-y-auto ${showDetail || layout !== "three" ? "block" : "hidden md:block"}`}>
             {expandedTerm ? (
               <TermDetail
                 term={expandedTerm}
@@ -310,12 +381,19 @@ export default function App() {
                 onBack={() => setShowDetail(false)}
               />
             ) : (
-              <div className="flex items-center justify-center h-full text-muted text-sm">
-                Select a term to view its definition
-              </div>
+              <div className="flex items-center justify-center h-full text-fg3 text-sm">Select a term to view its definition</div>
             )}
           </div>
+
+          {layout === "center" && <JumpToTermPill onClick={openPalette} />}
         </div>
+      )}
+
+      {view === "diagram" && (
+        <DiagramPage
+          selectedSlug={selectedSlug}
+          onSelectTerm={(slug) => { setView("terms"); handleSelectTerm(slug) }}
+        />
       )}
 
       {view === "articles" && (
@@ -404,5 +482,13 @@ export default function App() {
         />
       )}
     </Layout>
+    <CommandPalette
+      open={paletteOpen}
+      query={paletteQuery}
+      onQueryChange={setPaletteQuery}
+      onClose={closePalette}
+      onSelect={handlePaletteSelect}
+    />
+    </>
   )
 }

@@ -7,7 +7,7 @@ import type { TermListResponse } from "../types"
 interface UseTermsOptions {
   search: string
   category: string | null
-  tag: string | null
+  tag?: string | null
   favoritesOnly: boolean
   limit?: number
   offset?: number

@@ -16,39 +16,31 @@ export function TermCard({ term, isSelected, onClick, onToggleFavorite }: TermCa
     <div
       data-slug={term.slug}
       onClick={onClick}
-      className={`group card-hover px-4 py-3 border-b border-border cursor-pointer
-        hover:bg-surface
-        ${isSelected ? "bg-surface border-l-2 border-l-accent" : "border-l-2 border-l-transparent"}`}
+      className={`px-4 py-[15px] border-b border-line border-l-[3px] cursor-pointer transition-colors
+        ${isSelected ? "bg-bg3 border-l-accent" : "border-l-transparent hover:bg-bg3/60"}`}
     >
       <div className="flex items-start justify-between gap-2">
-        <div className="flex-1 min-w-0">
-          <h3 className="font-mono font-medium text-sm text-text truncate">{term.name}</h3>
-          <p className="text-xs text-muted mt-0.5 leading-relaxed line-clamp-2">{preview}…</p>
-        </div>
-        <div className="flex flex-shrink-0 items-center gap-1.5">
+        <h3 className="font-semibold text-[14.5px] tracking-[-0.01em] text-fg truncate">{term.name}</h3>
+        <div className="flex-none flex items-center gap-1.5">
           {hasVisual && (
-            <span
-              title="Includes concept visual"
-              aria-label="Includes concept visual"
-              className="rounded border border-accent/30 bg-accent/10 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent"
-            >
+            <span className="text-[9.5px] tracking-[.1em] uppercase border border-tagLine text-tagFg rounded-[3px] px-[5px] py-px">
               Visual
             </span>
           )}
           <button
             onClick={e => { e.stopPropagation(); onToggleFavorite() }}
-            className={`text-sm transition-colors
-              ${term.is_favorite ? "text-green" : "text-muted hover:text-green"}`}
+            className={`text-[13px] ${term.is_favorite ? "text-accent" : "text-fg3 opacity-50"}`}
           >
-            {term.is_favorite ? "★" : "☆"}
+            ★
           </button>
         </div>
       </div>
-      {term.categories.length > 0 && (
-        <div className="flex flex-wrap gap-1 mt-2">
-          {term.categories.map(c => (
-            <span key={c.id} className="text-xs bg-code border border-border text-muted px-1.5 py-0.5 rounded">
-              {c.name}
+      <p className="mt-[5px] text-fg2 text-[12.5px] leading-[1.55] line-clamp-2">{preview}…</p>
+      {term.tags.length > 0 && (
+        <div className="flex flex-wrap gap-[5px] mt-[9px]">
+          {term.tags.map(t => (
+            <span key={t.id} className="text-[10.5px] text-tagFg bg-tagBg border border-tagLine rounded px-[7px] py-[2px]">
+              {t.name}
             </span>
           ))}
         </div>

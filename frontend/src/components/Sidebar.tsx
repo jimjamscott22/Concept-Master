@@ -2,87 +2,83 @@ import type { Category, Tag } from "../types"
 
 interface SidebarProps {
   categories: Category[]
-  tags: Tag[]
   selectedCategory: string | null
-  selectedTag: string | null
   favoritesOnly: boolean
   onSelectCategory: (slug: string | null) => void
-  onSelectTag: (name: string | null) => void
   onToggleFavorites: () => void
+  tags?: Tag[]
+  selectedTag?: string | null
+  onSelectTag?: (name: string | null) => void
 }
 
 export function Sidebar({
-  categories, tags, selectedCategory, selectedTag,
-  favoritesOnly,
-  onSelectCategory, onSelectTag, onToggleFavorites,
+  categories, selectedCategory, favoritesOnly, onSelectCategory, onToggleFavorites,
+  tags, selectedTag, onSelectTag,
 }: SidebarProps) {
   return (
-    <nav className="flex flex-col h-full text-sm">
-      {/* Filters header */}
-      <div className="px-4 pt-4 pb-2">
-        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono">
-          Filters
-        </p>
-      </div>
-
-      {/* Favorites */}
-      <div className="px-3 pb-3 border-b border-border">
+    <nav className="h-full overflow-y-auto pt-[18px] pb-10">
+      <p className="px-4 pb-[10px] text-[10.5px] tracking-[.14em] text-fg3 uppercase">Filters</p>
+      <div className="px-2 mb-1">
         <button
           onClick={onToggleFavorites}
-          className={`w-full text-left px-3 py-2 rounded-md transition-colors
-            flex items-center gap-2
-            ${favoritesOnly ? "bg-green/10 text-green" : "text-muted hover:bg-surface hover:text-text"}`}
+          className={`w-full text-left px-[10px] py-2 rounded-md text-[13px] transition-colors
+            ${favoritesOnly
+              ? "bg-bg3 border border-accent text-accent"
+              : "border border-transparent text-fg2 hover:bg-bg3"}`}
         >
-          <span className={favoritesOnly ? "text-green" : "text-muted/70"}>★</span>
-          <span>Favorites only</span>
+          ★ Favorites only
         </button>
       </div>
 
-      {/* Categories */}
-      <div className="px-3 py-3 border-b border-border flex-shrink-0">
-        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono mb-2 px-3">
-          Categories
-        </p>
+      <div className="h-px bg-line my-4 mx-4" />
+
+      <p className="px-4 pb-[10px] text-[10.5px] tracking-[.14em] text-fg3 uppercase">Categories</p>
+      <div className="px-2 flex flex-col gap-px">
         <button
           onClick={() => onSelectCategory(null)}
-          className={`w-full text-left px-3 py-1.5 rounded-md transition-colors mb-0.5
-            ${!selectedCategory ? "text-accent bg-accent/10" : "text-muted hover:text-text hover:bg-surface"}`}
+          className={`w-full flex justify-between px-[10px] py-2 rounded-md text-[13px] transition-colors
+            border-l-2
+            ${!selectedCategory ? "bg-bg3 text-fg border-accent" : "text-fg2 border-transparent hover:bg-bg3"}`}
         >
-          All
+          <span>All</span>
         </button>
         {categories.map(cat => (
           <button
             key={cat.id}
             onClick={() => onSelectCategory(cat.slug === selectedCategory ? null : cat.slug)}
-            className={`w-full text-left px-3 py-1.5 rounded-md transition-colors mb-0.5 flex justify-between
-              ${selectedCategory === cat.slug ? "text-accent bg-accent/10" : "text-muted hover:text-text hover:bg-surface"}`}
+            className={`w-full flex justify-between px-[10px] py-2 rounded-md text-[13px] transition-colors
+              border-l-2
+              ${selectedCategory === cat.slug ? "bg-bg3 text-fg border-accent" : "text-fg2 border-transparent hover:bg-bg3"}`}
           >
             <span>{cat.name}</span>
-            <span className="text-xs opacity-60">{cat.term_count}</span>
+            <span className="text-[11px] text-fg3">{cat.term_count}</span>
           </button>
         ))}
       </div>
 
-      {/* Tags */}
-      <div className="px-3 py-3 overflow-y-auto flex-1">
-        <p className="text-[10px] text-muted uppercase tracking-[0.2em] font-mono mb-2 px-3">
-          Tags
-        </p>
-        <div className="flex flex-wrap gap-1 px-1">
-          {tags.map(tag => (
-            <button
-              key={tag.id}
-              onClick={() => onSelectTag(tag.name === selectedTag ? null : tag.name)}
-              className={`px-2 py-0.5 rounded text-xs transition-colors
-                ${selectedTag === tag.name
-                  ? "bg-accent/20 text-accent border border-accent/30"
-                  : "bg-code text-muted border border-border hover:text-text"}`}
-            >
-              {tag.name}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Legacy tags section — only rendered for the Articles call site (Task 9).
+          Browse's three-pane call site omits `tags`, matching the new spec (no tag
+          filter in Pane A; tags live on cards/reader instead). */}
+      {tags && tags.length > 0 && onSelectTag && (
+        <>
+          <div className="h-px bg-line my-4 mx-4" />
+          <p className="px-4 pb-[10px] text-[10.5px] tracking-[.14em] text-fg3 uppercase">Tags</p>
+          <div className="px-3 flex flex-wrap gap-1">
+            {tags.map(tag => (
+              <button
+                key={tag.id}
+                onClick={() => onSelectTag(tag.name === selectedTag ? null : tag.name)}
+                className={`px-2 py-0.5 rounded text-xs transition-colors
+                  ${selectedTag === tag.name
+                    ? "bg-accent/20 text-accent border border-accent/30"
+                    : "bg-codeBg text-fg3 border border-line hover:text-fg"}`}
+              >
+                {tag.name}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
     </nav>
   )
 }

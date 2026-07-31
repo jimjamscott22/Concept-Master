@@ -6,6 +6,8 @@ A local-first desktop web application for building and browsing a personal gloss
 
 ---
 
+![Screenshot of Concept Master](docs/img/concept-master-1.png)
+
 ## Features
 
 - **Searchable glossary** — debounced full-text search across term names and definitions (press `Ctrl+K` or `/` to focus)

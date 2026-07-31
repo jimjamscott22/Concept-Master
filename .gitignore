@@ -59,5 +59,9 @@ Thumbs.db
 # Subagent-driven-development scratch state
 .superpowers/
 
+# Superdesign generated analysis and temporary conversion files
+.superdesign/init/
+.superdesign/tmp/
+
 # Extracted design-handoff assets (redundant with the committed .zip)
 docs/new_features/_extracted/

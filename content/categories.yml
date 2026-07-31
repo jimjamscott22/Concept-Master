@@ -18,6 +18,8 @@
   slug: devops
 - name: Functional Programming
   slug: functional-programming
+- name: Git
+  slug: git
 - name: Memory Management
   slug: memory-management
 - name: Networking

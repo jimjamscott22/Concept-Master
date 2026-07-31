@@ -4,13 +4,15 @@ categories:
 - ai-assisted-development
 tags:
 - agentic-ai
-- tooling
 - automation
+- tooling
 related:
-- tool-use
+- context-engineering
 - context-window
+- hallucination
 - model-context-protocol
-- prompt-engineering
+- system-prompt
+- tool-use
 code_lang: bash
 ---
 

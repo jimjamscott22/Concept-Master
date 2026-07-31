@@ -6,8 +6,8 @@ tags:
 - agentic-ai
 - fundamentals
 related:
-- prompt-engineering
 - ai-coding-agent
+- prompt-engineering
 code_lang: text
 ---
 

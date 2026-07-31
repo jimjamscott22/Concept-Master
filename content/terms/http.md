@@ -6,6 +6,8 @@ categories:
 tags:
 - exam-review
 - fundamentals
+related:
+- idempotency
 code_lang: bash
 ---
 

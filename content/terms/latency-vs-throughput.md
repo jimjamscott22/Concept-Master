@@ -5,9 +5,6 @@ categories:
 tags:
 - fundamentals
 - interview-prep
-related:
-- load-balancer
-- tcp
 code_lang: python
 ---
 

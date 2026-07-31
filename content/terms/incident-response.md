@@ -3,9 +3,9 @@ name: Incident Response
 categories:
 - devops
 tags:
+- monitoring
 - operations
 - reliability
-- monitoring
 code_lang: bash
 ---
 

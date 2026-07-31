@@ -6,7 +6,6 @@ tags:
 - fundamentals
 - sql
 related:
-- where-clause
 - index-database
 code_lang: sql
 ---

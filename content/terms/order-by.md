@@ -5,9 +5,6 @@ categories:
 tags:
 - fundamentals
 - sql
-related:
-- select-query
-- where-clause
 code_lang: sql
 ---
 

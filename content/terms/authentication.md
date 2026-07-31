@@ -7,6 +7,9 @@ tags:
 - fundamentals
 - java
 - python
+related:
+- json-web-token-jwt
+- oauth
 code_lang: python
 ---
 

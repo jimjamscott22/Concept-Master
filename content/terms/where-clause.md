@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - sql
 related:
-- select-query
 - delete-statement
+- select-query
 - update-statement
 code_lang: sql
 ---

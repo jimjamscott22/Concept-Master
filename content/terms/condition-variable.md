@@ -23,11 +23,6 @@ Why? **Spurious wakeups** can happen (the OS may wake a thread without a `notify
 **vs. Semaphore:** a semaphore is just a count; a condition variable lets you wait on *any* predicate over arbitrary shared state.
 
 ```python
-while not condition_holds():
-    cv.wait()
-```
-
-```python
 import threading
 from collections import deque
 
@@ -49,6 +44,11 @@ def producer(item):
 ```
 
 **vs. Semaphore:** a semaphore is just a count; a condition variable lets you wait on *any* predicate over arbitrary shared state.
+
+```python
+while not condition_holds():
+    cv.wait()
+```
 
 ```python
 while not condition_holds():

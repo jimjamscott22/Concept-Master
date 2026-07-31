@@ -6,7 +6,6 @@ tags:
 - fundamentals
 - sql
 related:
-- where-clause
 - aggregate-functions
 code_lang: sql
 ---

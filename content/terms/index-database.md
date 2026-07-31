@@ -5,6 +5,7 @@ categories:
 tags:
 - fundamentals
 related:
+- like-operator
 - primary-key
 - select-query
 code_lang: sql

@@ -5,6 +5,8 @@ categories:
 tags:
 - java
 - python
+related:
+- template-method-pattern
 code_lang: python
 ---
 

@@ -1,8 +1,8 @@
 ---
 name: Proxy Pattern
 categories:
-- design-patterns
 - cybersecurity
+- design-patterns
 tags:
 - advanced
 - interview-prep

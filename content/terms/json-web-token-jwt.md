@@ -8,7 +8,6 @@ tags:
 - interview-prep
 - security
 related:
-- oauth
 - authentication
 code_lang: javascript
 ---

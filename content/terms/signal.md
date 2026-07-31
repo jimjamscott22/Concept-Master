@@ -7,7 +7,6 @@ tags:
 - interview-prep
 related:
 - process-vs-thread
-- system-call
 code_lang: c
 ---
 

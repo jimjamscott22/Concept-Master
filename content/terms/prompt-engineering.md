@@ -6,9 +6,9 @@ tags:
 - agentic-ai
 - fundamentals
 related:
-- system-prompt
 - context-engineering
 - hallucination
+- system-prompt
 code_lang: text
 ---
 

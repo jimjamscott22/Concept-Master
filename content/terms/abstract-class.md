@@ -8,6 +8,7 @@ tags:
 - python
 related:
 - arraylist
+- template-method-pattern
 code_lang: python
 ---
 

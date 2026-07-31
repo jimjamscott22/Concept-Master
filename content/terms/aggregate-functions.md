@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - sql
 related:
-- group-by
-- select-query
+- distinct
+- null-sql
 code_lang: sql
 ---
 

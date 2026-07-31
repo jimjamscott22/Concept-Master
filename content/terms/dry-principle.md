@@ -6,8 +6,9 @@ tags:
 - fundamentals
 - interview-prep
 related:
-- separation-of-concerns
 - cohesion
+- kiss-principle
+- yagni
 code_lang: python
 ---
 

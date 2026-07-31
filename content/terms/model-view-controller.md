@@ -1,16 +1,13 @@
 ---
 name: Model-View-Controller
 categories:
-- design-patterns
 - design
+- design-patterns
 - web
 tags:
 - fundamentals
 - interview-prep
 - web
-related:
-- separation-of-concerns
-- rest
 code_lang: typescript
 ---
 

@@ -1,15 +1,14 @@
 ---
 name: Adapter Pattern
 categories:
-- design-patterns
 - design
+- design-patterns
 tags:
 - fundamentals
 - interview-prep
 - java
 related:
-- dependency-injection
-- java-interface
+- facade-pattern
 code_lang: java
 ---
 

@@ -1,14 +1,13 @@
 ---
 name: Facade Pattern
 categories:
-- design-patterns
 - design
+- design-patterns
 tags:
 - fundamentals
 - interview-prep
 related:
 - adapter-pattern
-- separation-of-concerns
 code_lang: python
 ---
 

@@ -7,6 +7,9 @@ tags:
 - sql
 related:
 - index-database
+- subquery
+- union-sql
+- where-clause
 code_lang: sql
 ---
 

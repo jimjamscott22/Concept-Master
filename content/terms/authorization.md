@@ -7,6 +7,9 @@ tags:
 - fundamentals
 - java
 - python
+related:
+- oauth
+- proxy-pattern
 code_lang: python
 ---
 

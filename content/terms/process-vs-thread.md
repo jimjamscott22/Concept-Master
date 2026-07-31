@@ -9,6 +9,7 @@ tags:
 related:
 - context-switch
 - mutex
+- signal
 - system-call
 code_lang: python
 ---

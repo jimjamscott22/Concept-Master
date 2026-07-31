@@ -6,8 +6,8 @@ tags:
 - agentic-ai
 - tooling
 related:
-- context-window
 - ai-coding-agent
+- context-window
 - prompt-engineering
 code_lang: text
 ---

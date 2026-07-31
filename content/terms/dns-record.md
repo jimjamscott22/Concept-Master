@@ -6,7 +6,6 @@ tags:
 - fundamentals
 - interview-prep
 related:
-- dns
 - cdn
 code_lang: bash
 ---

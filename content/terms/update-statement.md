@@ -8,6 +8,7 @@ tags:
 related:
 - sql-injection
 - transaction
+- where-clause
 code_lang: sql
 ---
 

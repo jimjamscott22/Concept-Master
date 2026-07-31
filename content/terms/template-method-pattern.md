@@ -8,8 +8,8 @@ tags:
 - interview-prep
 - java
 related:
-- inheritance
 - abstract-class
+- inheritance
 code_lang: java
 ---
 

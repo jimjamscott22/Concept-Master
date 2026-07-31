@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - interview-prep
 related:
-- kiss-principle
 - dry-principle
+- kiss-principle
 code_lang: typescript
 ---
 

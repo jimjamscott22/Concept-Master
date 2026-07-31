@@ -5,6 +5,8 @@ categories:
 tags:
 - infrastructure
 - performance
+related:
+- dns-record
 code_lang: bash
 ---
 

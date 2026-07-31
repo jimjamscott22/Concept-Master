@@ -6,6 +6,8 @@ tags:
 - fundamentals
 - os
 - unix
+related:
+- inode
 code_lang: c
 ---
 

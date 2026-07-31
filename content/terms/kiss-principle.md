@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - interview-prep
 related:
-- yagni
 - dry-principle
+- yagni
 code_lang: python
 ---
 

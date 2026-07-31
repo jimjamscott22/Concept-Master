@@ -4,6 +4,8 @@ categories:
 - databases
 tags:
 - fundamentals
+related:
+- subquery
 code_lang: sql
 ---
 

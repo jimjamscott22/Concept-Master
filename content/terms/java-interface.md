@@ -6,6 +6,8 @@ tags:
 - exam-review
 - fundamentals
 - java
+related:
+- solid-principles
 code_lang: java
 ---
 

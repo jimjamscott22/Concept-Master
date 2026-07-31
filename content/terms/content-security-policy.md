@@ -7,9 +7,6 @@ tags:
 - fundamentals
 - interview-prep
 - security
-related:
-- cross-site-scripting-xss
-- csrf
 code_lang: javascript
 ---
 

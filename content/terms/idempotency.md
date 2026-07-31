@@ -2,14 +2,13 @@
 name: Idempotency
 categories:
 - design
-- web
 - networking
+- web
 tags:
+- api
 - fundamentals
 - interview-prep
-- api
 related:
-- rest
 - http
 code_lang: javascript
 ---

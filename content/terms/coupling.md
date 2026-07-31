@@ -8,7 +8,7 @@ tags:
 - interview-prep
 related:
 - cohesion
-- dependency-injection
+- separation-of-concerns
 code_lang: java
 ---
 

@@ -7,8 +7,9 @@ tags:
 - fundamentals
 - interview-prep
 related:
-- separation-of-concerns
 - coupling
+- dry-principle
+- separation-of-concerns
 code_lang: java
 ---
 

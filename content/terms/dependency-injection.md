@@ -8,6 +8,7 @@ tags:
 - interview-prep
 - java
 related:
+- solid-principles
 - virtual-environment-python
 code_lang: java
 ---

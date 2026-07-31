@@ -8,6 +8,7 @@ tags:
 - python
 related:
 - closure
+- proxy-pattern
 code_lang: python
 ---
 

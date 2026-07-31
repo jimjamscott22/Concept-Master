@@ -7,7 +7,6 @@ tags:
 - sql
 related:
 - select-query
-- where-clause
 - sql-join
 code_lang: sql
 ---

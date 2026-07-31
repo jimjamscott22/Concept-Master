@@ -5,6 +5,9 @@ categories:
 tags:
 - fundamentals
 - javascript
+related:
+- model-context-protocol
+- tool-use
 code_lang: javascript
 ---
 

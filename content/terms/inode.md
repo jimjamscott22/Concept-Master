@@ -7,7 +7,6 @@ tags:
 - interview-prep
 related:
 - file-descriptor
-- virtual-memory
 code_lang: c
 ---
 

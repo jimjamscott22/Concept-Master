@@ -8,7 +8,7 @@ tags:
 related:
 - ai-coding-agent
 - context-engineering
-- prompt-engineering
+- system-prompt
 code_lang: text
 ---
 

@@ -6,8 +6,8 @@ tags:
 - fundamentals
 - sql
 related:
-- select-query
 - aggregate-functions
+- union-sql
 code_lang: sql
 ---
 

@@ -4,12 +4,12 @@ categories:
 - ai-assisted-development
 tags:
 - agentic-ai
-- tooling
 - api
+- tooling
 related:
-- tool-use
 - ai-coding-agent
 - json
+- tool-use
 code_lang: json
 ---
 

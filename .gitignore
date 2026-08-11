@@ -65,3 +65,6 @@ Thumbs.db
 
 # Extracted design-handoff assets (redundant with the committed .zip)
 docs/new_features/_extracted/
+
+# graphify knowledge graph (generated cache, intermediates, and local outputs)
+graphify-out/

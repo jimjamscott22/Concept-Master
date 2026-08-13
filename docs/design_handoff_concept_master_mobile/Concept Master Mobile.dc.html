@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta content="canvas" name="design_doc_mode">
+<link href="_ds/modernist-f136aad5-ae2d-4a68-9887-50f646de5082/styles.css" rel="stylesheet">
+<script src="_ds/modernist-f136aad5-ae2d-4a68-9887-50f646de5082/_ds_bundle.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#e8e6e1;font-family:'JetBrains Mono',ui-monospace,monospace}a{color:#0b62c4;text-decoration:none}a:hover{color:#083f7f}.dv-turn{padding:44px 48px 36px;border-bottom:1px solid rgba(0,0,0,.1)}.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 8px}.dv-tid{font:600 10px 'JetBrains Mono',monospace;padding:3px 7px;background:#1a1a1a;color:#fff;text-decoration:none}.dv-tname{font:600 13px/1.2 'JetBrains Mono',monospace;color:#1a1a1a}.dv-sub{font:12px/1.6 'JetBrains Mono',monospace;color:rgba(0,0,0,.55);max-width:70ch;margin:0 0 26px}.dv-opts{display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start}.dv-opt{flex:none;display:flex;flex-direction:column;gap:12px;scroll-margin-top:16px}.dv-oid{font:600 10.5px 'JetBrains Mono',monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;text-decoration:none}.dv-olabel{display:flex;align-items:baseline;gap:8px;font:400 11px/1.3 'JetBrains Mono',monospace;color:rgba(0,0,0,.55)}.dv-row{display:flex;gap:26px;align-items:flex-start}.dv-cap{font:10.5px 'JetBrains Mono',monospace;color:rgba(0,0,0,.45);margin:8px 0 0;text-align:left}.dv-next{margin:26px 0 0;font:12px/1.6 'JetBrains Mono',monospace;color:rgba(0,0,0,.5)}.dv-opt:target .dv-oid{background:#7cc4ff;color:#08121c}</style>
+</helmet>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">Add term — the fourth tab, end to end</span></div>
+<p class="dv-sub">Built on <a class="dv-oid" href="#1a">1a</a>'s vocabulary: mono chrome, serif definition body, tag pills, 3px left rule on the active row. The form is one scroll — term, category, definition — with code and diagram added on demand so the common case stays short. Everything writes to the local store immediately; the header chip flips from SYNCED to SYNC NOW · 1 until the next manual push.</p>
+<div class="dv-opts">
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>New term → tag sheet → saved and pending sync</div>
+<div class="dv-row">
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 16px 12px;background:#151a21;border-bottom:1px solid #2b333e;display:flex;align-items:center;justify-content:space-between">
+<span style="color:#7c8a99;font-size:13px">Cancel</span>
+<span style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.04em;color:#e9eef4">NEW TERM</span>
+<span style="font-size:13px;color:#7c8a99;opacity:.45">Save</span>
+</div>
+<div style="flex:1;overflow:hidden;padding:20px 16px 0">
+<div><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Term</div><div style="margin-top:7px;min-height:46px;display:flex;align-items:center;padding:0 12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px;font-size:15px;color:#7c8a99;opacity:.6">e.g. Hash Table</div></div>
+<div style="margin-top:18px"><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Category</div>
+<div style="display:flex;gap:6px;margin-top:9px;flex-wrap:wrap">
+<span style="padding:7px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Algorithms</span>
+<span style="padding:7px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Data Structures</span>
+<span style="padding:7px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Databases</span>
+<span style="padding:7px 12px;border:1px dashed #2b333e;color:#7c8a99;font-size:12px;border-radius:9999px">+ New</span>
+</div></div>
+<div style="margin-top:18px"><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Definition</div>
+<div style="margin-top:7px;min-height:132px;padding:12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px;font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.65;color:#7c8a99;opacity:.6">Write the definition in your own words…</div></div>
+<div style="margin-top:18px;display:flex;gap:8px">
+<div style="flex:1;height:44px;border:1px dashed #2b333e;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:7px;color:#7c8a99;font-size:12.5px">+ Code snippet</div>
+<div style="flex:1;height:44px;border:1px dashed #2b333e;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:7px;color:#7c8a99;font-size:12.5px">+ Diagram</div>
+</div>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">01</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">BROWSE</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">STUDY</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ARTICLES</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff;">04</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">ADD</span></div></div>
+</div>
+</x-import>
+<p class="dv-cap">Empty form — code and diagram are optional</p>
+</div>
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace;position:relative">
+<div style="padding:62px 16px 12px;background:#151a21;border-bottom:1px solid #2b333e;display:flex;align-items:center;justify-content:space-between">
+<span style="color:#7c8a99;font-size:13px">Cancel</span>
+<span style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.04em;color:#e9eef4">NEW TERM</span>
+<span style="font-size:13px;color:#7cc4ff;font-weight:600">Save</span>
+</div>
+<div style="flex:1;overflow:hidden;padding:20px 16px 0">
+<div><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Term</div><div style="margin-top:7px;min-height:46px;display:flex;align-items:center;padding:0 12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px;font-size:15px;color:#e9eef4;font-weight:600">Hash Table</div></div>
+<div style="margin-top:18px"><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Category</div>
+<div style="display:flex;gap:6px;margin-top:9px">
+<span style="padding:7px 12px;border:1px solid #7cc4ff;background:#1c232c;color:#e9eef4;font-size:12px;border-radius:9999px">Data Structures</span>
+<span style="padding:7px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Algorithms</span>
+</div></div>
+<div style="margin-top:18px"><div style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Definition</div>
+<div style="margin-top:7px;min-height:132px;padding:12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px;font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.65;color:#e9eef4">A structure that maps keys to values using a hash function, giving average O(1) lookup. Collisions are resolved by chaining or open addressing.<span style="display:inline-block;width:1.5px;height:17px;background:#7cc4ff;vertical-align:-3px;margin-left:1px"></span></div></div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;background:#151a21;border-top:1px solid #2b333e;border-radius:14px 14px 0 0;padding:16px 16px 40px;box-shadow:0 -18px 40px rgba(0,0,0,.45);z-index:2">
+<div style="width:36px;height:4px;background:#2b333e;border-radius:2px;margin:-6px auto 14px"></div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#7c8a99">Tags</span><span style="font-size:12.5px;color:#7cc4ff">Done</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:13px">
+<span style="font-size:12px;color:#151a21;background:#7cc4ff;border:1px solid #7cc4ff;border-radius:4px;padding:5px 10px">#fundamentals ✕</span>
+<span style="font-size:12px;color:#151a21;background:#7cc4ff;border:1px solid #7cc4ff;border-radius:4px;padding:5px 10px">#interview-prep ✕</span>
+<span style="font-size:12px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:5px 10px">#java</span>
+<span style="font-size:12px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:5px 10px">#exam-review</span>
+<span style="font-size:12px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:5px 10px">#python</span>
+</div>
+<div style="margin-top:13px;height:42px;display:flex;align-items:center;padding:0 12px;background:#0f1216;border:1px dashed #2b333e;border-radius:8px;color:#7c8a99;font-size:13px">+ Create a new tag</div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Tag sheet — pick existing tags or create one</p>
+</div>
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace;position:relative">
+<div style="padding:62px 16px 12px;background:#151a21;border-bottom:1px solid #2b333e">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+<div style="display:flex;align-items:center;gap:8px"><span style="color:#7cc4ff;font-weight:700;font-size:15px">&gt;</span><span style="font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#e9eef4">concept-master</span></div>
+<button style="height:30px;padding:0 10px;border:1px solid #7cc4ff;background:#1c232c;color:#7cc4ff;font:10.5px 'JetBrains Mono',monospace;letter-spacing:.06em;border-radius:6px">SYNC NOW · 1</button>
+</div>
+<div style="margin-top:12px;height:44px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px"><span style="color:#7c8a99;font-size:15px">⌕</span><span style="color:#7c8a99;font-size:14px">Search 188 terms…</span></div>
+</div>
+<div style="flex:1;overflow:hidden">
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid #7cc4ff;background:#1c232c">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Hash Table</h3><span style="font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid #2f4356;color:#9fd0ff;border-radius:3px;padding:1px 5px">Unsynced</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A structure that maps keys to values using a hash function, giving average O(1) lookup. Collisions are…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">#fundamentals</span><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">#interview-prep</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">ACID</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">ACID describes the four guarantees every reliable database transaction must provide…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">#exam-review</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Array</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A contiguous block of memory storing elements of the same type, accessed by index in O(1) time…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">#fundamentals</span><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">#java</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent;">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Binary Search</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A divide-and-conquer search algorithm that repeatedly halves the search space…</p>
+
+</div>
+</div>
+<div style="position:absolute;left:14px;right:14px;bottom:97px;background:#1c232c;border:1px solid #2f4356;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 10px 30px rgba(0,0,0,.5)">
+<span style="color:#e9eef4;font-size:13px">Saved locally · 1 term pending</span>
+<span style="color:#7cc4ff;font-size:12.5px;font-weight:600">Sync</span>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px"><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff;">01</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">BROWSE</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">STUDY</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ARTICLES</span></div><div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">04</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ADD</span></div></div>
+</div>
+</x-import>
+<p class="dv-cap">Back in Browse — new row on top, unsynced</p>
+</div>
+</div>
+</div>
+</div>
+<p class="dv-next">Try next: "add the code snippet editor screen" · "show the sync-in-progress and conflict states" · "let me edit an existing term from the detail ⋯ menu"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Concept Master for iOS — two navigation models</span></div>
+<p class="dv-sub">Both carry the desktop vocabulary over unchanged: JetBrains Mono chrome, Source Serif body, the Midnight and Paper palettes, 3px left rules on selected rows, tag pills, and the Definition / Code / Diagram tabs. Local-only: all 187 terms ship in the bundle, with a manual re-sync in the header. Detail tabs and the flashcard reveal are tappable.</p>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Bottom tab bar — Browse / Study / Articles, search always at the top</div>
+<div class="dv-row">
+
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 16px 12px;background:#151a21;border-bottom:1px solid #2b333e">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+<div style="display:flex;align-items:center;gap:8px"><span style="color:#7cc4ff;font-weight:700;font-size:15px">&gt;</span><span style="font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#e9eef4">concept-master</span></div>
+<button style="height:30px;padding:0 10px;border:1px solid #2b333e;background:#0f1216;color:#7c8a99;font:10.5px 'JetBrains Mono',monospace;letter-spacing:.06em;border-radius:6px">SYNCED 2h</button>
+</div>
+<div style="margin-top:12px;height:44px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#0f1216;border:1px solid #2b333e;border-radius:8px"><span style="color:#7c8a99;font-size:15px">⌕</span><span style="color:#7c8a99;font-size:14px">Search 187 terms…</span></div>
+</div>
+<div style="display:flex;gap:6px;padding:12px 14px;background:#151a21;border-bottom:1px solid #2b333e;overflow:hidden">
+<span style="flex:none;padding:6px 12px;border:1px solid #7cc4ff;background:#1c232c;color:#e9eef4;font-size:12px;border-radius:9999px">All <span style="opacity:.55">187</span></span>
+<span style="flex:none;padding:6px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Algorithms <span style="opacity:.55">21</span></span>
+<span style="flex:none;padding:6px 12px;border:1px solid #2b333e;color:#a9b6c4;font-size:12px;border-radius:9999px">Data Struc…</span>
+</div>
+<div style="flex:1;overflow:hidden">
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">ACID</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">ACID describes the four guarantees every reliable database transaction must provide…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">exam-review</span><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">fundamentals</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Array</h3><div style="display:flex;align-items:center;gap:6px"><span style="font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid #2f4356;color:#9fd0ff;border-radius:3px;padding:1px 5px">Visual</span><span style="color:#7cc4ff;font-size:15px">★</span></div></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A contiguous block of memory storing elements of the same type, accessed by index in O(1) time…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">fundamentals</span><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">java</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid #7cc4ff;background:#1c232c">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Binary Search</h3><div style="display:flex;align-items:center;gap:6px"><span style="font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;border:1px solid #2f4356;color:#9fd0ff;border-radius:3px;padding:1px 5px">Visual</span><span style="color:#7cc4ff;font-size:15px">★</span></div></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A divide-and-conquer search algorithm that repeatedly halves the search space…</p>
+<div style="display:flex;gap:5px;margin-top:10px"><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">interview-prep</span><span style="font-size:11px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:2px 7px">java</span></div>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Big O Notation</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A mathematical notation describing the upper bound of an algorithm's time or space complexity…</p>
+</div>
+<div style="padding:15px 16px;border-bottom:1px solid #2b333e;border-left:3px solid transparent">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><h3 style="margin:0;font:600 16px 'JetBrains Mono',monospace;color:#e9eef4">Closure</h3><span style="color:#7c8a99;opacity:.5;font-size:15px">★</span></div>
+<p style="margin:6px 0 0;color:#a9b6c4;font-size:13px;line-height:1.55">A function that captures variables from its enclosing scope, even after the outer function has…</p>
+</div>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff">01</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">BROWSE</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">STUDY</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ARTICLES</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">04</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ADD</span></div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Browse — search, chip rail, term rows</p>
+</div>
+
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 16px 10px;background:#151a21;border-bottom:1px solid #2b333e;display:flex;align-items:center;justify-content:space-between">
+<span style="color:#7c8a99;font-size:13px">← Browse</span>
+<div style="display:flex;gap:8px"><span style="width:32px;height:32px;border:1px solid #2b333e;background:#0f1216;color:#7cc4ff;border-radius:6px;display:flex;align-items:center;justify-content:center">★</span><span style="width:32px;height:32px;border:1px solid #2b333e;background:#0f1216;color:#7c8a99;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px">⋯</span></div>
+</div>
+<div style="flex:1;overflow:hidden;padding:20px 16px 0">
+<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px">
+<span style="font-size:11px;letter-spacing:.12em;font-weight:600;text-transform:uppercase;padding:3px 9px;background:#7cc4ff;color:#151a21;border-radius:4px">Algorithms</span>
+<span style="font-size:11.5px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:3px 9px">#interview-prep</span>
+<span style="font-size:11.5px;color:#9fd0ff;background:#1d2733;border:1px solid #2f4356;border-radius:4px;padding:3px 9px">#java</span>
+</div>
+<h1 style="margin:0 0 20px;font:700 30px/1.15 'JetBrains Mono',monospace;letter-spacing:-0.025em;color:#e9eef4">Binary Search</h1>
+<div style="display:flex;gap:4px;border-bottom:1px solid #2b333e">
+<button onClick="{{ tabDef }}" style="{{ styleDef }}">Definition</button>
+<button onClick="{{ tabCode }}" style="{{ styleCode }}">Code</button>
+<button onClick="{{ tabViz }}" style="{{ styleViz }}">Diagram</button>
+</div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ isDef }}">
+<div style="padding-top:22px;color:#e9eef4;font-family:'Source Serif 4',Georgia,serif;font-size:17px;line-height:1.7">
+<p style="margin:0 0 16px">A divide-and-conquer search algorithm that repeatedly halves the search space. Requires the array to be <strong>sorted</strong>.</p>
+<p style="margin:0 0 18px"><strong>Time complexity:</strong> O(log n)</p>
+</div>
+<pre style="margin:0;background:#0a0d11;border:1px solid #2b333e;border-radius:10px;padding:16px;overflow:hidden;font:12px/1.7 'JetBrains Mono',monospace;color:#dbe4ee"><span style="color:#82aaff">def</span> <span style="color:#ffcb6b">binary_search</span>(arr, target):
+    lo, hi = <span style="color:#f78c6c">0</span>, len(arr) - <span style="color:#f78c6c">1</span>
+    <span style="color:#82aaff">while</span> lo &lt;= hi:
+        mid = (lo + hi) // <span style="color:#f78c6c">2</span></pre>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ isCode }}">
+<div style="padding-top:22px">
+<div style="display:flex;gap:6px;margin-bottom:12px"><span style="padding:6px 13px;border:1px solid #7cc4ff;background:#1c232c;color:#e9eef4;font-size:12px;border-radius:6px">python</span><span style="padding:6px 13px;border:1px solid #2b333e;color:#7c8a99;font-size:12px;border-radius:6px">java</span></div>
+<pre style="margin:0;background:#0a0d11;border:1px solid #2b333e;border-radius:10px;padding:16px;overflow:hidden;font:12px/1.75 'JetBrains Mono',monospace;color:#dbe4ee"><span style="color:#82aaff">def</span> <span style="color:#ffcb6b">binary_search</span>(arr, target):
+    lo, hi = <span style="color:#f78c6c">0</span>, len(arr) - <span style="color:#f78c6c">1</span>
+    <span style="color:#82aaff">while</span> lo &lt;= hi:
+        mid = (lo + hi) // <span style="color:#f78c6c">2</span>
+        <span style="color:#82aaff">if</span> arr[mid] == target:
+            <span style="color:#82aaff">return</span> mid
+        <span style="color:#82aaff">elif</span> arr[mid] &lt; target:
+            lo = mid + <span style="color:#f78c6c">1</span>
+        <span style="color:#82aaff">else</span>:
+            hi = mid - <span style="color:#f78c6c">1</span>
+    <span style="color:#82aaff">return</span> -<span style="color:#f78c6c">1</span></pre>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ isViz }}">
+<div style="padding-top:22px">
+<div style="border:1px dashed #2b333e;background:#151a21;border-radius:10px;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+<span style="font:10.5px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#7c8a99;text-transform:uppercase">SVG from /concepts</span>
+<span style="font:12px 'JetBrains Mono',monospace;color:#a9b6c4">binary-search.svg — pinch to zoom</span>
+</div>
+</div>
+</sc-if>
+<div style="margin-top:24px;padding-top:18px;border-top:1px solid #2b333e">
+<p style="margin:0 0 10px;font:11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7c8a99;text-transform:uppercase">Related</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<span style="font:12.5px 'JetBrains Mono',monospace;color:#a9b6c4;background:#151a21;border:1px solid #2b333e;border-radius:6px;padding:8px 12px">Big O Notation <span style="color:#7c8a99">→</span></span>
+<span style="font:12.5px 'JetBrains Mono',monospace;color:#a9b6c4;background:#151a21;border:1px solid #2b333e;border-radius:6px;padding:8px 12px">Array <span style="color:#7c8a99">→</span></span>
+</div>
+</div>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff">01</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">BROWSE</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">STUDY</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ARTICLES</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">04</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ADD</span></div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Term detail — Definition / Code / Diagram tabs</p>
+</div>
+
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 16px 12px;background:#151a21;border-bottom:1px solid #2b333e">
+<p style="margin:0 0 6px;font:10.5px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7c8a99;text-transform:uppercase">Unscheduled practice</p>
+<h2 style="margin:0;font:700 22px 'JetBrains Mono',monospace;color:#e9eef4">Study</h2>
+<div style="display:flex;gap:6px;margin-top:12px">
+<span style="padding:6px 11px;border:1px solid rgba(124,196,255,.4);background:rgba(124,196,255,.1);color:#7cc4ff;font-size:12px;border-radius:6px">Flashcards</span>
+<span style="padding:6px 11px;border:1px solid #2b333e;background:#151a21;color:#7c8a99;font-size:12px;border-radius:6px">Quiz</span>
+</div>
+</div>
+<div style="flex:1;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#7c8a99"><span>Card <span style="color:#e9eef4">14</span> of 187</span><span>Name → Definition</span></div>
+<div style="flex:1;background:#151a21;border:1px solid #2b333e;border-radius:10px;padding:24px 20px;display:flex;flex-direction:column">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center">
+<p style="margin:0 0 12px;font-size:11px;letter-spacing:.16em;color:#7c8a99;text-transform:uppercase">What does this term mean?</p>
+<h2 style="margin:0;font:700 28px 'JetBrains Mono',monospace;color:#e9eef4">Closure</h2>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ revealed }}">
+<div style="margin-top:22px;padding-top:22px;border-top:1px solid #2b333e">
+<h3 style="margin:0 0 8px;font:400 11px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#7c8a99;text-transform:uppercase">Definition</h3>
+<p style="margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.65;color:#e9eef4">A function that captures variables from its enclosing scope, even after the outer function has returned. Enables data hiding and partial application.</p>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ notRevealed }}">
+<div style="margin-top:22px;text-align:center">
+<button onClick="{{ reveal }}" style="padding:12px 24px;background:rgba(124,196,255,.1);color:#7cc4ff;border:1px solid rgba(124,196,255,.3);border-radius:6px;font:500 14px 'JetBrains Mono',monospace">Show answer</button>
+</div>
+</sc-if>
+</div>
+<div style="display:flex;gap:8px">
+<button onClick="{{ hide }}" style="flex:1;padding:13px;border:1px solid #2b333e;background:none;color:#a9b6c4;border-radius:6px;font:13px 'JetBrains Mono',monospace">Previous</button>
+<button onClick="{{ hide }}" style="flex:1;padding:13px;border:1px solid rgba(124,196,255,.3);background:rgba(124,196,255,.1);color:#7cc4ff;border-radius:6px;font:13px 'JetBrains Mono',monospace">Next</button>
+</div>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">01</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">BROWSE</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff">02</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">STUDY</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">03</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ARTICLES</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">04</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ADD</span></div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Study — tap Show answer to reveal</p>
+</div>
+
+<div>
+<x-import component-from-global-scope="IOSDevice" dark="{{ true }}" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#0f1216;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 16px 10px;background:#151a21;border-bottom:1px solid #2b333e;display:flex;align-items:center;justify-content:space-between">
+<span style="color:#7c8a99;font-size:13px">← Articles</span>
+<span style="font-size:11px;color:#7c8a99">9 min read</span>
+</div>
+<div style="flex:1;overflow:hidden;padding:22px 18px 0">
+<p style="margin:0 0 10px;font-size:11px;letter-spacing:.12em;color:#7c8a99;text-transform:uppercase">Algorithms</p>
+<h1 style="margin:0 0 8px;font:700 26px/1.2 'JetBrains Mono',monospace;letter-spacing:-0.02em;color:#e9eef4">Understanding Big-O Notation</h1>
+<p style="margin:0 0 18px;font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:16px;color:#a9b6c4">A practical guide to reasoning about algorithmic complexity</p>
+<div style="height:1px;background:#2b333e;margin-bottom:18px"></div>
+<div style="font-family:'Source Serif 4',Georgia,serif;font-size:17.5px;line-height:1.72;color:#e9eef4">
+<p style="margin:0 0 18px">Big-O notation is the language we use to talk about how an algorithm's cost grows as its input grows. It deliberately ignores constants and lower-order terms so we can compare approaches without getting lost in machine-specific details.</p>
+<h2 style="margin:0 0 12px;font:600 19px 'JetBrains Mono',monospace;color:#e9eef4">Why constants don't matter (much)</h2>
+<p style="margin:0 0 18px">If one algorithm runs in 100n steps and another in 2n², the linear one wins for any sufficiently large n — no matter how big that constant 100 is.</p>
+</div>
+<div style="display:flex;gap:8px;padding-top:4px"><span style="font:12px 'JetBrains Mono',monospace;color:#a9b6c4;background:#151a21;border:1px solid #2b333e;border-radius:6px;padding:8px 12px">Big O Notation <span style="color:#7c8a99">→</span></span><span style="font:12px 'JetBrains Mono',monospace;color:#a9b6c4;background:#151a21;border:1px solid #2b333e;border-radius:6px;padding:8px 12px">Quick Sort <span style="color:#7c8a99">→</span></span></div>
+</div>
+<div style="flex:none;height:83px;background:#151a21;border-top:1px solid #2b333e;display:flex;align-items:flex-start;padding-top:9px">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">01</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">BROWSE</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">02</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">STUDY</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7cc4ff">03</span><span style="font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7cc4ff">ARTICLES</span></div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px"><span style="font-size:10.5px;color:#7c8a99;opacity:.5">04</span><span style="font:400 10.5px 'JetBrains Mono',monospace;letter-spacing:.08em;color:#7c8a99">ADD</span></div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Article reader</p>
+</div>
+
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Hub model — no tab bar; one index screen, everything pushes. Shown in Paper.</div>
+<div class="dv-row">
+
+<div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#faf9f7;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 20px 18px;border-bottom:2px solid #1a1c1f">
+<div style="display:flex;align-items:center;gap:8px"><span style="color:#0b62c4;font-weight:700;font-size:15px">&gt;</span><span style="font-weight:700;font-size:15px;color:#1a1c1f">concept-master</span></div>
+<h1 style="margin:16px 0 0;font:700 34px/1.05 'JetBrains Mono',monospace;letter-spacing:-0.03em;color:#1a1c1f">187 terms<br>on this phone</h1>
+<p style="margin:10px 0 0;font:11.5px 'JetBrains Mono',monospace;color:#787f88">Last synced 10 Aug, 14:22 · <span style="color:#0b62c4">Sync now</span></p>
+</div>
+<div style="flex:1">
+<div style="display:flex;align-items:center;gap:10px;padding:14px 20px;border-bottom:1px solid #ddd7cd;background:#f2f0ec"><span style="color:#787f88;font-size:15px">⌕</span><span style="color:#787f88;font-size:14px">Search terms, tags, categories…</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;color:#787f88">01</span><span style="font:600 17px 'JetBrains Mono',monospace;color:#1a1c1f">Browse</span></div><span style="font-size:12px;color:#787f88">187 →</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;color:#787f88">02</span><span style="font:600 17px 'JetBrains Mono',monospace;color:#1a1c1f">Study</span></div><span style="font-size:12px;color:#787f88">flashcards · quiz →</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;color:#787f88">03</span><span style="font:600 17px 'JetBrains Mono',monospace;color:#1a1c1f">Articles</span></div><span style="font-size:12px;color:#787f88">9 →</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:2px solid #1a1c1f"><div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;color:#787f88">04</span><span style="font:600 17px 'JetBrains Mono',monospace;color:#1a1c1f">Capture a term</span></div><span style="font-size:12px;color:#787f88">→</span></div>
+<p style="margin:0;padding:20px 20px 10px;font:10.5px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#787f88;text-transform:uppercase">Recently opened</p>
+<div style="padding:0 20px;display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd7cd"><span style="font-size:14px;color:#1a1c1f">Binary Search</span><span style="font-size:11px;color:#787f88">Algorithms</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd7cd"><span style="font-size:14px;color:#1a1c1f">Closure</span><span style="font-size:11px;color:#787f88">Functional</span></div>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd7cd"><span style="font-size:14px;color:#1a1c1f">ACID</span><span style="font-size:11px;color:#787f88">Databases</span></div>
+</div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Home index — flush-left, rules, no tabs</p>
+</div>
+
+<div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#faf9f7;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 20px 12px;border-bottom:2px solid #1a1c1f">
+<span style="color:#787f88;font-size:13px">← Home</span>
+<div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:10px"><h1 style="margin:0;font:700 26px 'JetBrains Mono',monospace;letter-spacing:-0.02em;color:#1a1c1f">Browse</h1><span style="font-size:11px;letter-spacing:.1em;color:#787f88">ALL CATEGORIES</span></div>
+<div style="margin-top:12px;height:42px;display:flex;align-items:center;gap:9px;padding:0 12px;background:#f2f0ec;border:1px solid #ddd7cd"><span style="color:#787f88;font-size:15px">⌕</span><span style="color:#787f88;font-size:14px">Filter 187 terms…</span></div>
+</div>
+<div style="flex:1;display:flex;overflow:hidden">
+<div style="flex:1;overflow:hidden">
+<p style="margin:0;padding:9px 20px;background:#f2f0ec;border-bottom:1px solid #ddd7cd;font:11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#787f88">A</p>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">ACID</span><span style="font-size:11px;color:#787f88">Databases</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">The four guarantees every reliable database transaction must provide…</p></div>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">Array</span><span style="font-size:11px;color:#787f88">Data Structures</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">A contiguous block of memory storing elements of the same type…</p></div>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">ArrayList</span><span style="font-size:11px;color:#787f88">Data Structures</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">A resizable array implementation backed by a growable object array…</p></div>
+<p style="margin:0;padding:9px 20px;background:#f2f0ec;border-bottom:1px solid #ddd7cd;font:11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#787f88">B</p>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd;border-left:3px solid #0b62c4;background:#f2f0ec"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">Big O Notation</span><span style="font-size:11px;color:#787f88">Algorithms</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">A mathematical notation describing the upper bound of an algorithm's…</p></div>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">Binary Search</span><span style="font-size:11px;color:#787f88">Algorithms</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">A divide-and-conquer search algorithm that repeatedly halves…</p></div>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">Binary Search Tree</span><span style="font-size:11px;color:#787f88">Data Structures</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">A binary tree where every left descendant is smaller than its node…</p></div>
+<div style="padding:13px 20px;border-bottom:1px solid #ddd7cd"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font:600 15px 'JetBrains Mono',monospace;color:#1a1c1f">Buffer Overflow</span><span style="font-size:11px;color:#787f88">Cybersecurity</span></div><p style="margin:5px 0 0;font-size:12.5px;line-height:1.5;color:#4c525a">Writing past the end of a fixed-size buffer, corrupting adjacent memory…</p></div>
+</div>
+<div style="flex:none;width:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font:9.5px 'JetBrains Mono',monospace;color:#787f88;border-left:1px solid #ddd7cd">
+<span style="color:#0b62c4;font-weight:700">A</span><span style="color:#0b62c4;font-weight:700">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span><span>I</span><span>J</span><span>K</span><span>L</span><span>M</span><span>N</span><span>O</span><span>P</span><span>Q</span><span>R</span><span>S</span><span>T</span><span>U</span><span>V</span><span>W</span>
+</div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Browse pushed — A–Z sections, index rail</p>
+</div>
+
+<div>
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="height:100%;display:flex;flex-direction:column;background:#faf9f7;font-family:'JetBrains Mono',monospace">
+<div style="padding:62px 20px 0;border-bottom:2px solid #1a1c1f">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="color:#787f88;font-size:13px">← Browse</span><div style="display:flex;gap:14px;font-size:15px"><span style="color:#0b62c4">★</span><span style="color:#787f88">⋯</span></div></div>
+<p style="margin:14px 0 6px;font-size:11px;letter-spacing:.12em;color:#787f88;text-transform:uppercase">Functional Programming</p>
+<h1 style="margin:0 0 14px;font:700 30px 'JetBrains Mono',monospace;letter-spacing:-0.025em;color:#1a1c1f">Closure</h1>
+<div style="display:flex;gap:0;border-top:1px solid #ddd7cd">
+<span style="flex:1;text-align:center;padding:12px 0;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.06em;color:#1a1c1f;background:#f2f0ec;border-bottom:2px solid #0b62c4">DEFINITION</span>
+<span style="flex:1;text-align:center;padding:12px 0;font:400 12px 'JetBrains Mono',monospace;letter-spacing:.06em;color:#787f88;border-left:1px solid #ddd7cd">CODE</span>
+<span style="flex:1;text-align:center;padding:12px 0;font:400 12px 'JetBrains Mono',monospace;letter-spacing:.06em;color:#787f88;border-left:1px solid #ddd7cd">DIAGRAM</span>
+</div>
+</div>
+<div style="flex:1;padding:22px 20px 0;overflow:hidden">
+<div style="font-family:'Source Serif 4',Georgia,serif;font-size:18px;line-height:1.72;color:#1a1c1f">
+<p style="margin:0 0 20px">A function that captures variables from its enclosing scope, even after the outer function has returned. Enables data hiding and partial application.</p>
+</div>
+<pre style="margin:0 0 20px;background:#f5f3ef;border:1px solid #ddd7cd;padding:16px;overflow:hidden;font:12px/1.7 'JetBrains Mono',monospace;color:#24272b"><span style="color:#0b62c4">def</span> <span style="color:#7a3ea8">make_counter</span>(start=<span style="color:#a03a12">0</span>):
+    count = [start]  <span style="color:#8a8f96"># mutable container</span>
+    <span style="color:#0b62c4">def</span> <span style="color:#7a3ea8">increment</span>():
+        count[<span style="color:#a03a12">0</span>] += <span style="color:#a03a12">1</span>
+        <span style="color:#0b62c4">return</span> count[<span style="color:#a03a12">0</span>]
+    <span style="color:#0b62c4">return</span> increment</pre>
+<div style="display:flex;gap:6px;margin-bottom:20px"><span style="font-size:11.5px;color:#12508a;background:#e7edf6;border:1px solid #c9d8ec;padding:3px 9px">#advanced</span><span style="font-size:11.5px;color:#12508a;background:#e7edf6;border:1px solid #c9d8ec;padding:3px 9px">#java</span><span style="font-size:11.5px;color:#12508a;background:#e7edf6;border:1px solid #c9d8ec;padding:3px 9px">#python</span></div>
+<div style="border-top:1px solid #ddd7cd;padding-top:16px">
+<p style="margin:0 0 10px;font:11px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#787f88;text-transform:uppercase">Related</p>
+<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #ddd7cd"><span style="font-size:14px;color:#1a1c1f">Decorator (Python)</span><span style="color:#787f88">→</span></div>
+</div>
+</div>
+</div>
+</x-import>
+<p class="dv-cap">Term detail — full-width segmented tabs</p>
+</div>
+
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "go with <a class="dv-oid" href="#1a">1a</a> but use <a class="dv-oid" href="#1b">1b</a>'s A–Z browse" · "add the Review queue and streak screens" · "show <a class="dv-oid" href="#1a">1a</a> in Paper too"</p>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { revealed: false, tab: "def", mRevealed: false, mTab: "def" };
+  renderVals() {
+    const t = this.state.tab;
+    const m = this.state.mTab;
+    const mOn = "flex:1;padding:12px 10px;text-align:left;border:none;border-bottom:3px solid var(--color-accent);background:none;color:var(--color-accent);font:800 11.5px var(--font-heading);letter-spacing:.08em;cursor:pointer";
+    const mOff = "flex:1;padding:12px 10px;text-align:left;border:none;border-bottom:3px solid transparent;background:none;color:var(--color-neutral-600);font:600 11.5px var(--font-heading);letter-spacing:.08em;cursor:pointer";
+    const on = "padding:11px 14px;font:600 12.5px 'JetBrains Mono',monospace;letter-spacing:.04em;margin-bottom:-1px;border:none;background:none;color:#e9eef4;border-bottom:2px solid #7cc4ff";
+    const off = "padding:11px 14px;font:400 12.5px 'JetBrains Mono',monospace;letter-spacing:.04em;margin-bottom:-1px;border:none;background:none;color:#7c8a99;border-bottom:2px solid transparent";
+    return {
+      revealed: this.state.revealed,
+      notRevealed: !this.state.revealed,
+      reveal: () => this.setState({ revealed: true }),
+      hide: () => this.setState({ revealed: false }),
+      isDef: t === "def", isCode: t === "code", isViz: t === "visual",
+      styleDef: t === "def" ? on : off,
+      styleCode: t === "code" ? on : off,
+      styleViz: t === "visual" ? on : off,
+      tabDef: () => this.setState({ tab: "def" }),
+      tabCode: () => this.setState({ tab: "code" }),
+      tabViz: () => this.setState({ tab: "visual" }),
+      mIsDef: m === "def", mIsCode: m === "code", mIsViz: m === "visual",
+      mStyleDef: m === "def" ? mOn : mOff,
+      mStyleCode: m === "code" ? mOn : mOff,
+      mStyleViz: m === "visual" ? mOn : mOff,
+      mTabDef: () => this.setState({ mTab: "def" }),
+      mTabCode: () => this.setState({ mTab: "code" }),
+      mTabViz: () => this.setState({ mTab: "visual" }),
+      mRevealed: this.state.mRevealed,
+      mNotRevealed: !this.state.mRevealed,
+      mReveal: () => this.setState({ mRevealed: true }),
+      mHide: () => this.setState({ mRevealed: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

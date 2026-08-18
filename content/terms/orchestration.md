@@ -6,6 +6,9 @@ tags:
 - containers
 - infrastructure
 - scaling
+related:
+- gitops
+- rolling-deployment
 code_lang: yaml
 ---
 

@@ -8,6 +8,7 @@ tags:
 - tooling
 related:
 - ai-coding-agent
+- human-in-the-loop
 - json
 - model-context-protocol
 code_lang: json

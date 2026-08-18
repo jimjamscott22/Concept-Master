@@ -6,6 +6,10 @@ tags:
 - automation
 - deployment
 - pipelines
+related:
+- feature-flag
+- gitops
+- secrets-management
 code_lang: yaml
 ---
 

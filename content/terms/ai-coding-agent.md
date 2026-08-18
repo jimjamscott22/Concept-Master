@@ -7,9 +7,11 @@ tags:
 - automation
 - tooling
 related:
+- chain-of-thought
 - context-engineering
 - context-window
 - hallucination
+- human-in-the-loop
 - model-context-protocol
 - system-prompt
 - tool-use

@@ -6,8 +6,10 @@ tags:
 - agentic-ai
 - fundamentals
 related:
+- chain-of-thought
 - context-engineering
 - hallucination
+- retrieval-augmented-generation
 - system-prompt
 code_lang: text
 ---

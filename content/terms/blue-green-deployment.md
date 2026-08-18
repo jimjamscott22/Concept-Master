@@ -6,6 +6,9 @@ tags:
 - deployment
 - release-strategy
 - rollback
+related:
+- canary-deployment
+- rolling-deployment
 code_lang: bash
 ---
 

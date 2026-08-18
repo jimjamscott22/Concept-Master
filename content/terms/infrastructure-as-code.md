@@ -6,6 +6,9 @@ tags:
 - automation
 - infrastructure
 - provisioning
+related:
+- gitops
+- secrets-management
 code_lang: hcl
 ---
 

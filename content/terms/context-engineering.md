@@ -8,7 +8,9 @@ tags:
 related:
 - ai-coding-agent
 - context-window
+- embeddings
 - prompt-engineering
+- retrieval-augmented-generation
 code_lang: text
 ---
 

@@ -6,6 +6,10 @@ tags:
 - deployment
 - monitoring
 - release-strategy
+related:
+- blue-green-deployment
+- feature-flag
+- rolling-deployment
 code_lang: yaml
 ---
 

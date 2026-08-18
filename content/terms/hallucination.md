@@ -8,6 +8,7 @@ tags:
 related:
 - ai-coding-agent
 - prompt-engineering
+- retrieval-augmented-generation
 code_lang: text
 ---
 

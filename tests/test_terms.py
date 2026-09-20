@@ -115,3 +115,25 @@ def test_toggle_favorite(client):
     client.patch("/api/terms/array/favorite")
     final = client.get("/api/terms/array").json()["is_favorite"]
     assert final != original
+
+
+def test_search_orders_by_relevance(client):
+    padding = " ".join(["filler word"] * 40)
+    name_hit = client.post("/api/terms", json={
+        "name": "Zzyxquank",
+        "definition": "A short definition unrelated to the query term.",
+        "category_ids": [], "tag_names": [], "related_term_ids": [],
+    }).json()
+    definition_hit = client.post("/api/terms", json={
+        "name": "Unrelated Padded Term",
+        "definition": f"{padding} zzyxquank {padding}",
+        "category_ids": [], "tag_names": [], "related_term_ids": [],
+    }).json()
+
+    response = client.get("/api/terms?q=zzyxquank")
+    names = [t["name"] for t in response.json()["terms"]]
+
+    assert names.index("Zzyxquank") < names.index("Unrelated Padded Term")
+
+    client.delete(f"/api/terms/{name_hit['slug']}")
+    client.delete(f"/api/terms/{definition_hit['slug']}")

@@ -231,6 +231,7 @@ async def list_terms(
     conn: aiomysql.Connection = Depends(get_db),
 ):
     joins, conditions, params = "", [], []
+    relevance_select, order_by, relevance_params = "", "t.name", []
 
     if category:
         joins += " JOIN term_categories tc ON t.id = tc.term_id JOIN categories c ON tc.category_id = c.id"
@@ -248,6 +249,9 @@ async def list_terms(
             ft_query = " ".join("+" + w + "*" for w in long_words)
             conditions.append("MATCH(t.name, t.definition) AGAINST (%s IN BOOLEAN MODE)")
             params.append(ft_query)
+            relevance_select = ", MATCH(t.name, t.definition) AGAINST (%s IN BOOLEAN MODE) AS relevance"
+            relevance_params = [ft_query]
+            order_by = "relevance DESC, t.name"
         else:
             conditions.append("(t.name LIKE %s OR t.definition LIKE %s)")
             params.extend([f"%{q}%", f"%{q}%"])
@@ -263,8 +267,9 @@ async def list_terms(
         total = (await cur.fetchone())["total"]
 
         await cur.execute(
-            f"SELECT DISTINCT t.* FROM terms t{joins}{where} ORDER BY t.name LIMIT %s OFFSET %s",
-            params + [limit, offset],
+            f"SELECT DISTINCT t.*{relevance_select} FROM terms t{joins}{where} "
+            f"ORDER BY {order_by} LIMIT %s OFFSET %s",
+            relevance_params + params + [limit, offset],
         )
         rows = await cur.fetchall()
 

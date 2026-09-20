@@ -118,22 +118,24 @@ def test_toggle_favorite(client):
 
 
 def test_search_orders_by_relevance(client):
-    padding = " ".join(["filler word"] * 40)
-    name_hit = client.post("/api/terms", json={
-        "name": "Zzyxquank",
-        "definition": "A short definition unrelated to the query term.",
+    # Alphabetically "Alpha..." would sort before "Beta...", but Beta's definition
+    # repeats the query word three times to Alpha's one, so it should rank first
+    # by FULLTEXT relevance.
+    weak_match = client.post("/api/terms", json={
+        "name": "Alpha Term XYZ",
+        "definition": "zzyxquank appears here only once in this definition.",
         "category_ids": [], "tag_names": [], "related_term_ids": [],
     }).json()
-    definition_hit = client.post("/api/terms", json={
-        "name": "Unrelated Padded Term",
-        "definition": f"{padding} zzyxquank {padding}",
+    strong_match = client.post("/api/terms", json={
+        "name": "Beta Term XYZ",
+        "definition": "zzyxquank zzyxquank zzyxquank this definition repeats the word three times.",
         "category_ids": [], "tag_names": [], "related_term_ids": [],
     }).json()
 
     response = client.get("/api/terms?q=zzyxquank")
     names = [t["name"] for t in response.json()["terms"]]
 
-    assert names.index("Zzyxquank") < names.index("Unrelated Padded Term")
+    assert names.index("Beta Term XYZ") < names.index("Alpha Term XYZ")
 
-    client.delete(f"/api/terms/{name_hit['slug']}")
-    client.delete(f"/api/terms/{definition_hit['slug']}")
+    client.delete(f"/api/terms/{weak_match['slug']}")
+    client.delete(f"/api/terms/{strong_match['slug']}")

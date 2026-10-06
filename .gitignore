@@ -68,3 +68,4 @@ docs/new_features/_extracted/
 
 # graphify knowledge graph (generated cache, intermediates, and local outputs)
 graphify-out/
+.cursor/hooks/state/continual-learning.json

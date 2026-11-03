@@ -1,10 +1,10 @@
 # IMPLEMENTATION PLAN — Daily Concept (Concept-Master bolt-on)
 
-Read `SPEC.md` first, then `docs/daily-concept/INTEGRATION_NOTES.md` for approved integration decisions. Every phase ends in a reviewable state with its checks reported. Don't start a phase until the previous one's checks pass and its scope is approved. Current approval covers the documentation revisions and Phase 1 only. Work sequentially; implement first, then add focused tests.
+Read `SPEC.md` first, then `docs/daily-concept/INTEGRATION_NOTES.md` for approved integration decisions. Every phase ends in a reviewable state with its checks reported. Don't start a phase until the previous one's checks pass and its scope is approved. Phase 1 is committed as `6e90d2e`; the user approved Phase 2, then explicitly requested Phase 3 while the isolated MariaDB gate remained blocked. Phase 4 is not approved. Carry the unresolved database gate forward; do not mark it passed based on offline tests. Work sequentially; implement first, then add focused tests.
 
 Conventions:
 - Python dependencies: `uv add <pkg>`, and run everything through `uv run ...`. Never use pip.
-- Branch creation and commits require explicit authorization; do not create a branch, commit, or push solely because this plan mentions them. Suggested commit messages: `daily-concept: phase N — <summary>`.
+- Branch creation and commits require explicit authorization; do not create a branch, commit, or push solely because this plan mentions them. Use the repository hook's Conventional Commits format, for example `feat(daily-concept): phase N summary`.
 - New backend code lives in a `daily_concept/` package, or wherever Phase 0 decides it fits better. New frontend code lives in a `daily/` feature folder that follows the existing structure.
 - When the spec and the existing codebase conflict, the **existing codebase conventions win**. Record the deviation in `INTEGRATION_NOTES.md`.
 
@@ -73,6 +73,9 @@ Conventions:
 3. Implement the `LLMProvider` protocol, `MockProvider`, and `AnthropicProvider`. Run `uv add anthropic`; the model and key come from env (SPEC §8.2).
 4. Implement the generator: buffer fill, selection, generation, validation, the retry loop with error feedback, and the status transitions (SPEC §8.1, §8.4, §8.5).
 5. Add the CLI: `uv run python -m daily_concept.generate --days-ahead N [--date D --force] [--provider mock|anthropic]`.
+   Mock CLI runs require `--dry-run` and use disposable memory, preventing fixture
+   lessons from being published. Real generation requires the feature flag and
+   explicit model/key settings; no implicit paid calls run during development.
 6. Add fixtures to `tests/fixtures/lessons/` covering valid, invalid-then-valid, and always-invalid cases.
 7. Write tests: schema validators, the generator with `MockProvider` (all three fixture paths), and the non-zero exit code on failure.
 8. Manual check (user runs this with a real key): generate 3 days and eyeball the quality. Tune the prompt if needed, and bump `PROMPT_VERSION` if it changes.

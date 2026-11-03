@@ -69,7 +69,7 @@ database sync and tables begin in Phase 2. Pydantic and PyYAML already exist.
 `networking`, `systems`, `security`, `ai-ml`, `python`, `web`, `data`, `software-engineering`, `hardware`. Keep this as an enum in code, and make adding a domain a one-line change.
 
 ### 5.3 Validation rules (enforced at load time and in tests)
-- `id` is unique and matches `^[a-z0-9]+(-[a-z0-9]+)*$`
+- `id` is unique, at most 255 characters (the MariaDB key limit chosen here), and matches `^[a-z0-9]+(-[a-z0-9]+)*$`
 - Every `prerequisites` and `related` id exists
 - The prerequisite edges form a DAG (no cycles); report the cycle path on failure
 - `difficulty` is an integer from 1 to 5
@@ -151,8 +151,11 @@ concept. Tests/startup never trigger implicit paid generation calls.
 
 ### 8.2 Provider abstraction
 - Define an `LLMProvider` protocol with a single method: `generate_lesson(concept, context) -> str (raw JSON)`.
-- **`AnthropicProvider`**: the default. The model comes from the `DAILY_LLM_MODEL` env var (for example `claude-sonnet-5`; confirm the current model string in the Anthropic docs). The API key comes from `ANTHROPIC_API_KEY`.
+- **`AnthropicProvider`**: the default for explicit persistent CLI runs. `DAILY_LLM_MODEL` is required (the example `claude-sonnet-5-5` was checked against the official model list during Phase 3). The API key comes from `ANTHROPIC_API_KEY`; no model or paid call is selected implicitly at startup.
 - **`MockProvider`**: returns fixtures from `tests/fixtures/lessons/`, including deliberately invalid ones.
+  The CLI requires `--provider mock --dry-run`, exercising generation in disposable
+  memory without a database or paid call. Fixture content is not publishable
+  curriculum material; persistent end-to-end validation still requires MariaDB.
 - If an Ollama or LM Studio provider is added later, it plugs into the same protocol. This is a nice-to-have, not MVP.
 
 ### 8.3 Prompt

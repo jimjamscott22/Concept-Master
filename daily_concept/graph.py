@@ -16,7 +16,7 @@ import yaml
 
 
 DEFAULT_GRAPH_PATH = Path(__file__).resolve().parent.parent / "content/daily_concepts/concepts.yaml"
-ConceptId = Annotated[str, StringConstraints(pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
+ConceptId = Annotated[str, StringConstraints(max_length=255, pattern=r"^[a-z0-9]+(-[a-z0-9]+)*$")]
 NonEmptyText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 
 

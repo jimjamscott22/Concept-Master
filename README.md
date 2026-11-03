@@ -233,6 +233,18 @@ The glossary now includes a diagram system for concept entries in the detail vie
 
 ## Next Steps
 
+Daily Concept graph validation and the generation CLI are available; the daily
+API and UI are planned in later phases. Start fully offline with:
+
+```sh
+uv run python -m daily_concept.generate --provider mock --dry-run --days-ahead 3
+```
+
+See [Daily Concept operations](docs/daily-concept/OPERATIONS.md) for configuration,
+manual provider validation, systemd/cron examples, container packaging, backup and
+restore, and the isolated MariaDB test gate. Scheduling is not installed or
+activated automatically.
+
 Suggested future improvements:
 
 - Add more concept diagrams for glossary terms that do not have visuals yet

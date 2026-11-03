@@ -86,6 +86,7 @@ def test_shared_prerequisite_is_not_a_cycle(tmp_path):
 
 @pytest.mark.parametrize("changes", [
     {"id": "Bad_slug"},
+    {"id": "a" * 256},
     {"id": "bad\n"},
     {"difficulty": 0},
     {"difficulty": 6},

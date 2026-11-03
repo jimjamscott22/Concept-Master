@@ -2,13 +2,17 @@
 
 Date: 2026-11-02
 
-Status: Phase 0 committed as `fd8577e`; approved revisions and Phase 1 implemented
-and locally verified. Changes remain uncommitted; Phase 2 awaits approval.
+Status: Phase 0 committed as `fd8577e`, Phase 1 as `6e90d2e`. Phases 2 and 3 are
+approved and implemented, with offline checks passing; isolated MariaDB,
+container execution, and real-provider validation remain outstanding. Phase 2/3
+implementation is paused at this commit checkpoint at the user's request.
+Phase 4 is not approved.
 
 These notes reconcile `docs/feature/SPEC.md` and `IMPLEMENTATION_PLAN.md`
 with the current source. Decisions below govern later phases; only the graph
 loader, validator, seed curriculum, CLI, and tests are in Phase 1. No database
-data is changed by Phase 1. Phases 2 onward require further approval.
+data is changed by Phase 1. The user subsequently approved Phases 2 and 3;
+later phases require further approval.
 
 ## 1. Source review and graph status
 
@@ -242,12 +246,17 @@ in Phase 1, before the generator exists.
 - Branch creation and per-phase commits described by the attached plan are not
   treated as separate user authorization. This phase leaves a reviewable document
   in the current checkout; no branch, commit, or push was performed.
-- The user approved these revisions and Phase 1 only. Implement graph validation
+- Initial approval covered these revisions and Phase 1 only. Implement graph validation
   and the CLI first, then focused tests; Pydantic and PyYAML already exist.
   Database sync moves entirely to Phase 2 alongside its tables. Stop after Phase
   1 validation and report results before requesting the next phase. Phases 6–7
   remain deferred. Real-provider quality review and two nights of unattended
   scheduling cannot be claimed from offline/local checks.
+
+The user subsequently requested committing Phase 1 and beginning Phase 2. This
+authorized Phase 2 implementation. The later request to continue Phase 3 approved
+generation implementation while carrying the unresolved database gate forward.
+No paid provider call or production database mutation was performed in this work.
 
 ## 12. Phase 1 implementation and verification
 
@@ -271,3 +280,106 @@ in Phase 1, before the generator exists.
 - No full database-backed suite, schema initialization, browser, container, or
   real-provider checks were run. No database access, startup wiring, generation,
   frontend changes, dependency additions, or Phase 2 implementation occurred.
+
+## 13. Phase 2 implementation and validation boundary
+
+- Added four additive tables to `backend/schema.sql`: concepts, daily lessons,
+  quiz responses, and a singleton streak row. The schema defines date/concept
+  uniqueness, claim token/expiry metadata, historical title/domain snapshots, and
+  unique daily answers. Repeated v2 review attempts can coexist via a nullable
+  generated daily-item key. Claim acquisition/recovery belongs to Phase 3;
+  response grading and streak updates belong to Phase 4.
+- `daily_concept/sync.py` validates the full YAML before database acquisition,
+  reconciles concepts in a transaction, rolls back failures, and soft-deletes
+  removed nodes. Lesson snapshots and progress are never rewritten by sync.
+  IDs now have a 255-character maximum matching the stored key.
+- Startup calls sync only when `DAILY_CONCEPT_ENABLED` is true (also accepting
+  1/yes/on), independently of `SYNC_ON_START`. It defaults off. The daily import
+  is lazy, preserving disabled startup before Phase 3 container packaging.
+  Pool cleanup now runs even when startup sync raises an error.
+- `daily_concept/selection.py` is a pure function over the current active graph,
+  taught IDs, reserved IDs, and lesson metadata. SHA-256 of the date seeds local
+  RNG tie-breaking over sorted IDs. Difficulty uses the last seven lessons
+  scheduled before the target date; domain rotation checks the preceding two
+  calendar dates. Relation scoring uses actual completion dates in the preceding
+  seven days, including late completions of older lessons. Callers must supply
+  valid lesson metadata (excluding failed generation rows).
+- Both normal and fallback paths exclude reservations. Exhaustion and temporary
+  reservation saturation have different log messages. No lesson is marked taught
+  by scheduling it; prerequisite fallback is logged explicitly.
+- Offline tests cover selection/scoring, reservation fallback, sync transaction
+  handling, flag gating, and startup-failure pool cleanup. Mocked sync/startup
+  checks do not establish MariaDB SQL compatibility.
+  The daily tests plus existing term/article loader/writer regression tests report
+  84 passed and 2 skipped. Seed validation and `git diff --check` also pass.
+- Opt-in integration tests in `tests/test_daily_concept_database.py` create/drop
+  only randomly named disposable databases. They apply schema twice on fresh and
+  representative existing-schema databases, check preserved glossary data,
+  idempotent sync, soft deletion/history, JSON storage, and uniqueness constraints.
+  They require explicit `DAILY_TEST_DB_HOST`, `DAILY_TEST_DB_USER`, and
+  `DAILY_TEST_DB_PASS` (optional `DAILY_TEST_DB_PORT`, default 3306), with permission
+  to create/drop disposable databases. They never fall back to application DB
+  settings. Run with `uv run pytest tests/test_daily_concept_database.py -q`.
+- Isolated database checks remain blocked: Docker's Linux engine is not running,
+  no native MariaDB executable was found in PATH, and no dedicated test-server
+  credentials are configured. The two opt-in cases are skipped. No development
+  database was accessed or modified, and Phase 2's database acceptance gate has
+  not passed. No generation, provider, frontend, browser, or image checks ran.
+
+## 14. Phase 3 implementation and verification
+
+- Added strict Pydantic lesson/visual/quiz/link models with length, word, sentence,
+  option, index, code, coding-domain, taught-link, and teaser-context checks.
+  Factual quality and semantic requirements such as a concrete analogy remain
+  human-review items; mechanical validation cannot prove them.
+- Added `prompts/lesson_v1.md`, JSON Schema/context embedding, and persisted
+  `PROMPT_VERSION`. Invalid output receives validation feedback without input
+  values, and is retried up to three attempts. Final invalid output is redacted
+  before failure storage; provider exception bodies are not retained or logged.
+- Added async `LLMProvider`, fixture-backed `MockProvider`, and `AnthropicProvider`
+  using the official SDK. `uv add anthropic tzdata` updated dependencies/lockfile.
+  The model is explicitly required from `DAILY_LLM_MODEL`. The example model
+  `claude-sonnet-5-5` was checked against
+  <https://platform.claude.com/docs/en/models/overview>; SDK usage was checked
+  against the official Python documentation. No real request was made.
+- The CLI fills today through today + N - 1, validates settings before database
+  access, syncs the graph, reserves each date/concept, and writes `ready` only
+  after validation. Existing valid lessons are skipped. Failed dates keep their
+  reservation. Forced replacement retains the concept and rejects completed
+  lessons. Exhaustion, saturation, active competing claims, or invalid output
+  produce a non-zero exit if a requested date lacks a valid lesson.
+- MariaDB claim transactions take the singleton streak lock before lesson locks,
+  then end before provider requests. Phase 4 must use the same lock order.
+  Five-minute claims and ownership/expiry predicates prevent stale workers from
+  saving. Crashed claims can be reclaimed on a later run. Transport retries are
+  off; each call is bounded by a 60-second SDK timeout and 65-second async timeout.
+- `--provider mock --dry-run` is a deliberate CLI adaptation: it exercises the
+  buffer/selection/validation/retry flow in disposable memory without MariaDB or
+  paid calls. Mock fixtures are not curriculum-accurate for arbitrary concepts
+  and cannot be persisted by the CLI. Paid dry runs are refused.
+- Backend Docker packaging now includes the daily package, prompts, and offline
+  fixtures. Compose passes daily environment settings and mounts daily source.
+  `.dockerignore` excludes the local graph output. Added `.env.example` entries
+  and `OPERATIONS.md`, linked from README, with scheduling, backup/restore,
+  disabled behavior, container checks, and manual-provider review instructions.
+  No schedule or service was installed or activated.
+- Verification: 144 focused tests passed and three isolated MariaDB cases skipped.
+  The actual CLI passed a three-day offline buffer and invalid-then-valid retry
+  (two attempts); always-invalid exited 1 as expected. `uv lock --check`,
+  `docker compose config --quiet`, and `git diff --check` passed.
+- Docker's Linux engine remains unavailable, so image build/execution was not
+  verified. Fresh/existing MariaDB schema tests plus the new SQL claim-recovery
+  test require dedicated isolated credentials and remain skipped. Unit tests of
+  disposable state do not prove SQL locking/concurrency. No development database
+  was accessed. Real generation of three lessons, human quality review, and
+  unattended scheduling remain unverified; Phase 3's full acceptance gate is
+  therefore still open. No Phase 4 API or frontend work was started.
+
+## 15. Paused checkpoint
+
+The user requested committing the Phase 2/3 work and pausing. Final focused
+verification reported 144 passed and three isolated MariaDB cases skipped;
+`git diff --check` passed. No paid provider call, development database mutation,
+or deployment occurred. Resume from the outstanding MariaDB/container/provider
+validation gates documented above before treating Phases 2/3 as fully accepted.
+No further implementation is authorized by this pause request.

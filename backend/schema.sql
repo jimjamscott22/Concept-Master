@@ -145,3 +145,75 @@ CREATE TABLE IF NOT EXISTS article_related_articles (
 CREATE INDEX IF NOT EXISTS idx_articles_slug      ON articles(slug);
 CREATE INDEX IF NOT EXISTS idx_articles_published ON articles(is_published);
 CREATE INDEX IF NOT EXISTS idx_articles_created   ON articles(created_at);
+
+-- Daily Concept is independent of glossary/review identity. Additive MVP tables.
+CREATE TABLE IF NOT EXISTS concepts (
+    id            VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    title         TEXT NOT NULL,
+    domain        VARCHAR(50) NOT NULL,
+    tags          JSON NOT NULL,
+    difficulty    TINYINT NOT NULL,
+    prerequisites JSON NOT NULL,
+    related       JSON NOT NULL,
+    angle         TEXT,
+    active        TINYINT(1) NOT NULL DEFAULT 1,
+    synced_at     DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (id),
+    CONSTRAINT chk_concept_difficulty CHECK (difficulty BETWEEN 1 AND 5)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS daily_lessons (
+    id             INT NOT NULL AUTO_INCREMENT,
+    concept_id     VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    scheduled_date DATE NOT NULL,
+    title          TEXT NOT NULL,
+    domain         VARCHAR(50) NOT NULL,
+    status         ENUM('scheduled', 'ready', 'published', 'completed', 'failed', 'pending_review') NOT NULL DEFAULT 'scheduled',
+    payload        JSON,
+    raw_output     LONGTEXT,
+    prompt_version VARCHAR(100),
+    model          VARCHAR(255),
+    attempts       INT NOT NULL DEFAULT 0,
+    claim_token    CHAR(36) CHARACTER SET ascii COLLATE ascii_bin,
+    claim_expires_at DATETIME(6),
+    created_at     DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    completed_at   DATETIME(6),
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_daily_date (scheduled_date),
+    UNIQUE KEY uq_daily_concept (concept_id),
+    CONSTRAINT fk_daily_concept FOREIGN KEY (concept_id) REFERENCES concepts(id),
+    CONSTRAINT chk_daily_attempts CHECK (attempts >= 0),
+    CONSTRAINT chk_daily_claim CHECK (
+        (claim_token IS NULL AND claim_expires_at IS NULL) OR
+        (claim_token IS NOT NULL AND claim_expires_at IS NOT NULL)
+    )
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS quiz_responses (
+    id             INT NOT NULL AUTO_INCREMENT,
+    lesson_id      INT NOT NULL,
+    item_index     INT NOT NULL,
+    selected_index INT NOT NULL,
+    correct        TINYINT(1) NOT NULL,
+    answered_at    DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    source         ENUM('daily', 'review') NOT NULL DEFAULT 'daily',
+    -- NULL permits multiple v2 review attempts while daily answers stay unique.
+    daily_item_index INT GENERATED ALWAYS AS
+        (CASE WHEN source = 'daily' THEN item_index ELSE NULL END) STORED,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_daily_response (lesson_id, daily_item_index),
+    CONSTRAINT fk_quiz_lesson FOREIGN KEY (lesson_id) REFERENCES daily_lessons(id),
+    CONSTRAINT chk_quiz_indices CHECK (item_index >= 0 AND selected_index >= 0)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS streaks (
+    id                  TINYINT NOT NULL,
+    `current`           INT NOT NULL DEFAULT 0,
+    longest             INT NOT NULL DEFAULT 0,
+    last_completed_date DATE,
+    PRIMARY KEY (id),
+    CONSTRAINT chk_streak_singleton CHECK (id = 1),
+    CONSTRAINT chk_streak_counts CHECK (`current` >= 0 AND longest >= `current`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT IGNORE INTO streaks (id) VALUES (1);

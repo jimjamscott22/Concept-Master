@@ -13,14 +13,22 @@ from .sync_content import DEFAULT_CONTENT_ROOT, sync_content
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.pool = await create_pool()
-    if os.getenv("SYNC_ON_START") == "1":
-        report = await sync_content(app.state.pool, DEFAULT_CONTENT_ROOT)
-        print(report.format())
-        article_report = await sync_articles(app.state.pool, DEFAULT_CONTENT_ROOT)
-        print(article_report.format())
-    yield
-    app.state.pool.close()
-    await app.state.pool.wait_closed()
+    try:
+        if os.getenv("SYNC_ON_START") == "1":
+            report = await sync_content(app.state.pool, DEFAULT_CONTENT_ROOT)
+            print(report.format())
+            article_report = await sync_articles(app.state.pool, DEFAULT_CONTENT_ROOT)
+            print(article_report.format())
+        if os.getenv("DAILY_CONCEPT_ENABLED", "false").strip().lower() in {"true", "1", "yes", "on"}:
+            # Keep disabled startup independent of the daily package and tables.
+            from daily_concept.sync import sync_concepts
+
+            count = await sync_concepts(app.state.pool)
+            print(f"Daily concept sync complete: {count} active concepts")
+        yield
+    finally:
+        app.state.pool.close()
+        await app.state.pool.wait_closed()
 
 
 app = FastAPI(title="Concept Master", lifespan=lifespan)

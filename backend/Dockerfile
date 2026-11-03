@@ -13,6 +13,8 @@ RUN uv sync --frozen --no-dev
 
 COPY backend ./backend
 COPY content ./content
+COPY daily_concept ./daily_concept
+COPY tests/fixtures/lessons ./tests/fixtures/lessons
 
 EXPOSE 8000
 

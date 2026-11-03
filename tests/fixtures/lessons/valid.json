@@ -1,0 +1,35 @@
+{
+  "concept_id": "python-values",
+  "hook": "Why can two names refer to the same list?",
+  "concept_md": "In Python, a name refers to an object rather than owning a private copy of its contents. Assignment evaluates the expression on the right and binds the name on the left to the resulting object. When you assign an existing list to another name, both names refer to that same list.\n\nMutating the list changes the object, so either name lets you observe the new contents. Rebinding one name is different: it changes which object that name refers to, without redirecting the other name. This distinction explains many surprising bugs involving shared collections.\n\nTo reason about a short program, draw names as arrows pointing toward objects. For assignment, move or add an arrow. For a list operation such as append, change the object that the arrow reaches. Keep those two actions separate while tracing each line. A shallow copy creates a new outer collection, but its elements can still refer to shared objects. Copying therefore requires deciding which parts of the structure should actually become independent.",
+  "analogy": "Two bookmarks can point to the same page; moving one bookmark does not rewrite the page.",
+  "see_it": {
+    "kind": "code",
+    "language": "python",
+    "content": "a = [1]\nb = a\nb.append(2)\nprint(a)",
+    "caption": "The two names reach one list."
+  },
+  "check": [
+    {
+      "kind": "predict_output",
+      "prompt": "What does this display?",
+      "code": "a = [1]\nb = a\nb.append(2)\nprint(a)",
+      "options": ["[1, 2]", "[1]", "[2]"],
+      "answer_index": 0,
+      "explanation": "Both names refer to the same mutated list."
+    },
+    {
+      "kind": "mcq",
+      "prompt": "What does rebinding a name change?",
+      "options": ["The object that name refers to", "Every alias", "The Python interpreter"],
+      "answer_index": 0,
+      "explanation": "Rebinding redirects a single name."
+    }
+  ],
+  "link": {
+    "previous_concept_id": null,
+    "connection": "Distinguishing names from objects helps reason about shared state.",
+    "tomorrow_teaser": null
+  },
+  "fun_fact": null
+}

@@ -29,6 +29,12 @@ services:
       DB_PASS: ${DB_PASS:-concept_password}
       DB_NAME: ${DB_NAME:-concept_master}
       SYNC_ON_START: ${SYNC_ON_START:-1}
+      DAILY_CONCEPT_ENABLED: ${DAILY_CONCEPT_ENABLED:-false}
+      DAILY_TIMEZONE: ${DAILY_TIMEZONE:-America/New_York}
+      DAILY_LLM_MODEL: ${DAILY_LLM_MODEL:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      DAILY_ADMIN_ENABLED: ${DAILY_ADMIN_ENABLED:-false}
+      DAILY_REQUIRE_APPROVAL: ${DAILY_REQUIRE_APPROVAL:-false}
     command: >
       sh -c "python -m backend.database &&
              uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000"
@@ -37,6 +43,7 @@ services:
     volumes:
       - ./backend:/app/backend
       - ./content:/app/content
+      - ./daily_concept:/app/daily_concept
     depends_on:
       db:
         condition: service_healthy

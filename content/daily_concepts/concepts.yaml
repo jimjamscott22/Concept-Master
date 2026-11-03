@@ -1,0 +1,270 @@
+# Stable curriculum IDs; these are separate from editable glossary term slugs.
+- id: binary-representation
+  title: Representing information with bits
+  domain: hardware
+  tags: [bits, representation]
+  difficulty: 1
+  prerequisites: []
+  related: [python-values]
+  angle: "The same eight bits can be a number, a letter, or part of a picture. Who decides?"
+
+- id: logic-gates
+  title: Building decisions from logic gates
+  domain: hardware
+  tags: [circuits, boolean-logic]
+  difficulty: 2
+  prerequisites: [binary-representation]
+  related: [python-control-flow]
+  angle: "How can switches that only know on and off add two numbers?"
+
+- id: cpu-instructions
+  title: How a CPU follows instructions
+  domain: hardware
+  tags: [cpu, instructions]
+  difficulty: 3
+  prerequisites: [logic-gates]
+  related: [processes]
+  angle: "A processor does not understand your program; it keeps fetching the next instruction."
+
+- id: processes
+  title: Processes and isolated execution
+  domain: systems
+  tags: [operating-systems, processes]
+  difficulty: 3
+  prerequisites: [cpu-instructions]
+  related: [virtual-memory]
+  angle: "Why can two programs both believe they own the same memory address?"
+
+- id: virtual-memory
+  title: Virtual memory and address translation
+  domain: systems
+  tags: [memory, operating-systems]
+  difficulty: 4
+  prerequisites: [processes]
+  related: [container-isolation]
+  angle: "Your program gets a private map of memory, while the OS holds the atlas."
+
+- id: container-isolation
+  title: Containers share a kernel while isolating processes
+  domain: systems
+  tags: [containers, isolation]
+  difficulty: 4
+  prerequisites: [processes]
+  related: [least-privilege]
+  angle: "If a container is not a tiny virtual machine, what is keeping it separate?"
+
+- id: ip-addresses
+  title: IP addresses identify network interfaces
+  domain: networking
+  tags: [ip, addressing]
+  difficulty: 1
+  prerequisites: []
+  related: [binary-representation]
+  angle: "An IP address is a delivery address, but it does not promise the recipient is listening."
+
+- id: packet-routing
+  title: Routing packets between networks
+  domain: networking
+  tags: [routing, packets]
+  difficulty: 2
+  prerequisites: [ip-addresses]
+  related: [dns-resolution]
+  angle: "Each router only needs to choose the next hop, not plan the entire journey."
+
+- id: dns-resolution
+  title: How DNS resolution works
+  domain: networking
+  tags: [dns, protocols]
+  difficulty: 2
+  prerequisites: [ip-addresses]
+  related: [http-request-response]
+  angle: "Why typing a name can trigger a small worldwide scavenger hunt."
+
+- id: tcp-reliability
+  title: Reliable byte streams over unreliable packets
+  domain: networking
+  tags: [tcp, reliability]
+  difficulty: 3
+  prerequisites: [packet-routing]
+  related: [http-request-response]
+  angle: "Packets can disappear or arrive twice; how does a download still come out intact?"
+
+- id: least-privilege
+  title: Giving each program only the permissions it needs
+  domain: security
+  tags: [permissions, access-control]
+  difficulty: 1
+  prerequisites: []
+  related: [container-isolation]
+  angle: "A music player should not need the keys to every file on your computer."
+
+- id: authentication-authorization
+  title: Proving identity versus granting access
+  domain: security
+  tags: [identity, authorization]
+  difficulty: 2
+  prerequisites: [least-privilege]
+  related: [http-request-response]
+  angle: "Knowing who you are does not tell a server what you may do."
+
+- id: tls-trust
+  title: TLS encryption and certificate trust
+  domain: security
+  tags: [tls, certificates]
+  difficulty: 3
+  prerequisites: [tcp-reliability, authentication-authorization]
+  related: [dns-resolution]
+  angle: "Encryption hides the conversation, but how do you know who is on the other end?"
+
+- id: python-values
+  title: Python names refer to values
+  domain: python
+  tags: [python, values, names]
+  difficulty: 1
+  prerequisites: []
+  related: [binary-representation]
+  angle: "Assignment attaches a name to an object; it does not put the object in a labeled box."
+
+- id: python-control-flow
+  title: Choosing and repeating work in Python
+  domain: python
+  tags: [python, conditionals, loops]
+  difficulty: 2
+  prerequisites: [python-values]
+  related: [logic-gates]
+  angle: "Trace a loop one decision at a time and the surprising output stops being surprising."
+
+- id: python-mutability
+  title: Shared references and mutable objects
+  domain: python
+  tags: [python, references, mutability]
+  difficulty: 3
+  prerequisites: [python-control-flow]
+  related: [pure-functions]
+  angle: "Why did changing one list also change the list under another name?"
+
+- id: http-request-response
+  title: HTTP requests and responses
+  domain: web
+  tags: [http, client-server]
+  difficulty: 2
+  prerequisites: [dns-resolution]
+  related: [tcp-reliability]
+  angle: "A browser asks a structured question, and a server answers with more than a page."
+
+- id: browser-rendering
+  title: From HTML and CSS to pixels
+  domain: web
+  tags: [browser, html, css]
+  difficulty: 3
+  prerequisites: [http-request-response]
+  related: [cpu-instructions]
+  angle: "Downloading a page is only the beginning of the browser's work."
+
+- id: http-caching
+  title: Reusing HTTP responses safely
+  domain: web
+  tags: [http, caching]
+  difficulty: 3
+  prerequisites: [http-request-response]
+  related: [browser-rendering]
+  angle: "Sometimes the fastest response is permission to keep the copy you already have."
+
+- id: relational-tables
+  title: Organizing data into related tables
+  domain: data
+  tags: [databases, relations]
+  difficulty: 1
+  prerequisites: []
+  related: [data-modeling]
+  angle: "Why repeat a customer's name on every order when one stable ID can connect them?"
+
+- id: database-indexes
+  title: Indexes trade storage and writes for faster lookups
+  domain: data
+  tags: [databases, indexes]
+  difficulty: 2
+  prerequisites: [relational-tables]
+  related: [http-caching]
+  angle: "A database index helps you skip rows, but someone has to keep the shortcut up to date."
+
+- id: database-transactions
+  title: Making a group of database changes atomic
+  domain: data
+  tags: [databases, transactions]
+  difficulty: 3
+  prerequisites: [relational-tables]
+  related: [idempotency]
+  angle: "Moving money needs both account updates to succeed together, even when the process crashes."
+
+- id: model-predictions
+  title: Machine learning models learn patterns for predictions
+  domain: ai-ml
+  tags: [machine-learning, predictions]
+  difficulty: 1
+  prerequisites: []
+  related: [relational-tables]
+  angle: "A model can learn a useful pattern without knowing why that pattern exists."
+
+- id: training-inference
+  title: Learning model parameters versus using them
+  domain: ai-ml
+  tags: [training, inference]
+  difficulty: 2
+  prerequisites: [model-predictions]
+  related: [cpu-instructions]
+  angle: "Answering a question with a model does not necessarily teach it anything new."
+
+- id: tokens-context
+  title: Tokens and a language model's context window
+  domain: ai-ml
+  tags: [language-models, tokens, context]
+  difficulty: 2
+  prerequisites: [training-inference]
+  related: [binary-representation]
+  angle: "A model reads pieces of text, and the workbench holding those pieces has limited space."
+
+- id: retrieval-augmentation
+  title: Supplying retrieved evidence to a language model
+  domain: ai-ml
+  tags: [retrieval, grounding]
+  difficulty: 3
+  prerequisites: [tokens-context]
+  related: [database-indexes]
+  angle: "An open-book exam still depends on finding the right page and interpreting it correctly."
+
+- id: data-modeling
+  title: Choosing representations that preserve useful meaning
+  domain: software-engineering
+  tags: [modeling, invariants]
+  difficulty: 1
+  prerequisites: []
+  related: [relational-tables]
+  angle: "Representing money as a floating-point number is a design decision with consequences."
+
+- id: pure-functions
+  title: Predictable functions without hidden changes
+  domain: software-engineering
+  tags: [functions, side-effects]
+  difficulty: 2
+  prerequisites: [python-values]
+  related: [python-mutability]
+  angle: "If the inputs stay the same, what else could make a function return something different?"
+
+- id: idempotency
+  title: Making retries safe with idempotent operations
+  domain: software-engineering
+  tags: [retries, reliability]
+  difficulty: 3
+  prerequisites: [http-request-response, data-modeling]
+  related: [database-transactions]
+  angle: "A timeout leaves you unsure whether the server acted. Can you safely ask again?"
+
+- id: dependency-inversion
+  title: Depending on contracts rather than concrete services
+  domain: software-engineering
+  tags: [interfaces, dependencies]
+  difficulty: 3
+  prerequisites: [pure-functions]
+  related: [idempotency]
+  angle: "How can lesson generation work with a real provider today and an offline fixture tomorrow?"

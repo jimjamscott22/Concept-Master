@@ -15,12 +15,16 @@ This is a **bolt-on**, not a rewrite. It reuses Concept-Master's existing stack,
 5. **Additive and reversible.** The whole feature sits behind a `DAILY_CONCEPT_ENABLED` flag and lives in its own module(s). Removing the flag restores the old app.
 6. **Match the existing look.** Use Concept-Master's existing design tokens and components. Do not introduce a new palette or font.
 
-## 3. Assumptions (verify in Phase 0)
+## 3. Stack confirmed in Phase 0
 
-- Backend is Python (likely FastAPI) and frontend is React. If the stack differs (for example, the Expo/React Native port has become the main client), adapt the file layout and keep the contracts in this spec.
+Phase 0 confirmed React 19 web, FastAPI, single-user/no-auth, and MariaDB via
+`aiomysql` with direct SQL and schema initialization (no ORM/migration tool).
+The approved integration notes govern these adaptations. Phase 1 is graph-only;
+database sync and tables begin in Phase 2. Pydantic and PyYAML already exist.
+
 - Python dependencies are managed with **uv** (`uv add ...`, `uv run ...`). Do not use pip or poetry.
-- The database is SQLite unless Concept-Master already uses something else, in which case use that and its existing migration tooling.
-- The app may be single-user. If it has a user model, key all per-user tables below by `user_id`.
+- Use MariaDB and additive SQL in `backend/schema.sql`; do not introduce SQLite or an ORM.
+- Preserve the single-user model without adding `user_id` columns or an account system.
 
 ## 4. Scope
 
@@ -85,8 +89,12 @@ Run once per date by the generator. The selection must be deterministic for a gi
    - +3 if its domain differs from both of the previous 2 days' domains
    - +2 if its difficulty is within ±1 of the user's recent average (the last 7 lessons; default 2)
    - +1 if it is `related` to something taught in the last 7 days
-3. Choose the highest score. Break ties with a seeded RNG, where `seed = hash(date)`.
-4. **Fallback:** if no concept is eligible, pick the lowest-difficulty untaught concept, ignoring prerequisites, and log a warning. If every concept has been taught, log "graph exhausted" and skip generation. The UI then shows a review-only day.
+3. Choose the highest score. Break ties over sorted candidates with a stable date-derived seed; do not use Python's randomized built-in string hash.
+4. **Fallback:** choose the lowest-difficulty active, untaught, unreserved concept, ignoring prerequisites, and log a warning. If all active concepts have been taught, log "graph exhausted" and skip generation; MVP offers history (daily reviews arrive in v2). If remaining concepts are reserved, report reservation saturation rather than exhaustion and do not duplicate them.
+
+Pass reservations explicitly: `select_concept(date, taught, reserved, recent_lessons, graph)`.
+Only completed concepts count as taught; generating future lessons does not
+satisfy prerequisites.
 
 ## 7. Lesson schema
 
@@ -131,9 +139,15 @@ Each lesson must include at least one item that is **not** `mcq`, provided the c
 uv run python -m daily_concept.generate --days-ahead 3
 uv run python -m daily_concept.generate --date 2026-10-01 --force
 ```
-- Keeps a buffer of `--days-ahead` scheduled lessons (default 3), running selection for each missing date.
-- `--force` regenerates the lesson for a specific date.
+- Covers today through today + N - 1 in `DAILY_TIMEZONE` (default N=3), filling missing or failed dates.
+- `--force` regenerates an uncompleted lesson for a specific date, retaining its concept; completed lessons cannot be overwritten.
 - Exits non-zero if any date ends without a valid lesson.
+
+Atomically reserve each date and concept using an expiring claim and ownership
+token. Never hold a database transaction during provider calls. A worker may
+save output only while it owns the unexpired claim. Reclaim expired jobs; failed
+dates retain their concept for retries. Different dates cannot reserve the same
+concept. Tests/startup never trigger implicit paid generation calls.
 
 ### 8.2 Provider abstraction
 - Define an `LLMProvider` protocol with a single method: `generate_lesson(concept, context) -> str (raw JSON)`.
@@ -160,11 +174,17 @@ Store the prompt in `daily_concept/prompts/lesson_v1.md`, and version it with a 
 - `ready`: the lesson passed validation.
 - `published`: the lesson's date is today or earlier. Set this lazily on read.
 - Optional review gate: if `DAILY_REQUIRE_APPROVAL=true`, lessons stop at `pending_review` until approved through the admin endpoint. The default is false.
+  MVP rejects this configuration explicitly until v2 approval support exists.
 
 ### 8.6 Scheduling
 The pipeline is only a CLI. Document two deployment options in the README, and don't embed a scheduler in the web process unless Concept-Master already has one:
 - A systemd timer + service unit (homelab), running nightly at 02:00 local time
 - A cron line
+
+Scheduling/environment examples, backup/restore guidance, and disabled-feature
+documentation are MVP deliverables in Phases 3–5. Do not activate scheduled jobs
+as part of implementation. Package `daily_concept/` and its prompts in the backend
+container alongside `backend/` and `content/`.
 
 ## 9. Data model
 
@@ -176,6 +196,11 @@ Adapt names and types to the existing ORM and migration tooling. Add `user_id` t
 - **`streaks`**: a single row (or one per user) with `current`, `longest`, `last_completed_date`
 - **`review_cards`** (v2): `id`, `concept_id` (fk, unique per user), `easiness` (float, default 2.5), `interval_days` (int), `repetitions` (int), `due_date` (date), `last_reviewed_at`
 
+MVP adds reservation/claim ownership and expiry metadata, unique concept
+reservations, historical title/domain snapshots on lessons, and uniqueness for
+daily responses by lesson/item. Generated lessons and progress must be backed up;
+they cannot be rebuilt from the curated YAML. Removed concepts become inactive.
+
 ## 10. Streaks
 
 - A day counts as complete when the user submits answers to the Check step, regardless of score.
@@ -183,11 +208,14 @@ Adapt names and types to the existing ORM and migration tooling. Add `user_id` t
 - Completing on date D when `last_completed_date` is D−1 increments `current`. When it is D, nothing changes. Otherwise `current` resets to 1.
 - `longest` equals `max(longest, current)`.
 - Late completion is allowed: finishing a past lesson from history does **not** repair the streak. Streak freezes are v2+.
+- A late lesson neither starts nor increments today's streak. Report current=0
+  when the last completion precedes yesterday, preserving longest and last date.
 
 ## 11. Spaced repetition (v2)
 
 - Completing a daily lesson creates a `review_card` for its concept.
 - **Quality score from the daily quiz:**
+  - Evaluate more-than-half-wrong first, then all-correct, then otherwise quality 3.
   - All correct: 5
   - One wrong: 3
   - More than half wrong: 1
@@ -204,7 +232,7 @@ Prefix `/api/daily`, following the existing router and auth conventions.
 | `GET /today` | Today's lesson payload + status + whether completed. 404 with a friendly body if none exists |
 | `POST /lessons/{id}/complete` | Body: answers list. Returns per-item correctness, explanations, updated streak |
 | `GET /history?limit&offset` | Past lessons (title, date, domain, score) |
-| `GET /lessons/{id}` | Any past lesson (read-only replay) |
+| `GET /lessons/{id}` | Lesson whose date has arrived; completed replay is read-only, unfinished past lessons permit first completion |
 | `GET /streak` | current, longest, last_completed_date |
 | `GET /reviews/due` (v2) | Up to 3 review questions |
 | `POST /reviews/{card_id}` (v2) | Submit review answer |
@@ -212,16 +240,26 @@ Prefix `/api/daily`, following the existing router and auth conventions.
 | `POST /admin/regenerate/{date}` (v2) | Force regenerate (local-only / admin-guarded) |
 | `POST /admin/approve/{id}` (v2) | Approve pending lesson |
 
-Answers are checked **server-side**. The `/today` payload must not include `answer_index` or `explanation` until the lesson is completed.
+Answers are checked **server-side**. Every uncompleted lesson-serving path,
+including replay and v2 reviews, excludes `answer_index` and `explanation`.
+Never expose future lessons, failed payloads, raw output, or pending approval
+through guessed IDs. Completed replay may include grading feedback.
+
+Validate the entire answer list before any write. Lock the lesson and singleton
+streak row consistently and persist answers/completion/streak atomically.
+Re-completion returns the original grading and current streak without replacing
+answers. Concurrent completions of different lessons serialize streak updates.
+A credential-free server capability response controls frontend feature discovery;
+disabled daily endpoints remain unavailable and daily startup sync is skipped.
 
 ## 13. Frontend
 
-- **Entry point:** a prominent "Today" card on Concept-Master's home or dashboard, showing the concept title (or a hidden teaser if you prefer the surprise), the domain badge, and the streak count.
+- **Entry point:** a prominent "Today" card in the existing browse shell, showing the concept title up front, the domain badge, and the streak count.
 - **Daily flow:** a 5-step stepper with the steps **Hook → Concept → See It → Check → Link**.
   - Show progress dots, allow going back, and don't allow skipping ahead past Check.
   - Hook: show it large, and add a "tap to reveal" moment if it fits the design system.
   - See It: code gets syntax highlighting, Mermaid source renders as a diagram, tables render as tables. Nothing is ever executed.
-  - Check: one question per screen. After submission, show correctness and the explanation.
+  - Check: collect answers one question per screen, then submit the complete quiz once. Show correctness/explanations afterward and unlock Link only after successful completion.
   - Link: show the connection text, link to the previous lesson, then show the teaser.
 - **Completion screen:** show the streak update with a small, tasteful celebration, then go to the reviews (v2) or back home.
 - **History view:** a list of past lessons, each replayable.
@@ -234,6 +272,8 @@ Answers are checked **server-side**. The `/today` payload must not include `answ
 - Rendered Markdown is sanitized, with no raw HTML passthrough.
 - Generated code is displayed and never executed.
 - Admin endpoints are disabled unless `DAILY_ADMIN_ENABLED=true`.
+  V2 also requires the daily flag and a loopback-only guard; an environment flag
+  is not authentication. Document limitations behind reverse proxies.
 
 ## 15. Testing
 
@@ -258,9 +298,9 @@ Answers are checked **server-side**. The `/today` payload must not include `answ
 6. With `DAILY_CONCEPT_ENABLED=false`, the app behaves exactly as it did before the feature.
 7. All tests pass.
 
-## 17. Open questions (answer during Phase 0 or leave as a TODO)
+## 17. Phase 0 decisions and remaining question
 
-- Does Concept-Master already have concept/lesson entities to map onto, or do we need the new tables?
-- Is the Expo/React Native port the primary client now, or is it still the web app?
-- Hosting target: homelab (systemd timer) or elsewhere?
-- Should today's concept title be hidden until opened, as a surprise, or shown up front?
+- Add daily-specific tables; glossary identity and progress have different semantics.
+- The active client is the React web app.
+- Show today's title up front in the existing browse shell.
+- Hosting remains unconfirmed. Document systemd and cron options without installing or activating either.

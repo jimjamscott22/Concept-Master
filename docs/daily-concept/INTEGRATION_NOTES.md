@@ -1,12 +1,14 @@
 # Daily Concept integration notes
 
-Date: 2026-11-01
+Date: 2026-11-02
 
-Status: Phase 0 source review complete; awaiting approval before Phase 1.
+Status: Phase 0 committed as `fd8577e`; approved revisions and Phase 1 implemented
+and locally verified. Changes remain uncommitted; Phase 2 awaits approval.
 
 These notes reconcile `docs/feature/SPEC.md` and `IMPLEMENTATION_PLAN.md`
-with the current source. They describe proposed implementation decisions, not
-completed feature work. No application code or database data was changed.
+with the current source. Decisions below govern later phases; only the graph
+loader, validator, seed curriculum, CLI, and tests are in Phase 1. No database
+data is changed by Phase 1. Phases 2 onward require further approval.
 
 ## 1. Source review and graph status
 
@@ -14,13 +16,16 @@ Reviewed `CLAUDE.md`, `README.md`, `pyproject.toml`, backend startup, schema,
 database dependencies, term and review routers, test setup, frontend entry point,
 API client, study UI, Markdown/code rendering, theme variables, and package scripts.
 
-Neither `graphify-out/GRAPH_REPORT.md` nor `.graphify/GRAPH_REPORT.md` exists.
-`graphify scope inspect . --scope auto` resolved to 427 committed files, with
-10,420 ignored files excluded. A graph refresh was not run: this exceeds the
-Graphify skill's 200-file threshold for selecting a narrower scope. No graph
-edges were used as evidence. Direct source inspection is the basis for these
-notes. A narrower backend/frontend graph can be generated separately if useful;
-it is not required to implement the feature.
+The newly generated `.graphify/GRAPH_REPORT.md` records commit `fd8577e`, matching
+HEAD at review: 398 included files from 428 candidates, 627 nodes, 1,380 edges,
+39 communities, and 19 inferred edges. Branch metadata reports `stale: false`.
+The report's UTC date is November 3 (November 2 locally). The expected
+`.graphify/.graphify_runtime.json` proof file is absent, so TypeScript runtime
+provenance is not confirmed. The graph provides orientation, not independent
+proof of behavior; relevant persistence, startup, navigation, and rendering
+decisions were checked against source. No inferred edge is relied on unverified.
+The generated `.graphify/` directory is ignored and stays local. This graph is a
+Phase 0 snapshot; it does not include the subsequent Phase 1 changes.
 
 ## 2. Stack and active client
 
@@ -56,6 +61,18 @@ Daily completion must use an explicit transaction and row locking so retries or
 concurrent requests cannot duplicate responses or increment a streak twice.
 Generation also needs a unique date constraint and a claim/update strategy to
 prevent overlapping scheduled jobs from overwriting each other's lessons.
+Use an expiring generation claim with an ownership token. Reserve the date and
+concept atomically, release the transaction before calling the provider, and
+conditionally save only if the claim is still owned and unexpired. Recovery
+reclaims expired jobs; failed-date retries retain their concept reservation.
+Prevent two dates from reserving the same concept. Force regeneration reuses
+the uncompleted lesson's concept and cannot overwrite a completed lesson.
+
+Validate the entire answer list before writes. Lock the lesson and singleton
+streak row in a consistent order, then persist responses, completion, and streak
+in one transaction. Add a unique daily response key on lesson/item. Re-completion
+returns the original recorded grading and current streak without replacing
+answers. Different lessons must also serialize updates to the streak row.
 
 ## 4. Reuse, extend, or add
 
@@ -75,6 +92,8 @@ YAML remains authoritative for the curated graph. Generated lessons and personal
 progress are database state, unlike the rebuildable glossary index; deployment
 docs must identify those tables as data to back up. Removed graph nodes become
 inactive while lesson history remains intact.
+Snapshot title and domain with generated lessons so YAML edits do not rewrite
+historical metadata; stored lesson payloads already preserve lesson text.
 
 ## 5. Users and authorization
 
@@ -109,6 +128,9 @@ and hybrid/mono typography. Use existing tokens and fonts throughout.
 - `Flashcard`, `ReviewPanel`, and `EmptyState` provide useful interaction and
   loading/empty-state patterns. There is no existing five-step lesson stepper.
 - No Mermaid or Cytoscape dependency exists in `frontend/package.json`.
+- `DiagramPage` already groups glossary terms as category chips. Reuse its visual
+  patterns in v2, but retain its existing glossary semantics; it does not model
+  daily prerequisites or learned/available/locked curriculum state.
 
 Build a small daily stepper and reuse the renderer patterns. Markdown must omit
 raw HTML passthrough. Mermaid needs strict security settings and sanitization of
@@ -129,6 +151,8 @@ Before completion, redact answers and explanations from every lesson-serving
 path, including lesson replay and review questions. Restrict replay to dates
 that have arrived; future ready lessons and approval-pending lessons must not be
 exposed through guessed IDs. Completed replay may include grading feedback.
+Allow first completion of an unfinished past lesson; completed replay is
+read-only. Late completion never changes today's streak.
 
 ## 8. Testing and CI
 
@@ -161,6 +185,11 @@ of implementation. Hosting is not confirmed. Default lesson timezone to
 
 Windows development may require the `tzdata` dependency for IANA timezone data.
 Systemd units are Linux deployment artifacts, not local Windows services.
+Scheduling instructions, environment examples, backup/restore guidance, and
+disabled-feature behavior are MVP documentation, completed across Phases 3–5.
+Add `daily_concept/`, including prompt files, to `backend/Dockerfile` in Phase 3:
+the current image copies only `backend/` and `content/`. Do not change the image
+in Phase 1, before the generator exists.
 
 ## 10. Specification ambiguities and proposed resolutions
 
@@ -172,6 +201,10 @@ Systemd units are Linux deployment artifacts, not local Windows services.
    as taught. Generating future dates does not mark prerequisites as learned.
    Log prerequisite fallback explicitly; never duplicate a reserved concept when
    the remaining graph is only scheduled.
+   Pass `reserved` explicitly to selection. The default three-day buffer covers
+   today through today + 2 in `DAILY_TIMEZONE`. Distinguish all-taught exhaustion
+   from temporary reservation saturation. With daily reviews deferred, MVP's
+   exhausted state offers history rather than promising a review-only feature.
 3. **Late completion:** record answers and completion for history, but change
    streak state only when the lesson's scheduled date equals today's date in
    `DAILY_TIMEZONE`. A late lesson neither repairs nor starts today's streak.
@@ -204,11 +237,37 @@ Systemd units are Linux deployment artifacts, not local Windows services.
   flashcard progress because their identities and rules differ.
 - Add a minimal runtime capability contract and frontend test setup because
   neither currently exists for this feature.
-- Defer full Graphify generation; use verified source files for integration.
+- Use the existing Phase 0 Graphify snapshot with source verification; do not
+  regenerate or commit local graph output as part of Phase 1.
 - Branch creation and per-phase commits described by the attached plan are not
   treated as separate user authorization. This phase leaves a reviewable document
   in the current checkout; no branch, commit, or push was performed.
-- Stop after these notes for review. Proposed next approval covers Phases 1–5
-  (MVP), with phase-specific validation. Phases 6–7 remain explicitly deferred
-  unless approved. Real-provider quality review and two nights of unattended
+- The user approved these revisions and Phase 1 only. Implement graph validation
+  and the CLI first, then focused tests; Pydantic and PyYAML already exist.
+  Database sync moves entirely to Phase 2 alongside its tables. Stop after Phase
+  1 validation and report results before requesting the next phase. Phases 6–7
+  remain deferred. Real-provider quality review and two nights of unattended
   scheduling cannot be claimed from offline/local checks.
+
+## 12. Phase 1 implementation and verification
+
+- Added `daily_concept/graph.py`: `ConceptDef`, domain enum, YAML loading,
+  ID/reference validation, prerequisite DAG checks with cycle paths, and a
+  `validate` CLI. It imports neither database code nor provider code.
+- Added 30 seeds in `content/daily_concepts/concepts.yaml`, covering all nine
+  domains with seven introductory roots and prerequisite chains four concepts
+  deep. Related links may form cycles; prerequisite links may not.
+- The CLI reports domain/difficulty counts and sorted roots. A custom file may
+  be checked with `uv run python -m daily_concept.graph validate --path FILE`;
+  malformed input or missing files return exit code 1 with a readable error.
+- Validation passed on the seed file. All 32 graph tests passed, including
+  duplicate IDs, missing prerequisite/related references, cycles, invalid fields,
+  malformed YAML, CLI failures, and a working-directory-independent default path.
+- The graph tests plus existing term/article content loader/writer tests passed:
+  59 tests total. `git diff --check` passed and `git check-ignore` confirmed the
+  local `.graphify/GRAPH_REPORT.md` is ignored.
+- This sandbox denied writes to uv's default interpreter cache. Checks used
+  `uv --cache-dir .venv/uv-cache run ...`, keeping the cache in ignored `.venv/`.
+- No full database-backed suite, schema initialization, browser, container, or
+  real-provider checks were run. No database access, startup wiring, generation,
+  frontend changes, dependency additions, or Phase 2 implementation occurred.

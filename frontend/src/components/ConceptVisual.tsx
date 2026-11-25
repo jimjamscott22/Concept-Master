@@ -9,6 +9,11 @@ export interface ConceptVisualMeta {
 }
 
 const conceptVisuals: Record<string, ConceptVisualMeta> = {
+  "abstract-data-type": {
+    src: "/concepts/abstract-data-type.svg",
+    alt: "Java’s List interface lists operations such as add and get above an abstraction boundary. ArrayList uses a resizable array and LinkedList uses linked nodes below it.",
+    caption: "Visual: ArrayList and LinkedList both implement the List contract with different storage structures.",
+  },
   acid: {
     src: "/concepts/acid.svg",
     alt: "Diagram showing the four ACID properties — Atomicity, Consistency, Isolation, Durability — around a central transaction.",
@@ -69,10 +74,30 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Breadth-first search traversal diagram with level-order visits and a queue.",
     caption: "Visual: BFS explores one level at a time using a queue.",
   },
+  "canary-deployment": {
+    src: "/concepts/canary-deployment.svg",
+    alt: "A timeline shows version 2 receiving 5 percent, then 25 percent, then 100 percent of traffic as server metrics stay healthy. A failed health check routes all traffic back to version 1.",
+    caption: "Visual: Start with a small traffic share, monitor health, then expand the rollout or route traffic back to the stable version.",
+  },
+  cdn: {
+    src: "/concepts/cdn.svg",
+    alt: "A browser requests an asset from a CDN edge. On a cache hit, the edge serves the stored copy. On a cache miss, the edge fetches from the origin, caches the response when allowed, and serves the browser.",
+    caption: "Visual: A nearby CDN edge can serve cached assets directly. A miss sends the edge back to the origin.",
+  },
+  "ci-cd": {
+    src: "/concepts/ci-cd.svg",
+    alt: "A code change enters continuous integration to build and test. A passing build moves to continuous delivery, where it is packaged and promoted to staging before a production release.",
+    caption: "Visual: Continuous integration validates changes. Continuous delivery prepares a passing artifact for a repeatable release.",
+  },
   closure: {
     src: "/concepts/closure.svg",
     alt: "Diagram showing an inner function retaining access to an outer variable.",
     caption: "Visual: returned inner functions can still use variables captured from outer scope.",
+  },
+  "composition-vs-inheritance": {
+    src: "/concepts/composition-vs-inheritance.svg",
+    alt: "Dog extends Animal to inherit breathe. A retriever has a Fetcher and a Swimmer and calls those objects to fetch or swim.",
+    caption: "Visual: Inheritance extends a base type. Composition delegates work to objects held by the caller.",
   },
   "condition-variable": {
     src: "/concepts/condition-variable.svg",
@@ -84,10 +109,20 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram contrasting a cohesive module with related responsibilities against a low-cohesion module with scattered duties.",
     caption: "Visual: high cohesion keeps related responsibilities grouped around one clear purpose.",
   },
+  containerization: {
+    src: "/concepts/containerization.svg",
+    alt: "One app image contains the app, runtime, and libraries. The same image starts two isolated containers. Both containers on this host share its operating system kernel.",
+    caption: "Visual: Containers start from packaged images. Containers on the same host use its kernel while running isolated processes.",
+  },
   "content-security-policy": {
     src: "/concepts/content-security-policy.svg",
     alt: "Diagram showing a web page request checked by a Content Security Policy before trusted or blocked scripts load.",
     caption: "Visual: CSP restricts which sources a browser may load or execute.",
+  },
+  "context-switch": {
+    src: "/concepts/context-switch.svg",
+    alt: "On one CPU core, thread A runs until a timer interrupt. The kernel saves A’s registers, program counter and stack pointer, loads the saved state for thread B, and resumes B.",
+    caption: "Visual: A context switch saves the outgoing thread’s CPU state and restores the incoming thread’s state so it can resume.",
   },
   "context-window": {
     src: "/concepts/context-window.svg",
@@ -169,15 +204,35 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing a client calling a facade that coordinates loader, analyzer, and exporter subsystem steps.",
     caption: "Visual: a facade offers one simple entry point over a multi-step subsystem.",
   },
+  "foreign-key": {
+    src: "/concepts/foreign-key.svg",
+    alt: "Two orders reference customer 7 by its primary key. An attempted order referencing customer 99 is rejected because the customers table has no matching row.",
+    caption: "Visual: A foreign key requires each non-null reference to match a key in the parent table.",
+  },
   "garbage-collection": {
     src: "/concepts/garbage-collection.svg",
     alt: "Diagram contrasting reachable objects with unreachable objects eligible for cleanup.",
     caption: "Visual: unreachable objects can be reclaimed automatically by the runtime.",
   },
+  "git-merging-rebasing-and-cherry-picking": {
+    src: "/concepts/git-merging-rebasing-and-cherry-picking.svg",
+    alt: "From a common commit A, main has C and the feature has B then D. A merge creates M with parents C and D. A rebase replays B and D as new commits on C. Cherry-picking D alone applies its change as D prime on C.",
+    caption: "Visual: A merge can join two histories. Rebase replays a series of commits, while cherry-pick applies only the selected commits.",
+  },
+  "git-staging-and-committing": {
+    src: "/concepts/git-staging-and-committing.svg",
+    alt: "The working tree has edits to app.py and notes.md. Git add app.py copies that file’s current content to the index. Git commit records the staged snapshot. The notes.md edit remains unstaged.",
+    caption: "Visual: Git commit records the index. Changes left unstaged stay in the working tree.",
+  },
   graph: {
     src: "/concepts/graph.svg",
     alt: "Graph diagram showing nodes connected by edges.",
     caption: "Visual: graphs model entities as vertices and relationships as edges.",
+  },
+  "group-by": {
+    src: "/concepts/group-by.svg",
+    alt: "Orders with totals 20 and 15 for user 7 form one group and sum to 35. The order for user 8 forms its own group and sums to 10.",
+    caption: "Visual: GROUP BY user_id with SUM(total) returns one row per user with the sum of that user’s orders.",
   },
   "hash-map": {
     src: "/concepts/hash-map.svg",
@@ -329,6 +384,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram comparing isolated process address spaces with threads sharing code and heap while retaining separate stacks.",
     caption: "Visual: processes isolate memory, while threads share process resources but keep separate stacks.",
   },
+  promise: {
+    src: "/concepts/promise.svg",
+    alt: "A pending promise can settle at most once. It becomes fulfilled with a value or rejected with a reason. With await, fulfillment gives back the value and rejection throws the reason.",
+    caption: "Visual: Once settled, a promise stays fulfilled or rejected. Await yields the value or throws the reason.",
+  },
   "proxy-pattern": {
     src: "/concepts/proxy-pattern.svg",
     alt: "Diagram showing a client calling a proxy that performs authorization and caching before forwarding to a real object.",
@@ -359,6 +419,16 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing a function calling itself on smaller inputs until a base case is reached.",
     caption: "Visual: recursion solves a problem by reducing it until a base case stops the calls.",
   },
+  "retrieval-augmented-generation": {
+    src: "/concepts/retrieval-augmented-generation.svg",
+    alt: "At question time a retriever looks up relevant passages in the document index. The question and the retrieved passages are given to the language model, which generates an answer.",
+    caption: "Visual: RAG gives the model relevant passages at question time so it can base the answer on retrieved material.",
+  },
+  semaphore: {
+    src: "/concepts/semaphore.svg",
+    alt: "A semaphore starts with two available permits. Threads A and B acquire one each. C waits when no permits are available, then acquires a permit after A releases one.",
+    caption: "Visual: A counting semaphore bounds concurrent access. Waiters can acquire a permit when one is released.",
+  },
   "separation-of-concerns": {
     src: "/concepts/separation-of-concerns.svg",
     alt: "Diagram showing data access, business rules, and rendering separated into connected responsibility boxes.",
@@ -378,6 +448,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/singleton.svg",
     alt: "Diagram showing multiple callers receiving the same shared singleton instance.",
     caption: "Visual: a singleton pattern ensures one shared instance is reused.",
+  },
+  "sliding-window": {
+    src: "/concepts/sliding-window.svg",
+    alt: "Two length-three windows move across 4, 2, 7, 1, 5. The first sums to 13. Sliding one position drops 4, adds 1, and updates the sum to 10.",
+    caption: "Visual: For a fixed-size sum, slide one index at a time and update the total with the outgoing and incoming values.",
   },
   "sql-join": {
     src: "/concepts/sql-join.svg",
@@ -438,6 +513,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/transaction.svg",
     alt: "Diagram showing the transaction flow from BEGIN through operations to COMMIT or ROLLBACK.",
     caption: "Visual: a transaction groups operations into an all-or-nothing unit of work.",
+  },
+  "tree-traversal": {
+    src: "/concepts/tree-traversal.svg",
+    alt: "The same binary tree yields preorder A B D E C, inorder D B E A C, postorder D E B C A, and level order A B C D E.",
+    caption: "Visual: Depth-first orders differ in when they visit the root. Level order visits nodes one depth at a time.",
   },
   trie: {
     src: "/concepts/trie.svg",

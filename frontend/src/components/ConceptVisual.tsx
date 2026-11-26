@@ -204,6 +204,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing a client calling a facade that coordinates loader, analyzer, and exporter subsystem steps.",
     caption: "Visual: a facade offers one simple entry point over a multi-step subsystem.",
   },
+  "feature-flag": {
+    src: "/concepts/feature-flag.svg",
+    alt: "The deployed checkout has both tax engines. A tax_engine flag that is off selects the legacy engine. Turning it on selects the new engine with the same deployed code.",
+    caption: "Visual: A runtime flag can release or disable a feature without redeploying the application.",
+  },
   "foreign-key": {
     src: "/concepts/foreign-key.svg",
     alt: "Two orders reference customer 7 by its primary key. An attempted order referencing customer 99 is rejected because the customers table has no matching row.",
@@ -214,15 +219,60 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram contrasting reachable objects with unreachable objects eligible for cleanup.",
     caption: "Visual: unreachable objects can be reclaimed automatically by the runtime.",
   },
+  "git-branching-and-switching": {
+    src: "/concepts/git-branching-and-switching.svg",
+    alt: "Main and feature initially point to commit B. HEAD points to feature after switching, and a new commit C advances feature while main stays at B.",
+    caption: "Visual: A new commit advances the checked-out branch. HEAD identifies which branch is checked out.",
+  },
+  "git-history-search-and-debugging": {
+    src: "/concepts/git-history-search-and-debugging.svg",
+    alt: "A is known good and E is known bad. Testing C marks it bad, so the search narrows to B and C. B passes, making C the first bad commit in this history.",
+    caption: "Visual: Git bisect uses a repeatable test to narrow a good-to-bad commit range.",
+  },
+  "git-inspecting-and-comparing-changes": {
+    src: "/concepts/git-inspecting-and-comparing-changes.svg",
+    alt: "HEAD holds the last commit, the index contains staged edits, and the working tree contains current files. Git diff compares the working tree to the index, git diff --staged compares the index to HEAD, and git diff HEAD compares the working tree to HEAD for tracked changes.",
+    caption: "Visual: Choose the git diff command that compares the two snapshots you want to inspect.",
+  },
   "git-merging-rebasing-and-cherry-picking": {
     src: "/concepts/git-merging-rebasing-and-cherry-picking.svg",
     alt: "From a common commit A, main has C and the feature has B then D. A merge creates M with parents C and D. A rebase replays B and D as new commits on C. Cherry-picking D alone applies its change as D prime on C.",
     caption: "Visual: A merge can join two histories. Rebase replays a series of commits, while cherry-pick applies only the selected commits.",
   },
+  "git-remotes-and-synchronization": {
+    src: "/concepts/git-remotes-and-synchronization.svg",
+    alt: "Fetch updates the local origin/main tracking reference from main on the remote. Pull fetches and then integrates into local main. Push publishes local commits to the remote branch.",
+    caption: "Visual: Fetch updates your view of the remote, pull also integrates, and push publishes local commits.",
+  },
+  "git-setup-help-and-repository-creation": {
+    src: "/concepts/git-setup-help-and-repository-creation.svg",
+    alt: "A local directory becomes a repository with git init. A remote repository can be copied with git clone, which normally configures origin. Repository-local settings override user-global settings, which override system settings.",
+    caption: "Visual: Use init for a directory and clone for an existing repository. Check the source of settings with git config --list --show-origin.",
+  },
   "git-staging-and-committing": {
     src: "/concepts/git-staging-and-committing.svg",
     alt: "The working tree has edits to app.py and notes.md. Git add app.py copies that file’s current content to the index. Git commit records the staged snapshot. The notes.md edit remains unstaged.",
     caption: "Visual: Git commit records the index. Changes left unstaged stay in the working tree.",
+  },
+  "git-stashing-and-worktrees": {
+    src: "/concepts/git-stashing-and-worktrees.svg",
+    alt: "Git stash puts tracked edits aside and later reapplies them in the same directory. Git worktree keeps the first branch checked out while opening another branch in a second directory backed by the same repository.",
+    caption: "Visual: Stash when you need to put edits aside. Use another worktree when both branches need their own working directories.",
+  },
+  "git-tags-and-releases": {
+    src: "/concepts/git-tags-and-releases.svg",
+    alt: "The annotated tag v2.0.0 points to tested commit B and carries release metadata. Commits C and D arrive later and main advances to D. The release tag still points to B.",
+    caption: "Visual: Tag the tested release commit so it stays easy to find as the branch moves forward.",
+  },
+  "git-undoing-restoring-and-cleaning-up": {
+    src: "/concepts/git-undoing-restoring-and-cleaning-up.svg",
+    alt: "A decision guide maps file changes to restore, a local branch tip to reset, a published commit to revert, a lost branch tip to reflog, and untracked files to a git clean dry run.",
+    caption: "Visual: Match the undo command to the state you want to change.",
+  },
+  "gitops": {
+    src: "/concepts/gitops.svg",
+    alt: "Git declares three replicas while the cluster has two. A controller reads both, detects the difference, and reconciles the cluster to three replicas.",
+    caption: "Visual: A GitOps controller continuously compares live state with versioned configuration and corrects drift.",
   },
   graph: {
     src: "/concepts/graph.svg",
@@ -259,6 +309,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram of an HTTP request from client to server and a response back.",
     caption: "Visual: HTTP request-response flow between a client and server.",
   },
+  "incident-response": {
+    src: "/concepts/incident-response.svg",
+    alt: "An error spike triggers an alert. The team identifies its impact, rolls back to restore service, fixes the cause, and reviews the incident to assign follow-up actions.",
+    caption: "Visual: Mitigate user impact first, then fix the cause and turn the review into follow-up work.",
+  },
   "index-database": {
     src: "/concepts/index-database.svg",
     alt: "Diagram showing a database index pointing quickly to matching rows.",
@@ -268,6 +323,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/inode.svg",
     alt: "Diagram showing a filename pointing to an inode, which stores metadata and points to data blocks.",
     caption: "Visual: filenames point to inodes; inodes describe and locate file data.",
+  },
+  "infrastructure-as-code": {
+    src: "/concepts/infrastructure-as-code.svg",
+    alt: "Versioned configuration defines a private logs bucket. The team reviews the proposed changes in a plan, then applies the plan to create the bucket.",
+    caption: "Visual: Infrastructure definitions can be reviewed, versioned, and applied through a repeatable workflow.",
   },
   inheritance: {
     src: "/concepts/inheritance.svg",
@@ -349,6 +409,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     alt: "Diagram showing a class blueprint and an instantiated object with state and behavior.",
     caption: "Visual: objects are runtime instances created from classes.",
   },
+  "observability": {
+    src: "/concepts/observability.svg",
+    alt: "A latency metric shows when checkout slowed down. A request trace locates the slow span in payments, and a correlated log reports that a connection timed out.",
+    caption: "Visual: Metrics, traces, and logs answer different questions about the same system behavior.",
+  },
   "observer-pattern": {
     src: "/concepts/observer-pattern.svg",
     alt: "Diagram showing a subject notifying multiple observers after a state change.",
@@ -358,6 +423,11 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/oauth.svg",
     alt: "Diagram showing a user, app, authorization server, and API exchanging delegated access without sharing the user's password.",
     caption: "Visual: OAuth gives apps delegated access through authorization grants and tokens.",
+  },
+  "orchestration": {
+    src: "/concepts/orchestration.svg",
+    alt: "An orchestrator schedules three web replicas across two nodes. When one replica fails on node B, the orchestrator starts a replacement to restore the desired count.",
+    caption: "Visual: An orchestrator places workloads and reconciles failures to keep the desired number of replicas running.",
   },
   "page-fault": {
     src: "/concepts/page-fault.svg",
@@ -423,6 +493,16 @@ const conceptVisuals: Record<string, ConceptVisualMeta> = {
     src: "/concepts/retrieval-augmented-generation.svg",
     alt: "At question time a retriever looks up relevant passages in the document index. The question and the retrieved passages are given to the language model, which generates an answer.",
     caption: "Visual: RAG gives the model relevant passages at question time so it can base the answer on retrieved material.",
+  },
+  "rolling-deployment": {
+    src: "/concepts/rolling-deployment.svg",
+    alt: "A service starts with three version 1 replicas. The rollout replaces one replica at a time, waiting for the new replica to become ready before removing an old one.",
+    caption: "Visual: A rolling deployment keeps serving requests as ready replicas of the new version take over in batches.",
+  },
+  "secrets-management": {
+    src: "/concepts/secrets-management.svg",
+    alt: "An app authenticates to a secrets manager with its workload identity. A policy grants access, a short-lived credential is returned at runtime, and an audit log records the access event.",
+    caption: "Visual: A secrets manager grants access by identity, supplies credentials at runtime, and records access for auditing.",
   },
   semaphore: {
     src: "/concepts/semaphore.svg",

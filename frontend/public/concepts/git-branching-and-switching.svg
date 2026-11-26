@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Branching and Switching</title>
+  <desc id="desc">Main and feature initially point to commit B. HEAD points to feature after switching, and a new commit C advances feature while main stays at B.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Branching and Switching</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="212" fill="#e6edf3" font-size="23" text-anchor="start" font-weight="700">After git switch -c feature</text>
+  <text x="75" y="388" fill="#e6edf3" font-size="23" text-anchor="start" font-weight="700">After committing C</text>
+  <path d="M402 220H475" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="385" cy="220" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="385" y="227" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">A</text>
+  <circle cx="475" cy="220" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="475" y="227" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">B</text>
+  <path d="M402 397H475" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="385" cy="397" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="385" y="404" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">A</text>
+  <circle cx="475" cy="397" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="475" y="404" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">B</text>
+  <path d="M499 397H565" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="589" cy="397" r="24" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="589" y="404" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">C</text>
+  <path d="M475 164V188" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <text x="475" y="156" fill="#58a6ff" font-size="21" text-anchor="middle" class="mono">main</text>
+  <path d="M475 341V365" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <text x="475" y="333" fill="#58a6ff" font-size="21" text-anchor="middle" class="mono">main</text>
+  <rect x="670" y="193" width="209" height="54" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="774.5" y="228.0" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">HEAD → feature</text>
+  <path d="M670 220H507" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-green)"/>
+  <rect x="670" y="370" width="209" height="54" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="774.5" y="405.0" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">HEAD → feature</text>
+  <path d="M670 397H621" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-green)"/>
+  <path d="M75 278H885" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

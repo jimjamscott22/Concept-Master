@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">GitOps</title>
+  <desc id="desc">Git declares three replicas while the cluster has two. A controller reads both, detects the difference, and reconciles the cluster to three replicas.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">GitOps</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="70" y="241" width="225" height="104" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="182.5" y="289.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Git repository</text>
+  <text x="182.5" y="318.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Desired: 3 replicas</text>
+  <rect x="367" y="241" width="226" height="104" rx="12" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+  <text x="480.0" y="289.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Controller</text>
+  <text x="480.0" y="318.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Compare states</text>
+  <rect x="665" y="241" width="225" height="104" rx="12" fill="#0d1117" stroke="#a9b6c2" stroke-width="2"/>
+  <text x="777.5" y="289.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Live cluster</text>
+  <text x="777.5" y="318.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Actual: 2 replicas</text>
+  <path d="M295 293H359" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <path d="M665 293H601" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <text x="331" y="224" fill="#58a6ff" font-size="19" text-anchor="middle">read config</text>
+  <text x="629" y="224" fill="#a9b6c2" font-size="19" text-anchor="middle">read live state</text>
+  <path d="M480 345V433H656" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-green)"/>
+  <rect x="665" y="398" width="225" height="70" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="777.5" y="441.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Actual: 3 replicas</text>
+  <text x="526" y="411" fill="#3fb950" font-size="20" text-anchor="start">reconcile drift</text>
+</svg>

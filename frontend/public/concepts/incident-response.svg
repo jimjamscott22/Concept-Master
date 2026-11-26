@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Incident Response</title>
+  <desc id="desc">An error spike triggers an alert. The team identifies its impact, rolls back to restore service, fixes the cause, and reviews the incident to assign follow-up actions.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e3b341"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Incident Response</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="64" y="228" width="148" height="96" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="138.0" y="272.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Detect</text>
+  <text x="138.0" y="301.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Error alert</text>
+  <path d="M212 276H229" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <rect x="235" y="228" width="148" height="96" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="309.0" y="272.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Triage</text>
+  <text x="309.0" y="301.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Assess impact</text>
+  <path d="M383 276H400" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <rect x="406" y="228" width="148" height="96" rx="12" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+  <text x="480.0" y="272.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Mitigate</text>
+  <text x="480.0" y="301.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Roll back</text>
+  <path d="M554 276H571" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <rect x="577" y="228" width="148" height="96" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="651.0" y="272.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Resolve</text>
+  <text x="651.0" y="301.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Fix the cause</text>
+  <path d="M725 276H742" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <rect x="748" y="228" width="148" height="96" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="822.0" y="272.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Review</text>
+  <text x="822.0" y="301.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Follow-up</text>
+  <path d="M480 324V381" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-amber)"/>
+  <rect x="364" y="390" width="232" height="63" rx="12" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+  <text x="480.0" y="429.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Service restored</text>
+</svg>

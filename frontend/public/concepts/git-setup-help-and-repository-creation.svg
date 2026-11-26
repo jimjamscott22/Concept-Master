@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Git Setup, Help, and Repository Creation</title>
+  <desc id="desc">A local directory becomes a repository with git init. A remote repository can be copied with git clone, which normally configures origin. Repository-local settings override user-global settings, which override system settings.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Git Setup, Help, and Repository Creation</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="74" y="168" fill="#e6edf3" font-size="23" text-anchor="start" font-weight="700">Create a local repository</text>
+  <rect x="74" y="189" width="227" height="67" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="187.5" y="230.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Local directory</text>
+  <path d="M301 223H648" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <text x="474" y="213" fill="#58a6ff" font-size="23" text-anchor="middle" class="mono">git init</text>
+  <rect x="657" y="189" width="229" height="67" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="771.5" y="218.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Local repository</text>
+  <text x="771.5" y="247.5" fill="#a9b6c2" font-size="20" text-anchor="middle">No remote by default</text>
+  <rect x="74" y="277" width="227" height="67" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="187.5" y="318.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Remote repo</text>
+  <path d="M301 311H648" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <text x="474" y="301" fill="#58a6ff" font-size="23" text-anchor="middle" class="mono">git clone</text>
+  <rect x="657" y="277" width="229" height="67" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="771.5" y="306.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Local copy</text>
+  <text x="771.5" y="335.5" fill="#a9b6c2" font-size="20" text-anchor="middle">Usually adds origin</text>
+  <path d="M74 367H886" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="74" y="402" fill="#e6edf3" font-size="22" text-anchor="start" font-weight="700">Configuration precedence · highest first</text>
+  <text x="74" y="438" fill="#e3b341" font-size="22" text-anchor="start" class="mono">Repository local  &gt;  User global  &gt;  System</text>
+  <text x="886" y="471" fill="#a9b6c2" font-size="21" text-anchor="end" class="mono">git help &lt;command&gt;</text>
+</svg>

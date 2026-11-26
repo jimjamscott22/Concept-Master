@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Stashing and Worktrees</title>
+  <desc id="desc">Git stash puts tracked edits aside and later reapplies them in the same directory. Git worktree keeps the first branch checked out while opening another branch in a second directory backed by the same repository.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Stashing and Worktrees</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="167" fill="#e6edf3" font-size="23" text-anchor="start" font-weight="700">Stash · pause edits in one directory</text>
+  <rect x="74" y="188" width="222" height="82" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="185.0" y="225.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Tracked edits</text>
+  <text x="185.0" y="254.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Working directory</text>
+  <rect x="369" y="188" width="222" height="82" rx="12" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+  <text x="480.0" y="225.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Stash entry</text>
+  <text x="480.0" y="254.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Saved temporarily</text>
+  <rect x="664" y="188" width="222" height="82" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="775.0" y="225.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Edits restored</text>
+  <text x="775.0" y="254.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Same directory</text>
+  <path d="M296 229H361M591 229H656" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M340 229H361" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <path d="M635 229H656" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <path d="M74 299H886" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="75" y="331" fill="#e6edf3" font-size="23" text-anchor="start" font-weight="700">Worktree · keep both directories open</text>
+  <rect x="74" y="375" width="222" height="83" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="185.0" y="412.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Shared Git repo</text>
+  <text x="185.0" y="441.5" fill="#a9b6c2" font-size="20" text-anchor="middle">Same commit objects</text>
+  <path d="M296 417H335V387H360" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <path d="M335 417V446H656" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <rect x="369" y="354" width="222" height="67" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="480.0" y="383.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Directory A</text>
+  <text x="480.0" y="412.5" fill="#a9b6c2" font-size="20" text-anchor="middle">Feature branch</text>
+  <rect x="664" y="413" width="222" height="67" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="775.0" y="442.5" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Directory B</text>
+  <text x="775.0" y="471.5" fill="#a9b6c2" font-size="20" text-anchor="middle">Hotfix branch</text>
+</svg>

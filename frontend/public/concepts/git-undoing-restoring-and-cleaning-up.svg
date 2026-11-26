@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Undoing, Restoring, and Cleaning Up</title>
+  <desc id="desc">A decision guide maps file changes to restore, a local branch tip to reset, a published commit to revert, a lost branch tip to reflog, and untracked files to a git clean dry run.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Undoing, Restoring, and Cleaning Up</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="74" y="157" width="812" height="54" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="93" y="192" fill="#e6edf3" font-size="22" text-anchor="start">Discard unstaged edits to one file</text>
+  <text x="562" y="192" fill="#58a6ff" font-size="22" text-anchor="start" class="mono">git restore &lt;path&gt;</text>
+  <rect x="74" y="221" width="812" height="54" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="93" y="256" fill="#e6edf3" font-size="22" text-anchor="start">Move an unpublished branch tip</text>
+  <text x="562" y="256" fill="#58a6ff" font-size="22" text-anchor="start" class="mono">git reset &lt;commit&gt;</text>
+  <rect x="74" y="285" width="812" height="54" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="93" y="320" fill="#e6edf3" font-size="22" text-anchor="start">Reverse a published commit</text>
+  <text x="562" y="320" fill="#3fb950" font-size="22" text-anchor="start" class="mono">git revert &lt;commit&gt;</text>
+  <rect x="74" y="349" width="812" height="54" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="93" y="384" fill="#e6edf3" font-size="22" text-anchor="start">Find a lost branch tip</text>
+  <text x="562" y="384" fill="#3fb950" font-size="22" text-anchor="start" class="mono">git reflog</text>
+  <rect x="74" y="413" width="812" height="54" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="93" y="448" fill="#e6edf3" font-size="22" text-anchor="start">Preview untracked files for removal</text>
+  <text x="562" y="448" fill="#e3b341" font-size="22" text-anchor="start" class="mono">git clean -n</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Inspecting and Comparing Changes</title>
+  <desc id="desc">HEAD holds the last commit, the index contains staged edits, and the working tree contains current files. Git diff compares the working tree to the index, git diff --staged compares the index to HEAD, and git diff HEAD compares the working tree to HEAD for tracked changes.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Inspecting and Comparing Changes</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="73" y="177" width="236" height="98" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="191.0" y="222.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">HEAD</text>
+  <text x="191.0" y="251.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Last commit</text>
+  <rect x="362" y="177" width="236" height="98" rx="12" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+  <text x="480.0" y="222.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Index</text>
+  <text x="480.0" y="251.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Staged snapshot</text>
+  <rect x="651" y="177" width="236" height="98" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="769.0" y="222.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Working tree</text>
+  <text x="769.0" y="251.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Current files</text>
+  <path d="M191 275V311H480V275" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="335" y="341" fill="#e3b341" font-size="21" text-anchor="middle" class="mono">git diff --staged</text>
+  <path d="M480 275V311H769V275" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="624" y="341" fill="#3fb950" font-size="21" text-anchor="middle" class="mono">git diff</text>
+  <path d="M191 339V407H769V339" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="480" y="442" fill="#58a6ff" font-size="23" text-anchor="middle" class="mono">git diff HEAD</text>
+</svg>

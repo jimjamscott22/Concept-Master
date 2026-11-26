@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Tags and Releases</title>
+  <desc id="desc">The annotated tag v2.0.0 points to tested commit B and carries release metadata. Commits C and D arrive later and main advances to D. The release tag still points to B.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Tags and Releases</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M168 342H762" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="168" cy="342" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="168" y="349" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">A</text>
+  <circle cx="366" cy="342" r="24" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="366" y="349" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">B</text>
+  <circle cx="564" cy="342" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="564" y="349" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">C</text>
+  <circle cx="762" cy="342" r="24" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="762" y="349" fill="#e6edf3" font-size="21" text-anchor="middle" font-weight="700" class="mono">D</text>
+  <rect x="235" y="169" width="262" height="86" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="366.0" y="208.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700" class="mono">v2.0.0</text>
+  <text x="366.0" y="237.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Tagger and message</text>
+  <path d="M366 255V309" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-green)"/>
+  <rect x="645" y="169" width="234" height="86" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="762.0" y="208.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700" class="mono">main</text>
+  <text x="762.0" y="237.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Branch tip</text>
+  <path d="M762 255V309" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <text x="366" y="401" fill="#3fb950" font-size="21" text-anchor="middle">Tested release commit</text>
+  <text x="762" y="401" fill="#58a6ff" font-size="21" text-anchor="middle">Latest commit</text>
+</svg>

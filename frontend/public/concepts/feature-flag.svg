@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Feature Flag</title>
+  <desc id="desc">The deployed checkout has both tax engines. A tax_engine flag that is off selects the legacy engine. Turning it on selects the new engine with the same deployed code.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+    <marker id="arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117" stroke="#0d1117" stroke-width="2"/>
+  <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <text x="64" y="98" fill="#e6edf3" font-size="36" text-anchor="start" font-weight="700">Feature Flag</text>
+  <path d="M64 125H896" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="80" y="257" width="205" height="90" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="182.5" y="298.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Checkout</text>
+  <text x="182.5" y="327.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Same build</text>
+  <path d="M285 302H364" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-blue)"/>
+  <rect x="373" y="257" width="214" height="90" rx="12" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+  <text x="480.0" y="298.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700" class="mono">tax_engine</text>
+  <text x="480.0" y="327.0" fill="#a9b6c2" font-size="20" text-anchor="middle">Read flag at runtime</text>
+  <path d="M587 302H628V218H684" fill="none" stroke="#a9b6c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-muted)"/>
+  <path d="M628 302V388H684" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-green)"/>
+  <text x="642" y="204" fill="#a9b6c2" font-size="21" text-anchor="middle" class="mono">OFF</text>
+  <text x="642" y="424" fill="#3fb950" font-size="21" text-anchor="middle" class="mono">ON</text>
+  <rect x="692" y="174" width="190" height="88" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+  <text x="787.0" y="226.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">Legacy engine</text>
+  <rect x="692" y="344" width="190" height="88" rx="12" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+  <text x="787.0" y="396.0" fill="#e6edf3" font-size="24" text-anchor="middle" font-weight="700">New engine</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">CI/CD</title>
+  <desc id="desc">A code change enters continuous integration to build and test. A passing build moves to continuous delivery, where it is packaged and promoted to staging before a production release.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+    <marker id="arrow-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ff7b72"/></marker>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">CI/CD</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="64" y="165" width="323" height="222" rx="16" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <rect x="434" y="165" width="462" height="222" rx="16" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="86" y="201" font-size="21" fill="#58a6ff" font-weight="700">CI · Continuous Integration</text>
+    <text x="456" y="201" font-size="21" fill="#3fb950" font-weight="700">CD · Continuous Delivery</text>
+    <rect x="84" y="256" width="126" height="64" rx="13" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="147.0" y="296.0" font-size="22" fill="#58a6ff" text-anchor="middle" font-weight="700">Build</text>
+    <rect x="230" y="256" width="126" height="64" rx="13" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="293.0" y="296.0" font-size="22" fill="#58a6ff" text-anchor="middle" font-weight="700">Test</text>
+    <rect x="450" y="256" width="126" height="64" rx="13" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="513.0" y="296.0" font-size="22" fill="#3fb950" text-anchor="middle" font-weight="700">Package</text>
+    <rect x="599" y="256" width="126" height="64" rx="13" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="662.0" y="296.0" font-size="22" fill="#3fb950" text-anchor="middle" font-weight="700">Stage</text>
+    <rect x="748" y="256" width="126" height="64" rx="13" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="811.0" y="296.0" font-size="22" fill="#3fb950" text-anchor="middle" font-weight="700">Release</text>
+    <path d="M210 288L225 288" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M356 288L445 288" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M576 288L594 288" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M725 288L743 288" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <text x="402" y="271" font-size="18" fill="#a9b6c2" text-anchor="middle">passes</text>
+    <text x="225" y="354" font-size="18" fill="#a9b6c2" text-anchor="middle">Automated checks on each change</text>
+    <text x="665" y="354" font-size="18" fill="#a9b6c2" text-anchor="middle">Production release can require approval</text>
+    <path d="M293 387V416" fill="none" stroke="#ff7b72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <text x="293" y="447" font-size="20" fill="#ff7b72" text-anchor="middle">Failed checks stop the pipeline</text>
+  </g>
+</svg>

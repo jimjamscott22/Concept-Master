@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Staging and Committing</title>
+  <desc id="desc">The working tree has edits to app.py and notes.md. Git add app.py copies that file’s current content to the index. Git commit records the staged snapshot. The notes.md edit remains unstaged.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">Staging and Committing</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="64" y="204" width="243" height="197" rx="13" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <text x="84" y="240" font-size="24" font-weight="700">Working tree</text>
+    <text x="84" y="270" font-size="19" fill="#a9b6c2">Edited files</text>
+    <rect x="84" y="287" width="203" height="45" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+    <text x="97" y="316" font-size="19" fill="#3fb950" class="mono">app.py edit</text>
+    <rect x="374" y="204" width="214" height="197" rx="13" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <text x="394" y="240" font-size="24" font-weight="700">Index</text>
+    <text x="394" y="270" font-size="19" fill="#a9b6c2">Next snapshot</text>
+    <rect x="394" y="287" width="174" height="45" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+    <text x="407" y="316" font-size="19" fill="#3fb950" class="mono">app.py edit</text>
+    <rect x="655" y="204" width="241" height="197" rx="13" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <text x="675" y="240" font-size="24" font-weight="700">New commit</text>
+    <text x="675" y="270" font-size="19" fill="#a9b6c2">Recorded snapshot</text>
+    <rect x="675" y="287" width="201" height="45" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="2"/>
+    <text x="688" y="316" font-size="19" fill="#3fb950" class="mono">app.py edit</text>
+    <rect x="84" y="343" width="203" height="42" rx="8" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="97" y="370" font-size="18" fill="#a9b6c2" class="mono">notes.md edit</text>
+    <path d="M307 309L368 309" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M588 309L649 309" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <text x="340" y="176" font-size="20" fill="#3fb950" text-anchor="middle" class="mono">git add app.py</text>
+    <text x="621" y="176" font-size="20" fill="#3fb950" text-anchor="middle" class="mono">git commit</text>
+    <path d="M340 187V296M621 187V296" fill="none" stroke="#3fb950" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+    <text x="82" y="453" font-size="20" fill="#a9b6c2">notes.md stays unstaged.</text>
+  </g>
+</svg>

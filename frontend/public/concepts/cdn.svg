@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">CDN (Content Delivery Network)</title>
+  <desc id="desc">A browser requests an asset from a CDN edge. On a cache hit, the edge serves the stored copy. On a cache miss, the edge fetches from the origin, caches the response when allowed, and serves the browser.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#58a6ff"/></marker>
+    <marker id="arrow-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+    <marker id="arrow-3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e3b341"/></marker>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">CDN (Content Delivery Network)</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="165" y="173" font-size="23" text-anchor="middle" font-weight="700">Browser</text>
+    <path d="M165 187L165 463" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+    <text x="479" y="173" font-size="23" text-anchor="middle" font-weight="700">CDN edge</text>
+    <path d="M479 187L479 463" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+    <text x="794" y="173" font-size="23" text-anchor="middle" font-weight="700">Origin</text>
+    <path d="M794 187L794 463" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+    <path d="M165 216L472 216" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <text x="322.0" y="207" font-size="20" fill="#58a6ff" text-anchor="middle">Request asset</text>
+    <path d="M479 263L172 263" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <text x="322.0" y="254" font-size="20" fill="#3fb950" text-anchor="middle">Hit · serve cached copy</text>
+    <path d="M165 333L472 333" fill="none" stroke="#58a6ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <text x="322.0" y="324" font-size="20" fill="#58a6ff" text-anchor="middle">Request asset</text>
+    <path d="M479 364L787 364" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-3)"/>
+    <text x="636.5" y="355" font-size="20" fill="#e3b341" text-anchor="middle">Miss · fetch from origin</text>
+    <path d="M794 412L486 412" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-3)"/>
+    <text x="636.5" y="403" font-size="20" fill="#e3b341" text-anchor="middle">Return asset</text>
+    <path d="M479 458L172 458" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <text x="322.0" y="449" font-size="20" fill="#3fb950" text-anchor="middle">Serve asset after fetch</text>
+    <path d="M66 288L894 288" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="636" y="450" font-size="19" fill="#a9b6c2" text-anchor="middle">Edge caches when allowed</text>
+  </g>
+</svg>

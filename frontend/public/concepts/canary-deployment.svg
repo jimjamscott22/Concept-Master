@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Canary Deployment</title>
+  <desc id="desc">A timeline shows version 2 receiving 5 percent, then 25 percent, then 100 percent of traffic as server metrics stay healthy. A failed health check routes all traffic back to version 1.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">Canary Deployment</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="65" y="151" width="17" height="17" rx="4" fill="#58a6ff"/>
+    <text x="94" y="168" font-size="21">v1 · stable</text>
+    <rect x="272" y="151" width="17" height="17" rx="4" fill="#3fb950"/>
+    <text x="301" y="168" font-size="21">v2 · canary</text>
+    <text x="65" y="255" font-size="23" font-weight="700">Start</text>
+    <rect x="245" y="220" width="472" height="43" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <rect x="248" y="223" width="466" height="37" rx="4" fill="#58a6ff"/>
+    <rect x="248" y="223" width="23.3" height="37" rx="4" fill="#3fb950"/>
+    <text x="744" y="251" font-size="21" fill="#3fb950" class="mono">5% on v2</text>
+    <text x="65" y="318" font-size="23" font-weight="700">Expand</text>
+    <rect x="245" y="283" width="472" height="43" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <rect x="248" y="286" width="466" height="37" rx="4" fill="#58a6ff"/>
+    <rect x="248" y="286" width="116.5" height="37" rx="4" fill="#3fb950"/>
+    <text x="744" y="314" font-size="21" fill="#3fb950" class="mono">25% on v2</text>
+    <text x="65" y="381" font-size="23" font-weight="700">Promote</text>
+    <rect x="245" y="346" width="472" height="43" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="2"/>
+    <rect x="248" y="349" width="466" height="37" rx="4" fill="#58a6ff"/>
+    <rect x="248" y="349" width="466.0" height="37" rx="4" fill="#3fb950"/>
+    <text x="744" y="377" font-size="21" fill="#3fb950" class="mono">100% on v2</text>
+    <text x="245" y="433" font-size="21" fill="#3fb950">Advance when health checks pass.</text>
+    <text x="245" y="464" font-size="21" fill="#ff7b72">If health worsens, send all traffic back to v1.</text>
+  </g>
+</svg>

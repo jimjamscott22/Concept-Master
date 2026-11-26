@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Promise</title>
+  <desc id="desc">A pending promise can settle at most once. It becomes fulfilled with a value or rejected with a reason. With await, fulfillment gives back the value and rejection throws the reason.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3fb950"/></marker>
+    <marker id="arrow-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ff7b72"/></marker>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">Promise</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="68" y="247" width="208" height="98" rx="13" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="172.0" y="291.0" font-size="22" fill="#58a6ff" text-anchor="middle" font-weight="700">Pending</text>
+    <text x="172.0" y="319.0" font-size="18" text-anchor="middle">waiting</text>
+    <rect x="596" y="165" width="280" height="100" rx="13" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="736.0" y="210.0" font-size="22" fill="#3fb950" text-anchor="middle" font-weight="700">Fulfilled</text>
+    <text x="736.0" y="238.0" font-size="18" text-anchor="middle">has a value</text>
+    <rect x="596" y="324" width="280" height="100" rx="13" fill="#0d1117" stroke="#ff7b72" stroke-width="2"/>
+    <text x="736.0" y="369.0" font-size="22" fill="#ff7b72" text-anchor="middle" font-weight="700">Rejected</text>
+    <text x="736.0" y="397.0" font-size="18" text-anchor="middle">has a reason</text>
+    <path d="M276 286H356Q385 286 385 260V238Q385 215 412 215H586" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M276 307H356Q385 307 385 333V351Q385 374 412 374H586" fill="none" stroke="#ff7b72" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <text x="415" y="201" font-size="20" fill="#3fb950">success</text>
+    <text x="415" y="360" font-size="20" fill="#ff7b72">failure</text>
+    <text x="736" y="296" font-size="20" text-anchor="middle">await returns the value</text>
+    <text x="736" y="459" font-size="20" text-anchor="middle">await throws the reason</text>
+  </g>
+</svg>

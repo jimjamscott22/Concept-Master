@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Context Switch</title>
+  <desc id="desc">On one CPU core, thread A runs until a timer interrupt. The kernel saves A’s registers, program counter and stack pointer, loads the saved state for thread B, and resumes B.</desc>
+  <defs>
+    <style>text{font-family:IBM Plex Sans,system-ui,sans-serif}.mono{font-family:JetBrains Mono,monospace}</style>
+    <marker id="arrow-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a9b6c2"/></marker>
+    <marker id="arrow-2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L10 5L0 10z" fill="#e3b341"/></marker>
+  </defs>
+  <g fill="#e6edf3">
+    <rect x="0" y="0" width="960" height="540" rx="28" fill="#0d1117"/>
+    <rect x="32" y="32" width="896" height="476" rx="22" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+    <text x="64" y="99" font-size="36" font-weight="700">Context Switch</text>
+    <path d="M64 125L896 125" fill="none" stroke="#30363d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="64" y="174" font-size="22" font-weight="700">One CPU core</text>
+    <rect x="64" y="245" width="184" height="92" rx="13" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="156.0" y="286.0" font-size="22" fill="#58a6ff" text-anchor="middle" font-weight="700">Thread A</text>
+    <text x="156.0" y="314.0" font-size="18" text-anchor="middle">running</text>
+    <rect x="283" y="245" width="171" height="92" rx="13" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+    <text x="368.5" y="286.0" font-size="22" fill="#e3b341" text-anchor="middle" font-weight="700">Save A</text>
+    <text x="368.5" y="314.0" font-size="18" text-anchor="middle">kernel</text>
+    <rect x="484" y="245" width="171" height="92" rx="13" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+    <text x="569.5" y="286.0" font-size="22" fill="#e3b341" text-anchor="middle" font-weight="700">Load B</text>
+    <text x="569.5" y="314.0" font-size="18" text-anchor="middle">kernel</text>
+    <rect x="686" y="245" width="210" height="92" rx="13" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="791.0" y="286.0" font-size="22" fill="#3fb950" text-anchor="middle" font-weight="700">Thread B</text>
+    <text x="791.0" y="314.0" font-size="18" text-anchor="middle">resumes</text>
+    <path d="M248 291L278 291" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M454 291L479 291" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M655 291L681 291" fill="none" stroke="#a9b6c2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-1)"/>
+    <path d="M264 219L264 280" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 6"/>
+    <text x="264" y="205" font-size="21" fill="#58a6ff" text-anchor="middle">Timer interrupt</text>
+    <path d="M368 337L368 391" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <path d="M570 391L570 337" fill="none" stroke="#e3b341" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-2)"/>
+    <rect x="254" y="392" width="228" height="60" rx="13" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+    <text x="368.0" y="430.0" font-size="22" fill="#e3b341" text-anchor="middle" font-weight="700">Saved state for A</text>
+    <rect x="499" y="392" width="224" height="60" rx="13" fill="#0d1117" stroke="#e3b341" stroke-width="2"/>
+    <text x="611.0" y="430.0" font-size="22" fill="#e3b341" text-anchor="middle" font-weight="700">Saved state for B</text>
+  </g>
+</svg>
